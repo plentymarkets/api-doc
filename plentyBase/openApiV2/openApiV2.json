@@ -1,0 +1,1326 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.2.0",
+        "title": "plentyBase"
+    },
+    "host": "local.plentybase.de:7331",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "about"
+        },
+        {
+            "name": "authentication"
+        },
+        {
+            "name": "files"
+        },
+        {
+            "name": "directories"
+        },
+        {
+            "name": "healthcheck"
+        },
+        {
+            "name": "logs"
+        },
+        {
+            "name": "print history"
+        },
+        {
+            "name": "printer config"
+        },
+        {
+            "name": "printers"
+        },
+        {
+            "name": "system"
+        }
+    ],
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "paths": {
+        "/about/thirdparty": {
+            "get": {
+                "tags": [
+                    "about"
+                ],
+                "summary": "Get libraries list",
+                "description": "Returns a list of libraries which plentyBase is using",
+                "operationId": "getThirdPartyLibs",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "List of used libraries",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ThirdPartyLib"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+        "/about/update": {
+            "get": {
+                "tags": [
+                    "about"
+                ],
+                "summary": "Get update information",
+                "description": "Checks for an update and returns information",
+                "operationId": "checkForUpdate",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Update information"
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+        "/about/version": {
+            "get": {
+                "tags": [
+                    "about"
+                ],
+                "summary": "Get application version",
+                "description": "Returns the current application version",
+                "operationId": "getApplicationVersion",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Application version"
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+        "/authentication/token": {
+            "post": {
+                "tags": [
+                    "authentication"
+                ],
+                "summary": "Set accessToken which could be accepted later",
+                "description": "Does an authentication request for the specific token and returns the access token object which is saved in plentyBase tool",
+                "operationId": "setAccessToken",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "accessToken",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "test_token"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Set access token",
+                        "schema": {
+                            "$ref": "#/definitions/TokenBean"
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+        "/authentication/check": {
+            "get": {
+                "tags": [
+                    "authentication"
+                ],
+                "summary": "Checks accessToken",
+                "description": "Checks if given accessToken is valid",
+                "operationId": "checkAccessToken",
+                "consumes": [
+                    "text/plain"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "accessToken",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "test_token"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Valid accessToken"
+                    },
+                    "401": {
+                        "description": "AccessToken not accepted"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "422": {
+                        "description": "Missing parameter"
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+        "/files/collections": {
+            "post": {
+                "tags": [
+                    "files"
+                ],
+                "summary": "Save collection document",
+                "description": "Creates and saves a collection document. You can add multiple files to this request, once per parameter. Than you can define multiple file content elements in the file content list. The form parameters has to match with the parameter names of the added files.",
+                "operationId": "saveCollectionDocument",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "parameters": [
+                    {
+                        "name": "json",
+                        "in": "formData",
+                        "description": "Save collection document request json",
+                        "required": true,
+                        "type": "string",
+                        "x-example": "{\n  \"targetFileId\": \"merge_1\",\n  \"fileReferences\": [],\n  \"fileContentList\": [\n    {\n      \"formParameter\": \"file1\",\n      \"encoding\": \"base64\",\n      \"type\": \"application/pdf\"\n    },\n    {\n      \"formParameter\": \"file2\",\n      \"encoding\": \"\",\n      \"type\": \"application/pdf\"\n    }\n  ],\n  \"targetFileReference\": {\n    \"directory\": \"/private/var/spool/pdfwriter/jeromeklemm/\",\n    \"extension\": \"pdf\",\n    \"name\": \"mergedfile\"\n  }\n}"
+                    },
+                    {
+                        "name": "file1",
+                        "in": "formData",
+                        "description": "For example an base64 encoded file as string",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "An base64 encoded pdf file"
+                    },
+                    {
+                        "name": "file2",
+                        "in": "formData",
+                        "description": "Put a file here",
+                        "required": false,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "File save response json object",
+                        "schema": {
+                            "$ref": "#/definitions/FileReferenceBean"
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+        "/directories": {
+            "get": {
+                "tags": [
+                    "directories"
+                ],
+                "summary": "Get directory content",
+                "description": "Get content of a directory. You can set multiple filters and the depth of the result set.",
+                "operationId": "listFilteredDirectoryContent",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "directoryPath",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "/path/to/your/directory/"
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "directory"
+                    },
+                    {
+                        "name": "writable",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean",
+                        "x-example": true
+                    },
+                    {
+                        "name": "hidden",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean",
+                        "x-example": "false"
+                    },
+                    {
+                        "name": "depth",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32",
+                        "x-example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns the content of a directory",
+                        "schema": {
+                            "$ref": "#/definitions/DirectoryBean"
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+        "/files": {
+            "get": {
+                "tags": [
+                    "files"
+                ],
+                "summary": "Get file via file path",
+                "description": "Returns the requested file",
+                "operationId": "getFileViaFilePath",
+                "parameters": [
+                    {
+                        "name": "filePath",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "/path/to/your/file.pdf"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Requested file",
+                        "schema": {
+                            "type": "file"
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "files"
+                ],
+                "summary": "Save file",
+                "description": "Returns save file response json object",
+                "operationId": "saveFilesMultiPart",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "parameters": [
+                    {
+                        "name": "files",
+                        "in": "formData",
+                        "description": "Files json",
+                        "required": true,
+                        "type": "string",
+                        "x-example": "[\n  {\n    \"id\": \"1\",\n    \"reference\": {\n      \"extension\": \"pdf\",\n      \"directory\": \"/private/var/spool/pdfwriter/jeromeklemm/neue test files/\",\n      \"name\": \"testfile1\"\n    },\n    \"content\": {\n      \"formParameter\": \"file1\",\n      \"encoding\": \"base64\",\n      \"type\": \"application/pdf\"\n    }\n  },\n  {\n    \"id\": \"2\",\n    \"reference\": {\n      \"extension\": \"pdf\",\n      \"directory\": \"/private/var/spool/pdfwriter/jeromeklemm/neue test files/\",\n      \"name\": \"testfile2\"\n    },\n    \"content\": {\n      \"formParameter\": \"file2\",\n      \"encoding\": \"\",\n      \"type\": \"application/pdf\"\n    }\n  }\n]"
+                    },
+                    {
+                        "name": "file1",
+                        "in": "formData",
+                        "description": "For example an base64 encoded file as string",
+                        "required": true,
+                        "type": "string",
+                        "x-example": "An base64 encoded pdf file"
+                    },
+                    {
+                        "name": "file2",
+                        "in": "formData",
+                        "description": "Put a file here",
+                        "required": true,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Save file response json object",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/FileBean"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+        "/healthcheck": {
+            "get": {
+                "tags": [
+                    "healthcheck"
+                ],
+                "summary": "Check if plentyBase is available",
+                "description": "Checks if plentyBase is available",
+                "operationId": "doHealthCheck",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/logs": {
+            "post": {
+                "tags": [
+                    "logs"
+                ],
+                "summary": "Log message",
+                "description": "Logs messages in file",
+                "operationId": "log",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "parameters": [
+                    {
+                        "name": "level",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "INFO"
+                    },
+                    {
+                        "name": "tag",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "TEST"
+                    },
+                    {
+                        "name": "message",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "TEST LOG MESSAGE"
+                    },
+                    {
+                        "name": "exception",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "TEST LOG EXCEPTION"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "No formParameter"
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+        "/printers/history": {
+            "post": {
+                "tags": [
+                    "print history"
+                ],
+                "summary": "Add entry to print history",
+                "description": "Adds an entry to print history",
+                "operationId": "addEntryToPrintHistoryWithCurrentDate",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "parameters": [
+                    {
+                        "name": "printHistoryEntryJson",
+                        "in": "formData",
+                        "description": "Print history entry as json without id and date",
+                        "required": true,
+                        "type": "string",
+                        "x-example": "{\n  \"documentType\": \"invoice\",\n  \"description\": \"2\",\n  \"filePath\": \"/Users/jeromeklemm/Library/Caches/eu.plentymarkets.plentybase/Downloads/87edc072-db68-4b8a-a446-2dd682095faa_temp_1.pdf\",\n  \"printerConfigId\": 1\n}"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "True if successful",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "print history"
+                ],
+                "summary": "Delete multiple entries from print history",
+                "description": "Deletes a list of entries from print history",
+                "operationId": "deleteEntryList",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "List of print history entry ids",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "collectionFormat": "multi",
+                        "x-example": "1, 2, 3, 4"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "True if successfully deleted complete list of entries",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "404": {
+                        "description": "False if some entry has not been found"
+                    }
+                }
+            }
+        },
+        "/printers/history/{id}": {
+            "get": {
+                "tags": [
+                    "print history"
+                ],
+                "summary": "Read entry from print history",
+                "description": "Reads an entry from print history",
+                "operationId": "readEntry",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "List of print history entry ids",
+                        "required": true,
+                        "type": "integer",
+                        "pattern": "\\d+",
+                        "format": "int32",
+                        "x-example": "1, 2, 3, 4"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Print history entry",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Entry not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "print history"
+                ],
+                "summary": "Delete entry from print history",
+                "description": "Deletes an entry from print history",
+                "operationId": "deleteEntry",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of print history entry",
+                        "required": true,
+                        "type": "integer",
+                        "pattern": "\\d+",
+                        "format": "int32",
+                        "x-example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "True if successful",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "404": {
+                        "description": "Entry not found"
+                    }
+                }
+            }
+        },
+        "/printers/history/pages/{page}": {
+            "get": {
+                "tags": [
+                    "print history"
+                ],
+                "summary": "Read entry page from print history",
+                "description": "Reads entry page from print history",
+                "operationId": "getPageEntries",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "path",
+                        "description": "List of print history entry ids",
+                        "required": true,
+                        "type": "integer",
+                        "pattern": "[1-9][0-9]*",
+                        "format": "int64",
+                        "x-example": 1
+                    },
+                    {
+                        "name": "itemsPerPage",
+                        "in": "query",
+                        "description": "List of print history entry ids",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64",
+                        "x-example": 10
+                    },
+                    {
+                        "name": "sortOrder",
+                        "in": "query",
+                        "description": "List of print history entry ids",
+                        "required": true,
+                        "type": "string",
+                        "x-example": "asc"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Print history page",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Entries not found"
+                    }
+                }
+            }
+        },
+        "/printers/history/pages": {
+            "get": {
+                "tags": [
+                    "print history"
+                ],
+                "summary": "Read all pages from print history",
+                "description": "Reads all pages from print history",
+                "operationId": "readAllPages",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "All print history entries",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/PrintHistoryEntryBean"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Entries not found"
+                    }
+                }
+            }
+        },
+        "/printers/configs": {
+            "get": {
+                "tags": [
+                    "printer config"
+                ],
+                "summary": "Get printer configurations",
+                "description": "Get all saved printer configurations",
+                "operationId": "getPrinterConfigShortInfoList",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Printer configuration",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/PrinterConfigShortInfoBean"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "printer config"
+                ],
+                "summary": "Store printer configuration",
+                "description": "Stores a printer configuration",
+                "operationId": "storePrinterConfigPostRequest",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "config",
+                        "in": "formData",
+                        "description": "New printer configuration",
+                        "required": true,
+                        "type": "string",
+                        "x-example": "{\n    \"configName\": \"Drucker Client Raum\",\n    \"printerName\": \"Brother HL-2270DW series\",\n    \"paperTray\": \"AutoSelect\",\n    \"paperSize\": \"A4\",\n    \"paperOrientation\": \"portrait\",\n    \"paperScale\": \"fit_to_page\",\n    \"duplexMode\": \"\",\n    \"showPrintDialog\": false,\n    \"paperHeight\": 0,\n    \"paperWidth\": 0,\n    \"marginLeft\": 0,\n    \"marginRight\": 0,\n    \"marginTop\": 0,\n    \"marginBottom\": 0,\n    \"autoRotateAndCenter\": false,\n    \"printerPlugin\": \"Standard\"\n}"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully stored the printer configuration",
+                        "schema": {
+                            "$ref": "#/definitions/PrinterConfigStoredResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+        "/printers/configs/{id}": {
+            "get": {
+                "tags": [
+                    "printer config"
+                ],
+                "summary": "Get printer configuration",
+                "description": "Get saved printer configuration by given id",
+                "operationId": "getPrinterConfigById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "pattern": "\\d+",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Printer configuration json object",
+                        "schema": {
+                            "$ref": "#/definitions/PrinterConfigDataBean"
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "printer config"
+                ],
+                "summary": "Store printer configuration",
+                "description": "Stores a printer configuration",
+                "operationId": "storePrinterConfig",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of printer config which should be updated",
+                        "required": true,
+                        "type": "integer",
+                        "pattern": "\\d+",
+                        "format": "int32",
+                        "x-example": 1
+                    },
+                    {
+                        "name": "config",
+                        "in": "formData",
+                        "description": "New printer config",
+                        "required": true,
+                        "type": "string",
+                        "x-example": "{\n    \"configName\": \"Drucker Client Raum\",\n    \"printerName\": \"Brother HL-2270DW series\",\n    \"paperTray\": \"AutoSelect\",\n    \"paperSize\": \"A4\",\n    \"paperOrientation\": \"portrait\",\n    \"paperScale\": \"fit_to_page\",\n    \"duplexMode\": \"\",\n    \"showPrintDialog\": false,\n    \"paperHeight\": 0,\n    \"paperWidth\": 0,\n    \"marginLeft\": 0,\n    \"marginRight\": 0,\n    \"marginTop\": 0,\n    \"marginBottom\": 0,\n    \"autoRotateAndCenter\": false,\n    \"printerPlugin\": \"Standard\"\n}"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully stored the printer configuration",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "printer config"
+                ],
+                "summary": "Delete printer configuration",
+                "description": "Delete printer config",
+                "operationId": "deletePrinterConfig",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "pattern": "\\d+",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "200 if configuration is successfully deleted",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "500 if no configuration is found"
+                    }
+                }
+            }
+        },
+        "/printers/tests/print": {
+            "post": {
+                "tags": [
+                    "printers"
+                ],
+                "summary": "Prints a test page",
+                "description": "Prints a test page with given configuration. you can print with an existing configuration by using the config id parameter or you can pass the configuration directly",
+                "operationId": "printTestPage",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "config",
+                        "in": "formData",
+                        "description": "Printer config in json format",
+                        "required": false,
+                        "type": "string",
+                        "x-example": "{\n    \"configName\": \"Drucker Client Raum\",\n    \"printerName\": \"Brother HL-2270DW series\",\n    \"paperTray\": \"AutoSelect\",\n    \"paperSize\": \"A4\",\n    \"paperOrientation\": \"portrait\",\n    \"paperScale\": \"fit_to_page\",\n    \"duplexMode\": \"\",\n    \"showPrintDialog\": false,\n    \"paperHeight\": 0,\n    \"paperWidth\": 0,\n    \"marginLeft\": 0,\n    \"marginRight\": 0,\n    \"marginTop\": 0,\n    \"marginBottom\": 0,\n    \"autoRotateAndCenter\": false,\n    \"printerPlugin\": \"Standard\"\n}"
+                    },
+                    {
+                        "name": "configId",
+                        "in": "formData",
+                        "description": "Id of an existing printer config",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32",
+                        "x-example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully printed test page",
+                        "schema": {
+                            "$ref": "#/definitions/PrintStatus"
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+        "/printers/print": {
+            "post": {
+                "tags": [
+                    "printers"
+                ],
+                "operationId": "printMultiPart",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "parameters": [
+                    {
+                        "name": "printJobs",
+                        "in": "formData",
+                        "description": "Files json",
+                        "required": true,
+                        "type": "string",
+                        "x-example": "[\n  {\n    \"id\": \"testPrint1\",\n    \"documentType\": \"invoice\",\n    \"description\": \"2\",\n    \"printerConfigId\": 1,\n    \"copies\": 0,\n    \"storeInPrintHistory\": true,\n    \"fileReferences\": [],\n    \"fileContentList\": [\n      {\n        \"formParameter\": \"file1\",\n        \"encoding\": \"base64\",\n        \"type\": \"application/pdf\"\n      },\n      {\n        \"formParameter\": \"file2\",\n        \"encoding\": \"\",\n        \"type\": \"application/pdf\"\n      }\n    ]\n  }\n]"
+                    },
+                    {
+                        "name": "file1",
+                        "in": "formData",
+                        "description": "For example an base64 encoded file as string",
+                        "required": true,
+                        "type": "string",
+                        "x-example": "An base64 encoded pdf file"
+                    },
+                    {
+                        "name": "file2",
+                        "in": "formData",
+                        "description": "Put a file here",
+                        "required": true,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/printers": {
+            "get": {
+                "tags": [
+                    "printers"
+                ],
+                "summary": "Get printer list",
+                "description": "Returns a list of saved printer configurations",
+                "operationId": "getPrinterList",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "List of saved printers",
+                        "schema": {
+                            "$ref": "#/definitions/PrinterListResponseData"
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+        "/system/macaddress": {
+            "get": {
+                "tags": [
+                    "system"
+                ],
+                "summary": "Get mac address",
+                "description": "Returns mac address from device which is running plentyBase",
+                "operationId": "getMacAddress",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Mac address in json",
+                        "schema": {
+                            "$ref": "#/definitions/MacAddressBean"
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "ThirdPartyLib": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "license": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            }
+        },
+        "UpdateBean": {
+            "type": "object",
+            "properties": {
+                "currentVersion": {
+                    "type": "string"
+                },
+                "availableVersion": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string",
+                    "format": "url"
+                },
+                "channel": {
+                    "type": "string"
+                }
+            }
+        },
+        "VersionBean": {
+            "type": "object",
+            "properties": {
+                "version": {
+                    "type": "string"
+                }
+            }
+        },
+        "TokenBean": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "token": {
+                    "type": "string"
+                },
+                "userId": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "ipAddress": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "timestamp": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "accepted": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "FileReferenceBean": {
+            "type": "object",
+            "properties": {
+                "directory": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "extension": {
+                    "type": "string"
+                }
+            }
+        },
+        "DirectoryBean": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "hidden": {
+                    "type": "boolean"
+                },
+                "readable": {
+                    "type": "boolean"
+                },
+                "writable": {
+                    "type": "boolean"
+                },
+                "children": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DirectoryBean"
+                    }
+                }
+            }
+        },
+        "FileBean": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "content": {
+                    "$ref": "#/definitions/FileContentBean"
+                },
+                "reference": {
+                    "$ref": "#/definitions/FileReferenceBean"
+                }
+            }
+        },
+        "FileContentBean": {
+            "type": "object",
+            "properties": {
+                "formParameter": {
+                    "type": "string"
+                },
+                "encoding": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            }
+        },
+        "PrintHistoryEntryBean": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "documentType": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "filePath": {
+                    "type": "string"
+                },
+                "printerConfigId": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "date": {
+                    "type": "string"
+                }
+            }
+        },
+        "PrinterConfigShortInfoBean": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "PrinterConfigDataBean": {
+            "type": "object",
+            "properties": {
+                "configName": {
+                    "type": "string"
+                },
+                "printerName": {
+                    "type": "string"
+                },
+                "paperTray": {
+                    "type": "string"
+                },
+                "paperSize": {
+                    "type": "string"
+                },
+                "paperOrientation": {
+                    "type": "string"
+                },
+                "paperScale": {
+                    "type": "string"
+                },
+                "duplexMode": {
+                    "type": "string"
+                },
+                "showPrintDialog": {
+                    "type": "boolean"
+                },
+                "paperHeight": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "paperWidth": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "marginLeft": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "marginRight": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "marginTop": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "marginBottom": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "autoRotateAndCenter": {
+                    "type": "boolean"
+                },
+                "printerPlugin": {
+                    "type": "string"
+                }
+            }
+        },
+        "PrinterConfigStoredResponse": {
+            "type": "object",
+            "properties": {
+                "printerConfigId": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "PrintStatus": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "filePath": {
+                    "type": "string"
+                },
+                "error": {
+                    "type": "boolean"
+                },
+                "errorMessage": {
+                    "type": "string"
+                }
+            }
+        },
+        "MultiPrintResponse": {
+            "type": "object",
+            "properties": {
+                "printStatusList": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/PrintStatus"
+                    }
+                }
+            }
+        },
+        "PrinterBean": {
+            "type": "object",
+            "properties": {
+                "printerName": {
+                    "type": "string"
+                },
+                "paperSizes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "paperTrays": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "duplexModi": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "paperOrientations": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "printerPlugins": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "PrinterListResponseData": {
+            "type": "object",
+            "properties": {
+                "printers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/PrinterBean"
+                    }
+                }
+            }
+        },
+        "MacAddressBean": {
+            "type": "object",
+            "properties": {
+                "macAddress": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
