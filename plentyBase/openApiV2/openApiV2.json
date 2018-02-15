@@ -43,13 +43,35 @@
         "https"
     ],
     "paths": {
+        "/about/version": {
+            "get": {
+                "tags": [
+                    "about"
+                ],
+                "summary": "Get plentyBase version",
+                "description": "Gets the plentyBase version currently installed.",
+                "operationId": "getApplicationVersion",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Application version"
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
         "/about/thirdparty": {
             "get": {
                 "tags": [
                     "about"
                 ],
-                "summary": "Get libraries list",
-                "description": "Returns a list of libraries which plentyBase is using",
+                "summary": "List libraries",
+                "description": "Lists the libraries that plentyBase is using.",
                 "operationId": "getThirdPartyLibs",
                 "produces": [
                     "application/json"
@@ -77,7 +99,7 @@
                     "about"
                 ],
                 "summary": "Get update information",
-                "description": "Checks for an update and returns information",
+                "description": "Gets the latest available plentyBase version and version information.",
                 "operationId": "checkForUpdate",
                 "produces": [
                     "application/json"
@@ -93,35 +115,13 @@
                 }
             }
         },
-        "/about/version": {
-            "get": {
-                "tags": [
-                    "about"
-                ],
-                "summary": "Get application version",
-                "description": "Returns the current application version",
-                "operationId": "getApplicationVersion",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "Application version"
-                    },
-                    "500": {
-                        "description": "Server error"
-                    }
-                }
-            }
-        },
         "/authentication/token": {
             "post": {
                 "tags": [
                     "authentication"
                 ],
-                "summary": "Set accessToken which could be accepted later",
-                "description": "Does an authentication request for the specific token and returns the access token object which is saved in plentyBase tool",
+                "summary": "Set access token",
+                "description": "Sends an authentication request for the specified access token and returns the access token object that is saved in the plentyBase tool. The access token must be specified.",
                 "operationId": "setAccessToken",
                 "consumes": [
                     "application/x-www-form-urlencoded"
@@ -133,6 +133,7 @@
                     {
                         "name": "accessToken",
                         "in": "formData",
+                        "description": "The plentyBase access token",
                         "required": false,
                         "type": "string",
                         "x-example": "test_token"
@@ -156,8 +157,8 @@
                 "tags": [
                     "authentication"
                 ],
-                "summary": "Checks accessToken",
-                "description": "Checks if given accessToken is valid",
+                "summary": "Check access token",
+                "description": "Checks if the plentyBase instance requires an access token for authentication. If an access token is required, the access token is checked for validity.",
                 "operationId": "checkAccessToken",
                 "consumes": [
                     "text/plain"
@@ -169,6 +170,7 @@
                     {
                         "name": "accessToken",
                         "in": "query",
+                        "description": "The plentyBase access token",
                         "required": false,
                         "type": "string",
                         "x-example": "test_token"
@@ -176,10 +178,10 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Valid accessToken"
+                        "description": "Valid access token"
                     },
                     "401": {
-                        "description": "AccessToken not accepted"
+                        "description": "Access token not accepted"
                     },
                     "403": {
                         "description": "Forbidden"
@@ -198,8 +200,8 @@
                 "tags": [
                     "files"
                 ],
-                "summary": "Save collection document",
-                "description": "Creates and saves a collection document. You can add multiple files to this request, once per parameter. Than you can define multiple file content elements in the file content list. The form parameters has to match with the parameter names of the added files.",
+                "summary": "Save collection document (multi-document)",
+                "description": "Creates and saves a collection document (multi-document). Specify one file per parameter to include multiple files in the request. You can then define multiple file content elements in the file content list. The form parameter must match the parameter name of the file added.",
                 "operationId": "saveCollectionDocument",
                 "consumes": [
                     "multipart/form-data"
@@ -208,7 +210,7 @@
                     {
                         "name": "json",
                         "in": "formData",
-                        "description": "Save collection document request json",
+                        "description": "Save collection document request as a json object<br><b>targetFileId</b> = An optional ID to assign to the collection file<br><b>fileReferences</b><br><b>fileContentList</b><br><b>formParameter</b> = The form parameter of the file to be added. The form parameter must match the parameter name of the file added.<br><b>encoding</b> = The encoding of the file to be added<br><b>type</b> = The content type of the file to be added<br><b>targetFileReference</b><br><b>directory</b> =  The directory in which to save the collection file to be created<br><b>extension</b> = The extension of the collection file to be created<br><b>name</b> = The name of the collection file to be created",
                         "required": true,
                         "type": "string",
                         "x-example": "{\n  \"targetFileId\": \"merge_1\",\n  \"fileReferences\": [],\n  \"fileContentList\": [\n    {\n      \"formParameter\": \"file1\",\n      \"encoding\": \"base64\",\n      \"type\": \"application/pdf\"\n    },\n    {\n      \"formParameter\": \"file2\",\n      \"encoding\": \"\",\n      \"type\": \"application/pdf\"\n    }\n  ],\n  \"targetFileReference\": {\n    \"directory\": \"/private/var/spool/pdfwriter/jeromeklemm/\",\n    \"extension\": \"pdf\",\n    \"name\": \"mergedfile\"\n  }\n}"
@@ -216,7 +218,7 @@
                     {
                         "name": "file1",
                         "in": "formData",
-                        "description": "For example an base64 encoded file as string",
+                        "description": "The file to be included in the collection, e.g. a base64 encoded file as string",
                         "required": false,
                         "type": "string",
                         "x-example": "An base64 encoded pdf file"
@@ -224,7 +226,7 @@
                     {
                         "name": "file2",
                         "in": "formData",
-                        "description": "Put a file here",
+                        "description": "The file to be included in the collection",
                         "required": false,
                         "type": "file"
                     }
@@ -248,7 +250,7 @@
                     "directories"
                 ],
                 "summary": "Get directory content",
-                "description": "Get content of a directory. You can set multiple filters and the depth of the result set.",
+                "description": "Gets the content of a directory. You can set multiple filters and specify the depth of the results set.",
                 "operationId": "listFilteredDirectoryContent",
                 "produces": [
                     "application/json"
@@ -257,6 +259,7 @@
                     {
                         "name": "directoryPath",
                         "in": "query",
+                        "description": "The path to the directory",
                         "required": false,
                         "type": "string",
                         "x-example": "/path/to/your/directory/"
@@ -264,6 +267,7 @@
                     {
                         "name": "type",
                         "in": "query",
+                        "description": "Limits the results to a specific file type",
                         "required": false,
                         "type": "string",
                         "x-example": "directory"
@@ -271,6 +275,7 @@
                     {
                         "name": "writable",
                         "in": "query",
+                        "description": "Parameter value <b>true</b> limits the results to writable files",
                         "required": false,
                         "type": "boolean",
                         "x-example": true
@@ -278,6 +283,7 @@
                     {
                         "name": "hidden",
                         "in": "query",
+                        "description": "Parameter value <b>true</b> limits the results to hidden files. If no filter is set, all files are returned.",
                         "required": false,
                         "type": "boolean",
                         "x-example": "false"
@@ -285,6 +291,7 @@
                     {
                         "name": "depth",
                         "in": "query",
+                        "description": "The folder depth of the results set",
                         "required": false,
                         "type": "integer",
                         "format": "int32",
@@ -309,13 +316,14 @@
                 "tags": [
                     "files"
                 ],
-                "summary": "Get file via file path",
-                "description": "Returns the requested file",
+                "summary": "Get a file",
+                "description": "Gets a file. The path to the file must be specified.",
                 "operationId": "getFileViaFilePath",
                 "parameters": [
                     {
                         "name": "filePath",
                         "in": "query",
+                        "description": "The path of the path",
                         "required": false,
                         "type": "string",
                         "x-example": "/path/to/your/file.pdf"
@@ -337,8 +345,8 @@
                 "tags": [
                     "files"
                 ],
-                "summary": "Save file",
-                "description": "Returns save file response json object",
+                "summary": "Save files",
+                "description": "Save one or more files. ",
                 "operationId": "saveFilesMultiPart",
                 "consumes": [
                     "multipart/form-data"
@@ -347,7 +355,7 @@
                     {
                         "name": "files",
                         "in": "formData",
-                        "description": "Files json",
+                        "description": "The file details as a json object<br><b>id</b> = An optional ID to assign to the file<br><b>reference</b><br><b>extension</b> = The filename extension<br><b>directory</b> = The directory in which to save the file<br><b>name</b> = The name under which to save the file<br><b>content</b><br><b>formParameter</b> = The form parameter of the file. The form parameter must match the parameter name of the file added.<br><b>encoding</b> = The encoding of the file<br><b>type</b> = The content type of the file",
                         "required": true,
                         "type": "string",
                         "x-example": "[\n  {\n    \"id\": \"1\",\n    \"reference\": {\n      \"extension\": \"pdf\",\n      \"directory\": \"/private/var/spool/pdfwriter/jeromeklemm/neue test files/\",\n      \"name\": \"testfile1\"\n    },\n    \"content\": {\n      \"formParameter\": \"file1\",\n      \"encoding\": \"base64\",\n      \"type\": \"application/pdf\"\n    }\n  },\n  {\n    \"id\": \"2\",\n    \"reference\": {\n      \"extension\": \"pdf\",\n      \"directory\": \"/private/var/spool/pdfwriter/jeromeklemm/neue test files/\",\n      \"name\": \"testfile2\"\n    },\n    \"content\": {\n      \"formParameter\": \"file2\",\n      \"encoding\": \"\",\n      \"type\": \"application/pdf\"\n    }\n  }\n]"
@@ -355,7 +363,7 @@
                     {
                         "name": "file1",
                         "in": "formData",
-                        "description": "For example an base64 encoded file as string",
+                        "description": "The file to be saved, e.g.a base64 encoded file as string",
                         "required": true,
                         "type": "string",
                         "x-example": "An base64 encoded pdf file"
@@ -363,7 +371,7 @@
                     {
                         "name": "file2",
                         "in": "formData",
-                        "description": "Put a file here",
+                        "description": "The file to be saved",
                         "required": true,
                         "type": "file"
                     }
@@ -390,7 +398,7 @@
                     "healthcheck"
                 ],
                 "summary": "Check if plentyBase is available",
-                "description": "Checks if plentyBase is available",
+                "description": "Checks if plentyBase is available.",
                 "operationId": "doHealthCheck",
                 "produces": [
                     "application/json"
@@ -408,8 +416,8 @@
                 "tags": [
                     "logs"
                 ],
-                "summary": "Log message",
-                "description": "Logs messages in file",
+                "summary": "Create a log entry",
+                "description": "Creates an entry in the log.",
                 "operationId": "log",
                 "consumes": [
                     "application/x-www-form-urlencoded"
@@ -418,6 +426,7 @@
                     {
                         "name": "level",
                         "in": "formData",
+                        "description": "The severity level of the log entry (error, warning, info, debug, trace)",
                         "required": false,
                         "type": "string",
                         "x-example": "INFO"
@@ -425,6 +434,7 @@
                     {
                         "name": "tag",
                         "in": "formData",
+                        "description": "The tag for grouping log entries",
                         "required": false,
                         "type": "string",
                         "x-example": "TEST"
@@ -432,6 +442,7 @@
                     {
                         "name": "message",
                         "in": "formData",
+                        "description": "The log message",
                         "required": false,
                         "type": "string",
                         "x-example": "TEST LOG MESSAGE"
@@ -439,6 +450,7 @@
                     {
                         "name": "exception",
                         "in": "formData",
+                        "description": "The exception message",
                         "required": false,
                         "type": "string",
                         "x-example": "TEST LOG EXCEPTION"
@@ -454,84 +466,13 @@
                 }
             }
         },
-        "/printers/history": {
-            "post": {
-                "tags": [
-                    "print history"
-                ],
-                "summary": "Add entry to print history",
-                "description": "Adds an entry to print history",
-                "operationId": "addEntryToPrintHistoryWithCurrentDate",
-                "consumes": [
-                    "application/x-www-form-urlencoded"
-                ],
-                "produces": [
-                    "application/x-www-form-urlencoded"
-                ],
-                "parameters": [
-                    {
-                        "name": "printHistoryEntryJson",
-                        "in": "formData",
-                        "description": "Print history entry as json without id and date",
-                        "required": true,
-                        "type": "string",
-                        "x-example": "{\n  \"documentType\": \"invoice\",\n  \"description\": \"2\",\n  \"filePath\": \"/Users/jeromeklemm/Library/Caches/eu.plentymarkets.plentybase/Downloads/87edc072-db68-4b8a-a446-2dd682095faa_temp_1.pdf\",\n  \"printerConfigId\": 1\n}"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "True if successful",
-                        "schema": {
-                            "type": "boolean"
-                        }
-                    },
-                    "500": {
-                        "description": "Server error"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "print history"
-                ],
-                "summary": "Delete multiple entries from print history",
-                "description": "Deletes a list of entries from print history",
-                "operationId": "deleteEntryList",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "query",
-                        "description": "List of print history entry ids",
-                        "required": true,
-                        "type": "array",
-                        "items": {
-                            "type": "integer",
-                            "format": "int32"
-                        },
-                        "collectionFormat": "multi",
-                        "x-example": "1, 2, 3, 4"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "True if successfully deleted complete list of entries",
-                        "schema": {
-                            "type": "boolean"
-                        }
-                    },
-                    "404": {
-                        "description": "False if some entry has not been found"
-                    }
-                }
-            }
-        },
         "/printers/history/{id}": {
             "get": {
                 "tags": [
                     "print history"
                 ],
-                "summary": "Read entry from print history",
-                "description": "Reads an entry from print history",
+                "summary": "Get a print history entry",
+                "description": "Gets the specified entry of the print history. Entries are stored in the print history for 14 days. The ID of the entry must be specified.",
                 "operationId": "readEntry",
                 "produces": [
                     "application/json"
@@ -540,7 +481,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "List of print history entry ids",
+                        "description": "The ID of the print history entry",
                         "required": true,
                         "type": "integer",
                         "pattern": "\\d+",
@@ -564,14 +505,14 @@
                 "tags": [
                     "print history"
                 ],
-                "summary": "Delete entry from print history",
-                "description": "Deletes an entry from print history",
+                "summary": "Delete a print history entry",
+                "description": "Deletes an entry from the print history. The ID of the entry to be deleted must be specified.",
                 "operationId": "deleteEntry",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Id of print history entry",
+                        "description": "The ID of the print history entry",
                         "required": true,
                         "type": "integer",
                         "pattern": "\\d+",
@@ -592,13 +533,84 @@
                 }
             }
         },
+        "/printers/history": {
+            "post": {
+                "tags": [
+                    "print history"
+                ],
+                "summary": "Create print history entry",
+                "description": "Creates an entry in the print history.",
+                "operationId": "addEntryToPrintHistoryWithCurrentDate",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "parameters": [
+                    {
+                        "name": "printHistoryEntryJson",
+                        "in": "formData",
+                        "description": "Print history entry as a json object without ID and date<br><b>documentType</b> = The type of the document. The following document types are valid:<br>admin, blog, category, correction_document, credit_note, customer, delivery_note, dunning_letter, ebics_hash, facet, invoice, invoice_external, item, multi_credit_note, multi_invoice, offer, order_confirmation, pickup_delivery, receipt, refund_reversal, reorder, repair_bill, return_note, reversal_document, settlement_report, success_confirmation, ticket, webshop, webshop_customer, z_report, shipping_label, shipping_export_label<br><b>description</b> = The description of the document<br><b>filePath</b> = The path under which the file is stored<br><b>printerConfigId</b> = The ID of the printer configuration used",
+                        "required": true,
+                        "type": "string",
+                        "x-example": "{\n  \"documentType\": \"invoice\",\n  \"description\": \"2\",\n  \"filePath\": \"/Users/jeromeklemm/Library/Caches/eu.plentymarkets.plentybase/Downloads/87edc072-db68-4b8a-a446-2dd682095faa_temp_1.pdf\",\n  \"printerConfigId\": 1\n}"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "True if successful",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "print history"
+                ],
+                "summary": "Delete print history entries",
+                "description": "Deletes a list of entries from the print history. The IDs of the entries to be deleted must be specified.",
+                "operationId": "deleteEntryList",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "A list of print history entry IDs as an array",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "collectionFormat": "multi",
+                        "x-example": "1, 2, 3, 4"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "True if successfully deleted complete list of entries",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "404": {
+                        "description": "False if one or more entries have not been found"
+                    }
+                }
+            }
+        },
         "/printers/history/pages/{page}": {
             "get": {
                 "tags": [
                     "print history"
                 ],
-                "summary": "Read entry page from print history",
-                "description": "Reads entry page from print history",
+                "summary": "Get a print history page",
+                "description": "Gets a page of print history entries. Entries are stored in the print history for 14 days. The page number, the number of entries per page and the sorting order must be specified.",
                 "operationId": "getPageEntries",
                 "produces": [
                     "application/json"
@@ -607,7 +619,7 @@
                     {
                         "name": "page",
                         "in": "path",
-                        "description": "List of print history entry ids",
+                        "description": "The page number to be returned",
                         "required": true,
                         "type": "integer",
                         "pattern": "[1-9][0-9]*",
@@ -617,7 +629,7 @@
                     {
                         "name": "itemsPerPage",
                         "in": "query",
-                        "description": "List of print history entry ids",
+                        "description": "The number of print history entries per page",
                         "required": true,
                         "type": "integer",
                         "format": "int64",
@@ -626,7 +638,7 @@
                     {
                         "name": "sortOrder",
                         "in": "query",
-                        "description": "List of print history entry ids",
+                        "description": "The order in which the print history entries are to be sorted.<br><b>asc</b> = Entries are sorted in ascending order by date, i.e. the oldest entry is returned first.<br><b>desc</b> = Entries are sorted in descending order by date, i.e. the most recent entry is returned first.",
                         "required": true,
                         "type": "string",
                         "x-example": "asc"
@@ -650,8 +662,8 @@
                 "tags": [
                     "print history"
                 ],
-                "summary": "Read all pages from print history",
-                "description": "Reads all pages from print history",
+                "summary": "List print history entries",
+                "description": "Lists all entries of the print history. Entries are stored in the print history for 14 days. Entries are returned in descending order, i.e. the most recent entry is returned first.",
                 "operationId": "readAllPages",
                 "produces": [
                     "application/json"
@@ -678,8 +690,8 @@
                 "tags": [
                     "printer config"
                 ],
-                "summary": "Get printer configurations",
-                "description": "Get all saved printer configurations",
+                "summary": "List printer configurations",
+                "description": "Lists the IDs and names of the available printer configurations.",
                 "operationId": "getPrinterConfigShortInfoList",
                 "produces": [
                     "application/json"
@@ -704,8 +716,8 @@
                 "tags": [
                     "printer config"
                 ],
-                "summary": "Store printer configuration",
-                "description": "Stores a printer configuration",
+                "summary": "Create a printer configuration",
+                "description": "Creates a printer configuration.",
                 "operationId": "storePrinterConfigPostRequest",
                 "consumes": [
                     "application/x-www-form-urlencoded"
@@ -717,7 +729,7 @@
                     {
                         "name": "config",
                         "in": "formData",
-                        "description": "New printer configuration",
+                        "description": "The printer configuration details<br><b>configName</b> = The name of the printer configuration<br><b>printerName</b> = The name of the printer<br><b>paperTray</b> = The paper tray to get the paper from<br><b>paperSize</b> = The paper size<br><b>paperOrientation</b> = The paper orientation<br><b>paperScale</b> = The scaling of the page<br><b>duplexMode</b> = The double sided printing option to be used<br><b>showPrintDialog</b> = Whether or not the printer dialogue should open before printing (true/false)<br><b>paperHeight, paperWidth</b> = Values for paperSize custom only<br><b>marginLeft, marginRight, marginTop, marginBottom</b> = Optional: Distances in mm from page corners<br><b>printerPlugin</b> = The printer plugin to be used<br>The values depend on the specification of the printer.",
                         "required": true,
                         "type": "string",
                         "x-example": "{\n    \"configName\": \"Drucker Client Raum\",\n    \"printerName\": \"Brother HL-2270DW series\",\n    \"paperTray\": \"AutoSelect\",\n    \"paperSize\": \"A4\",\n    \"paperOrientation\": \"portrait\",\n    \"paperScale\": \"fit_to_page\",\n    \"duplexMode\": \"\",\n    \"showPrintDialog\": false,\n    \"paperHeight\": 0,\n    \"paperWidth\": 0,\n    \"marginLeft\": 0,\n    \"marginRight\": 0,\n    \"marginTop\": 0,\n    \"marginBottom\": 0,\n    \"autoRotateAndCenter\": false,\n    \"printerPlugin\": \"Standard\"\n}"
@@ -725,7 +737,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successfully stored the printer configuration",
+                        "description": "Successfully saved the printer configuration",
                         "schema": {
                             "$ref": "#/definitions/PrinterConfigStoredResponse"
                         }
@@ -741,8 +753,8 @@
                 "tags": [
                     "printer config"
                 ],
-                "summary": "Get printer configuration",
-                "description": "Get saved printer configuration by given id",
+                "summary": "Get a printer configuration",
+                "description": "Gets a printer configuration. The ID of the printer configuration must be specified.",
                 "operationId": "getPrinterConfigById",
                 "produces": [
                     "application/json"
@@ -751,6 +763,7 @@
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "The ID of the printer configuration",
                         "required": true,
                         "type": "integer",
                         "pattern": "\\d+",
@@ -773,8 +786,8 @@
                 "tags": [
                     "printer config"
                 ],
-                "summary": "Store printer configuration",
-                "description": "Stores a printer configuration",
+                "summary": "Updates a printer configuration",
+                "description": "Updates a printer configuration",
                 "operationId": "storePrinterConfig",
                 "consumes": [
                     "application/x-www-form-urlencoded"
@@ -786,7 +799,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Id of printer config which should be updated",
+                        "description": "ID of the printer configuration to be updated",
                         "required": true,
                         "type": "integer",
                         "pattern": "\\d+",
@@ -796,7 +809,7 @@
                     {
                         "name": "config",
                         "in": "formData",
-                        "description": "New printer config",
+                        "description": "The new printer configuration details.<br><b>configName</b> = The name of the printer configuration<br><b>printerName</b> = The name of the printer<br><b>paperTray</b> = The paper tray to get the paper from<br><b>paperSize</b> = The paper size<br><b>paperOrientation</b> = The paper orientation<br><b>paperScale</b> = The scaling of the page<br><b>duplexMode</b> = The double sided printing option to be used<br><b>showPrintDialog</b> = Whether or not the printer dialogue should open before printing (true/false)<br><b>paperHeight, paperWidth</b> = Values for paperSize custom only<br><b>marginLeft, marginRight, marginTop, marginBottom</b> = Optional: Distances in mm from page corners<br><b>printerPlugin</b> = The printer plugin to be used<br>The values depend on the specification of the printer.",
                         "required": true,
                         "type": "string",
                         "x-example": "{\n    \"configName\": \"Drucker Client Raum\",\n    \"printerName\": \"Brother HL-2270DW series\",\n    \"paperTray\": \"AutoSelect\",\n    \"paperSize\": \"A4\",\n    \"paperOrientation\": \"portrait\",\n    \"paperScale\": \"fit_to_page\",\n    \"duplexMode\": \"\",\n    \"showPrintDialog\": false,\n    \"paperHeight\": 0,\n    \"paperWidth\": 0,\n    \"marginLeft\": 0,\n    \"marginRight\": 0,\n    \"marginTop\": 0,\n    \"marginBottom\": 0,\n    \"autoRotateAndCenter\": false,\n    \"printerPlugin\": \"Standard\"\n}"
@@ -818,8 +831,8 @@
                 "tags": [
                     "printer config"
                 ],
-                "summary": "Delete printer configuration",
-                "description": "Delete printer config",
+                "summary": "Delete a printer configuration",
+                "description": "Deletes a printer configuration. The ID of the printer configuration must be specified.",
                 "operationId": "deletePrinterConfig",
                 "produces": [
                     "application/json"
@@ -828,6 +841,7 @@
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "The ID of the printer configuration to be deleted",
                         "required": true,
                         "type": "integer",
                         "pattern": "\\d+",
@@ -836,7 +850,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "200 if configuration is successfully deleted",
+                        "description": "Configuration successfully deleted",
                         "schema": {
                             "type": "string"
                         }
@@ -852,8 +866,8 @@
                 "tags": [
                     "printers"
                 ],
-                "summary": "Prints a test page",
-                "description": "Prints a test page with given configuration. you can print with an existing configuration by using the config id parameter or you can pass the configuration directly",
+                "summary": "Print a test page",
+                "description": "Prints a test page with the specified printer configuration. Specify a printer configuration as a JSON object or pass the ID of an existing printer configuration using the configId parameter.",
                 "operationId": "printTestPage",
                 "consumes": [
                     "application/x-www-form-urlencoded"
@@ -865,7 +879,7 @@
                     {
                         "name": "config",
                         "in": "formData",
-                        "description": "Printer config in json format",
+                        "description": "A printer configuration as a JSON object<br><b>documentType</b> = The type of the document. The following document types are valid:<br>admin, blog, category, correction_document, credit_note, customer, delivery_note, dunning_letter, ebics_hash, facet, invoice, invoice_external, item, multi_credit_note, multi_invoice, offer, order_confirmation, pickup_delivery, receipt, refund_reversal, reorder, repair_bill, return_note, reversal_document, settlement_report, success_confirmation, ticket, webshop, webshop_customer, z_report, shipping_label, shipping_export_label<br><b>description</b> = The description of the file<br><b>printerConfigId</b> = The ID of the printer configuration to be used for the print job<br><b>copies</b> = The number of copies to be printed<br><b>storeInPrintHistory</b> = Flag that indicates if the document is to be saved in the print history (true/false)<br><b>formParameter</b> = The form parameter of the file. The form parameter must match the parameter name of the file added.<br><b>encoding</b> = The encoding of the file<br><b>type</b> = The content type of the file",
                         "required": false,
                         "type": "string",
                         "x-example": "{\n    \"configName\": \"Drucker Client Raum\",\n    \"printerName\": \"Brother HL-2270DW series\",\n    \"paperTray\": \"AutoSelect\",\n    \"paperSize\": \"A4\",\n    \"paperOrientation\": \"portrait\",\n    \"paperScale\": \"fit_to_page\",\n    \"duplexMode\": \"\",\n    \"showPrintDialog\": false,\n    \"paperHeight\": 0,\n    \"paperWidth\": 0,\n    \"marginLeft\": 0,\n    \"marginRight\": 0,\n    \"marginTop\": 0,\n    \"marginBottom\": 0,\n    \"autoRotateAndCenter\": false,\n    \"printerPlugin\": \"Standard\"\n}"
@@ -873,7 +887,7 @@
                     {
                         "name": "configId",
                         "in": "formData",
-                        "description": "Id of an existing printer config",
+                        "description": "The ID of an existing printer configuration",
                         "required": false,
                         "type": "integer",
                         "format": "int32",
@@ -906,7 +920,7 @@
                     {
                         "name": "printJobs",
                         "in": "formData",
-                        "description": "Files json",
+                        "description": "Files json<br><b>documentType</b> = The type of the document. The following document types are valid:<br>admin, blog, category, correction_document, credit_note, customer, delivery_note, dunning_letter, ebics_hash, facet, invoice, invoice_external, item, multi_credit_note, multi_invoice, offer, order_confirmation, pickup_delivery, receipt, refund_reversal, reorder, repair_bill, return_note, reversal_document, settlement_report, success_confirmation, ticket, webshop, webshop_customer, z_report, shipping_label, shipping_export_label<br><b>description</b> = The description of the file<br><b>printerConfigId</b> = The ID of the printer configuration to be used for the print job<br><b>copies</b> = The number of copies to be printed<br><b>storeInPrintHistory</b> = Flag that indicates if the document is to be saved in the print history (true/false)<br><b>formParameter</b> = The form parameter of the file. The form parameter must match the parameter name of the file added.<br><b>encoding</b> = The encoding of the file<br><b>type</b> = The content type of the file",
                         "required": true,
                         "type": "string",
                         "x-example": "[\n  {\n    \"id\": \"testPrint1\",\n    \"documentType\": \"invoice\",\n    \"description\": \"2\",\n    \"printerConfigId\": 1,\n    \"copies\": 0,\n    \"storeInPrintHistory\": true,\n    \"fileReferences\": [],\n    \"fileContentList\": [\n      {\n        \"formParameter\": \"file1\",\n        \"encoding\": \"base64\",\n        \"type\": \"application/pdf\"\n      },\n      {\n        \"formParameter\": \"file2\",\n        \"encoding\": \"\",\n        \"type\": \"application/pdf\"\n      }\n    ]\n  }\n]"
@@ -914,7 +928,7 @@
                     {
                         "name": "file1",
                         "in": "formData",
-                        "description": "For example an base64 encoded file as string",
+                        "description": "The file to be printed, e.g. base64 encoded file as string",
                         "required": true,
                         "type": "string",
                         "x-example": "An base64 encoded pdf file"
@@ -922,7 +936,7 @@
                     {
                         "name": "file2",
                         "in": "formData",
-                        "description": "Put a file here",
+                        "description": "The file to be printed",
                         "required": true,
                         "type": "file"
                     }
@@ -939,8 +953,8 @@
                 "tags": [
                     "printers"
                 ],
-                "summary": "Get printer list",
-                "description": "Returns a list of saved printer configurations",
+                "summary": "List printer specifications",
+                "description": "Lists the specifications of the printers that plentyBase can access.",
                 "operationId": "getPrinterList",
                 "produces": [
                     "application/json"
@@ -964,8 +978,8 @@
                 "tags": [
                     "system"
                 ],
-                "summary": "Get mac address",
-                "description": "Returns mac address from device which is running plentyBase",
+                "summary": "Get MAC address",
+                "description": "Gets the MAC address of the device that is running plentyBase.",
                 "operationId": "getMacAddress",
                 "produces": [
                     "application/json"
@@ -973,7 +987,7 @@
                 "parameters": [],
                 "responses": {
                     "200": {
-                        "description": "Mac address in json",
+                        "description": "MAC address in json",
                         "schema": {
                             "$ref": "#/definitions/MacAddressBean"
                         }
@@ -986,6 +1000,14 @@
         }
     },
     "definitions": {
+        "VersionBean": {
+            "type": "object",
+            "properties": {
+                "version": {
+                    "type": "string"
+                }
+            }
+        },
         "ThirdPartyLib": {
             "type": "object",
             "properties": {
@@ -1020,14 +1042,6 @@
                     "format": "url"
                 },
                 "channel": {
-                    "type": "string"
-                }
-            }
-        },
-        "VersionBean": {
-            "type": "object",
-            "properties": {
-                "version": {
                     "type": "string"
                 }
             }
