@@ -39,8 +39,8 @@
         }
     ],
     "schemes": [
-        "http",
-        "https"
+        "https",
+        "http"
     ],
     "paths": {
         "/about/version": {
