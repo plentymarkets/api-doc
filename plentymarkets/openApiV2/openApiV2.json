@@ -391,6 +391,153 @@
                 ]
             }
         },
+        "\/rest\/accounting\/locations\/existing_accounts": {
+            "get": {
+                "summary": "Get all unique posting accounts",
+                "description": "",
+                "tags": [
+                    "Accounting"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\Accounting\\Models\\PostingAccounts"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/accounting\/locations\/posting_accounts": {
+            "get": {
+                "summary": "Get all posting accounts",
+                "description": "",
+                "tags": [
+                    "Accounting"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\Accounting\\Models\\PostingAccounts"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "post": {
+                "summary": "Save posting accounts",
+                "description": "",
+                "tags": [
+                    "Accounting"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\Accounting\\Models\\PostingAccounts"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/accounting\/locations\/posting_accounts\/{id}": {
+            "delete": {
+                "summary": "Delete an posting account",
+                "description": "",
+                "tags": [
+                    "Accounting"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "get": {
+                "summary": "Gets posting account by the unique id",
+                "description": "",
+                "tags": [
+                    "Accounting"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Accounting\\Models\\PostingAccounts"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/accounting\/locations\/revenue_account_configurations": {
             "get": {
                 "summary": "List revenue account configurations",
@@ -702,6 +849,44 @@
                 ]
             }
         },
+        "\/rest\/accounting\/locations\/{locationId}\/posting_accounts": {
+            "get": {
+                "summary": "Get all posting accounts by locationId",
+                "description": "",
+                "tags": [
+                    "Accounting"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\Accounting\\Models\\PostingAccounts"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "locationId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/accounting\/locations\/{locationId}\/posting_key_configurations": {
             "get": {
                 "summary": "Get a posting key configuration of an accounting location",
@@ -763,6 +948,106 @@
                         "description": "",
                         "format": "integer",
                         "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/accounting\/locations\/{locationId}\/{type}\/posting_accounts": {
+            "get": {
+                "summary": "Get all posting accounts by locationId and type",
+                "description": "",
+                "tags": [
+                    "Accounting"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\Accounting\\Models\\PostingAccounts"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "locationId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "type",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/accounting\/locations\/{webstoreId}\/{countryId}\/posting_accounts": {
+            "get": {
+                "summary": "Get all posting accounts for a country of a webstore",
+                "description": "",
+                "tags": [
+                    "Accounting"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\Accounting\\Models\\PostingAccounts"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "webstoreId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "countryId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "$webstoreId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the webstore",
+                        "format": "integer",
+                        "in": "query"
                     }
                 ],
                 "security": [
@@ -6117,7 +6402,10 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#\/definitions\/Illuminate\\Database\\Eloquent\\Collection"
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\User\\Models\\User"
+                            }
                         }
                     },
                     "401": {
@@ -24884,6 +25172,153 @@
                 ]
             }
         },
+        "\/rest\/listings\/markets\/find": {
+            "get": {
+                "summary": "Find listing markets",
+                "description": "Lists listing market by filter options.",
+                "tags": [
+                    "Listing"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "page": {
+                                    "type": "integer",
+                                    "description": "Current page of the response"
+                                },
+                                "totalsCount": {
+                                    "type": "integer",
+                                    "description": "The total number of entries in the response"
+                                },
+                                "isLastPage": {
+                                    "type": "boolean",
+                                    "description": "Flag that indicates if the page shown is the last page of the response"
+                                },
+                                "lastPageNumber": {
+                                    "type": "integer",
+                                    "description": "The last page number"
+                                },
+                                "firstOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the first item of the current page result"
+                                },
+                                "lastOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the last item of the current page result"
+                                },
+                                "itemsPerPage": {
+                                    "type": "integer",
+                                    "description": "The requested amount of items per result page"
+                                },
+                                "entries": {
+                                    "type": "array",
+                                    "description": "List of ListingMarket",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Listing\\Market\\Models\\ListingMarket"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "page",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The page of results to search for.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "itemsPerPage",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The number of items to list per page.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter that restricts the search result to listing markets that match the given ID(s).",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "variations",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter that restricts the search result to listing markets with a custom variation condition. Available values are 'all', 'fixed'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "referrerId",
+                        "type": "number",
+                        "required": false,
+                        "description": "Filter that restricts the search result to listing markets with given referrer ID.",
+                        "format": "double",
+                        "in": "query"
+                    },
+                    {
+                        "name": "credentialsId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter that restricts the search result to listing markets with given credential ID.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "directoryId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter that restricts the search result to listing markets with a given directory ID.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "itemId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter that restricts the search result to listing markets that belong to a given item ID.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "shippingProfileId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter that restricts the search result to listing markets that belong to a given shipping profile ID",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "with",
+                        "type": "array",
+                        "required": false,
+                        "description": "An array with child instances to be loaded. Valid instances are 'listing', 'texts', 'properties', 'prices', 'dates', 'infos'.",
+                        "format": "",
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/listings\/markets\/histories": {
             "get": {
                 "summary": "List listing market history",
@@ -30063,6 +30498,14 @@
                         "description": "",
                         "format": "integer",
                         "in": "path"
+                    },
+                    {
+                        "name": "with",
+                        "type": "string",
+                        "required": false,
+                        "description": "Load additional relations for a coupon code. Currently possible are:\n     * <ul>\n     *   <li>'campaign' = The coupon campaign to which this code belongs to.<\/li>\n     * <\/ul>\n     * Example: <code>?with=campaign<\/code>",
+                        "format": "string",
+                        "in": "query"
                     }
                 ],
                 "security": [
@@ -32372,6 +32815,46 @@
                 ]
             }
         },
+        "\/rest\/orders\/shipping\/parcels\/preview\/{language?}": {
+            "get": {
+                "summary": "Get a preview list for parcel services.",
+                "description": "",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "language?",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "language",
+                        "type": "string",
+                        "required": false,
+                        "description": "",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/orders\/shipping\/presets": {
             "get": {
                 "summary": "List shipping profiles",
@@ -32442,6 +32925,46 @@
                         "type": "string",
                         "required": false,
                         "description": "Filter that restricts the search result to presets that were updated after a specific date. Possible formats: yyyy-mm-dd or yyyy-mm-dd hh:mm:ss",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/orders\/shipping\/presets\/preview\/{language?}": {
+            "get": {
+                "summary": "Get a preview list for parcel service presets.",
+                "description": "",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "language?",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "language",
+                        "type": "string",
+                        "required": false,
+                        "description": "",
                         "format": "string",
                         "in": "query"
                     }
@@ -36116,6 +36639,46 @@
                 ]
             }
         },
+        "\/rest\/payments\/methods\/preview\/{language?}": {
+            "get": {
+                "summary": "Get a preview list for parcel services.",
+                "description": "",
+                "tags": [
+                    "Payment"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "language?",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "language",
+                        "type": "string",
+                        "required": false,
+                        "description": "",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/payments\/methods\/{methodId}": {
             "get": {
                 "summary": "List payments of a payment method",
@@ -37070,6 +37633,29 @@
                         "oAuth2": []
                     }
                 ]
+            }
+        },
+        "\/rest\/plugins\/seo\/sitemap": {
+            "get": {
+                "summary": "Load sitemap patterns",
+                "description": "Loads all given sitemap patterns from booted plugins.",
+                "tags": [
+                    "Plugins"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/string"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                }
             }
         },
         "\/rest\/plugins\/ui": {
@@ -41846,6 +42432,41 @@
                 ]
             }
         },
+        "\/rest\/storage\/frontend\/object-url": {
+            "get": {
+                "summary": "Get the URL for a layout document",
+                "description": "Gets the URL of a layout document. The storage key must be specified. The returned URL expires after 10 minutes.",
+                "tags": [
+                    "Cloud"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/string"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "key",
+                        "type": "string",
+                        "required": true,
+                        "description": "The storage key for the frontend document to retrieve the URL for. Include the storage key in the request in a <code>key<\/code> field.",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/storage\/layout": {
             "delete": {
                 "summary": "Delete layout documents",
@@ -44259,6 +44880,39 @@
                 "save": {
                     "type": "boolean",
                     "description": "Flag that indicates if the debtor account shall be saved within the contact data."
+                }
+            }
+        },
+        "Plenty\\Modules\\Accounting\\Models\\PostingAccounts": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": ""
+                },
+                "locationId": {
+                    "type": "integer",
+                    "description": ""
+                },
+                "type": {
+                    "type": "string",
+                    "description": ""
+                },
+                "position": {
+                    "type": "integer",
+                    "description": ""
+                },
+                "subtype": {
+                    "type": "string",
+                    "description": ""
+                },
+                "name": {
+                    "type": "string",
+                    "description": ""
+                },
+                "account": {
+                    "type": "string",
+                    "description": ""
                 }
             }
         },
