@@ -1,41 +1,41 @@
 {
     "swagger": "2.0",
     "info": {
-        "version": "1.2.0",
+        "version": "1.2.1",
         "title": "plentyBase"
     },
     "host": "local.plentybase.de:7331",
     "basePath": "/",
     "tags": [
         {
-            "name": "about"
+            "name": "About"
         },
         {
-            "name": "authentication"
+            "name": "Authentication"
         },
         {
-            "name": "files"
+            "name": "Files"
         },
         {
-            "name": "directories"
+            "name": "Directories"
         },
         {
-            "name": "healthcheck"
+            "name": "Healthcheck"
         },
         {
-            "name": "logs"
+            "name": "Logs"
         },
         {
-            "name": "print history"
+            "name": "Print history"
         },
         {
-            "name": "printer config"
+            "name": "Printer config"
         },
         {
-            "name": "printers"
+            "name": "Printers"
         },
         {
-            "name": "system"
+            "name": "System"
         }
     ],
     "schemes": [
@@ -43,32 +43,10 @@
         "http"
     ],
     "paths": {
-        "/about/version": {
-            "get": {
-                "tags": [
-                    "about"
-                ],
-                "summary": "Get plentyBase version",
-                "description": "Gets the plentyBase version currently installed.",
-                "operationId": "getApplicationVersion",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "Application version"
-                    },
-                    "500": {
-                        "description": "Server error"
-                    }
-                }
-            }
-        },
         "/about/thirdparty": {
             "get": {
                 "tags": [
-                    "about"
+                    "About"
                 ],
                 "summary": "List libraries",
                 "description": "Lists the libraries that plentyBase is using.",
@@ -96,7 +74,7 @@
         "/about/update": {
             "get": {
                 "tags": [
-                    "about"
+                    "About"
                 ],
                 "summary": "Get update information",
                 "description": "Gets the latest available plentyBase version and version information.",
@@ -115,10 +93,32 @@
                 }
             }
         },
+        "/about/version": {
+            "get": {
+                "tags": [
+                    "About"
+                ],
+                "summary": "Get plentyBase version",
+                "description": "Gets the plentyBase version currently installed.",
+                "operationId": "getApplicationVersion",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Application version"
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
         "/authentication/token": {
             "post": {
                 "tags": [
-                    "authentication"
+                    "Authentication"
                 ],
                 "summary": "Set access token",
                 "description": "Sends an authentication request for the specified access token and returns the access token object that is saved in the plentyBase tool. The access token must be specified.",
@@ -155,7 +155,7 @@
         "/authentication/check": {
             "get": {
                 "tags": [
-                    "authentication"
+                    "Authentication"
                 ],
                 "summary": "Check access token",
                 "description": "Checks if the plentyBase instance requires an access token for authentication. If an access token is required, the access token is checked for validity.",
@@ -198,7 +198,7 @@
         "/files/collections": {
             "post": {
                 "tags": [
-                    "files"
+                    "Files"
                 ],
                 "summary": "Save collection document (multi-document)",
                 "description": "Creates and saves a collection document (multi-document). Specify one file per parameter to include multiple files in the request. You can then define multiple file content elements in the file content list. The form parameter must match the parameter name of the file added.",
@@ -247,7 +247,7 @@
         "/directories": {
             "get": {
                 "tags": [
-                    "directories"
+                    "Directories"
                 ],
                 "summary": "Get directory content",
                 "description": "Gets the content of a directory. You can set multiple filters and specify the depth of the results set.",
@@ -314,7 +314,7 @@
         "/files": {
             "get": {
                 "tags": [
-                    "files"
+                    "Files"
                 ],
                 "summary": "Get a file",
                 "description": "Gets a file. The path to the file must be specified.",
@@ -343,7 +343,7 @@
             },
             "post": {
                 "tags": [
-                    "files"
+                    "Files"
                 ],
                 "summary": "Save files",
                 "description": "Save one or more files. ",
@@ -395,14 +395,11 @@
         "/healthcheck": {
             "get": {
                 "tags": [
-                    "healthcheck"
+                    "Healthcheck"
                 ],
                 "summary": "Check if plentyBase is available",
                 "description": "Checks if plentyBase is available.",
                 "operationId": "doHealthCheck",
-                "produces": [
-                    "application/json"
-                ],
                 "parameters": [],
                 "responses": {
                     "200": {
@@ -414,7 +411,7 @@
         "/logs": {
             "post": {
                 "tags": [
-                    "logs"
+                    "Logs"
                 ],
                 "summary": "Create a log entry",
                 "description": "Creates an entry in the log.",
@@ -466,77 +463,10 @@
                 }
             }
         },
-        "/printers/history/{id}": {
-            "get": {
-                "tags": [
-                    "print history"
-                ],
-                "summary": "Get a print history entry",
-                "description": "Gets the specified entry of the print history. Entries are stored in the print history for 14 days. The ID of the entry must be specified.",
-                "operationId": "readEntry",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "The ID of the print history entry",
-                        "required": true,
-                        "type": "integer",
-                        "pattern": "\\d+",
-                        "format": "int32",
-                        "x-example": "1, 2, 3, 4"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Print history entry",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "404": {
-                        "description": "Entry not found"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "print history"
-                ],
-                "summary": "Delete a print history entry",
-                "description": "Deletes an entry from the print history. The ID of the entry to be deleted must be specified.",
-                "operationId": "deleteEntry",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "The ID of the print history entry",
-                        "required": true,
-                        "type": "integer",
-                        "pattern": "\\d+",
-                        "format": "int32",
-                        "x-example": 1
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "True if successful",
-                        "schema": {
-                            "type": "boolean"
-                        }
-                    },
-                    "404": {
-                        "description": "Entry not found"
-                    }
-                }
-            }
-        },
         "/printers/history": {
             "post": {
                 "tags": [
-                    "print history"
+                    "Print history"
                 ],
                 "summary": "Create print history entry",
                 "description": "Creates an entry in the print history.",
@@ -571,7 +501,7 @@
             },
             "delete": {
                 "tags": [
-                    "print history"
+                    "Print history"
                 ],
                 "summary": "Delete print history entries",
                 "description": "Deletes a list of entries from the print history. The IDs of the entries to be deleted must be specified.",
@@ -604,10 +534,77 @@
                 }
             }
         },
+        "/printers/history/{id}": {
+            "get": {
+                "tags": [
+                    "Print history"
+                ],
+                "summary": "Get a print history entry",
+                "description": "Gets the specified entry of the print history. Entries are stored in the print history for 14 days. The ID of the entry must be specified.",
+                "operationId": "readEntry",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the print history entry",
+                        "required": true,
+                        "type": "integer",
+                        "pattern": "\\d+",
+                        "format": "int32",
+                        "x-example": "1, 2, 3, 4"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Print history entry",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Entry not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Print history"
+                ],
+                "summary": "Delete a print history entry",
+                "description": "Deletes an entry from the print history. The ID of the entry to be deleted must be specified.",
+                "operationId": "deleteEntry",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the print history entry",
+                        "required": true,
+                        "type": "integer",
+                        "pattern": "\\d+",
+                        "format": "int32",
+                        "x-example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "True if successful",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "404": {
+                        "description": "Entry not found"
+                    }
+                }
+            }
+        },
         "/printers/history/pages/{page}": {
             "get": {
                 "tags": [
-                    "print history"
+                    "Print history"
                 ],
                 "summary": "Get a print history page",
                 "description": "Gets a page of print history entries. Entries are stored in the print history for 14 days. The page number, the number of entries per page and the sorting order must be specified.",
@@ -660,7 +657,7 @@
         "/printers/history/pages": {
             "get": {
                 "tags": [
-                    "print history"
+                    "Print history"
                 ],
                 "summary": "List print history entries",
                 "description": "Lists all entries of the print history. Entries are stored in the print history for 14 days. Entries are returned in descending order, i.e. the most recent entry is returned first.",
@@ -688,7 +685,7 @@
         "/printers/configs": {
             "get": {
                 "tags": [
-                    "printer config"
+                    "Printer config"
                 ],
                 "summary": "List printer configurations",
                 "description": "Lists the IDs and names of the available printer configurations.",
@@ -714,7 +711,7 @@
             },
             "post": {
                 "tags": [
-                    "printer config"
+                    "Printer config"
                 ],
                 "summary": "Create a printer configuration",
                 "description": "Creates a printer configuration.",
@@ -751,7 +748,7 @@
         "/printers/configs/{id}": {
             "get": {
                 "tags": [
-                    "printer config"
+                    "Printer config"
                 ],
                 "summary": "Get a printer configuration",
                 "description": "Gets a printer configuration. The ID of the printer configuration must be specified.",
@@ -784,7 +781,7 @@
             },
             "put": {
                 "tags": [
-                    "printer config"
+                    "Printer config"
                 ],
                 "summary": "Updates a printer configuration",
                 "description": "Updates a printer configuration",
@@ -829,7 +826,7 @@
             },
             "delete": {
                 "tags": [
-                    "printer config"
+                    "Printer config"
                 ],
                 "summary": "Delete a printer configuration",
                 "description": "Deletes a printer configuration. The ID of the printer configuration must be specified.",
@@ -864,7 +861,7 @@
         "/printers/tests/print": {
             "post": {
                 "tags": [
-                    "printers"
+                    "Printers"
                 ],
                 "summary": "Print a test page",
                 "description": "Prints a test page with the specified printer configuration. Specify a printer configuration as a JSON object or pass the ID of an existing printer configuration using the configId parameter.",
@@ -910,7 +907,7 @@
         "/printers/print": {
             "post": {
                 "tags": [
-                    "printers"
+                    "Printers"
                 ],
                 "operationId": "printMultiPart",
                 "consumes": [
@@ -951,7 +948,7 @@
         "/printers": {
             "get": {
                 "tags": [
-                    "printers"
+                    "Printers"
                 ],
                 "summary": "List printer specifications",
                 "description": "Lists the specifications of the printers that plentyBase can access.",
@@ -976,7 +973,7 @@
         "/system/macaddress": {
             "get": {
                 "tags": [
-                    "system"
+                    "System"
                 ],
                 "summary": "Get MAC address",
                 "description": "Gets the MAC address of the device that is running plentyBase.",
@@ -1000,14 +997,6 @@
         }
     },
     "definitions": {
-        "VersionBean": {
-            "type": "object",
-            "properties": {
-                "version": {
-                    "type": "string"
-                }
-            }
-        },
         "ThirdPartyLib": {
             "type": "object",
             "properties": {
@@ -1042,6 +1031,14 @@
                     "format": "url"
                 },
                 "channel": {
+                    "type": "string"
+                }
+            }
+        },
+        "VersionBean": {
+            "type": "object",
+            "properties": {
+                "version": {
                     "type": "string"
                 }
             }
@@ -1183,6 +1180,15 @@
                 }
             }
         },
+        "PrinterConfigStoredResponse": {
+            "type": "object",
+            "properties": {
+                "printerConfigId": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
         "PrinterConfigDataBean": {
             "type": "object",
             "properties": {
@@ -1239,15 +1245,6 @@
                 },
                 "printerPlugin": {
                     "type": "string"
-                }
-            }
-        },
-        "PrinterConfigStoredResponse": {
-            "type": "object",
-            "properties": {
-                "printerConfigId": {
-                    "type": "integer",
-                    "format": "int32"
                 }
             }
         },
