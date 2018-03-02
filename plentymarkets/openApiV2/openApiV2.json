@@ -71,6 +71,22 @@
             }
         },
         {
+            "name": "Board",
+            "description": "Routes for Board",
+            "externalDocs": {
+                "description": "Official developers site for Board routes",
+                "url": "https:\/\/developers.plentymarkets.com\/rest-doc\/board"
+            }
+        },
+        {
+            "name": "Boards",
+            "description": "Routes for Boards",
+            "externalDocs": {
+                "description": "Official developers site for Boards routes",
+                "url": "https:\/\/developers.plentymarkets.com\/rest-doc\/boards"
+            }
+        },
+        {
             "name": "Category",
             "description": "Routes for Category",
             "externalDocs": {
@@ -2847,6 +2863,22 @@
                         "type": "string",
                         "required": false,
                         "description": "Filter that restricts the search result to contacts with a private phone number",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "billingAddressId",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter that restricts the search result to contacts with a billing address with the id provided",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "deliveryAddressId",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter that restricts the search result to contacts with a delivery address with the id provided",
                         "format": "string",
                         "in": "query"
                     }
@@ -6599,6 +6631,984 @@
                                 }
                             }
                         }
+                    }
+                ]
+            }
+        },
+        "\/rest\/boards": {
+            "get": {
+                "summary": "Lists all boards.",
+                "description": "",
+                "tags": [
+                    "Boards"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\Board\\Models\\Board"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "post": {
+                "summary": "Creates a new board.",
+                "description": "",
+                "tags": [
+                    "Boards"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Board\\Models\\Board"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "\/rest\/boards",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "boardName"
+                            ],
+                            "properties": {
+                                "id": {
+                                    "type": "string"
+                                },
+                                "boardName": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "\/rest\/boards\/{boardId}": {
+            "delete": {
+                "summary": "Deletes a specific board.",
+                "description": "",
+                "tags": [
+                    "Boards"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "boardId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "get": {
+                "summary": "Gets a single board by its ID",
+                "description": "",
+                "tags": [
+                    "Boards"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Board\\Models\\Board"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "boardId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "tasksPerPage",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Maximum number of tasks to list per column",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "put": {
+                "summary": "Updates a specific board.",
+                "description": "",
+                "tags": [
+                    "Boards"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Board\\Models\\Board"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "boardId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "in": "body",
+                        "name": "\/rest\/boards\/{boardId}",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "boardName": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/boards\/{boardId}\/columns": {
+            "get": {
+                "summary": "Lists all columns for a given board",
+                "description": "",
+                "tags": [
+                    "Board"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\Board\\Models\\BoardColumn"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "boardId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "post": {
+                "summary": "Creates a new column and assigns it to a given board",
+                "description": "",
+                "tags": [
+                    "Board"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Board\\Models\\BoardColumn"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "boardId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "in": "body",
+                        "name": "\/rest\/boards\/{boardId}\/columns",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "columnName",
+                                "position"
+                            ],
+                            "properties": {
+                                "columnName": {
+                                    "type": "string"
+                                },
+                                "position": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/boards\/{boardId}\/columns\/{columnId}": {
+            "delete": {
+                "summary": "Deletes a specific column.",
+                "description": "",
+                "tags": [
+                    "Board"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "boardId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "columnId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "put": {
+                "summary": "Updates a specific column.",
+                "description": "",
+                "tags": [
+                    "Board"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Board\\Models\\BoardColumn"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "boardId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "columnId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "in": "body",
+                        "name": "\/rest\/boards\/{boardId}\/columns\/{columnId}",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "columnName": {
+                                    "type": "string"
+                                },
+                                "position": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/boards\/{boardId}\/columns\/{columnId}\/position": {
+            "put": {
+                "summary": "Updates the position of a specific column. Also updates the positions of all following columns on the same board.",
+                "description": "",
+                "tags": [
+                    "Board"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "boardId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "columnId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "position",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/boards\/{boardId}\/columns\/{columnId}\/tasks": {
+            "get": {
+                "summary": "Lists all tasks for a given column.",
+                "description": "",
+                "tags": [
+                    "Board"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\Board\\Models\\BoardTask"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "boardId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "columnId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "startAt",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Position of a task to start listing at.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "tasksPerPage",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Number of tasks to list per page.",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "post": {
+                "summary": "Creates a new tasks on a specified column.",
+                "description": "",
+                "tags": [
+                    "Board"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Board\\Models\\BoardTask"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "boardId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "columnId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "in": "body",
+                        "name": "\/rest\/boards\/{boardId}\/columns\/{columnId}\/tasks",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "taskName",
+                                "position"
+                            ],
+                            "properties": {
+                                "taskName": {
+                                    "type": "string"
+                                },
+                                "description": {
+                                    "type": "string"
+                                },
+                                "position": {
+                                    "type": "integer"
+                                },
+                                "references": {
+                                    "type": "array",
+                                    "items": {}
+                                }
+                            }
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/boards\/{boardId}\/columns\/{columnId}\/tasks\/{taskId}": {
+            "delete": {
+                "summary": "Deletes a task.",
+                "description": "",
+                "tags": [
+                    "Board"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "boardId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "columnId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "taskId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "get": {
+                "summary": "Gets a task by its ID.",
+                "description": "",
+                "tags": [
+                    "Board"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Board\\Models\\BoardTask"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "boardId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "columnId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "taskId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "put": {
+                "summary": "Updates a task.",
+                "description": "",
+                "tags": [
+                    "Board"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Board\\Models\\BoardTask"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "boardId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "columnId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "taskId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "in": "body",
+                        "name": "\/rest\/boards\/{boardId}\/columns\/{columnId}\/tasks\/{taskId}",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "boardId": {
+                                    "type": "string"
+                                },
+                                "columnId": {
+                                    "type": "string"
+                                },
+                                "taskName": {
+                                    "type": "string"
+                                },
+                                "description": {
+                                    "type": "string"
+                                },
+                                "position": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/boards\/{boardId}\/columns\/{columnId}\/tasks\/{taskId}\/position": {
+            "put": {
+                "summary": "Updates the position of a task.",
+                "description": "",
+                "tags": [
+                    "Board"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "boardId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "columnId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "taskId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "position",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The new position of the task",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/boards\/{boardId}\/columns\/{columnId}\/tasks\/{taskId}\/references": {
+            "post": {
+                "summary": "Creates a new reference from a given task to a contact or a ticket.",
+                "description": "",
+                "tags": [
+                    "Board"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Board\\Models\\BoardTaskReference"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "boardId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "columnId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "taskId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "referenceValue",
+                        "type": "string",
+                        "required": true,
+                        "description": "Reference type followed by foreign ID of the referenced object. Syntax: TYPE-ID Example: user-123456 Types: user,ticket,contact,order,item",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/boards\/{boardId}\/columns\/{columnId}\/tasks\/{taskId}\/references\/{referenceId}": {
+            "delete": {
+                "summary": "Deletes a reference from a given task.",
+                "description": "",
+                "tags": [
+                    "Board"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "boardId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "columnId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "taskId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "referenceId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/boards\/{boardId}\/columns\/{columnId}\/tasks\/{taskId}\/references\/{referenceType}\/{referenceKey}": {
+            "get": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Board"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "boardId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "columnId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "taskId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "referenceType",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "referenceKey",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
                     }
                 ]
             }
@@ -19741,6 +20751,341 @@
                         "in": "query",
                         "items": {
                             "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/items\/{id}\/variations\/{variationId}\/variation_additional_skus": {
+            "get": {
+                "summary": "List additional SKUs",
+                "description": "Lists the additional SKUs of a variation. Filters must be specified.",
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\Item\\VariationAdditionalSku\\Models\\VariationAdditionalSku"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "variationId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "in": "body",
+                        "name": "\/rest\/items\/{id}\/variations\/{variationId}\/variation_additional_skus",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "variationId",
+                                "marketId",
+                                "marketAccountId",
+                                "sku"
+                            ],
+                            "properties": {
+                                "variationId": {
+                                    "type": "integer"
+                                },
+                                "marketId": {
+                                    "type": "number"
+                                },
+                                "marketAccountId": {
+                                    "type": "integer"
+                                },
+                                "sku": {
+                                    "type": "string"
+                                },
+                                "createdAt": {
+                                    "type": "string"
+                                },
+                                "updatedAt": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "post": {
+                "summary": "Create an additional SKU",
+                "description": "Creates an additional SKU. The ID of the variation must be specified.",
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Item\\VariationAdditionalSku\\Models\\VariationAdditionalSku"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "variationId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "in": "body",
+                        "name": "\/rest\/items\/{id}\/variations\/{variationId}\/variation_additional_skus",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "variationId",
+                                "marketId",
+                                "marketAccountId",
+                                "sku"
+                            ],
+                            "properties": {
+                                "variationId": {
+                                    "type": "integer"
+                                },
+                                "marketId": {
+                                    "type": "number"
+                                },
+                                "marketAccountId": {
+                                    "type": "integer"
+                                },
+                                "sku": {
+                                    "type": "string"
+                                },
+                                "createdAt": {
+                                    "type": "string"
+                                },
+                                "updatedAt": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/items\/{id}\/variations\/{variationId}\/variation_additional_skus\/{additionalSkuId}": {
+            "delete": {
+                "summary": "Delete an additional SKU",
+                "description": "Deletes an additional SKU. The ID of the additional SKU must be specified.",
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Repositories\\Models\\DeleteResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "variationId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "additionalSkuId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "get": {
+                "summary": "Gets an additional SKU",
+                "description": "Gets an additional SKU. The ID of the additional SKU must be specified.",
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Item\\VariationAdditionalSku\\Models\\VariationAdditionalSku"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "variationId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "additionalSkuId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "put": {
+                "summary": "Update an additional SKU",
+                "description": "Updates an additional SKU. The ID of the additional SKU must be specified.",
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Item\\VariationAdditionalSku\\Models\\VariationAdditionalSku"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "variationId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "additionalSkuId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "in": "body",
+                        "name": "\/rest\/items\/{id}\/variations\/{variationId}\/variation_additional_skus\/{additionalSkuId}",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "variationId",
+                                "marketId",
+                                "marketAccountId",
+                                "sku"
+                            ],
+                            "properties": {
+                                "variationId": {
+                                    "type": "integer"
+                                },
+                                "marketId": {
+                                    "type": "number"
+                                },
+                                "marketAccountId": {
+                                    "type": "integer"
+                                },
+                                "sku": {
+                                    "type": "string"
+                                },
+                                "createdAt": {
+                                    "type": "string"
+                                },
+                                "updatedAt": {
+                                    "type": "string"
+                                }
+                            }
                         }
                     }
                 ],
@@ -33159,6 +34504,34 @@
                 ]
             }
         },
+        "\/rest\/orders\/shipping\/returns\/returns_service_providers\/plugins": {
+            "get": {
+                "summary": "List shipping service provider plugins",
+                "description": "",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/orders\/shipping\/returns\/returns_service_providers\/{providerId}": {
             "get": {
                 "summary": "",
@@ -39363,6 +40736,31 @@
             }
         },
         "\/rest\/properties\/relations": {
+            "delete": {
+                "summary": "Delete property relations",
+                "description": "Deletes property relations. The ID of the property relations must be specified.",
+                "tags": [
+                    "Property"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "relationId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the property relation",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ]
+            },
             "get": {
                 "summary": "List property relations",
                 "description": "Lists property relations.",
@@ -45292,6 +46690,94 @@
                 }
             }
         },
+        "Plenty\\Modules\\Board\\Models\\Board": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": ""
+                },
+                "boardName": {
+                    "type": "string",
+                    "description": ""
+                },
+                "columnsCount": {
+                    "type": "integer",
+                    "description": ""
+                },
+                "tasksCount": {
+                    "type": "integer",
+                    "description": ""
+                }
+            }
+        },
+        "Plenty\\Modules\\Board\\Models\\BoardColumn": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": ""
+                },
+                "boardId": {
+                    "type": "string",
+                    "description": ""
+                },
+                "columnName": {
+                    "type": "string",
+                    "description": ""
+                },
+                "position": {
+                    "type": "integer",
+                    "description": ""
+                }
+            }
+        },
+        "Plenty\\Modules\\Board\\Models\\BoardTask": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": ""
+                },
+                "taskName": {
+                    "type": "string",
+                    "description": ""
+                },
+                "description": {
+                    "type": "string",
+                    "description": ""
+                },
+                "position": {
+                    "type": "integer",
+                    "description": ""
+                },
+                "columnId": {
+                    "type": "string",
+                    "description": ""
+                },
+                "boardId": {
+                    "type": "string",
+                    "description": ""
+                }
+            }
+        },
+        "Plenty\\Modules\\Board\\Models\\BoardTaskReference": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": ""
+                },
+                "taskId": {
+                    "type": "string",
+                    "description": "The ID of the task to create a reference for"
+                },
+                "referenceValue": {
+                    "type": "string",
+                    "description": "Reference type followed by foreign ID of the referenced object. Syntax: TYPE-ID Example: user-123456 Types: user,ticket,contact,order,item"
+                }
+            }
+        },
         "Plenty\\Modules\\Category\\Models\\Category": {
             "type": "object",
             "properties": {
@@ -47319,6 +48805,39 @@
                 }
             }
         },
+        "Plenty\\Modules\\Item\\VariationAdditionalSku\\Models\\VariationAdditionalSku": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "The ID of the additional sku"
+                },
+                "variationId": {
+                    "type": "integer",
+                    "description": "The ID of the variation."
+                },
+                "marketId": {
+                    "type": "number",
+                    "description": "The ID of the market reference."
+                },
+                "marketAccountId": {
+                    "type": "integer",
+                    "description": "The ID of the market account."
+                },
+                "sku": {
+                    "type": "string",
+                    "description": "The additional sku for this variation."
+                },
+                "createdAt": {
+                    "type": "string",
+                    "description": "The time the SKU was created (YYYY-MM-DD HH:MM:SS)."
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "description": "The time the SKU was updated (YYYY-MM-DD HH:MM:SS)."
+                }
+            }
+        },
         "Plenty\\Modules\\Item\\VariationBarcode\\Models\\VariationBarcode": {
             "type": "object",
             "properties": {
@@ -48272,6 +49791,10 @@
                 "warehouseVariationId": {
                     "type": "integer",
                     "description": "Either the ID of the variation or the ID of the item's main variation. No other values are permitted.<ul><li>ID of the variation = Warehouses are not inherited from the main variation.<\/li><li>ID of the item's main variation = Inheritance of warehouses is active.<\/li><\/ul>"
+                },
+                "propertyVariationId": {
+                    "type": "integer",
+                    "description": "Either the ID of the variation or the ID of the item's main variation. No other values are permitted.<ul><li>ID of the variation = Properties are not inherited from the main variation.<\/li><li>ID of the item's main variation = Inheritance of properties is active.<\/li><\/ul>"
                 }
             }
         },
@@ -50763,7 +52286,7 @@
                     "description": "The type of the client (store)"
                 },
                 "storeIdentifier": {
-                    "type": "string",
+                    "type": "integer",
                     "description": "The identifier of the client (store)"
                 }
             }
