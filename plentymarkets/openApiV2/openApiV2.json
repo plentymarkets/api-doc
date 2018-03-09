@@ -10943,7 +10943,7 @@
                         "name": "with",
                         "type": "string",
                         "required": false,
-                        "description": "Includes the specified variation information in the results. The following parameters are available: itemProperties, itemCrossSelling, variations, itemImages, itemShippingProfiles",
+                        "description": "Includes the specified variation information in the results. The following parameters are available: itemProperties, itemCrossSelling, variations, itemImages, itemShippingProfiles, ebayTitles",
                         "format": "string",
                         "in": "query"
                     },
@@ -11147,6 +11147,12 @@
                                 },
                                 "feedback": {
                                     "type": "integer"
+                                },
+                                "ebayTitles": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Item\\Item\\Models\\ItemEbayTitle"
+                                    }
                                 },
                                 "id": {
                                     "type": "integer"
@@ -24296,6 +24302,12 @@
                                 },
                                 "feedback": {
                                     "type": "integer"
+                                },
+                                "ebayTitles": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Item\\Item\\Models\\ItemEbayTitle"
+                                    }
                                 }
                             }
                         }
@@ -30253,6 +30265,60 @@
                 ]
             }
         },
+        "\/rest\/markets\/settings\/bulk": {
+            "post": {
+                "summary": "Create market settings",
+                "description": "Creates new market settings by given data. The marketplace ID and the type must be specified.",
+                "tags": [
+                    "Market"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\Market\\Settings\\Models\\Settings"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "put": {
+                "summary": "Update market settings",
+                "description": "Updates market settings. The market settings ID must be specified.",
+                "tags": [
+                    "Market"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\Market\\Settings\\Models\\Settings"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/markets\/settings\/correlations": {
             "get": {
                 "summary": "List correlation",
@@ -30264,7 +30330,10 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#\/definitions\/Plenty\\Modules\\Market\\Settings\\Models\\Settings"
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\Market\\Settings\\Models\\Settings"
+                            }
                         }
                     },
                     "401": {
@@ -30286,6 +30355,31 @@
                 "responses": {
                     "200": {
                         "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/markets\/settings\/correlations\/bulk": {
+            "post": {
+                "summary": "Create multiple correlations",
+                "description": "Creates multiple correlations. The type, market settings ID and the correlation ID for each param combination must be specified.",
+                "tags": [
+                    "Market"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
                     },
                     "401": {
                         "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
@@ -31617,8 +31711,7 @@
                             "type": "object",
                             "required": [
                                 "typeId",
-                                "plentyId",
-                                "orderItems"
+                                "plentyId"
                             ],
                             "properties": {
                                 "typeId": {
@@ -38829,7 +38922,7 @@
         "\/rest\/plugins": {
             "get": {
                 "summary": "List plugins",
-                "description": "Lists all plugins saved in the inbox folder. Plugins that have not been provisioned to Stage or Productive will also be shown.",
+                "description": "Lists all plugins saved in the inbox folder. Plugins that have not been provisioned to Stage or Productive will\nalso be shown.",
                 "tags": [
                     "Plugins"
                 ],
@@ -38907,7 +39000,7 @@
         "\/rest\/plugins\/search": {
             "get": {
                 "summary": "List plugins",
-                "description": "Lists all plugins saved in the inbox folder. Plugins that have not been provisioned to Stage or Productive will also be shown.",
+                "description": "Lists all plugins saved in the inbox folder. Plugins that have not been provisioned to Stage or Productive will\nalso be shown.",
                 "tags": [
                     "Plugins"
                 ],
@@ -39062,7 +39155,7 @@
         "\/rest\/plugins\/{pluginId}": {
             "delete": {
                 "summary": "Delete a plugin",
-                "description": "Deletes a plugin. This call also deletes all plugin files in the inbox folder! To commit the deletion, the plugin must be provisioned in Stage or Productive. The ID of the plugin must be specified.",
+                "description": "Deletes a plugin. This call also deletes all plugin files in the inbox folder! To commit the deletion, the\nplugin must be provisioned in Stage or Productive. The ID of the plugin must be specified.",
                 "tags": [
                     "Plugins"
                 ],
@@ -39125,7 +39218,7 @@
             },
             "put": {
                 "summary": "Update a plugin",
-                "description": "Updates a plugin. The plugin position can be changed. The plugin can be activated or deactivated for Stage or Productive. The plugin can be activated or deactivated for online stores. The ID of the plugin must be specified.",
+                "description": "Updates a plugin. The plugin position can be changed. The plugin can be activated or deactivated for Stage or\nProductive. The plugin can be activated or deactivated for online stores. The ID of the plugin must be\nspecified.",
                 "tags": [
                     "Plugins"
                 ],
@@ -45151,6 +45244,41 @@
                     }
                 ]
             }
+        },
+        "\/rest\/webstores\/{webstoreId}\/plugin_set": {
+            "get": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Webstore"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Plugin\\PluginSet\\Models\\PluginSet"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "webstoreId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
         }
     },
     "securityDefinitions": {
@@ -48214,6 +48342,23 @@
                 "free20": {
                     "type": "string",
                     "description": "The content of the free text field 20. This can be displayed in the online store or on eBay."
+                }
+            }
+        },
+        "Plenty\\Modules\\Item\\Item\\Models\\ItemEbayTitle": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "description": "The title."
+                },
+                "itemId": {
+                    "type": "integer",
+                    "description": "The unique ID of the item."
+                },
+                "id": {
+                    "type": "integer",
+                    "description": "The unique ID of the ebay title."
                 }
             }
         },
@@ -51800,6 +51945,28 @@
                     "items": {
                         "$ref": "#\/definitions\/Plenty\\Modules\\System\\Models\\Webstore"
                     }
+                },
+                "pluginSetIds": {
+                    "type": "array",
+                    "description": "Array of PluginSet Ids where this plugin is contained.",
+                    "items": {}
+                }
+            }
+        },
+        "Plenty\\Modules\\Plugin\\PluginSet\\Models\\PluginSet": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": ""
+                },
+                "parentPluginSetId": {
+                    "type": "integer",
+                    "description": ""
+                },
+                "name": {
+                    "type": "string",
+                    "description": ""
                 }
             }
         },
@@ -52288,6 +52455,10 @@
                 "storeIdentifier": {
                     "type": "integer",
                     "description": "The identifier of the client (store)"
+                },
+                "pluginSetId": {
+                    "type": "integer",
+                    "description": "The plugin set id of the client (store)"
                 }
             }
         },
