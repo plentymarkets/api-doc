@@ -17552,54 +17552,14 @@
         },
         "\/rest\/items\/variations": {
             "get": {
-                "summary": "Search variations",
-                "description": "Search variations by different filters",
+                "summary": "\/**\n\t * Search variations\n\t *\n\t * Search variations by different filters\n\t *\n\t * @Call(returnType=\"Plenty\\Modules\\Item\\Variation\\Models\\Variation\", includedChildren={\n\t *     \"\\VariationBarcode\",\n\t *     \"\\VariationCategory\",\n\t *     \"\\VariationSalesPrice\",\n\t *     \"\\VariationClient\",\n\t *     \"\\VariationMarket\",\n\t *     \"\\VariationDefaultCategory\",\n\t *     \"\\VariationSupplier\",\n\t *     \"\\VariationWarehouse\",\n\t *     \"\\Variation\",\n\t * })\n\t *\n\t * @CallParam(name=\"with\", type=\"String\", description=\"Includes the specified variation information in the results. The following parameters are available: <ul><li>variationBarcodes<\/b> = The barcode linked to the variation and the saved code<\/li><li>variationSalesPrices<\/b> = The sales prices linked to the variation and the saved price<\/li><li>marketItemNumbers<\/b> = The market ident number of the variation<\/li><li>variationCategories<\/b> = The categories linked to the variation<\/li><li>variationClients<\/b> = The clients (stores) for which the variation is activated<\/li><li>variationMarkets<\/b> = The markets for which the variation is activated <\/li><li>variationDefaultCategory<\/b> = The default category of the variation<\/li><li>variationSuppliers<\/b> = The supplier data associated with the variation<\/li><li>variationWarehouses<\/b> = The warehouse data associated with the variation<\/li><li>images<\/b> = The images linked to the variation<\/li><li>variationAttributeValues<\/b> = The attribute values of the variation<\/li><li>variationSkus<\/b> = The SKU data associated with the variation<\/li><li>unit<\/b> = The unit assigned to the variation<\/li><li>parent<\/b> = The main variation of the variation. Value is null if this variation is the item's main variation.<\/li><li>item<\/b> = <\/li><li>stock<\/b> = The stock data of the variation<\/li><\/ul> For example, specifying the parameters variationCategories and variationDefaultCategory will include the default category and all other categories the variations are linked to. More than one parameter should be separated by commas.\")\n\t * @CallParam(name=\"lang\", type=\"String\", description=\"The <a href='https:\/\/developers.plentymarkets.com\/rest-doc\/introduction#countries' target='_blank'>language<\/a> of the variation information.\")\n\t * @CallParam(name=\"page\", type=\"Int\", description=\"Limits the results to a specific page. The page number must be specified.\")\n\t * @CallParam(name=\"itemsPerPage\", type=\"Int\", description=\"Limits the number of results listed per page to a specific number. The number of variations to be listed per page must be specified.\")\n\t *\n\t * @CallParam(name=\"id\", type=\"Int\", description=\"Filter restricts the list of results to variations with the specified variation ID. An variation ID must be specified. More than one ID should be separated by commas.\")\n\t * @CallParam(name=\"itemId\", type=\"Int\", description=\"Filter restricts the list of results to variations with the specified item ID. An item ID must be specified. More than one ID should be separated by commas.\")\n\t * @CallParam(name=\"itemName\", type=\"String\", description=\"Filter restricts the list of results to variations with the specified item name. An item name must be specified.\")\n\t * @CallParam(name=\"flagOne\", type=\"String\", description=\"Filter restricts the list of results to variations of items with the flag one. The flag one must be specified.\")\n\t * @CallParam(name=\"flagTwo\", type=\"String\", description=\"Filter restricts the list of results to variations of items with the flag two. The flag two must be specified.\")\n\t *\n     * @CallParam(name=\"categoryId\", type=\"Int\", description=\"Filter restricts the list of results to variations with the specified category id\")\n\t * \n\t * @CallParam(name=\"isMain\", type=\"Bool\", description=\"Filter restricts the list of results to variations that are main variations.\")\n\t * @CallParam(name=\"isActive\", type=\"Bool\", description=\"Filter restricts the list of results to variations that are active.\")\n\t * @CallParam(name=\"barcode\", type=\"String\", description=\"Filter restricts the list of results to variations with the specified barcode. A barcode must be specified.\")\n\t * @CallParam(name=\"numberExact\", type=\"String\", description=\"Filter restricts the list of results to the variation with the variation number specified.\")\n\t * @CallParam(name=\"numberFuzzy\", type=\"String\", description=\"Filter restricts the list of results to variations with numbers that contain the variation number specified (SQL LIKE operator). For example, if variations with variation numbers 1 to 400 exist in the system, filtering by 12 will list variation numbers 12, 112, 120-129, 212 and 312.\")\n\t * @CallParam(name=\"isBundle\", type=\"Bool\", description=\"Filter restricts the list of results to variations to which variations were added to create a bundle.\")\n\t * @CallParam(name=\"plentyId\", type=\"Int\", description=\"Filter restricts the list of results to variations to which variations were visible in specific Clients.\")\n\t * @CallParam(name=\"supplierNumber\", type=\"String\", description=\"Filter restricts the list of results to variations with the specified supplier number. A supplier number must be specified.\")\n\t * @CallParam(name=\"sku\", type=\"String\", description=\"Filter restricts the list of results to variations with the specified SKU. In additional, results can also be restricted to a specific referrer by specifying the referrer ID after a colon. Example: L0R3MIP5UM:104.1\")\n\t * @CallParam(name=\"manufacturerId\", type=\"Int\", description=\"Filter restricts the list of results to variations with the specified manufacturer ID.\")\n\t * @CallParam(name=\"updatedBetween\", type=\"String\", description=\"Filter restricts the list of results to variations updated during the specified period. The end date (to) is optional. If no end date is specified, variations updated between the start date (from) and the present will be listed. The dates can be specified as unix timestamps or in the ISO 8601 date format. Start date and optional end date are separated by a comma. For example, ...\/variations?updatedBetween=1451606400,1456790400 will list variations updated between 2016-01-01 and 2016-03-01. ...\/variations?updatedBetween=1451606400 will list variations updated since 2016-01-01. The PHP function strtotime is also supported.\")\n\t * @CallParam(name=\"relatedUpdatedBetween\", type=\"String\", description=\"Filter restricts the list of results to those variations for which related information was updated during the specified period. Related information is defined as information linked to the variation, i.e. barcodes, categories, images, markets, clients (stores), prices, suppliers, warehouses and the default category. See variationUpdatedBetween for supported formats.\")\n\t *\n\t * @throws ValidationException| AuthorizationException\n\t *\n\t * @param Request $request\n\t *\n\t * @return PaginatedResult\n\t *\/",
+                "description": "",
                 "tags": [
                     "Item"
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "page": {
-                                    "type": "integer",
-                                    "description": "Current page of the response"
-                                },
-                                "totalsCount": {
-                                    "type": "integer",
-                                    "description": "The total number of entries in the response"
-                                },
-                                "isLastPage": {
-                                    "type": "boolean",
-                                    "description": "Flag that indicates if the page shown is the last page of the response"
-                                },
-                                "lastPageNumber": {
-                                    "type": "integer",
-                                    "description": "The last page number"
-                                },
-                                "firstOnPage": {
-                                    "type": "integer",
-                                    "description": "The index of the first item of the current page result"
-                                },
-                                "lastOnPage": {
-                                    "type": "integer",
-                                    "description": "The index of the last item of the current page result"
-                                },
-                                "itemsPerPage": {
-                                    "type": "integer",
-                                    "description": "The requested amount of items per result page"
-                                },
-                                "entries": {
-                                    "type": "array",
-                                    "description": "List of Variation",
-                                    "items": {
-                                        "$ref": "#\/definitions\/Plenty\\Modules\\Item\\Variation\\Models\\Variation"
-                                    }
-                                }
-                            }
-                        }
+                        "description": "OK"
                     },
                     "401": {
                         "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
@@ -17747,6 +17707,14 @@
                         "type": "string",
                         "required": false,
                         "description": "Filter restricts the list of results to variations with the specified supplier number. A supplier number must be specified.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "sku",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations with the specified SKU. In additional, results can also be restricted to a specific referrer by specifying the referrer ID after a colon. Example: L0R3MIP5UM:104.1",
                         "format": "string",
                         "in": "query"
                     },
@@ -31911,6 +31879,47 @@
             }
         },
         "\/rest\/orders\/coupons\/campaigns\/codes\/{code}": {
+            "delete": {
+                "summary": "Delete a coupon",
+                "description": "Deletes a coupon by the coupon code.",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "code",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "withoutUsed",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Do not delete used coupons",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
             "get": {
                 "summary": "Get coupon code information",
                 "description": "Gets coupon code information. The code must be specified.",
@@ -31944,6 +31953,49 @@
                         "description": "Load additional relations for a coupon code. Currently possible are:\n     * <ul>\n     *   <li>'campaign' = The coupon campaign to which this code belongs to.<\/li>\n     * <\/ul>\n     * Example: <code>?with=campaign<\/code>",
                         "format": "string",
                         "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/orders\/coupons\/campaigns\/codes\/{code}\/disabled\/{isDisabled}": {
+            "put": {
+                "summary": "Disable or enable coupon",
+                "description": "Sets the coupon disable field.",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "code",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "isDisabled",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
                     }
                 ],
                 "security": [
@@ -44714,6 +44766,62 @@
                 ]
             }
         },
+        "\/rest\/tickets\/status\/names": {
+            "get": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Ticket"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\Ticket\\Models\\TicketStatusName"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/tickets\/types\/names": {
+            "get": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Ticket"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\Ticket\\Models\\TicketTypeName"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/tickets\/{ticketId}": {
             "post": {
                 "summary": "Create a message",
@@ -52627,6 +52735,48 @@
                 "roleId": {
                     "type": "integer",
                     "description": "The role ID of the owner"
+                }
+            }
+        },
+        "Plenty\\Modules\\Ticket\\Models\\TicketStatusName": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "The ID of the status name"
+                },
+                "statusId": {
+                    "type": "integer",
+                    "description": "The status ID of the status name"
+                },
+                "lang": {
+                    "type": "string",
+                    "description": "The language of the status name"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the status"
+                }
+            }
+        },
+        "Plenty\\Modules\\Ticket\\Models\\TicketTypeName": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "The ID of the role name"
+                },
+                "typeId": {
+                    "type": "integer",
+                    "description": "The type id of the role name"
+                },
+                "lang": {
+                    "type": "string",
+                    "description": "The language of the role name"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the role"
                 }
             }
         },
