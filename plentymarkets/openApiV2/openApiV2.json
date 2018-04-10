@@ -5867,6 +5867,41 @@
                 ]
             }
         },
+        "\/rest\/accounts\/contacts\/{contactId}\/vcard": {
+            "get": {
+                "summary": "get a filestream of vcard from customer",
+                "description": "",
+                "tags": [
+                    "Account"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "contactId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/accounts\/order_summaries": {
             "get": {
                 "summary": "List order summaries",
@@ -19608,8 +19643,7 @@
                             "type": "object",
                             "required": [
                                 "itemId",
-                                "lang",
-                                "name"
+                                "lang"
                             ],
                             "properties": {
                                 "itemId": {
@@ -19804,8 +19838,7 @@
                             "type": "object",
                             "required": [
                                 "itemId",
-                                "lang",
-                                "name"
+                                "lang"
                             ],
                             "properties": {
                                 "itemId": {
@@ -34274,6 +34307,41 @@
                 ]
             }
         },
+        "\/rest\/orders\/shipping\/export_documents\/{orderId}": {
+            "get": {
+                "summary": "List export documents by order ID",
+                "description": "",
+                "tags": [
+                    "Export"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Order\\Shipping\\ExportDocuments\\Models\\ExportDocument"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/orders\/shipping\/package_types": {
             "get": {
                 "summary": "List shipping package types",
@@ -44815,6 +44883,34 @@
                 ]
             }
         },
+        "\/rest\/tickets\/status\/type\/names": {
+            "get": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Ticket"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\Ticket\\Models\\TicketStatusName"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/tickets\/types\/names": {
             "get": {
                 "summary": "",
@@ -51856,7 +51952,7 @@
                 },
                 "typeId": {
                     "type": "integer",
-                    "description": "The ID of the order type\n                                \t\t\t\t\t\t\t\tIt is possible to define individual order types. However,\n                                \t\t\t\t\t\t\t\tthe following types are available by default:\n<ul>\n    <li>Sales order = 1<\/li>\n    <li>Delivery = 2<\/li>\n    <li>Returns = 3<\/li>\n    <li>Credit note = 4<\/li>\n    <li>Warranty = 5<\/li>\n    <li>Repair = 6<\/li>\n    <li>Offer = 7<\/li>\n    <li>Advance order = 8<\/li>\n    <li>Multi-order = 9<\/li>\n    <li>Multi credit note = 10<\/li>\n    <li>Multi delivery = 11<\/li>\n    <li>Reorder = 12<\/li>\n    <li>Partial delivery = 13<\/li>\n<\/ul>"
+                    "description": "The ID of the order type\n                                \t\t\t\t\t\t\t\tIt is possible to define individual order types. However,\n                                \t\t\t\t\t\t\t\tthe following types are available by default:\n<ul>\n    <li>Sales order = 1<\/li>\n    <li>Delivery = 2<\/li>\n    <li>Returns = 3<\/li>\n    <li>Credit note = 4<\/li>\n    <li>Warranty = 5<\/li>\n    <li>Repair = 6<\/li>\n    <li>Offer = 7<\/li>\n    <li>Advance order = 8<\/li>\n    <li>Multi-order = 9<\/li>\n    <li>Multi credit note = 10<\/li>\n    <li>Multi delivery = 11<\/li>\n    <li>Reorder = 12<\/li>\n    <li>Partial delivery = 13<\/li>\n    <li>Subscription = 14<\/li>\n    <li>Redistribution = 15<\/li>\n    <li>Purchase order = 16<\/li>\n<\/ul>"
                 },
                 "statusId": {
                     "type": "number",
@@ -51905,7 +52001,7 @@
                 },
                 "typeId": {
                     "type": "integer",
-                    "description": "The ID of the property type.\n<ul>\n<li>WAREHOUSE\t\t              =\t1<\/li>\n<li>SHIPPING_PROFILE\t              =\t2<\/li>\n<li>PAYMENT_METHOD\t              =\t3<\/li>\n<li>WEIGHT\t\t\t              =\t11<\/li>\n<li>WIDTH\t\t\t              =\t12<\/li>\n<li>LENGTH\t\t                  =\t13<\/li>\n<li>HEIGHT\t      \t\t          = 14<\/li>\n<li>EXTERNAL_TOKEN_ID              =\t16<\/li>\n<li>EXTERNAL_ITEM_ID               =\t17<\/li>\n<li>COUPON_CODE\t      \t          =\t18<\/li>\n<li>COUPON_TYPE\t\t              =\t19<\/li>\n<li>ORIGINAL_WAREHOUSE\t          =\t20<\/li>\n<li>ORIGINAL_QUANTITY              =\t21<\/li>\n<li>CATEGORY_ID                    = 22<\/li>\n<li>MARKET_FEE\t\t              =\t23<\/li>\n<li>STOCK_REVERSING\t              =\t24<\/li>\n<li>DISPUTE_STATUS      \t          =\t25<\/li>\n<li>NO_CHANGE_BY_CONTACT           = 26<\/li>\n<li>SIZE \t\t\t              =\t29<\/li>\n<li>LOCATION_RESERVED\t          =\t30<\/li>\n<li>EXTERNAL_SHIPMENT_ITEM_ID      =\t31<\/li>\n<li>PARTIAL_SHIPPING_COSTS         =\t32<\/li>\n<li>MAIN_DOCUMENT_NUMBER           =\t33<\/li>\n<li>SALES_TAX_ID_NUMBER            =\t34<\/li>\n<li>RETURNS_REASON                 =\t35<\/li>\n<li>RETURNS_ITEM_STATUS            =\t36<\/li>\n<li>FULFILLMENT_CENTER_ID          = 37<\/li>\n<li>FULFILLMENT_CENTER_COUNTRY_ISO = 38<\/li>\n<li>REORDER_ITEM_ID                = 39<\/li>\n<li>LISTING_TYPE                   = 40<\/li>\n<\/ul>"
+                    "description": "The ID of the property type.\n<ul>\n<li>WAREHOUSE\t\t              =\t1<\/li>\n<li>SHIPPING_PROFILE\t              =\t2<\/li>\n<li>PAYMENT_METHOD\t              =\t3<\/li>\n<li>WEIGHT\t\t\t              =\t11<\/li>\n<li>WIDTH\t\t\t              =\t12<\/li>\n<li>LENGTH\t\t                  =\t13<\/li>\n<li>HEIGHT\t      \t\t          = 14<\/li>\n<li>EXTERNAL_TOKEN_ID              =\t16<\/li>\n<li>EXTERNAL_ITEM_ID               =\t17<\/li>\n<li>COUPON_CODE\t      \t          =\t18<\/li>\n<li>COUPON_TYPE\t\t              =\t19<\/li>\n<li>ORIGINAL_WAREHOUSE\t          =\t20<\/li>\n<li>ORIGINAL_QUANTITY              =\t21<\/li>\n<li>CATEGORY_ID                    = 22<\/li>\n<li>MARKET_FEE\t\t              =\t23<\/li>\n<li>STOCK_REVERSING\t              =\t24<\/li>\n<li>DISPUTE_STATUS      \t          =\t25<\/li>\n<li>NO_CHANGE_BY_CONTACT           = 26<\/li>\n<li>SIZE \t\t\t              =\t29<\/li>\n<li>LOCATION_RESERVED\t          =\t30<\/li>\n<li>EXTERNAL_SHIPMENT_ITEM_ID      =\t31<\/li>\n<li>PARTIAL_SHIPPING_COSTS         =\t32<\/li>\n<li>MAIN_DOCUMENT_NUMBER           =\t33<\/li>\n<li>SALES_TAX_ID_NUMBER            =\t34<\/li>\n<li>RETURNS_REASON                 =\t35<\/li>\n<li>RETURNS_ITEM_STATUS            =\t36<\/li>\n<li>FULFILLMENT_CENTER_ID          = 37<\/li>\n<li>FULFILLMENT_CENTER_COUNTRY_ISO = 38<\/li>\n<li>REORDER_ITEM_ID                = 39<\/li>\n<li>LISTING_TYPE                   = 40<\/li>\n<li>SOLD_COUPON_CODE               = 46<\/li>\n<\/ul>"
                 },
                 "value": {
                     "type": "string",
@@ -51934,7 +52030,7 @@
                 },
                 "typeId": {
                     "type": "integer",
-                    "description": "The ID of the property type. The following types are available:\n<ul>\n  <li>WAREHOUSE\t\t=\t1<\/li>\n  <li>SHIPPING_PROFILE\t=\t2<\/li>\n  <li>PAYMENT_METHOD\t\t\t=\t3<\/li>\n  <li>PAYMENT_STATUS\t\t\t=\t4<\/li>\n  <li>EXTERNAL_SHIPPING_PROFILE\t\t\t=\t5<\/li>\n  <li>DOCUMENT_LANGUAGE\t\t\t=\t6<\/li>\n  <li>EXTERNAL_ORDER_ID\t\t\t=\t7<\/li>\n  <li>CUSTOMER_SIGN\t\t\t=\t8<\/li>\n  <li>DUNNING_LEVEL\t\t\t=\t9<\/li>\n  <li>SELLER_ACCOUNT\t\t\t=\t10<\/li>\n  <li>WEIGHT\t\t\t=\t11<\/li>\n  <li>WIDTH\t\t\t=\t12<\/li>\n  <li>LENGTH          =\t13<\/li>\n  <li>HEIGHT\t\t=\t14<\/li>\n  <li>FLAG\t\t\t=\t15<\/li>\n  <li>EXTERNAL_TOKEN_ID\t\t\t=\t16<\/li>\n  <li>EXTERNAL_ITEM_ID\t\t\t=\t17<\/li>\n  <li>COUPON_CODE\t\t\t=\t18<\/li>\n  <li>COUPON_TYPE         =   19<\/li>\n  <li>SALES_TAX_ID_NUMBER =   34<\/li>\n  <li>MAIN_DOCUMENT_NUMBER = 33<\/li>\n  <li>PAYMENT_TRANSACTION_ID = 45<\/li>\n<\/ul>"
+                    "description": "The ID of the property type. The following types are available:\n<ul>\n  <li>WAREHOUSE\t\t=\t1<\/li>\n  <li>SHIPPING_PROFILE\t=\t2<\/li>\n  <li>PAYMENT_METHOD\t\t\t=\t3<\/li>\n  <li>PAYMENT_STATUS\t\t\t=\t4<\/li>\n  <li>EXTERNAL_SHIPPING_PROFILE\t\t\t=\t5<\/li>\n  <li>DOCUMENT_LANGUAGE\t\t\t=\t6<\/li>\n  <li>EXTERNAL_ORDER_ID\t\t\t=\t7<\/li>\n  <li>CUSTOMER_SIGN\t\t\t=\t8<\/li>\n  <li>DUNNING_LEVEL\t\t\t=\t9<\/li>\n  <li>SELLER_ACCOUNT\t\t\t=\t10<\/li>\n  <li>WEIGHT\t\t\t=\t11<\/li>\n  <li>WIDTH\t\t\t=\t12<\/li>\n  <li>LENGTH          =\t13<\/li>\n  <li>HEIGHT\t\t=\t14<\/li>\n  <li>FLAG\t\t\t=\t15<\/li>\n  <li>EXTERNAL_TOKEN_ID\t\t\t=\t16<\/li>\n  <li>EXTERNAL_ITEM_ID\t\t\t=\t17<\/li>\n  <li>COUPON_CODE\t\t\t=\t18<\/li>\n  <li>COUPON_TYPE         =   19<\/li>\n  <li>SALES_TAX_ID_NUMBER =   34<\/li>\n  <li>MAIN_DOCUMENT_NUMBER = 33<\/li>\n  <li>PAYMENT_TRANSACTION_ID = 45<\/li>\n  <li>EXTERNAL_TAX_SERVICE = 47<\/li>\n<\/ul>"
                 },
                 "value": {
                     "type": "string",
@@ -52083,6 +52179,27 @@
                 "isCountryStateMandatory": {
                     "type": "boolean",
                     "description": "Flag that states if a country state is mandatory for the country."
+                }
+            }
+        },
+        "Plenty\\Modules\\Order\\Shipping\\ExportDocuments\\Models\\ExportDocument": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": ""
+                },
+                "orderId": {
+                    "type": "integer",
+                    "description": ""
+                },
+                "packageNumber": {
+                    "type": "integer",
+                    "description": ""
+                },
+                "base64Content": {
+                    "type": "integer",
+                    "description": ""
                 }
             }
         },
@@ -52590,6 +52707,10 @@
                 "updateOrderPaymentStatus": {
                     "type": "boolean",
                     "description": "If $updateOrderPaymentStatus is true, update the order payment status. Default is false."
+                },
+                "isSystemCurrency": {
+                    "type": "boolean",
+                    "description": "If $isSystemCurrency is false, the value will be converted to the standard currency with the provided exchange rate. If $isSystemCurrency is false, the value is not converted. Default is true."
                 }
             }
         },
