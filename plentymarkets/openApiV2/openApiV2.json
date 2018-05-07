@@ -111,11 +111,27 @@
             }
         },
         {
+            "name": "Configuration",
+            "description": "Routes for Configuration",
+            "externalDocs": {
+                "description": "Official developers site for Configuration routes",
+                "url": "https:\/\/developers.plentymarkets.com\/rest-doc\/configuration"
+            }
+        },
+        {
             "name": "Contact",
             "description": "Routes for Contact",
             "externalDocs": {
                 "description": "Official developers site for Contact routes",
                 "url": "https:\/\/developers.plentymarkets.com\/rest-doc\/contact"
+            }
+        },
+        {
+            "name": "ContentBuilder",
+            "description": "Routes for ContentBuilder",
+            "externalDocs": {
+                "description": "Official developers site for ContentBuilder routes",
+                "url": "https:\/\/developers.plentymarkets.com\/rest-doc\/content_builder"
             }
         },
         {
@@ -223,6 +239,22 @@
             }
         },
         {
+            "name": "PluginMultilingualism",
+            "description": "Routes for PluginMultilingualism",
+            "externalDocs": {
+                "description": "Official developers site for PluginMultilingualism routes",
+                "url": "https:\/\/developers.plentymarkets.com\/rest-doc\/plugin_multilingualism"
+            }
+        },
+        {
+            "name": "PluginSet",
+            "description": "Routes for PluginSet",
+            "externalDocs": {
+                "description": "Official developers site for PluginSet routes",
+                "url": "https:\/\/developers.plentymarkets.com\/rest-doc\/plugin_set"
+            }
+        },
+        {
             "name": "Plugins",
             "description": "Routes for Plugins",
             "externalDocs": {
@@ -288,6 +320,74 @@
         }
     ],
     "paths": {
+        "\/export\/{exportKey}": {
+            "get": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Export"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/mixed"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "exportKey",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            }
+        },
+        "\/export\/{exportKey}\/{token}": {
+            "get": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Export"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/mixed"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "exportKey",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "token",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            }
+        },
         "\/rest\/account\/login": {
             "post": {
                 "summary": "Login",
@@ -301,9 +401,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Authentication\\Models\\TokenData"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -341,9 +438,6 @@
                 "responses": {
                     "200": {
                         "description": "OK"
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 }
             }
@@ -358,9 +452,6 @@
                 "responses": {
                     "200": {
                         "description": "OK"
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 }
             }
@@ -6545,9 +6636,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Basket\\Models\\Basket"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 }
             }
@@ -6568,9 +6656,6 @@
                                 "$ref": "#\/definitions\/Plenty\\Modules\\Basket\\Models\\BasketItem"
                             }
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 }
             },
@@ -6586,9 +6671,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Basket\\Models\\BasketItem"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -6651,9 +6733,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Basket\\Models\\BasketItem"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -7778,7 +7857,7 @@
                         "name": "with",
                         "type": "string",
                         "required": false,
-                        "description": "Includes the detail information and\/or the active clients (stores) list of the category. Available values: details, clients ",
+                        "description": "Includes the detail information, the active clients (stores) list of the category and\/or the linked Elmar category for each client. Available values: details, clients, elmarCategories ",
                         "format": "string",
                         "in": "query"
                     },
@@ -7918,6 +7997,12 @@
                                     "items": {
                                         "$ref": "#\/definitions\/Plenty\\Modules\\Category\\Models\\CategoryClient"
                                     }
+                                },
+                                "elmarCategories": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Category\\Models\\CategoryProperty"
+                                    }
                                 }
                             }
                         }
@@ -7987,6 +8072,12 @@
                                     "type": "array",
                                     "items": {
                                         "$ref": "#\/definitions\/Plenty\\Modules\\Category\\Models\\CategoryClient"
+                                    }
+                                },
+                                "elmarCategories": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Category\\Models\\CategoryProperty"
                                     }
                                 }
                             }
@@ -8383,7 +8474,7 @@
                         "name": "with",
                         "type": "string",
                         "required": false,
-                        "description": "Includes the detail information and\/or the active clients (stores) list of the category. Available values: details, clients ",
+                        "description": "Includes the detail information, the active clients (stores) list of the category and\/or the linked Elmar category for each client. Available values: details, clients, elmarCategories ",
                         "format": "string",
                         "in": "query"
                     },
@@ -8521,6 +8612,12 @@
                                     "type": "array",
                                     "items": {
                                         "$ref": "#\/definitions\/Plenty\\Modules\\Category\\Models\\CategoryClient"
+                                    }
+                                },
+                                "elmarCategories": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Category\\Models\\CategoryProperty"
                                     }
                                 }
                             }
@@ -9708,6 +9805,20 @@
                         "oAuth2": []
                     }
                 ]
+            }
+        },
+        "\/rest\/exports\/{exportId}\/filters\/{filterId}": {
+            "delete": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    ""
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
             }
         },
         "\/rest\/exports\/{exportId}\/filters\/{key}": {
@@ -12930,6 +13041,14 @@
                         "description": "",
                         "format": "integer",
                         "in": "path"
+                    },
+                    {
+                        "name": "with",
+                        "type": "string",
+                        "required": false,
+                        "description": "Includes the specified attribute information in the results. The following parameters are available:<ul><li>names = The attribute names in all languages<\/li><li>marketNames = The market attribute links<\/li><\/ul>",
+                        "format": "string",
+                        "in": "query"
                     }
                 ],
                 "security": [
@@ -13570,6 +13689,87 @@
                         "in": "path"
                     }
                 ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/items\/item_shipping_profiles": {
+            "get": {
+                "summary": "List all shipping profiles of all items",
+                "description": "Lists all shipping profiles of all items. Results can be filtered by the timestamp of the link between items and shipping profiles (eq, lt, lte, gt, gte, between).\n\neq = Equal to\ngte = Greater than or equal to\ngt = Greater than\nlte = Less than or equal to\nlt = Less than\nbetween = Date range\n\nExample: updated=gt:2018-04-16 16:00:00 returns all items with shipping profiles that were activated after 4pm on the 16th of April 2018.",
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "page": {
+                                    "type": "integer",
+                                    "description": "Current page of the response"
+                                },
+                                "totalsCount": {
+                                    "type": "integer",
+                                    "description": "The total number of entries in the response"
+                                },
+                                "isLastPage": {
+                                    "type": "boolean",
+                                    "description": "Flag that indicates if the page shown is the last page of the response"
+                                },
+                                "lastPageNumber": {
+                                    "type": "integer",
+                                    "description": "The last page number"
+                                },
+                                "firstOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the first item of the current page result"
+                                },
+                                "lastOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the last item of the current page result"
+                                },
+                                "itemsPerPage": {
+                                    "type": "integer",
+                                    "description": "The requested amount of items per result page"
+                                },
+                                "entries": {
+                                    "items": {}
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "post": {
+                "summary": "Bulk activate shipping profiles",
+                "description": "Activates up to 50 shipping profiles for items",
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Illuminate\\Support\\Collection"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
                 "security": [
                     {
                         "oAuth2": []
@@ -17966,6 +18166,112 @@
                                 },
                                 "isNeckermannPrimary": {
                                     "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "\/rest\/items\/variations\/variation_markets": {
+            "get": {
+                "summary": "List all links between variations and markets",
+                "description": "Lists all links between variations and markets.\nResults can be filtered by the ID of the variation and by the ID of the market, e.g. \"variationId=1030\"\nlists all links of the variation with the ID 1030.",
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "page": {
+                                    "type": "integer",
+                                    "description": "Current page of the response"
+                                },
+                                "totalsCount": {
+                                    "type": "integer",
+                                    "description": "The total number of entries in the response"
+                                },
+                                "isLastPage": {
+                                    "type": "boolean",
+                                    "description": "Flag that indicates if the page shown is the last page of the response"
+                                },
+                                "lastPageNumber": {
+                                    "type": "integer",
+                                    "description": "The last page number"
+                                },
+                                "firstOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the first item of the current page result"
+                                },
+                                "lastOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the last item of the current page result"
+                                },
+                                "itemsPerPage": {
+                                    "type": "integer",
+                                    "description": "The requested amount of items per result page"
+                                },
+                                "entries": {
+                                    "type": "array",
+                                    "description": "List of VariationMarket",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Item\\VariationMarket\\Models\\VariationMarket"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "post": {
+                "summary": "Create up to 50 links between variations and markets",
+                "description": "Creates up to 50 links between variations and markets. The ID of the variation and the ID of the market must be specified.",
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Illuminate\\Database\\Eloquent\\Collection"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "\/rest\/items\/variations\/variation_markets",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "variationId",
+                                "marketId"
+                            ],
+                            "properties": {
+                                "variationId": {
+                                    "type": "integer"
+                                },
+                                "marketId": {
+                                    "type": "integer"
                                 }
                             }
                         }
@@ -22555,6 +22861,44 @@
             }
         },
         "\/rest\/items\/{id}\/variations\/{variationId}\/variation_markets": {
+            "delete": {
+                "summary": "Delete all market links of one variation",
+                "description": "Deletes all links of one variation. The ID of the variation must be specified.",
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "variationId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
             "get": {
                 "summary": "List markets linked to a variation",
                 "description": "Lists all markets linked to a variation. The ID of the item and the ID of the variation must be specified.",
@@ -24408,6 +24752,36 @@
             }
         },
         "\/rest\/items\/{itemId}\/item_shipping_profiles": {
+            "delete": {
+                "summary": "Deactivate shipping profiles of an item",
+                "description": "Deactivates all shipping profiles of an item. The ID of the item must be specified.",
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "itemId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
             "get": {
                 "summary": "List shipping profiles of an item",
                 "description": "Lists the shipping profiles linked to an item. The ID of the item must be specified.",
@@ -24589,7 +24963,7 @@
                         "name": "with",
                         "type": "string",
                         "required": false,
-                        "description": "Includes the specified variation information in the results. The following parameters are available: <ul><li>variationProperties<\/b> = The properties linked to the variation<\/li><li>variationBarcodes<\/b> = The barcode linked to the variation and the saved code<\/li><li>variationBundleComponents<\/b> = The bundle components of the variation and their quantities<\/li><li>variationSalesPrices<\/b> = The sales prices linked to the variation and the saved price<\/li><li>marketItemNumbers<\/b> = The market ident number of the variation<\/li><li>variationCategories<\/b> = The categories linked to the variation<\/li><li>variationClients<\/b> = The clients (stores) for which the variation is activated<\/li><li>variationMarkets<\/b> = The markets for which the variation is activated <\/li><li>variationDefaultCategory<\/b> = The default category of the variation<\/li><li>variationSuppliers<\/b> = The supplier data associated with the variation<\/li><li>variationWarehouses<\/b> = The warehouse data associated with the variation<\/li><li>images<\/b> = The images linked to the variation<\/li><li>itemImages<\/b> = The images linked to the item<\/li><li>variationAttributeValues<\/b> = The attribute values of the variation<\/li><li>variationSkus<\/b> = The SKU data associated with the variation<\/li><li>unit<\/b> = The unit assigned to the variation<\/li><li>parent<\/b> = The main variation of the variation. Value is null if this variation is the item's main variation.<\/li><li>item<\/b> = <\/li><li>stock<\/b> = The stock data of the variation<\/li><\/ul> For example, specifying the parameters variationCategories and variationDefaultCategory will include the default category and all other categories the variations are linked to. More than one parameter should be separated by commas.",
+                        "description": "Includes the specified variation information in the results. The following parameters are available: <ul><li>properties<\/b> = The properties linked to the variation<\/li><li>variationProperties<\/b> = The properties linked to the variation<\/li><li>variationBarcodes<\/b> = The barcode linked to the variation and the saved code<\/li><li>variationBundleComponents<\/b> = The bundle components of the variation and their quantities<\/li><li>variationSalesPrices<\/b> = The sales prices linked to the variation and the saved price<\/li><li>marketItemNumbers<\/b> = The market ident number of the variation<\/li><li>variationCategories<\/b> = The categories linked to the variation<\/li><li>variationClients<\/b> = The clients (stores) for which the variation is activated<\/li><li>variationMarkets<\/b> = The markets for which the variation is activated <\/li><li>variationDefaultCategory<\/b> = The default category of the variation<\/li><li>variationSuppliers<\/b> = The supplier data associated with the variation<\/li><li>variationWarehouses<\/b> = The warehouse data associated with the variation<\/li><li>images<\/b> = The images linked to the variation<\/li><li>itemImages<\/b> = The images linked to the item<\/li><li>variationAttributeValues<\/b> = The attribute values of the variation<\/li><li>variationSkus<\/b> = The SKU data associated with the variation<\/li><li>variationAdditionalSkus<\/b> = The additional SKU data associated with the variation<\/li><li>unit<\/b> = The unit assigned to the variation<\/li><li>parent<\/b> = The main variation of the variation. Value is null if this variation is the item's main variation.<\/li><li>item<\/b> = <\/li><li>stock<\/b> = The stock data of the variation<\/li><\/ul> For example, specifying the parameters variationCategories and variationDefaultCategory will include the default category and all other categories the variations are linked to. More than one parameter should be separated by commas.",
                         "format": "string",
                         "in": "query"
                     },
@@ -25658,6 +26032,251 @@
                                 }
                             }
                         }
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/languages\/translations": {
+            "post": {
+                "summary": "Create a new translation",
+                "description": "Creates a new translation.",
+                "tags": [
+                    "PluginMultilingualism"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\PluginMultilingualism\\Models\\PluginTranslation"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "$pluginSetId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the plugin set",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "$pluginName",
+                        "type": "string",
+                        "required": true,
+                        "description": "The name of the plugin",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "$languageCode",
+                        "type": "string",
+                        "required": true,
+                        "description": "The language code for the translation",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "$key",
+                        "type": "string",
+                        "required": true,
+                        "description": "The translation key",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "$value",
+                        "type": "string",
+                        "required": true,
+                        "description": "The value of the translation",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "$fileName",
+                        "type": "string",
+                        "required": true,
+                        "description": "The of the file",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/languages\/translations\/{translationId}": {
+            "delete": {
+                "summary": "Delete a translation",
+                "description": "Deletes a translation. The ID of the translation must be specified.",
+                "tags": [
+                    "PluginMultilingualism"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "translationId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "$translationId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the translation",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "get": {
+                "summary": "Get a translation",
+                "description": "Gets a translation. The ID of the translation must be specified.",
+                "tags": [
+                    "PluginMultilingualism"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\PluginMultilingualism\\Models\\PluginTranslation"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "translationId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "$id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the translation",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "put": {
+                "summary": "Update a translation",
+                "description": "Updates a translation. The ID of the translation must be specified",
+                "tags": [
+                    "PluginMultilingualism"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\PluginMultilingualism\\Models\\PluginTranslation"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "translationId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "$id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the translation",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "$pluginSetId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the plugin set",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "$pluginName",
+                        "type": "string",
+                        "required": true,
+                        "description": "The name of the plugin",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "$languageCode",
+                        "type": "string",
+                        "required": true,
+                        "description": "The language code for the translation",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "$key",
+                        "type": "string",
+                        "required": true,
+                        "description": "The translation key",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "$value",
+                        "type": "string",
+                        "required": true,
+                        "description": "The value of the translation",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "$fileName",
+                        "type": "string",
+                        "required": true,
+                        "description": "The value of the translation",
+                        "format": "string",
+                        "in": "query"
                     }
                 ],
                 "security": [
@@ -28781,9 +29400,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Illuminate\\Http\\Response"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -28822,9 +29438,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Authentication\\Models\\TokenData"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 }
             }
@@ -31032,6 +31645,112 @@
                 ]
             }
         },
+        "\/rest\/newsletters\/list_recipients": {
+            "get": {
+                "summary": "List recipients",
+                "description": "",
+                "tags": [
+                    "Newsletter"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "page": {
+                                    "type": "integer",
+                                    "description": "Current page of the response"
+                                },
+                                "totalsCount": {
+                                    "type": "integer",
+                                    "description": "The total number of entries in the response"
+                                },
+                                "isLastPage": {
+                                    "type": "boolean",
+                                    "description": "Flag that indicates if the page shown is the last page of the response"
+                                },
+                                "lastPageNumber": {
+                                    "type": "integer",
+                                    "description": "The last page number"
+                                },
+                                "firstOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the first item of the current page result"
+                                },
+                                "lastOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the last item of the current page result"
+                                },
+                                "itemsPerPage": {
+                                    "type": "integer",
+                                    "description": "The requested amount of items per result page"
+                                },
+                                "entries": {
+                                    "items": {}
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "columns",
+                        "type": "array",
+                        "required": false,
+                        "description": "Filter that restricts the search result to specific columns",
+                        "format": "",
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The page to get. The default page that will be returned is page 1.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "itemsPerPage",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The number of orders to be displayed per page. The default number of orders per page is 50.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "folderId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter that restricts the search result to a specific folderId.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "with",
+                        "type": "array",
+                        "required": false,
+                        "description": "Load additional relations for a Recipient. CURRENTLY NOT AVAILABLE",
+                        "format": "",
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/newsletters\/recipients": {
             "delete": {
                 "summary": "Delete recipients",
@@ -31754,7 +32473,7 @@
                         "name": "with",
                         "type": "array",
                         "required": false,
-                        "description": "Load additional relations for an order. Currently possible are:\n    <ul>\n    <li>'addresses' = The address objects that are associated with the order.<\/li>\n    <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the the reference type, the ID of the reference and the relation itself.<\/li>\n    <li>'comments' = The order comments.<\/li>\n    <li>'location' = The accounting location of the order.<\/li>\n    <li>'payments' = The payments that are associated with the order.<\/li>\n    <li>'documents' = The documents that are associated with the order.<\/li>\n    <li>'orderItems.variation' = The variation that is associated with the order item.<\/li>\n    <li>'orderItems.giftCardCodes' = The gift card codes that are associated with the order item.<\/li>\n    <\/ul>\n    Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
+                        "description": "Load additional relations for an order. Currently possible are:\n    <ul>\n    <li>'addresses' = The address objects that are associated with the order.<\/li>\n    <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the the reference type, the ID of the reference and the relation itself.<\/li>\n    <li>'comments' = The order comments.<\/li>\n    <li>'location' = The accounting location of the order.<\/li>\n    <li>'payments' = The payments that are associated with the order.<\/li>\n    <li>'documents' = The documents that are associated with the order.<\/li>\n    <li>'orderItems.variation' = The variation that is associated with the order item.<\/li>\n    <li>'orderItems.giftCardCodes' = The gift card codes that are associated with the order item.<\/li>\n    <li>'orderItems.transactions' = The transactions that are associated with the order item.<\/li>\n    <\/ul>\n    Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
                         "format": "",
                         "in": "query",
                         "items": {
@@ -31947,7 +32666,7 @@
                         "name": "with",
                         "type": "array",
                         "required": false,
-                        "description": "Load additional relations for an order. Currently possible are:\n    <ul>\n    <li>'addresses' = The address objects that are associated with the order.<\/li>\n    <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the the reference type, the ID of the reference and the relation itself.<\/li>\n    <li>'comments' = The order comments.<\/li>\n    <li>'location' = The accounting location of the order.<\/li>\n    <li>'payments' = The payments that are associated with the order.<\/li>\n    <li>'documents' = The documents that are associated with the order.<\/li>\n    <li>'orderItems.variation' = The variation that is associated with the order item.<\/li>\n    <li>'orderItems.giftCardCodes' = The gift card codes that are associated with the order item.<\/li>\n    <\/ul>\n    Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
+                        "description": "Load additional relations for an order. Currently possible are:\n    <ul>\n    <li>'addresses' = The address objects that are associated with the order.<\/li>\n    <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the the reference type, the ID of the reference and the relation itself.<\/li>\n    <li>'comments' = The order comments.<\/li>\n    <li>'location' = The accounting location of the order.<\/li>\n    <li>'payments' = The payments that are associated with the order.<\/li>\n    <li>'documents' = The documents that are associated with the order.<\/li>\n    <li>'orderItems.variation' = The variation that is associated with the order item.<\/li>\n    <li>'orderItems.giftCardCodes' = The gift card codes that are associated with the order item.<\/li>\n    <li>'orderItems.transactions' = The transactions that are associated with the order item.<\/li>\n    <\/ul>\n    Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
                         "format": "",
                         "in": "query",
                         "items": {
@@ -33863,6 +34582,96 @@
                 ]
             }
         },
+        "\/rest\/orders\/items\/{orderItemId}\/transactions": {
+            "get": {
+                "summary": "List transactions",
+                "description": "Lists transactions for an order item. The ID of the order item must be specified.",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Illuminate\\Database\\Eloquent\\Collection"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderItemId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "columns",
+                        "type": "array",
+                        "required": false,
+                        "description": "The properties to be loaded",
+                        "format": "",
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "with",
+                        "type": "array",
+                        "required": false,
+                        "description": "Load additional relations for a transaction. Currently possible is 'orderItem'.",
+                        "format": "",
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "post": {
+                "summary": "Create a transaction",
+                "description": "",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Order\\Transaction\\Models\\OrderItemTransaction"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderItemId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/orders\/properties\/types": {
             "get": {
                 "summary": "List order property types",
@@ -34552,7 +35361,7 @@
                         "name": "with",
                         "type": "string",
                         "required": false,
-                        "description": "The name of an relation to the preset. The following parameter is available: parcelServiceRegion.",
+                        "description": "The name of an relation to the preset. The following parameter is available: parcelServiceRegion, parcelServicePresetNames and parcelServiceNames.",
                         "format": "string",
                         "in": "query"
                     },
@@ -35386,6 +36195,31 @@
                 ]
             }
         },
+        "\/rest\/orders\/statuses\/all": {
+            "get": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Illuminate\\Database\\Eloquent\\Collection"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/orders\/statuses\/{statusId}": {
             "delete": {
                 "summary": "Delete an order status.",
@@ -35560,7 +36394,7 @@
                         "name": "with",
                         "type": "array",
                         "required": false,
-                        "description": "Load additional relations for an order. Currently possible are:\n     * <ul>\n       <li>'addresses' = The address objects that are associated with the order.<\/li>\n       <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the the reference type, the ID of the reference and the relation itself.<\/li>\n       <li>'comments' = The order comments.<\/li>\n       <li>'location' = The accounting location of the order.<\/li>\n       <li>'payments' = The payments that are associated with the order.<\/li>\n       <li>'documents' = The documents that are associated with the order.<\/li>\n       <li>'orderItems.variation' = The variation that is associated with the order item.<\/li>\n       <li>'orderItems.giftCardCodes' = The gift card codes that are associated with the order item.<\/li>\n     <\/ul>\n     Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
+                        "description": "Load additional relations for an order. Currently possible are:\n     * <ul>\n       <li>'addresses' = The address objects that are associated with the order.<\/li>\n       <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the the reference type, the ID of the reference and the relation itself.<\/li>\n       <li>'comments' = The order comments.<\/li>\n       <li>'location' = The accounting location of the order.<\/li>\n       <li>'payments' = The payments that are associated with the order.<\/li>\n       <li>'documents' = The documents that are associated with the order.<\/li>\n       <li>'orderItems.variation' = The variation that is associated with the order item.<\/li>\n       <li>'orderItems.giftCardCodes' = The gift card codes that are associated with the order item.<\/li>\n       <li>'orderItems.transactions' = The transactions that are associated with the order item.<\/li>\n     <\/ul>\n     Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
                         "format": "",
                         "in": "query",
                         "items": {
@@ -37925,9 +38759,6 @@
                                 "$ref": "#\/definitions\/Plenty\\Modules\\Payment\\MethodName\\Models\\PaymentMethodName"
                             }
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -37966,9 +38797,6 @@
                                 "$ref": "#\/definitions\/Plenty\\Modules\\Payment\\MethodName\\Models\\PaymentMethodName"
                             }
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -38012,9 +38840,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Payment\\MethodName\\Models\\PaymentMethodName"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -39125,6 +39950,589 @@
                 ]
             }
         },
+        "\/rest\/plugin_sets": {
+            "get": {
+                "summary": "List all Sets",
+                "description": "Lists all available sets.",
+                "tags": [
+                    "PluginSet"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\Plugin\\PluginSet\\Models\\PluginSet"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "post": {
+                "summary": "Create a Set",
+                "description": "Creates a set with the given entries",
+                "tags": [
+                    "PluginSet"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Plugin\\PluginSet\\Models\\PluginSet"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/plugin_sets\/{pluginSetId}\/languages": {
+            "get": {
+                "summary": "List all the plugins translations for a plugin set",
+                "description": "Lists all the plugins translations for a plugin set",
+                "tags": [
+                    "PluginSet"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\PluginMultilingualism\\Models\\PluginTranslation"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "pluginSetId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "$pluginSetId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the plugin set",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/plugin_sets\/{pluginSetId}\/languages\/csv\/{languageCode}": {
+            "get": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "PluginSet"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "pluginSetId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "languageCode",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "$pluginSetId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the plugin set",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "$languageCode",
+                        "type": "string",
+                        "required": true,
+                        "description": "The code of the language",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/plugin_sets\/{pluginSetId}\/languages\/{languageCode}": {
+            "delete": {
+                "summary": "Delete multiple translation",
+                "description": "Deletes multiple translation. The pluginSetId and languageCode must be specified.",
+                "tags": [
+                    "PluginMultilingualism"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "pluginSetId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "languageCode",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "$pluginSetId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the plugin set",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "$languageCode",
+                        "type": "string",
+                        "required": true,
+                        "description": "The code of the language",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/plugin_sets\/{pluginSetId}\/languages\/{targetLanguage}": {
+            "get": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "PluginSet"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\PluginMultilingualism\\Models\\PluginTranslation"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "pluginSetId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "targetLanguage",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "$pluginSetId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the plugin set",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "$targetLanguage",
+                        "type": "string",
+                        "required": true,
+                        "description": "The code of the language we target",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "post": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "PluginSet"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "pluginSetId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "targetLanguage",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "$pluginSetId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the plugin set",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "$targetLanguage",
+                        "type": "string",
+                        "required": true,
+                        "description": "The code of the language",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/plugin_sets\/{setId}": {
+            "delete": {
+                "summary": "Delete a set",
+                "description": "Deletes a set",
+                "tags": [
+                    "PluginSet"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "setId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "get": {
+                "summary": "Get a set",
+                "description": "Gets a set.",
+                "tags": [
+                    "PluginSet"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Plugin\\PluginSet\\Models\\PluginSet"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "setId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "put": {
+                "summary": "Update a set",
+                "description": "Updates a set. Modifies the set entry list",
+                "tags": [
+                    "PluginSet"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "setId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/plugin_sets\/{setId}\/plugins": {
+            "get": {
+                "summary": "List all Plugins of Set",
+                "description": "Lists all active Plugins of given Set.",
+                "tags": [
+                    "PluginSet"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Illuminate\\Support\\Collection"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "setId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/plugin_sets\/{setId}\/plugins\/{pluginId}": {
+            "delete": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "PluginSet"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/mixed"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "setId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "pluginId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "post": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "PluginSet"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/mixed"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "setId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "pluginId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/plugin_sets\/{setId}\/set_entries": {
+            "get": {
+                "summary": "List all SetEntries of Set",
+                "description": "Lists all available SetEntries of given Set.",
+                "tags": [
+                    "PluginSet"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\Plugin\\PluginSet\\Models\\PluginSetEntry"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "setId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/plugins": {
             "get": {
                 "summary": "List plugins",
@@ -39199,6 +40607,41 @@
                                 }
                             }
                         }
+                    }
+                ]
+            }
+        },
+        "\/rest\/plugins\/plugin_sets\/{pluginSetId}\/plugins": {
+            "get": {
+                "summary": "List all Plugins of Set",
+                "description": "Lists all active Plugins of given Set.",
+                "tags": [
+                    "PluginSet"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Illuminate\\Support\\Collection"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "pluginSetId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
                     }
                 ]
             }
@@ -39323,9 +40766,6 @@
                                 "$ref": "#\/definitions\/string"
                             }
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 }
             }
@@ -39480,6 +40920,136 @@
                 ]
             }
         },
+        "\/rest\/plugins\/{pluginId}\/plugin_sets\/{pluginSetId}\/configuration_layout": {
+            "get": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Configuration"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "pluginId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "pluginSetId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/plugins\/{pluginId}\/plugin_sets\/{pluginSetId}\/configurations": {
+            "get": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Configuration"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\Plugin\\Models\\Configuration"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "pluginId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "pluginSetId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "put": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Configuration"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/mixed"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "pluginId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "pluginSetId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/properties": {
             "get": {
                 "summary": "List properties",
@@ -39496,9 +41066,6 @@
                                 "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\Property"
                             }
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 }
             },
@@ -39514,9 +41081,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\Property"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -39583,9 +41147,6 @@
                                 "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyAvailability"
                             }
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 }
             },
@@ -39601,9 +41162,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyAvailability"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -39667,9 +41225,6 @@
                 "responses": {
                     "200": {
                         "description": "OK"
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -39695,9 +41250,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyAvailability"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -39723,9 +41275,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyAvailability"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -39753,9 +41302,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/string"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 }
             }
@@ -39776,9 +41322,6 @@
                                 "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyGroup"
                             }
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -39804,9 +41347,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyGroup"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -39868,9 +41408,6 @@
                                 "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyGroupName"
                             }
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 }
             },
@@ -39886,9 +41423,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyGroupName"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -39955,9 +41489,6 @@
                 "responses": {
                     "200": {
                         "description": "OK"
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -39983,9 +41514,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyGroupName"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -40011,9 +41539,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyGroupName"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -40044,9 +41569,6 @@
                                 "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyGroupOption"
                             }
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 }
             },
@@ -40062,9 +41584,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyGroupOption"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -40128,9 +41647,6 @@
                 "responses": {
                     "200": {
                         "description": "OK"
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -40156,9 +41672,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyGroupOption"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -40184,9 +41697,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyGroupOption"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -40211,9 +41721,6 @@
                 "responses": {
                     "200": {
                         "description": "OK"
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 }
             }
@@ -40228,9 +41735,6 @@
                 "responses": {
                     "200": {
                         "description": "OK"
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 }
             }
@@ -40248,9 +41752,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyGroup"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -40276,9 +41777,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyGroup"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -40345,9 +41843,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/string"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -40375,9 +41870,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/string"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -40411,9 +41903,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/string"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -40446,9 +41935,6 @@
                 "responses": {
                     "200": {
                         "description": "OK"
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -40487,9 +41973,6 @@
                                 "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyMarket"
                             }
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 }
             },
@@ -40505,9 +41988,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyMarket"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -40580,9 +42060,6 @@
                 "responses": {
                     "200": {
                         "description": "OK"
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -40616,9 +42093,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyMarket"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -40652,9 +42126,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyMarket"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -40697,9 +42168,6 @@
                                 "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyName"
                             }
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 }
             },
@@ -40715,9 +42183,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyName"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -40792,9 +42257,6 @@
                 "responses": {
                     "200": {
                         "description": "OK"
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -40820,9 +42282,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyName"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -40848,9 +42307,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyName"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -40881,9 +42337,6 @@
                                 "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyOption"
                             }
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 }
             },
@@ -40899,9 +42352,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyOption"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -40953,9 +42403,6 @@
                 "responses": {
                     "200": {
                         "description": "OK"
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -40981,9 +42428,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyOption"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -41009,9 +42453,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyOption"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -41044,9 +42485,6 @@
                 "responses": {
                     "200": {
                         "description": "OK"
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -41075,9 +42513,6 @@
                                 "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyRelation"
                             }
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 }
             },
@@ -41093,9 +42528,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyRelation"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -41166,9 +42598,6 @@
                                 "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyRelation"
                             }
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -41199,9 +42628,6 @@
                                 "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyRelationMarkup"
                             }
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 }
             },
@@ -41217,9 +42643,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyRelationMarkup"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -41283,9 +42706,6 @@
                 "responses": {
                     "200": {
                         "description": "OK"
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -41311,9 +42731,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyRelationMarkup"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -41339,9 +42756,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyRelationMarkup"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -41372,9 +42786,6 @@
                                 "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyRelationValue"
                             }
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 }
             },
@@ -41390,9 +42801,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyRelationValue"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -41455,9 +42863,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyRelationValue"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 }
             }
@@ -41472,9 +42877,6 @@
                 "responses": {
                     "200": {
                         "description": "OK"
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -41508,9 +42910,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyRelationValue"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -41546,9 +42945,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyRelationValue"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -41581,9 +42977,6 @@
                 "responses": {
                     "200": {
                         "description": "OK"
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -41609,9 +43002,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyRelation"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -41637,9 +43027,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyRelation"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -41670,9 +43057,6 @@
                                 "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertySelection"
                             }
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 }
             },
@@ -41688,9 +43072,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertySelection"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -41741,9 +43122,6 @@
                 "responses": {
                     "200": {
                         "description": "OK"
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -41769,9 +43147,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertySelection"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -41797,9 +43172,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertySelection"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -41835,9 +43207,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/string"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 }
             }
@@ -41852,9 +43221,6 @@
                 "responses": {
                     "200": {
                         "description": "OK"
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -41880,9 +43246,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\Property"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -41908,9 +43271,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\Property"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -41921,6 +43281,298 @@
                         "description": "",
                         "format": "integer",
                         "in": "path"
+                    }
+                ]
+            }
+        },
+        "\/rest\/shop-builder\/frontend\/content_pages": {
+            "get": {
+                "summary": "List content pages for all the plugins",
+                "description": "Lists all content pages",
+                "tags": [
+                    "ContentBuilder"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/shop-builder\/frontend\/content_widgets": {
+            "get": {
+                "summary": "List content widgets for all the plugins",
+                "description": "Lists all content widgets",
+                "tags": [
+                    "ContentBuilder"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/shop-builder\/frontend\/contents": {
+            "get": {
+                "summary": "List contents",
+                "description": "Lists contents.",
+                "tags": [
+                    "ContentBuilder"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "post": {
+                "summary": "Create new content",
+                "description": "Creates new content",
+                "tags": [
+                    "ContentBuilder"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\ContentBuilder\\Models\\Content"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/shop-builder\/frontend\/contents\/{contentId}": {
+            "get": {
+                "summary": "Get content",
+                "description": "Gets content",
+                "tags": [
+                    "ContentBuilder"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "contentId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "put": {
+                "summary": "Update content",
+                "description": "Updates content",
+                "tags": [
+                    "ContentBuilder"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\ContentBuilder\\Models\\Content"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "contentId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/shop-builder\/frontend\/contents_links": {
+            "get": {
+                "summary": "List contents links",
+                "description": "Lists contents links.",
+                "tags": [
+                    "ContentBuilder"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "post": {
+                "summary": "Create new content link",
+                "description": "Creates new content link",
+                "tags": [
+                    "ContentBuilder"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\ContentBuilder\\Models\\ContentLink"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/shop-builder\/frontend\/contents_links\/{contentLinkId}": {
+            "get": {
+                "summary": "Get content link",
+                "description": "Gets content link",
+                "tags": [
+                    "ContentBuilder"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "contentLinkId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "put": {
+                "summary": "Update content link",
+                "description": "Updates content link",
+                "tags": [
+                    "ContentBuilder"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\ContentBuilder\\Models\\ContentLink"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "contentLinkId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/shop-builder\/frontend\/preview_data": {
+            "post": {
+                "summary": "Get the html representation of a content widget",
+                "description": "",
+                "tags": [
+                    "ContentBuilder"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
                     }
                 ]
             }
@@ -45455,9 +47107,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Warehouse\\Models\\WarehouseLocationDimension"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -45602,9 +47251,6 @@
                 "responses": {
                     "200": {
                         "description": "OK"
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 }
             },
@@ -45620,9 +47266,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Warehouse\\Models\\WarehouseLocation"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -45682,9 +47325,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/string"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 }
             }
@@ -45702,9 +47342,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Warehouse\\Models\\WarehouseLocationDimension"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -45777,9 +47414,6 @@
                 "responses": {
                     "200": {
                         "description": "OK"
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -45805,9 +47439,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Warehouse\\Models\\WarehouseLocationDimension"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -45833,9 +47464,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Warehouse\\Models\\WarehouseLocationDimension"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -45866,9 +47494,6 @@
                                 "$ref": "#\/definitions\/Plenty\\Modules\\Warehouse\\Models\\WarehouseLocation"
                             }
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 }
             }
@@ -45886,9 +47511,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Warehouse\\Models\\WarehouseLocationLevel"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -45937,9 +47559,6 @@
                 "responses": {
                     "200": {
                         "description": "OK"
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -45965,9 +47584,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Warehouse\\Models\\WarehouseLocationLevel"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -45993,9 +47609,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Warehouse\\Models\\WarehouseLocationLevel"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -46026,9 +47639,6 @@
                                 "$ref": "#\/definitions\/Plenty\\Modules\\Warehouse\\Models\\WarehouseLocationDimension"
                             }
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 }
             }
@@ -46043,9 +47653,6 @@
                 "responses": {
                     "200": {
                         "description": "OK"
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 }
             }
@@ -46060,9 +47667,6 @@
                 "responses": {
                     "200": {
                         "description": "OK"
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -46087,9 +47691,6 @@
                 "responses": {
                     "200": {
                         "description": "OK"
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -46115,9 +47716,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Warehouse\\Models\\WarehouseLocation"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -46143,14 +47741,38 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Warehouse\\Models\\WarehouseLocation"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
                     {
                         "name": "warehouseLocationId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            }
+        },
+        "\/rest\/warehouses\/structure\/{warehouseId}": {
+            "get": {
+                "summary": "Get a warehouse location structure",
+                "description": "Gets a warehouse location structure by warehouse ID. The warehouse ID is required.",
+                "tags": [
+                    "Warehouse"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/mixed"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "warehouseId",
                         "type": "integer",
                         "required": true,
                         "description": "",
@@ -46210,9 +47832,6 @@
                                 }
                             }
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -46240,9 +47859,6 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Warehouse\\Models\\WarehouseLocationDimension"
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -46273,9 +47889,6 @@
                                 "$ref": "#\/definitions\/Plenty\\Modules\\Warehouse\\Models\\WarehouseLocationLevel"
                             }
                         }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -48023,6 +49636,13 @@
                     "items": {
                         "$ref": "#\/definitions\/Plenty\\Modules\\Category\\Models\\CategoryDetails"
                     }
+                },
+                "elmarCategories": {
+                    "type": "array",
+                    "description": "The linked elmar (List)",
+                    "items": {
+                        "$ref": "#\/definitions\/Plenty\\Modules\\Category\\Models\\CategoryProperty"
+                    }
                 }
             }
         },
@@ -48173,6 +49793,27 @@
                 }
             }
         },
+        "Plenty\\Modules\\Category\\Models\\CategoryProperty": {
+            "type": "object",
+            "properties": {
+                "categoryId": {
+                    "type": "integer",
+                    "description": "The unique ID of the category"
+                },
+                "marketId": {
+                    "type": "number",
+                    "description": "The unique ID of the referrer"
+                },
+                "plentyId": {
+                    "type": "integer",
+                    "description": "The unique plenty ID of the client (store)"
+                },
+                "value": {
+                    "type": "string",
+                    "description": "The category of the referrer"
+                }
+            }
+        },
         "Plenty\\Modules\\Category\\Models\\CategoryTemplate": {
             "type": "object",
             "properties": {
@@ -48293,6 +49934,48 @@
                 "isVisibleForContact": {
                     "type": "boolean",
                     "description": "If true, the comment is visible for the associated contact."
+                }
+            }
+        },
+        "Plenty\\Modules\\ContentBuilder\\Models\\Content": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "The ID of the content"
+                },
+                "dataProviderName": {
+                    "type": "string",
+                    "description": "The name of the data provider"
+                },
+                "contentData": {
+                    "type": "string",
+                    "description": "The data of the content"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The type of the content"
+                }
+            }
+        },
+        "Plenty\\Modules\\ContentBuilder\\Models\\ContentLink": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "The ID of the content link"
+                },
+                "contentId": {
+                    "type": "integer",
+                    "description": "The ID of the content"
+                },
+                "containerName": {
+                    "type": "string",
+                    "description": "The name of the container"
+                },
+                "pluginSetId": {
+                    "type": "integer",
+                    "description": "The Id of the plugin set"
                 }
             }
         },
@@ -49415,6 +51098,10 @@
                 "free20": {
                     "type": "string",
                     "description": "The content of the free text field 20. This can be displayed in the online store or on eBay."
+                },
+                "maximumOrderQuantity": {
+                    "type": "number",
+                    "description": "The maximum order quantity of an item permitted per order. If a maximum order quantity is specified, no more than this quantity of any combination of the variations of the item can be ordered. Decimal values are possible to allow orders by weight or length. Default value is 0. If value is 0, the maximum order quantity is unlimited."
                 }
             }
         },
@@ -51952,7 +53639,7 @@
                 },
                 "typeId": {
                     "type": "integer",
-                    "description": "The ID of the order type\n                                \t\t\t\t\t\t\t\tIt is possible to define individual order types. However,\n                                \t\t\t\t\t\t\t\tthe following types are available by default:\n<ul>\n    <li>Sales order = 1<\/li>\n    <li>Delivery = 2<\/li>\n    <li>Returns = 3<\/li>\n    <li>Credit note = 4<\/li>\n    <li>Warranty = 5<\/li>\n    <li>Repair = 6<\/li>\n    <li>Offer = 7<\/li>\n    <li>Advance order = 8<\/li>\n    <li>Multi-order = 9<\/li>\n    <li>Multi credit note = 10<\/li>\n    <li>Multi delivery = 11<\/li>\n    <li>Reorder = 12<\/li>\n    <li>Partial delivery = 13<\/li>\n    <li>Subscription = 14<\/li>\n    <li>Redistribution = 15<\/li>\n    <li>Purchase order = 16<\/li>\n<\/ul>"
+                    "description": "The ID of the order type\n                                \t\t\t\t\t\t\t\tIt is possible to define individual order types. However,\n                                \t\t\t\t\t\t\t\tthe following types are available by default:\n<ul>\n    <li>Sales order = 1<\/li>\n    <li>Delivery = 2<\/li>\n    <li>Returns = 3<\/li>\n    <li>Credit note = 4<\/li>\n    <li>Warranty = 5<\/li>\n    <li>Repair = 6<\/li>\n    <li>Offer = 7<\/li>\n    <li>Advance order = 8<\/li>\n    <li>Multi-order = 9<\/li>\n    <li>Multi credit note = 10<\/li>\n    <li>Multi delivery = 11<\/li>\n    <li>Reorder = 12<\/li>\n    <li>Partial delivery = 13<\/li>\n    <li>Subscription = 14<\/li>\n    <li>Redistribution = 15<\/li>\n<\/ul>"
                 },
                 "statusId": {
                     "type": "number",
@@ -52596,6 +54283,59 @@
                 "updatedAt": {
                     "type": "string",
                     "description": "The date, when the status was updated."
+                },
+                "isFrontendVisible": {
+                    "type": "boolean",
+                    "description": ""
+                },
+                "color": {
+                    "type": "string",
+                    "description": ""
+                }
+            }
+        },
+        "Plenty\\Modules\\Order\\Transaction\\Models\\OrderItemTransaction": {
+            "type": "object",
+            "properties": {
+                "orderItemId": {
+                    "type": "integer",
+                    "description": "The ID of the order item"
+                },
+                "quantity": {
+                    "type": "number",
+                    "description": "The quantity"
+                },
+                "userId": {
+                    "type": "integer",
+                    "description": "The ID of the user"
+                },
+                "identification": {
+                    "type": "string",
+                    "description": "External identification. Can be an arbitrary string"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "The status. Possible values are 'in' and 'out'"
+                },
+                "receiptId": {
+                    "type": "integer",
+                    "description": "The receipt ID"
+                },
+                "warehouseLocationId": {
+                    "type": "integer",
+                    "description": "The ID of the warehouse location"
+                },
+                "batchBestBeforeDateId": {
+                    "type": "integer",
+                    "description": "The ID of the batch or best before date"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "description": "The date the transaction was created"
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "description": "The date the transaction was last updated"
                 }
             }
         },
@@ -52815,9 +54555,88 @@
                 }
             }
         },
-        "Plenty\\Modules\\Plugin\\Models\\Permission": {
+        "Plenty\\Modules\\PluginMultilingualism\\Models\\PluginTranslation": {
             "type": "object",
-            "properties": {}
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "The ID of the translation"
+                },
+                "pluginSetId": {
+                    "type": "integer",
+                    "description": "The ID of the plugin set"
+                },
+                "pluginName": {
+                    "type": "string",
+                    "description": "The name of the plugin"
+                },
+                "languageCode": {
+                    "type": "string",
+                    "description": "The code of the language"
+                },
+                "fileName": {
+                    "type": "string",
+                    "description": "The file of the key"
+                },
+                "key": {
+                    "type": "string",
+                    "description": "The translation key"
+                },
+                "value": {
+                    "type": "string",
+                    "description": "The translation value"
+                }
+            }
+        },
+        "Plenty\\Modules\\Plugin\\Models\\Configuration": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": ""
+                },
+                "key": {
+                    "type": "string",
+                    "description": ""
+                },
+                "value": {
+                    "type": "string",
+                    "description": ""
+                },
+                "plugin_id": {
+                    "type": "integer",
+                    "description": ""
+                },
+                "tab": {
+                    "type": "string",
+                    "description": ""
+                },
+                "label": {
+                    "type": "object",
+                    "description": ""
+                },
+                "type": {
+                    "type": "string",
+                    "description": ""
+                },
+                "possibleValues": {
+                    "type": "array",
+                    "description": "",
+                    "items": {}
+                },
+                "default": {
+                    "type": "string",
+                    "description": ""
+                },
+                "scss": {
+                    "type": "boolean",
+                    "description": ""
+                },
+                "pluginSetEntryId": {
+                    "type": "integer",
+                    "description": ""
+                }
+            }
         },
         "Plenty\\Modules\\Plugin\\Models\\Plugin": {
             "type": "object",
@@ -52971,8 +54790,9 @@
                     "description": "is closed source"
                 },
                 "marketplaceName": {
-                    "type": "string",
-                    "description": "The plugin name displayed in marketplace"
+                    "type": "array",
+                    "description": "The plugin name displayed in marketplace",
+                    "items": {}
                 },
                 "source": {
                     "type": "string",
@@ -53017,13 +54837,6 @@
                     "type": "string",
                     "description": "A forward link to the external tool developers page"
                 },
-                "permissions": {
-                    "type": "array",
-                    "description": "A list of plugin permissions (List)",
-                    "items": {
-                        "$ref": "#\/definitions\/Plenty\\Modules\\Plugin\\Models\\Permission"
-                    }
-                },
                 "webstores": {
                     "type": "array",
                     "description": "A list of clients (stores) activated for the plugin (List)",
@@ -53053,6 +54866,23 @@
                 },
                 "name": {
                     "type": "string",
+                    "description": ""
+                }
+            }
+        },
+        "Plenty\\Modules\\Plugin\\PluginSet\\Models\\PluginSetEntry": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": ""
+                },
+                "pluginId": {
+                    "type": "integer",
+                    "description": ""
+                },
+                "pluginSetId": {
+                    "type": "integer",
                     "description": ""
                 }
             }
