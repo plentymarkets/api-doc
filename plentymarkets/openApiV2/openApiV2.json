@@ -6941,6 +6941,39 @@
                     }
                 ]
             },
+            "post": {
+                "summary": "Copies a specific board.",
+                "description": "",
+                "tags": [
+                    "Boards"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Board\\Models\\Board"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "boardId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
             "put": {
                 "summary": "Updates a specific board.",
                 "description": "",
@@ -7089,6 +7122,47 @@
                         "description": "OK",
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "boardId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "columnId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "post": {
+                "summary": "Copies a specific column.",
+                "description": "",
+                "tags": [
+                    "Board"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Board\\Models\\BoardColumn"
                         }
                     },
                     "401": {
@@ -7408,6 +7482,55 @@
             },
             "get": {
                 "summary": "Gets a task by its ID.",
+                "description": "",
+                "tags": [
+                    "Board"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Board\\Models\\BoardTask"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "boardId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "columnId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "taskId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "post": {
+                "summary": "Copies a specific task.",
                 "description": "",
                 "tags": [
                     "Board"
@@ -17960,6 +18083,14 @@
                         "in": "query"
                     },
                     {
+                        "name": "storeSpecial",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations of items with the specified store special. The following values are allowed: 0 (None), 1 (Special offer), 2 (New item), 3(Top item).",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
                         "name": "categoryId",
                         "type": "integer",
                         "required": false,
@@ -20684,6 +20815,12 @@
                                 },
                                 "exchangeRate": {
                                     "type": "number"
+                                },
+                                "bestBeforeDate": {
+                                    "type": "string"
+                                },
+                                "batch": {
+                                    "type": "string"
                                 }
                             }
                         }
@@ -20764,6 +20901,12 @@
                                 },
                                 "reasonId": {
                                     "type": "integer"
+                                },
+                                "bestBeforeDate": {
+                                    "type": "string"
+                                },
+                                "batch": {
+                                    "type": "string"
                                 }
                             }
                         }
@@ -21033,6 +21176,12 @@
                                 },
                                 "newWarehouseId": {
                                     "type": "integer"
+                                },
+                                "bestBeforeDate": {
+                                    "type": "string"
+                                },
+                                "batch": {
+                                    "type": "string"
                                 }
                             }
                         }
@@ -28572,12 +28721,21 @@
                         "in": "path"
                     },
                     {
+                        "name": "referrerId",
+                        "type": "number",
+                        "required": true,
+                        "description": "The referrer ID.",
+                        "format": "double",
+                        "in": "query"
+                    },
+                    {
                         "in": "body",
                         "name": "\/rest\/listings\/markets\/{id}",
                         "schema": {
                             "type": "object",
                             "required": [
                                 "id",
+                                "referrerId",
                                 "listing"
                             ],
                             "properties": {
@@ -32473,7 +32631,7 @@
                         "name": "with",
                         "type": "array",
                         "required": false,
-                        "description": "Load additional relations for an order. Currently possible are:\n    <ul>\n    <li>'addresses' = The address objects that are associated with the order.<\/li>\n    <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the the reference type, the ID of the reference and the relation itself.<\/li>\n    <li>'comments' = The order comments.<\/li>\n    <li>'location' = The accounting location of the order.<\/li>\n    <li>'payments' = The payments that are associated with the order.<\/li>\n    <li>'documents' = The documents that are associated with the order.<\/li>\n    <li>'orderItems.variation' = The variation that is associated with the order item.<\/li>\n    <li>'orderItems.giftCardCodes' = The gift card codes that are associated with the order item.<\/li>\n    <li>'orderItems.transactions' = The transactions that are associated with the order item.<\/li>\n    <\/ul>\n    Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
+                        "description": "Load additional relations for an order. Currently possible are:\n    <ul>\n    <li>'addresses' = The address objects that are associated with the order.<\/li>\n    <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the the reference type, the ID of the reference and the relation itself.<\/li>\n    <li>'comments' = The order comments.<\/li>\n    <li>'location' = The accounting location of the order.<\/li>\n    <li>'payments' = The payments that are associated with the order.<\/li>\n    <li>'documents' = The documents that are associated with the order.<\/li>\n    <li>'orderItems.variation' = The variation that is associated with the order item.<\/li>\n    <li>'orderItems.giftCardCodes' = The gift card codes that are associated with the order item.<\/li>\n    <li>'orderItems.transactions' = The transactions that are associated with the order item.<\/li>\n    <li>'orderItems.serialNumbers' = The serial numbers that are associated with the order item.<\/li>\n    <li>'orderItems.variationBarcodes' = The barcodes that are associated with variation of the order item.<\/li>\n    <\/ul>\n    Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
                         "format": "",
                         "in": "query",
                         "items": {
@@ -32666,7 +32824,7 @@
                         "name": "with",
                         "type": "array",
                         "required": false,
-                        "description": "Load additional relations for an order. Currently possible are:\n    <ul>\n    <li>'addresses' = The address objects that are associated with the order.<\/li>\n    <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the the reference type, the ID of the reference and the relation itself.<\/li>\n    <li>'comments' = The order comments.<\/li>\n    <li>'location' = The accounting location of the order.<\/li>\n    <li>'payments' = The payments that are associated with the order.<\/li>\n    <li>'documents' = The documents that are associated with the order.<\/li>\n    <li>'orderItems.variation' = The variation that is associated with the order item.<\/li>\n    <li>'orderItems.giftCardCodes' = The gift card codes that are associated with the order item.<\/li>\n    <li>'orderItems.transactions' = The transactions that are associated with the order item.<\/li>\n    <\/ul>\n    Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
+                        "description": "Load additional relations for an order. Currently possible are:\n    <ul>\n    <li>'addresses' = The address objects that are associated with the order.<\/li>\n    <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the the reference type, the ID of the reference and the relation itself.<\/li>\n    <li>'comments' = The order comments.<\/li>\n    <li>'location' = The accounting location of the order.<\/li>\n    <li>'payments' = The payments that are associated with the order.<\/li>\n    <li>'documents' = The documents that are associated with the order.<\/li>\n    <li>'orderItems.variation' = The variation that is associated with the order item.<\/li>\n    <li>'orderItems.giftCardCodes' = The gift card codes that are associated with the order item.<\/li>\n    <li>'orderItems.transactions' = The transactions that are associated with the order item.<\/li>\n    <li>'orderItems.serialNumbers' = The serial numbers that are associated with the order item.<\/li>\n    <li>'orderItems.variationBarcodes' = The barcodes that are associated with variation of the order item.<\/li>\n    <\/ul>\n    Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
                         "format": "",
                         "in": "query",
                         "items": {
@@ -36177,7 +36335,8 @@
                         "schema": {
                             "type": "object",
                             "required": [
-                                "statusId"
+                                "statusId",
+                                "names"
                             ],
                             "properties": {
                                 "statusId": {
@@ -36394,7 +36553,7 @@
                         "name": "with",
                         "type": "array",
                         "required": false,
-                        "description": "Load additional relations for an order. Currently possible are:\n     * <ul>\n       <li>'addresses' = The address objects that are associated with the order.<\/li>\n       <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the the reference type, the ID of the reference and the relation itself.<\/li>\n       <li>'comments' = The order comments.<\/li>\n       <li>'location' = The accounting location of the order.<\/li>\n       <li>'payments' = The payments that are associated with the order.<\/li>\n       <li>'documents' = The documents that are associated with the order.<\/li>\n       <li>'orderItems.variation' = The variation that is associated with the order item.<\/li>\n       <li>'orderItems.giftCardCodes' = The gift card codes that are associated with the order item.<\/li>\n       <li>'orderItems.transactions' = The transactions that are associated with the order item.<\/li>\n     <\/ul>\n     Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
+                        "description": "Load additional relations for an order. Currently possible are:\n     * <ul>\n       <li>'addresses' = The address objects that are associated with the order.<\/li>\n       <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the the reference type, the ID of the reference and the relation itself.<\/li>\n       <li>'comments' = The order comments.<\/li>\n       <li>'location' = The accounting location of the order.<\/li>\n       <li>'payments' = The payments that are associated with the order.<\/li>\n       <li>'documents' = The documents that are associated with the order.<\/li>\n       <li>'orderItems.variation' = The variation that is associated with the order item.<\/li>\n       <li>'orderItems.giftCardCodes' = The gift card codes that are associated with the order item.<\/li>\n       <li>'orderItems.transactions' = The transactions that are associated with the order item.<\/li>\n       <li>'orderItems.serialNumbers' = The serial numbers that are associated with the order item.<\/li>\n       <li>'orderItems.variationBarcodes' = The barcodes that are associated with variation of the order item.<\/li>\n     <\/ul>\n     Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
                         "format": "",
                         "in": "query",
                         "items": {
@@ -52203,6 +52362,14 @@
                     "type": "number",
                     "description": "The quantity of the variation"
                 },
+                "bestBeforeDate": {
+                    "type": "string",
+                    "description": "The best before date of the variation"
+                },
+                "batch": {
+                    "type": "string",
+                    "description": "The batch of the variation"
+                },
                 "reasonId": {
                     "type": "integer",
                     "description": "The reason for correction. The following reasons are available:\n<ul>\n<li>301: Stock correction<\/li>\n<li>302: Stock correction by stocktaking<\/li>\n<li>304: Stock correction because of manufacturer error<\/li>\n<li>305: Stock correction because of unusable paper<\/li>\n<li>306: Stock correction because of packing error<\/li>\n<li>307: Stock correction because of damage<\/li>\n<li>309: Stock correction (internal offset)<\/li>\n<li>317: Stock correction because of BBD<\/li>\n<li>318: Stock correction because of shipping items to FBA<\/li>\n<li>319: Stock correction because of shipping items to fulfillment service provider<\/li>\n<li>320: Stock correction because of sample for interested parties<\/li>\n<li>321: Stock correction because of sample for customers<\/li>\n<li>322: Stock correction because of sample<\/li>\n<li>323: Stock correction because quality models are booked in<\/li>\n<li>324: Stock correction because quality models are booked out<\/li>\n<li>325: Stock correction because of gift<\/li>\n<li>326: Stock correction because of malfunction (without return)<\/li>\n<\/ul>"
@@ -52251,6 +52418,14 @@
                 "purchasePrice": {
                     "type": "number",
                     "description": "The purchase price"
+                },
+                "bestBeforeDate": {
+                    "type": "string",
+                    "description": "The best before date of the variation"
+                },
+                "batch": {
+                    "type": "string",
+                    "description": "The batch of the variation"
                 },
                 "reasonId": {
                     "type": "integer",
@@ -52305,6 +52480,14 @@
                     "type": "integer",
                     "description": "The process row type shows whether the stock movement is based on an order or on an incoming item data set.\n<ul>\n\t<li>1 = incoming item data set<\/li>\n\t<li>2 = order<\/li>\n<\/ul>"
                 },
+                "bestBeforeDate": {
+                    "type": "string",
+                    "description": "The best before date for the movement"
+                },
+                "batch": {
+                    "type": "string",
+                    "description": "The batch for the movement"
+                },
                 "storageLocationName": {
                     "type": "string",
                     "description": "The name of the storage location"
@@ -52337,6 +52520,14 @@
                 "quantity": {
                     "type": "number",
                     "description": "The quantity to redistribute"
+                },
+                "bestBeforeDate": {
+                    "type": "string",
+                    "description": "The best before date of the redistribution"
+                },
+                "batch": {
+                    "type": "string",
+                    "description": "The batch of the redistribution"
                 },
                 "currentStorageLocationId": {
                     "type": "integer",
@@ -52451,6 +52642,14 @@
                 "stockBuffer": {
                     "type": "integer",
                     "description": "The stock buffer for the variation in this warehouse"
+                },
+                "isBatch": {
+                    "type": "boolean",
+                    "description": "Is for warehouse and variation stock batch active"
+                },
+                "isBestBeforeDate": {
+                    "type": "boolean",
+                    "description": "Is for warehouse and variation stock best before date active"
                 },
                 "lastUpdateTimestamp": {
                     "type": "string",
@@ -55215,6 +55414,14 @@
                 "quantity": {
                     "type": "number",
                     "description": "The quantity stored at the storage location"
+                },
+                "bestBeforeDate": {
+                    "type": "string",
+                    "description": "The best before date"
+                },
+                "batch": {
+                    "type": "string",
+                    "description": "The batch"
                 },
                 "updatedAt": {
                     "type": "string",
