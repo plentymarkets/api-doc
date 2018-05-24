@@ -135,6 +135,14 @@
             }
         },
         {
+            "name": "CustomerContract",
+            "description": "Routes for CustomerContract",
+            "externalDocs": {
+                "description": "Official developers site for CustomerContract routes",
+                "url": "https:\/\/developers.plentymarkets.com\/rest-doc\/customer_contract"
+            }
+        },
+        {
             "name": "Document",
             "description": "Routes for Document",
             "externalDocs": {
@@ -9361,6 +9369,147 @@
                 "security": [
                     {
                         "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/customer_contracts": {
+            "get": {
+                "summary": "List contracts",
+                "description": "",
+                "tags": [
+                    "CustomerContract"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\CustomerContract\\Models\\CustomerContract"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Creates a new contract",
+                "description": "",
+                "tags": [
+                    "CustomerContract"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\CustomerContract\\Models\\CustomerContract"
+                        }
+                    }
+                }
+            }
+        },
+        "\/rest\/customer_contracts\/{contractId}": {
+            "get": {
+                "summary": "Returns a single contract",
+                "description": "",
+                "tags": [
+                    "CustomerContract"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\CustomerContract\\Models\\CustomerContract"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "contractId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            }
+        },
+        "\/rest\/customer_contracts\/{contractId}\/document": {
+            "get": {
+                "summary": "Starts download of contract document",
+                "description": "",
+                "tags": [
+                    "CustomerContract"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/mixed"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "contractId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            }
+        },
+        "\/rest\/customer_contracts\/{contractId}\/sign": {
+            "get": {
+                "summary": "Returns signing of a contract",
+                "description": "",
+                "tags": [
+                    "CustomerContract"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\CustomerContract\\Models\\Signing"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "contractId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            },
+            "post": {
+                "summary": "Sign a contract",
+                "description": "",
+                "tags": [
+                    "CustomerContract"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\CustomerContract\\Models\\Signing"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "contractId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
                     }
                 ]
             }
@@ -50138,6 +50287,44 @@
                 }
             }
         },
+        "Plenty\\Modules\\CustomerContract\\Models\\CustomerContract": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": ""
+                },
+                "contractLang": {
+                    "type": "string",
+                    "description": ""
+                },
+                "contractName": {
+                    "type": "string",
+                    "description": ""
+                },
+                "contractVisible": {
+                    "type": "boolean",
+                    "description": ""
+                }
+            }
+        },
+        "Plenty\\Modules\\CustomerContract\\Models\\Signing": {
+            "type": "object",
+            "properties": {
+                "contractId": {
+                    "type": "string",
+                    "description": ""
+                },
+                "contactId": {
+                    "type": "string",
+                    "description": ""
+                },
+                "signerName": {
+                    "type": "string",
+                    "description": ""
+                }
+            }
+        },
         "Plenty\\Modules\\DataExchange\\Models\\Export": {
             "type": "object",
             "properties": {
@@ -54349,6 +54536,22 @@
                 "updatedAt": {
                     "type": "string",
                     "description": "The date the shipping profile was last updated"
+                },
+                "showDataPrivacyAgreementHint": {
+                    "type": "integer",
+                    "description": ""
+                },
+                "transmitPrivacyRule": {
+                    "type": "string",
+                    "description": ""
+                },
+                "alternativeEmail": {
+                    "type": "string",
+                    "description": ""
+                },
+                "alternativePhone": {
+                    "type": "string",
+                    "description": ""
                 }
             }
         },
