@@ -2644,6 +2644,41 @@
                 ]
             }
         },
+        "\/rest\/accounts\/addresses\/{addressId}\/related_data": {
+            "get": {
+                "summary": "Find address data by address id",
+                "description": "",
+                "tags": [
+                    "Account"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Account\\Address\\Models\\Address"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "addressId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/accounts\/contact_relations\/{accountContactRelationId}": {
             "delete": {
                 "summary": "Deletes an account contact relation. The ID of the account contact relation must be specified.",
@@ -5943,6 +5978,41 @@
                             "items": {
                                 "$ref": "#\/definitions\/Plenty\\Modules\\Account\\Contact\\Models\\ContactOption"
                             }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "contactId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/accounts\/contacts\/{contactId}\/related_data": {
+            "get": {
+                "summary": "Return all contact related data",
+                "description": "Returns all contact related data.",
+                "tags": [
+                    "Account"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Account\\Contact\\Models\\Contact"
                         }
                     },
                     "401": {
@@ -9514,6 +9584,33 @@
                 ]
             }
         },
+        "\/rest\/customer_contracts\/{contractId}\/sign\/document": {
+            "get": {
+                "summary": "Starts download of signed contract document",
+                "description": "",
+                "tags": [
+                    "CustomerContract"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/mixed"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "contractId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            }
+        },
         "\/rest\/delete_log": {
             "get": {
                 "summary": "Search the delete log",
@@ -11452,6 +11549,14 @@
                         "in": "query"
                     },
                     {
+                        "name": "tagId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter restricts the list of results to items with the specified tagId. More than one ID should be separated by commas.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
                         "name": "flagOne",
                         "type": "integer",
                         "required": false,
@@ -11931,6 +12036,14 @@
                     }
                 },
                 "parameters": [
+                    {
+                        "name": "with",
+                        "type": "string",
+                        "required": false,
+                        "description": "Includes the specified attribute information in the results. The following parameters are available: <ul><li>names<\/b> = The names of the attribute<\/li><li>values<\/b> = The values of the attribute<\/li><li>maps<\/b> = The market maps of the attribute<\/li><\/ul> More than one parameter should be separated by commas.",
+                        "format": "string",
+                        "in": "query"
+                    },
                     {
                         "name": "updatedAt",
                         "type": "string",
@@ -12995,6 +13108,14 @@
                         "in": "path"
                     },
                     {
+                        "name": "with",
+                        "type": "string",
+                        "required": false,
+                        "description": "Includes the specified attribute value information in the results. The following parameters are available:<ul><li>attribute = The attribute of the value<\/li><li>names = The attribute value names in all languages<\/li><li>marketNames = The market attribute value links (amazon only)<\/li><li>valueMaps = The market attribute value links (amazon excluded)<\/li><\/ul>",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
                         "name": "updatedAt",
                         "type": "string",
                         "required": false,
@@ -13318,7 +13439,7 @@
                         "name": "with",
                         "type": "string",
                         "required": false,
-                        "description": "Includes the specified attribute information in the results. The following parameters are available:<ul><li>names = The attribute names in all languages<\/li><li>marketNames = The market attribute links<\/li><\/ul>",
+                        "description": "Includes the specified attribute value information in the results. The following parameters are available:<ul><li>attribute = The attribute of the value<\/li><li>names = The attribute value names in all languages<\/li><li>marketNames = The market attribute value links (amazon only)<\/li><li>valueMaps = The market attribute links (amazon excluded)<\/li><\/ul>",
                         "format": "string",
                         "in": "query"
                     }
@@ -13476,6 +13597,14 @@
                         "description": "",
                         "format": "integer",
                         "in": "path"
+                    },
+                    {
+                        "name": "with",
+                        "type": "string",
+                        "required": false,
+                        "description": "Includes the specified attribute information in the results. The following parameters are available: <ul><li>names<\/b> = The names of the attribute<\/li><li>values<\/b> = The values of the attribute<\/li><li>maps<\/b> = The market maps of the attribute<\/li><\/ul> More than one parameter should be separated by commas.",
+                        "format": "string",
+                        "in": "query"
                     }
                 ],
                 "security": [
@@ -18204,6 +18333,14 @@
                         "type": "integer",
                         "required": false,
                         "description": "Filter restricts the list of results to variations with the specified item ID. An item ID must be specified. More than one ID should be separated by commas.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "itemTagId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations with the specified tag ID. An tag ID must be specified. More than one ID should be separated by commas.",
                         "format": "integer",
                         "in": "query"
                     },
@@ -50322,6 +50459,10 @@
                 "signerName": {
                     "type": "string",
                     "description": ""
+                },
+                "createdAt": {
+                    "type": "string",
+                    "description": ""
                 }
             }
         },
@@ -50487,7 +50628,7 @@
                 },
                 "type": {
                     "type": "string",
-                    "description": "The type of the document. The following types are available:\n                           <ul>\n    <li>admin<\/li>\n    <li>blog<\/li>\n <li>category<\/li>\n <li>correction_document<\/li>\n <li>credit_note<\/li>\n       <li>customer<\/li>\n <li>delivery_note<\/li>\n    <li>dunning_letter<\/li>\n       <li>ebics_hash<\/li>\n    <li>facet<\/li>\n    <li>invoice<\/li>\n    <li>invoice_external<\/li>\n <li>item<\/li>\n <li>multi_credit_note<\/li>\n    <li>multi_invoice<\/li>\n       <li>offer<\/li>\n    <li>order_confirmation<\/li>\n       <li>pickup_delivery<\/li>\n    <li>receipt<\/li>\n                               <li>refund_reversal<\/li>\n    <li>reorder<\/li>\n    <li>repair_bill<\/li>\n    <li>return_note<\/li>\n       <li>reversal_document<\/li>\n       <li>settlement_report<\/li>\n    <li>success_confirmation<\/li>\n    <li>ticket<\/li>\n    <li>webshop<\/li>\n  <li>webshop_customer<\/li>\n    <li>z_report<\/li>\n    <li>shipping_label<\/li>\n    <li>shipping_export_label<\/li>\n    <li>returns_label<\/li>\n<\/ul>"
+                    "description": "The type of the document. The following types are available:\n                           <ul>\n    <li>admin<\/li>\n    <li>blog<\/li>\n <li>category<\/li>\n <li>correction_document<\/li>\n <li>credit_note<\/li>\n       <li>customer<\/li>\n <li>delivery_note<\/li>\n    <li>dunning_letter<\/li>\n       <li>ebics_hash<\/li>\n    <li>facet<\/li>\n    <li>invoice<\/li>\n    <li>invoice_external<\/li>\n                               <li>pos_invoice<\/li>\n                               <li>pos_invoice_cancellation<\/li>\n <li>item<\/li>\n <li>multi_credit_note<\/li>\n    <li>multi_invoice<\/li>\n       <li>offer<\/li>\n    <li>order_confirmation<\/li>\n       <li>pickup_delivery<\/li>\n    <li>receipt<\/li>\n                               <li>refund_reversal<\/li>\n    <li>reorder<\/li>\n    <li>repair_bill<\/li>\n    <li>return_note<\/li>\n       <li>reversal_document<\/li>\n       <li>settlement_report<\/li>\n    <li>success_confirmation<\/li>\n    <li>ticket<\/li>\n    <li>webshop<\/li>\n  <li>webshop_customer<\/li>\n    <li>z_report<\/li>\n    <li>shipping_label<\/li>\n    <li>shipping_export_label<\/li>\n    <li>returns_label<\/li>\n<\/ul>"
                 },
                 "number": {
                     "type": "integer",
