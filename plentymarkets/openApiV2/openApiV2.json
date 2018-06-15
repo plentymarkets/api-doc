@@ -6001,6 +6001,41 @@
                 ]
             }
         },
+        "\/rest\/accounts\/contacts\/{contactId}\/options\/validate": {
+            "get": {
+                "summary": "Validate a contact option by a given value",
+                "description": "validates a contact option by a given value",
+                "tags": [
+                    "Account"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "contactId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/accounts\/contacts\/{contactId}\/related_data": {
             "get": {
                 "summary": "Return all contact related data",
@@ -40424,7 +40459,7 @@
             },
             "post": {
                 "summary": "Create a Set",
-                "description": "Creates a set with the given entries",
+                "description": "Creates a new plugin set with the given name. If a 'copyPluginSetId' is given, all set entries from that set will be copied into the new set",
                 "tags": [
                     "PluginSet"
                 ],
@@ -40433,6 +40468,41 @@
                         "description": "OK",
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Plugin\\PluginSet\\Models\\PluginSet"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "copyPluginSetId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The ID of the plugin set of which to copy the set entries from into the\n     * new set",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/plugin_sets\/preview_hash": {
+            "get": {
+                "summary": "Get the preview hash for a set",
+                "description": "Get the hash required to preview a plugin set. Response content will be in the form ['previewHash' => 'adf245o9nwu90sdfjw409u4'].",
+                "tags": [
+                    "PluginSet"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
                         }
                     },
                     "401": {
@@ -40723,7 +40793,7 @@
         "\/rest\/plugin_sets\/{setId}": {
             "delete": {
                 "summary": "Delete a set",
-                "description": "Deletes a set",
+                "description": "Deletes a plugin set. Response content will be the number of sets deleted (i. e. '1' or '0').",
                 "tags": [
                     "PluginSet"
                 ],
@@ -40756,7 +40826,7 @@
             },
             "get": {
                 "summary": "Get a set",
-                "description": "Gets a set.",
+                "description": "",
                 "tags": [
                     "PluginSet"
                 ],
@@ -40789,7 +40859,7 @@
             },
             "put": {
                 "summary": "Update a set",
-                "description": "Updates a set. Modifies the set entry list",
+                "description": "Updates a set. Response content will be 'true' if the update was successful, 'false' if not.",
                 "tags": [
                     "PluginSet"
                 ],
@@ -40847,6 +40917,174 @@
                         "description": "",
                         "format": "integer",
                         "in": "path"
+                    },
+                    {
+                        "name": "'includeStage",
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Include staged plugins in the result.",
+                        "format": "boolean",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/plugin_sets\/{setId}\/plugins\/search": {
+            "get": {
+                "summary": "Search plugins",
+                "description": "Searches for plugins. The search can be refined with numerous parameters.",
+                "tags": [
+                    "PluginSet"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "page": {
+                                    "type": "integer",
+                                    "description": "Current page of the response"
+                                },
+                                "totalsCount": {
+                                    "type": "integer",
+                                    "description": "The total number of entries in the response"
+                                },
+                                "isLastPage": {
+                                    "type": "boolean",
+                                    "description": "Flag that indicates if the page shown is the last page of the response"
+                                },
+                                "lastPageNumber": {
+                                    "type": "integer",
+                                    "description": "The last page number"
+                                },
+                                "firstOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the first item of the current page result"
+                                },
+                                "lastOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the last item of the current page result"
+                                },
+                                "itemsPerPage": {
+                                    "type": "integer",
+                                    "description": "The requested amount of items per result page"
+                                },
+                                "entries": {
+                                    "type": "array",
+                                    "description": "List of Plugin",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Plugin\\Models\\Plugin"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "setId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "pluginSetId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Search for plugins from a specific plugin set.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "name",
+                        "type": "string",
+                        "required": false,
+                        "description": "Search for plugins with a specific name.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "in-stage",
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Search for plugins that are in stage.",
+                        "format": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "name": "in-productive",
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Search for plugins that are in productive.",
+                        "format": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "name": "type",
+                        "type": "string",
+                        "required": false,
+                        "description": "Search for plugins of a given type. Available types are 'Template' and 'Export'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "checkRequirements",
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Add the requirements to the response. This will add the 'notInstalledRequirements',\n     * 'notActiveStageRequirements' and 'notActiveProductiveRequirements' fields to the returned plugin model(s).",
+                        "format": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "name": "checkUpdate",
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Check for updates. If an update for a plugin is available, this will add the\n     * 'updateInformation' field to the returned plugin model(s).",
+                        "format": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "name": "source",
+                        "type": "string",
+                        "required": false,
+                        "description": "Search for plugins from a specific source. Available sources are 'marketplace', 'git', and\n     * 'local'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "installed",
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Only search for installed \/ not installed plugins.",
+                        "format": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "name": "active",
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Only search for plugins that are active \/ inactive.",
+                        "format": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "name": "itemsPerPage",
+                        "type": "integer",
+                        "required": false,
+                        "description": "How many plugins to include per page of the search result.",
+                        "format": "integer",
+                        "in": "query"
                     }
                 ],
                 "security": [
@@ -40858,7 +41096,48 @@
         },
         "\/rest\/plugin_sets\/{setId}\/plugins\/{pluginId}": {
             "delete": {
-                "summary": "",
+                "summary": "Remove a plugin from a set",
+                "description": "Removes a plugin from a set and deletes all plugin files. Response content will be 'true' if the deletion was successful,\n'false' if not. If no plugin set with the given id can be found or the plugin is not associated to the set, a 404 will be returned.",
+                "tags": [
+                    "PluginSet"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "setId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "pluginId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "post": {
+                "summary": "Add a plugin to a set",
                 "description": "",
                 "tags": [
                     "PluginSet"
@@ -40898,8 +41177,8 @@
                     }
                 ]
             },
-            "post": {
-                "summary": "",
+            "put": {
+                "summary": "Change a plugin's 'active' status for a set.",
                 "description": "",
                 "tags": [
                     "PluginSet"
@@ -40908,7 +41187,93 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#\/definitions\/mixed"
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "setId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "pluginId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/plugin_sets\/{setId}\/plugins\/{pluginId}\/install_git_plugin": {
+            "post": {
+                "summary": "Install a git plugin into a set",
+                "description": "Installs a git plugin into a set. Response content will be in the form ['gitPluginInstalled' => 'true' \/ 'false'].",
+                "tags": [
+                    "PluginSet"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "setId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "pluginId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/plugin_sets\/{setId}\/plugins\/{pluginId}\/setPosition": {
+            "post": {
+                "summary": "Set a plugin's position in a set",
+                "description": "",
+                "tags": [
+                    "PluginSet"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Plugin\\PluginSet\\Models\\PluginSetEntry"
                         }
                     },
                     "401": {
@@ -40943,7 +41308,7 @@
         "\/rest\/plugin_sets\/{setId}\/set_entries": {
             "get": {
                 "summary": "List all SetEntries of Set",
-                "description": "Lists all available SetEntries of given Set.",
+                "description": "",
                 "tags": [
                     "PluginSet"
                 ],
@@ -41082,6 +41447,14 @@
                         "description": "",
                         "format": "integer",
                         "in": "path"
+                    },
+                    {
+                        "name": "'includeStage",
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Include staged plugins in the result.",
+                        "format": "boolean",
+                        "in": "query"
                     }
                 ],
                 "security": [
@@ -41356,6 +41729,46 @@
                                 }
                             }
                         }
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/plugins\/{pluginId}\/plugin_sets\/{pluginSetId}": {
+            "delete": {
+                "summary": "Delete a plugin",
+                "description": "Deletes a plugin. This call also deletes all plugin files in the inbox folder! To commit the deletion, the\nplugin must be provisioned in Stage or Productive. The ID of the plugin must be specified.",
+                "tags": [
+                    "Plugins"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "pluginId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "pluginSetId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
                     }
                 ],
                 "security": [
@@ -47188,6 +47601,54 @@
                 ]
             }
         },
+        "\/rest\/user\/backend_pluginset": {
+            "get": {
+                "summary": "get the backend plugin set for user",
+                "description": "",
+                "tags": [
+                    "User"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Plugin\\PluginSet\\Models\\PluginSet"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "post": {
+                "summary": "set the backend plugin set for user",
+                "description": "",
+                "tags": [
+                    "User"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/vat": {
             "get": {
                 "summary": "List VAT configurations.",
@@ -48389,6 +48850,36 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Plugin\\PluginSet\\Models\\PluginSet"
                         }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "webstoreId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "post": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Webstore"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
                     },
                     "401": {
                         "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
@@ -52806,7 +53297,7 @@
                 },
                 "processRowType": {
                     "type": "integer",
-                    "description": "The process row type shows whether the stock movement is based on an order or on an incoming item data set.\n<ul>\n\t<li>1 = incoming item data set<\/li>\n\t<li>2 = order<\/li>\n<\/ul>"
+                    "description": "The type of the stock movement\n<ul>\n\t<li>1 = incoming item data set<\/li>\n\t<li>2 = order<\/li>\n                                     <li>3 = deleted stock movement<\/li>\n                                     <li>4 = new stock intake<\/li>\n<\/ul>"
                 },
                 "bestBeforeDate": {
                     "type": "string",
@@ -55194,15 +55685,15 @@
                 },
                 "position": {
                     "type": "integer",
-                    "description": "The position of the plugin. The position is used to determine the plugin order."
+                    "description": "The position of the plugin. The position is used to determine the plugin\norder."
                 },
                 "activeStage": {
                     "type": "boolean",
-                    "description": "Shows whether the plugin is active in Stage. Inactive plugins will not be provisioned in Stage."
+                    "description": "Shows whether the plugin is active in Stage. Inactive plugins will not\nbe provisioned in Stage."
                 },
                 "activeProductive": {
                     "type": "boolean",
-                    "description": "Shows whether the plugin is active in Productive. Inactive plugins will not be provisioned in Productive."
+                    "description": "Shows whether the plugin is active in Productive. Inactive plugins will\nnot be provisioned in Productive."
                 },
                 "created_at": {
                     "type": "string",
@@ -55232,6 +55723,10 @@
                 "type": {
                     "type": "string",
                     "description": "The type of the plugin. The following plugin types are available:\n<ul>\n    <li>Template<\/li>\n    <li>Export<\/li>\n<\/ul>"
+                },
+                "installed": {
+                    "type": "boolean",
+                    "description": "Whether or not the plugin is installed. This will be false for plugins\nthat have been purchased from the marketplace but have not yet been installed in any set."
                 },
                 "version": {
                     "type": "string",
@@ -55425,6 +55920,14 @@
                     "description": ""
                 },
                 "pluginSetId": {
+                    "type": "integer",
+                    "description": ""
+                },
+                "branchName": {
+                    "type": "string",
+                    "description": ""
+                },
+                "position": {
                     "type": "integer",
                     "description": ""
                 }
@@ -56406,6 +56909,10 @@
                 "incomingItems": {
                     "type": "boolean",
                     "description": ""
+                },
+                "backendPluginSetId": {
+                    "type": "integer",
+                    "description": "The ID of the user's selected backend set"
                 }
             }
         },
