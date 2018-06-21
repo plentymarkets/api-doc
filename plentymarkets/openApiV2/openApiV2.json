@@ -127,14 +127,6 @@
             }
         },
         {
-            "name": "ContentBuilder",
-            "description": "Routes for ContentBuilder",
-            "externalDocs": {
-                "description": "Official developers site for ContentBuilder routes",
-                "url": "https:\/\/developers.plentymarkets.com\/rest-doc\/content_builder"
-            }
-        },
-        {
             "name": "CustomerContract",
             "description": "Routes for CustomerContract",
             "externalDocs": {
@@ -284,6 +276,14 @@
             "externalDocs": {
                 "description": "Official developers site for Returns routes",
                 "url": "https:\/\/developers.plentymarkets.com\/rest-doc\/returns"
+            }
+        },
+        {
+            "name": "Shop",
+            "description": "Routes for Shop",
+            "externalDocs": {
+                "description": "Official developers site for Shop routes",
+                "url": "https:\/\/developers.plentymarkets.com\/rest-doc\/shop"
             }
         },
         {
@@ -1277,6 +1277,24 @@
                         "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
+                "parameters": [
+                    {
+                        "name": "updatedAt",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter that restricts the search result to accounts that were updated according to given filters.\n                                   <br> Usage: <ul>\n                                   <li>'updatedAt=between:yyyy-mm-dd,yyyy-mm-dd'<\/li>\n                                   <li>'updatedAt=eq:yyyy-mm-dd' (=)<\/li>\n                                   <li>'updatedAt=gt:yyyy-mm-dd' (>)<\/li>\n                                   <li>'updatedAt=gte:yyyy-mm-dd' (>=)<\/li>\n                                   <li>'updatedAt=lt:yyyy-mm-dd' (<)<\/li>\n                                   <li>'updatedAt=lte:yyyy-mm-dd' (<=)<\/li>\n                                   <li>Dates can also include the time. Example: 2017-03-08 13:24:17<\/li>\n                                   <li>Without including the time we will use 00:00:00 as default. Example: 2017-03-08 00:00:00<\/li>\n          <\/ul>",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "createdAt",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter that restricts the search result to accounts that were created according to given filters.\n                                   <br> Usage: <ul>\n                                   <li>'createdAt=between:yyyy-mm-dd,yyyy-mm-dd'<\/li>\n                                   <li>'createdAt=eq:yyyy-mm-dd' (=)<\/li>\n                                   <li>'createdAt=gt:yyyy-mm-dd' (>)<\/li>\n                                   <li>'createdAt=gte:yyyy-mm-dd' (>=)<\/li>\n                                   <li>'createdAt=lt:yyyy-mm-dd' (<)<\/li>\n                                   <li>'createdAt=lte:yyyy-mm-dd' (<=)<\/li>\n                                   <li>Dates can also include the time. Example: 2017-03-08 13:24:17<\/li>\n                                   <li>Without including the time we will use 00:00:00 as default. Example: 2017-03-08 00:00:00<\/li>\n          <\/ul>",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ],
                 "security": [
                     {
                         "oAuth2": []
@@ -41973,15 +41991,21 @@
                             "type": "object",
                             "required": [
                                 "cast",
-                                "position"
+                                "position",
+                                "names"
                             ],
                             "properties": {
                                 "cast": {
-                                    "type": "array",
-                                    "items": {}
+                                    "type": "string"
                                 },
                                 "position": {
                                     "type": "integer"
+                                },
+                                "names": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Illuminate\\Database\\Eloquent\\Collection"
+                                    }
                                 }
                             }
                         }
@@ -43955,7 +43979,8 @@
                         "schema": {
                             "type": "object",
                             "required": [
-                                "propertyId"
+                                "propertyId",
+                                "relation"
                             ],
                             "properties": {
                                 "propertyId": {
@@ -43963,6 +43988,12 @@
                                 },
                                 "position": {
                                     "type": "integer"
+                                },
+                                "relation": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyRelation"
+                                    }
                                 }
                             }
                         }
@@ -44143,286 +44174,528 @@
                 ]
             }
         },
-        "\/rest\/shop-builder\/frontend\/content_pages": {
+        "\/rest\/shop_builder\/content_links": {
             "get": {
-                "summary": "List content pages for all the plugins",
-                "description": "Lists all content pages",
-                "tags": [
-                    "ContentBuilder"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-                    }
-                },
-                "security": [
-                    {
-                        "oAuth2": []
-                    }
-                ]
-            }
-        },
-        "\/rest\/shop-builder\/frontend\/content_widgets": {
-            "get": {
-                "summary": "List content widgets for all the plugins",
-                "description": "Lists all content widgets",
-                "tags": [
-                    "ContentBuilder"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-                    }
-                },
-                "security": [
-                    {
-                        "oAuth2": []
-                    }
-                ]
-            }
-        },
-        "\/rest\/shop-builder\/frontend\/contents": {
-            "get": {
-                "summary": "List contents",
-                "description": "Lists contents.",
-                "tags": [
-                    "ContentBuilder"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-                    }
-                },
-                "security": [
-                    {
-                        "oAuth2": []
-                    }
-                ]
-            },
-            "post": {
-                "summary": "Create new content",
-                "description": "Creates new content",
-                "tags": [
-                    "ContentBuilder"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#\/definitions\/Plenty\\Modules\\ContentBuilder\\Models\\Content"
-                        }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-                    }
-                },
-                "security": [
-                    {
-                        "oAuth2": []
-                    }
-                ]
-            }
-        },
-        "\/rest\/shop-builder\/frontend\/contents\/{contentId}": {
-            "get": {
-                "summary": "Get content",
-                "description": "Gets content",
-                "tags": [
-                    "ContentBuilder"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-                    }
-                },
-                "parameters": [
-                    {
-                        "name": "contentId",
-                        "type": "integer",
-                        "required": true,
-                        "description": "",
-                        "format": "integer",
-                        "in": "path"
-                    }
-                ],
-                "security": [
-                    {
-                        "oAuth2": []
-                    }
-                ]
-            },
-            "put": {
-                "summary": "Update content",
-                "description": "Updates content",
-                "tags": [
-                    "ContentBuilder"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#\/definitions\/Plenty\\Modules\\ContentBuilder\\Models\\Content"
-                        }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-                    }
-                },
-                "parameters": [
-                    {
-                        "name": "contentId",
-                        "type": "integer",
-                        "required": true,
-                        "description": "",
-                        "format": "integer",
-                        "in": "path"
-                    }
-                ],
-                "security": [
-                    {
-                        "oAuth2": []
-                    }
-                ]
-            }
-        },
-        "\/rest\/shop-builder\/frontend\/contents_links": {
-            "get": {
-                "summary": "List contents links",
-                "description": "Lists contents links.",
-                "tags": [
-                    "ContentBuilder"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
-                        }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-                    }
-                },
-                "security": [
-                    {
-                        "oAuth2": []
-                    }
-                ]
-            },
-            "post": {
-                "summary": "Create new content link",
-                "description": "Creates new content link",
-                "tags": [
-                    "ContentBuilder"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#\/definitions\/Plenty\\Modules\\ContentBuilder\\Models\\ContentLink"
-                        }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-                    }
-                },
-                "security": [
-                    {
-                        "oAuth2": []
-                    }
-                ]
-            }
-        },
-        "\/rest\/shop-builder\/frontend\/contents_links\/{contentLinkId}": {
-            "get": {
-                "summary": "Get content link",
-                "description": "Gets content link",
-                "tags": [
-                    "ContentBuilder"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
-                        }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-                    }
-                },
-                "parameters": [
-                    {
-                        "name": "contentLinkId",
-                        "type": "integer",
-                        "required": true,
-                        "description": "",
-                        "format": "integer",
-                        "in": "path"
-                    }
-                ],
-                "security": [
-                    {
-                        "oAuth2": []
-                    }
-                ]
-            },
-            "put": {
-                "summary": "Update content link",
-                "description": "Updates content link",
-                "tags": [
-                    "ContentBuilder"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#\/definitions\/Plenty\\Modules\\ContentBuilder\\Models\\ContentLink"
-                        }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-                    }
-                },
-                "parameters": [
-                    {
-                        "name": "contentLinkId",
-                        "type": "integer",
-                        "required": true,
-                        "description": "",
-                        "format": "integer",
-                        "in": "path"
-                    }
-                ],
-                "security": [
-                    {
-                        "oAuth2": []
-                    }
-                ]
-            }
-        },
-        "\/rest\/shop-builder\/frontend\/preview_data": {
-            "post": {
-                "summary": "Get the html representation of a content widget",
+                "summary": "List all content links for a given plugin set",
                 "description": "",
                 "tags": [
-                    "ContentBuilder"
+                    "Shop"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\ShopBuilder\\Models\\ContentLink"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "pluginSetId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Id of the plugin set to get content links for.",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "post": {
+                "summary": "Link a content to a a layout container of a frontend plugin.",
+                "description": "",
+                "tags": [
+                    "Shop"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\ShopBuilder\\Models\\ContentLink"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "\/rest\/shop_builder\/content_links",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "contentId",
+                                "containerName",
+                                "pluginSetId"
+                            ],
+                            "properties": {
+                                "contentId": {
+                                    "type": "integer"
+                                },
+                                "containerName": {
+                                    "type": "string"
+                                },
+                                "pluginSetId": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "\/rest\/shop_builder\/content_links\/{contentLinkId}": {
+            "delete": {
+                "summary": "Delete a content link.",
+                "description": "",
+                "tags": [
+                    "Shop"
                 ],
                 "responses": {
                     "200": {
                         "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "contentLinkId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "get": {
+                "summary": "Find a content link by id.",
+                "description": "",
+                "tags": [
+                    "Shop"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\ShopBuilder\\Models\\ContentLink"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "contentLinkId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "put": {
+                "summary": "Update a content link.",
+                "description": "",
+                "tags": [
+                    "Shop"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\ShopBuilder\\Models\\ContentLink"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "contentLinkId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "in": "body",
+                        "name": "\/rest\/shop_builder\/content_links\/{contentLinkId}",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "contentId",
+                                "containerName",
+                                "pluginSetId"
+                            ],
+                            "properties": {
+                                "contentId": {
+                                    "type": "integer"
+                                },
+                                "containerName": {
+                                    "type": "string"
+                                },
+                                "pluginSetId": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/shop_builder\/contents": {
+            "get": {
+                "summary": "List all contents.",
+                "description": "",
+                "tags": [
+                    "Shop"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\ShopBuilder\\Models\\Content"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "post": {
+                "summary": "Create a new content.",
+                "description": "",
+                "tags": [
+                    "Shop"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\ShopBuilder\\Models\\Content"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "pluginSetId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Id of the plugin set to get content links for.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "in": "body",
+                        "name": "\/rest\/shop_builder\/contents",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "type"
+                            ],
+                            "properties": {
+                                "type": {
+                                    "type": "string"
+                                },
+                                "dataProviderName": {
+                                    "type": "string"
+                                },
+                                "widgets": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/shop_builder\/contents\/{contentId}": {
+            "delete": {
+                "summary": "Delete a content",
+                "description": "",
+                "tags": [
+                    "Shop"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "contentId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "pluginSetId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Id of the plugin set to get content links for.",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "get": {
+                "summary": "Find a content by id.",
+                "description": "",
+                "tags": [
+                    "Shop"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\ShopBuilder\\Models\\Content"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "contentId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "put": {
+                "summary": "Update a content.",
+                "description": "",
+                "tags": [
+                    "Shop"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\ShopBuilder\\Models\\Content"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "contentId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "pluginSetId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Id of the plugin set to get content links for.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "in": "body",
+                        "name": "\/rest\/shop_builder\/contents\/{contentId}",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "type"
+                            ],
+                            "properties": {
+                                "type": {
+                                    "type": "string"
+                                },
+                                "dataProviderName": {
+                                    "type": "string"
+                                },
+                                "widgets": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/shop_builder\/pages": {
+            "get": {
+                "summary": "List content pages from all plugins in a given plugin set.",
+                "description": "",
+                "tags": [
+                    "Shop"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\ShopBuilder\\Models\\ContentPage"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "pluginSetId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Id of the plugin set to read available content pages from.",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/shop_builder\/widgets": {
+            "get": {
+                "summary": "List all widgets provided by all frontend plugins of a given plugin set.",
+                "description": "",
+                "tags": [
+                    "Shop"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\ShopBuilder\\Models\\ContentWidget"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "pluginSetId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Id of the plugin set to get content links for.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "identifier",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter results by widget identifier.",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "post": {
+                "summary": "Render the preview for widgets.",
+                "description": "",
+                "tags": [
+                    "Shop"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\ShopBuilder\\Models\\ContentWidgetPreview"
+                            }
+                        }
                     },
                     "401": {
                         "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
@@ -46405,6 +46678,14 @@
                         "required": true,
                         "description": "The key for the uploaded object.",
                         "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "maxAge",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Number of seconds until the content of the file expires.",
+                        "format": "integer",
                         "in": "query"
                     }
                 ],
@@ -49937,6 +50218,10 @@
                 "confirmAuthString": {
                     "type": "string",
                     "description": "The key that is automatically generated by the system. This key recognises the user regardless whether the user is logged in to the system and will then set the confirmation timestamp."
+                },
+                "ipAddress": {
+                    "type": "string",
+                    "description": "The IP address from where the customer has confirmed the newsletter"
                 }
             }
         },
@@ -50870,48 +51155,6 @@
                 "isVisibleForContact": {
                     "type": "boolean",
                     "description": "If true, the comment is visible for the associated contact."
-                }
-            }
-        },
-        "Plenty\\Modules\\ContentBuilder\\Models\\Content": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "description": "The ID of the content"
-                },
-                "dataProviderName": {
-                    "type": "string",
-                    "description": "The name of the data provider"
-                },
-                "contentData": {
-                    "type": "string",
-                    "description": "The data of the content"
-                },
-                "type": {
-                    "type": "string",
-                    "description": "The type of the content"
-                }
-            }
-        },
-        "Plenty\\Modules\\ContentBuilder\\Models\\ContentLink": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "description": "The ID of the content link"
-                },
-                "contentId": {
-                    "type": "integer",
-                    "description": "The ID of the content"
-                },
-                "containerName": {
-                    "type": "string",
-                    "description": "The name of the container"
-                },
-                "pluginSetId": {
-                    "type": "integer",
-                    "description": "The Id of the plugin set"
                 }
             }
         },
@@ -55941,9 +56184,8 @@
                     "description": "The ID of the property"
                 },
                 "cast": {
-                    "type": "array",
-                    "description": "The cast of the property (array values: 'empty','int','float','selection','shortText','longText','date','file')",
-                    "items": {}
+                    "type": "string",
+                    "description": "The cast of the property (array values: 'empty','int','float','selection','shortText','longText','date','file')"
                 },
                 "position": {
                     "type": "integer",
@@ -56183,6 +56425,112 @@
                 "position": {
                     "type": "integer",
                     "description": "The position of the property selection"
+                }
+            }
+        },
+        "Plenty\\Modules\\ShopBuilder\\Models\\Content": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "The ID of the content"
+                },
+                "dataProviderName": {
+                    "type": "string",
+                    "description": "The name of the data provider"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The type of the content"
+                },
+                "widgets": {
+                    "type": "string",
+                    "description": "The configured widgets of the content"
+                }
+            }
+        },
+        "Plenty\\Modules\\ShopBuilder\\Models\\ContentLink": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "The ID of the content link"
+                },
+                "contentId": {
+                    "type": "integer",
+                    "description": "The ID of the content"
+                },
+                "containerName": {
+                    "type": "string",
+                    "description": "The name of the container"
+                },
+                "pluginSetId": {
+                    "type": "integer",
+                    "description": "The Id of the plugin set"
+                }
+            }
+        },
+        "Plenty\\Modules\\ShopBuilder\\Models\\ContentPage": {
+            "type": "object",
+            "properties": {
+                "identifier": {
+                    "type": "string",
+                    "description": "The identifier of the content page"
+                },
+                "caption": {
+                    "type": "string",
+                    "description": "Translation key to read the caption from"
+                }
+            }
+        },
+        "Plenty\\Modules\\ShopBuilder\\Models\\ContentWidget": {
+            "type": "object",
+            "properties": {
+                "identifier": {
+                    "type": "string",
+                    "description": "The identifier of the content widget"
+                },
+                "widgetClass": {
+                    "type": "string",
+                    "description": "The class of the content widget"
+                },
+                "label": {
+                    "type": "string",
+                    "description": "The label of the content widget"
+                },
+                "tooltip": {
+                    "type": "string",
+                    "description": "The tooltip of the content widget"
+                },
+                "previewImageURL": {
+                    "type": "string",
+                    "description": "The preview image the content widget"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The type of the widget"
+                },
+                "allowedNestingTypes": {
+                    "type": "array",
+                    "description": "Allowed types to be nested inside this widget",
+                    "items": {}
+                },
+                "settings": {
+                    "type": "string",
+                    "description": "The settings of the content widget"
+                }
+            }
+        },
+        "Plenty\\Modules\\ShopBuilder\\Models\\ContentWidgetPreview": {
+            "type": "object",
+            "properties": {
+                "identifier": {
+                    "type": "string",
+                    "description": ""
+                },
+                "content": {
+                    "type": "string",
+                    "description": ""
                 }
             }
         },
