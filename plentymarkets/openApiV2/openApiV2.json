@@ -18345,7 +18345,7 @@
                         "name": "with",
                         "type": "string",
                         "required": false,
-                        "description": "Includes the specified variation information in the results. The following parameters are available: <ul><li>variationBarcodes<\/b> = The barcode linked to the variation and the saved code<\/li><li>variationSalesPrices<\/b> = The sales prices linked to the variation and the saved price<\/li><li>marketItemNumbers<\/b> = The market ident number of the variation<\/li><li>variationCategories<\/b> = The categories linked to the variation<\/li><li>variationClients<\/b> = The clients (stores) for which the variation is activated<\/li><li>variationMarkets<\/b> = The markets for which the variation is activated <\/li><li>variationDefaultCategory<\/b> = The default category of the variation<\/li><li>variationSuppliers<\/b> = The supplier data associated with the variation<\/li><li>variationWarehouses<\/b> = The warehouse data associated with the variation<\/li><li>images<\/b> = The images linked to the variation<\/li><li>variationAttributeValues<\/b> = The attribute values of the variation<\/li><li>variationSkus<\/b> = The SKU data associated with the variation<\/li><li>unit<\/b> = The unit assigned to the variation<\/li><li>parent<\/b> = The main variation of the variation. Value is null if this variation is the item's main variation.<\/li><li>variationDescription<\/b> = The texts of the variation<\/li><li>item<\/b> = <\/li><li>stock<\/b> = The stock data of the variation<\/li><\/ul> For example, specifying the parameters variationCategories and variationDefaultCategory will include the default category and all other categories the variations are linked to. More than one parameter should be separated by commas.",
+                        "description": "Includes the specified variation information in the results. The following parameters are available: <ul><li>variationBarcodes = The barcode linked to the variation and the saved code<\/li><li>variationBundleComponents = The bundle components of the variation and their quantities<\/li><li>variationSalesPrices = The sales prices linked to the variation and the saved price<\/li><li>marketItemNumbers = The market ident number of the variation<\/li><li>variationCategories = The categories linked to the variation<\/li><li>variationClients = The clients (stores) for which the variation is activated<\/li><li>variationMarkets = The markets for which the variation is activated <\/li><li>variationDefaultCategory = The default category of the variation<\/li><li>variationSuppliers = The supplier data associated with the variation<\/li><li>variationWarehouses = The warehouse data associated with the variation<\/li><li>images = The images linked to the variation<\/li><li>variationAttributeValues = The attribute values of the variation<\/li><li>variationSkus = The SKU data associated with the variation<\/li><li>unit = The unit assigned to the variation<\/li><li>parent = The main variation of the variation. Value is null if this variation is the item's main variation.<\/li><li>variationDescription = The texts of the variation<\/li><li>item = The item data of the variation<\/li><li>stock = The stock data of the variation<\/li><\/ul> For example, specifying the parameters variationCategories and variationDefaultCategory will include the default category and all other categories the variations are linked to. More than one parameter should be separated by commas.",
                         "format": "string",
                         "in": "query"
                     },
@@ -24298,7 +24298,8 @@
                             "required": [
                                 "variationId",
                                 "marketId",
-                                "accountId"
+                                "accountId",
+                                "sku"
                             ],
                             "properties": {
                                 "variationId": {
@@ -24503,7 +24504,8 @@
                             "required": [
                                 "variationId",
                                 "marketId",
-                                "accountId"
+                                "accountId",
+                                "sku"
                             ],
                             "properties": {
                                 "variationId": {
@@ -32400,6 +32402,14 @@
                         "in": "query"
                     },
                     {
+                        "name": "ipAddress",
+                        "type": "string",
+                        "required": false,
+                        "description": "The IP address from where the customer has confirmed the newsletter",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
                         "in": "body",
                         "name": "\/rest\/newsletters\/recipients",
                         "schema": {
@@ -32557,6 +32567,14 @@
                         "items": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "name": "ipAddress",
+                        "type": "string",
+                        "required": false,
+                        "description": "The IP address from where the customer has confirmed the newsletter",
+                        "format": "string",
+                        "in": "query"
                     }
                 ],
                 "security": [
@@ -44195,16 +44213,6 @@
                         "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
-                "parameters": [
-                    {
-                        "name": "pluginSetId",
-                        "type": "integer",
-                        "required": true,
-                        "description": "Id of the plugin set to get content links for.",
-                        "format": "integer",
-                        "in": "query"
-                    }
-                ],
                 "security": [
                     {
                         "oAuth2": []
@@ -44425,15 +44433,12 @@
                         "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
-                "parameters": [
+                "security": [
                     {
-                        "name": "pluginSetId",
-                        "type": "integer",
-                        "required": true,
-                        "description": "Id of the plugin set to get content links for.",
-                        "format": "integer",
-                        "in": "query"
-                    },
+                        "oAuth2": []
+                    }
+                ],
+                "parameters": [
                     {
                         "in": "body",
                         "name": "\/rest\/shop_builder\/contents",
@@ -44454,11 +44459,6 @@
                                 }
                             }
                         }
-                    }
-                ],
-                "security": [
-                    {
-                        "oAuth2": []
                     }
                 ]
             }
@@ -44486,14 +44486,6 @@
                         "description": "",
                         "format": "integer",
                         "in": "path"
-                    },
-                    {
-                        "name": "pluginSetId",
-                        "type": "integer",
-                        "required": true,
-                        "description": "Id of the plugin set to get content links for.",
-                        "format": "integer",
-                        "in": "query"
                     }
                 ],
                 "security": [
@@ -44562,14 +44554,6 @@
                         "in": "path"
                     },
                     {
-                        "name": "pluginSetId",
-                        "type": "integer",
-                        "required": true,
-                        "description": "Id of the plugin set to get content links for.",
-                        "format": "integer",
-                        "in": "query"
-                    },
-                    {
                         "in": "body",
                         "name": "\/rest\/shop_builder\/contents\/{contentId}",
                         "schema": {
@@ -44619,16 +44603,6 @@
                         "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
-                "parameters": [
-                    {
-                        "name": "pluginSetId",
-                        "type": "integer",
-                        "required": true,
-                        "description": "Id of the plugin set to read available content pages from.",
-                        "format": "integer",
-                        "in": "query"
-                    }
-                ],
                 "security": [
                     {
                         "oAuth2": []
@@ -44658,14 +44632,6 @@
                     }
                 },
                 "parameters": [
-                    {
-                        "name": "pluginSetId",
-                        "type": "integer",
-                        "required": true,
-                        "description": "Id of the plugin set to get content links for.",
-                        "format": "integer",
-                        "in": "query"
-                    },
                     {
                         "name": "identifier",
                         "type": "string",
@@ -50222,6 +50188,10 @@
                 "ipAddress": {
                     "type": "string",
                     "description": "The IP address from where the customer has confirmed the newsletter"
+                },
+                "confirmationURL": {
+                    "type": "string",
+                    "description": "The url with which the customer has confirmed the newsletter"
                 }
             }
         },
@@ -54900,7 +54870,7 @@
                 },
                 "typeId": {
                     "type": "integer",
-                    "description": "The ID of the order type\n                                \t\t\t\t\t\t\t\tIt is possible to define individual order types. However,\n                                \t\t\t\t\t\t\t\tthe following types are available by default:\n<ul>\n    <li>Sales order = 1<\/li>\n    <li>Delivery = 2<\/li>\n    <li>Returns = 3<\/li>\n    <li>Credit note = 4<\/li>\n    <li>Warranty = 5<\/li>\n    <li>Repair = 6<\/li>\n    <li>Offer = 7<\/li>\n    <li>Advance order = 8<\/li>\n    <li>Multi-order = 9<\/li>\n    <li>Multi credit note = 10<\/li>\n    <li>Multi delivery = 11<\/li>\n    <li>Reorder = 12<\/li>\n    <li>Partial delivery = 13<\/li>\n    <li>Subscription = 14<\/li>\n    <li>Redistribution = 15<\/li>\n<\/ul>"
+                    "description": "The ID of the order type\n                                                              It is possible to define individual order types. However,\n                                                              the following types are available by default:\n<ul>\n    <li>Sales order = 1<\/li>\n    <li>Delivery = 2<\/li>\n    <li>Returns = 3<\/li>\n    <li>Credit note = 4<\/li>\n    <li>Warranty = 5<\/li>\n    <li>Repair = 6<\/li>\n    <li>Offer = 7<\/li>\n    <li>Advance order = 8<\/li>\n    <li>Multi-order = 9<\/li>\n    <li>Multi credit note = 10<\/li>\n    <li>Multi delivery = 11<\/li>\n    <li>Reorder = 12<\/li>\n    <li>Partial delivery = 13<\/li>\n    <li>Subscription = 14<\/li>\n    <li>Redistribution = 15<\/li>\n<\/ul>"
                 },
                 "statusId": {
                     "type": "number",
