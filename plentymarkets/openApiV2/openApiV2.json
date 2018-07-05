@@ -1180,6 +1180,34 @@
                 ]
             }
         },
+        "\/rest\/accounting\/stores\/locations": {
+            "get": {
+                "summary": "List all accounting locations",
+                "description": "",
+                "tags": [
+                    "Accounting"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\Accounting\\Models\\AccountingLocation"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/accounting\/stores\/{plentyId}\/locations": {
             "get": {
                 "summary": "List accounting locations of a client",
