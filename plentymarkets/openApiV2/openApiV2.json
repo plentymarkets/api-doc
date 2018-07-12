@@ -14259,6 +14259,34 @@
                 ]
             }
         },
+        "\/rest\/items\/labels": {
+            "get": {
+                "summary": "Lists all item label templates",
+                "description": "Lists all item label templates.",
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/items\/manufacturers": {
             "get": {
                 "summary": "List manufacturers",
@@ -20703,6 +20731,52 @@
                             "type": "array",
                             "items": {
                                 "$ref": "#\/definitions\/Plenty\\Modules\\Item\\ItemImage\\Models\\ItemImage"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "variationId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/items\/{id}\/variations\/{variationId}\/labels": {
+            "post": {
+                "summary": "Gets an base64 encoded label for an item id",
+                "description": "Gets an base64 encoded label for the given item id.",
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
                             }
                         }
                     },
@@ -28549,6 +28623,179 @@
                 ]
             }
         },
+        "\/rest\/listings\/markets\/item_specifics": {
+            "get": {
+                "summary": "Gets all ListingMarketItemSpecifics.",
+                "description": "Can be filtered by ID, listingMarketId, name and value.",
+                "tags": [
+                    "Listing"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Listing\\Market\\ItemSpecific\\Models\\ListingMarketItemSpecific"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "\/rest\/listings\/markets\/item_specifics",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "integer"
+                                },
+                                "listingMarketId": {
+                                    "type": "integer"
+                                },
+                                "name": {
+                                    "type": "string"
+                                },
+                                "value": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "\/rest\/listings\/markets\/item_specifics\/{id}": {
+            "delete": {
+                "summary": "Deletes a ListingMarketItemSpecific.",
+                "description": "The ID has to be specified.",
+                "tags": [
+                    "Listing"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "get": {
+                "summary": "Gets a ListingMarketItemSpecific.",
+                "description": "The ID has to be specified.",
+                "tags": [
+                    "Listing"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Listing\\Market\\ItemSpecific\\Models\\ListingMarketItemSpecific"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "put": {
+                "summary": "Updates a ListingMarketItemSpecific.",
+                "description": "The ID has to be specified.",
+                "tags": [
+                    "Listing"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Listing\\Market\\ItemSpecific\\Models\\ListingMarketItemSpecific"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "in": "body",
+                        "name": "\/rest\/listings\/markets\/item_specifics\/{id}",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "id"
+                            ],
+                            "properties": {
+                                "id": {
+                                    "type": "integer"
+                                },
+                                "listingMarketId": {
+                                    "type": "integer"
+                                },
+                                "name": {
+                                    "type": "string"
+                                },
+                                "value": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/listings\/markets\/start\/{id?}": {
             "post": {
                 "summary": "Start the market listing on the designated market.",
@@ -32260,6 +32507,14 @@
                         "in": "query"
                     },
                     {
+                        "name": "isConfirmed",
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Filter that restricts the search result to confirmed recipients.",
+                        "format": "boolean",
+                        "in": "query"
+                    },
+                    {
                         "name": "with",
                         "type": "array",
                         "required": false,
@@ -33016,7 +33271,7 @@
                         "name": "with",
                         "type": "array",
                         "required": false,
-                        "description": "Load additional relations for an order. Currently possible are:\n    <ul>\n    <li>'addresses' = The address objects that are associated with the order.<\/li>\n    <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the the reference type, the ID of the reference and the relation itself.<\/li>\n    <li>'comments' = The order comments.<\/li>\n    <li>'location' = The accounting location of the order.<\/li>\n    <li>'payments' = The payments that are associated with the order.<\/li>\n    <li>'documents' = The documents that are associated with the order.<\/li>\n    <li>'orderItems.variation' = The variation that is associated with the order item.<\/li>\n    <li>'orderItems.giftCardCodes' = The gift card codes that are associated with the order item.<\/li>\n    <li>'orderItems.transactions' = The transactions that are associated with the order item.<\/li>\n    <li>'orderItems.serialNumbers' = The serial numbers that are associated with the order item.<\/li>\n    <li>'orderItems.variationBarcodes' = The barcodes that are associated with variation of the order item.<\/li>\n    <\/ul>\n    Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
+                        "description": "Load additional relations for an order. Currently possible are:\n    <ul>\n    <li>'addresses' = The address objects that are associated with the order.<\/li>\n    <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the the reference type, the ID of the reference and the relation itself.<\/li>\n    <li>'comments' = The order comments.<\/li>\n    <li>'location' = The accounting location of the order.<\/li>\n    <li>'payments' = The payments that are associated with the order.<\/li>\n    <li>'documents' = The documents that are associated with the order.<\/li>\n    <li>'orderItems.variation' = The variation that is associated with the order item.<\/li>\n    <li>'orderItems.giftCardCodes' = The gift card codes that are associated with the order item.<\/li>\n    <li>'orderItems.transactions' = The transactions that are associated with the order item.<\/li>\n    <li>'orderItems.serialNumbers' = The serial numbers that are associated with the order item.<\/li>\n    <li>'orderItems.variationBarcodes' = The barcodes that are associated with variation of the order item.<\/li>\n    <li>'originOrderReferences' = The references to other orders, e.g. returns or credit notes, associated with this order.<\/li>\n    <\/ul>\n    Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
                         "format": "",
                         "in": "query",
                         "items": {
@@ -41972,6 +42227,23 @@
                 ]
             }
         },
+        "\/rest\/plugins_mail": {
+            "post": {
+                "summary": "Send mail",
+                "description": "Send mail from booted plugins.",
+                "tags": [
+                    "Plugins"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/bool"
+                        }
+                    }
+                }
+            }
+        },
         "\/rest\/properties": {
             "get": {
                 "summary": "List properties",
@@ -44289,6 +44561,9 @@
                                 },
                                 "pluginSetId": {
                                     "type": "integer"
+                                },
+                                "language": {
+                                    "type": "string"
                                 }
                             }
                         }
@@ -44405,6 +44680,9 @@
                                 },
                                 "pluginSetId": {
                                     "type": "integer"
+                                },
+                                "language": {
+                                    "type": "string"
                                 }
                             }
                         }
@@ -48024,6 +48302,73 @@
                         "oAuth2": []
                     }
                 ]
+            },
+            "post": {
+                "summary": "Create a VAT configuration",
+                "description": "",
+                "tags": [
+                    "Accounting"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Accounting\\Vat\\Models\\Vat"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "\/rest\/vat",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "countryId",
+                                "locationId",
+                                "startedAt",
+                                "vatRates"
+                            ],
+                            "properties": {
+                                "countryId": {
+                                    "type": "integer"
+                                },
+                                "locationId": {
+                                    "type": "integer"
+                                },
+                                "taxIdNumber": {
+                                    "type": "string"
+                                },
+                                "startedAt": {
+                                    "type": "string"
+                                },
+                                "invalidFrom": {
+                                    "type": "string"
+                                },
+                                "isRestrictedToDigitalItems": {
+                                    "type": "boolean"
+                                },
+                                "marginScheme": {
+                                    "type": "string"
+                                },
+                                "vatRates": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Accounting\\Vat\\Models\\VatRate"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ]
             }
         },
         "\/rest\/vat\/locations\/{locationId}": {
@@ -48266,6 +48611,110 @@
                         "description": "The date in the W3C format when the vat configuration went into effect",
                         "format": "string",
                         "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/vat\/{vatId}": {
+            "get": {
+                "summary": "Get a VAT configuration by id",
+                "description": "",
+                "tags": [
+                    "Accounting"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Accounting\\Vat\\Models\\Vat"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "vatId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "put": {
+                "summary": "Update a VAT configuration",
+                "description": "",
+                "tags": [
+                    "Accounting"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Accounting\\Vat\\Models\\Vat"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "vatId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "in": "body",
+                        "name": "\/rest\/vat\/{vatId}",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "countryId": {
+                                    "type": "integer"
+                                },
+                                "locationId": {
+                                    "type": "integer"
+                                },
+                                "taxIdNumber": {
+                                    "type": "string"
+                                },
+                                "startedAt": {
+                                    "type": "string"
+                                },
+                                "invalidFrom": {
+                                    "type": "string"
+                                },
+                                "isRestrictedToDigitalItems": {
+                                    "type": "boolean"
+                                },
+                                "marginScheme": {
+                                    "type": "string"
+                                },
+                                "vatRates": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Accounting\\Vat\\Models\\VatRate"
+                                    }
+                                }
+                            }
+                        }
                     }
                 ],
                 "security": [
@@ -50419,7 +50868,7 @@
                 },
                 "marginScheme": {
                     "type": "string",
-                    "description": "Specifies the tax rate that is used, when the margin scheme is applied"
+                    "description": "Specifies the tax rate that is used, when the margin scheme is applied. Available values: 'none', 'vat1', 'vat2', 'vat3', 'vat4'."
                 },
                 "isRestrictedToDigitalItems": {
                     "type": "boolean",
@@ -50436,6 +50885,23 @@
                 "updatedAt": {
                     "type": "string",
                     "description": "The date that the VAT configuration was last updated."
+                }
+            }
+        },
+        "Plenty\\Modules\\Accounting\\Vat\\Models\\VatRate": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "The ID of the VAT rate"
+                },
+                "vatRate": {
+                    "type": "number",
+                    "description": "The percentage of the VAT rate, e.g. 19.00 for 19 %"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of a VAT rate"
                 }
             }
         },
@@ -54107,6 +54573,27 @@
                 }
             }
         },
+        "Plenty\\Modules\\Listing\\Market\\ItemSpecific\\Models\\ListingMarketItemSpecific": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "The ID of the item specific."
+                },
+                "listingMarketId": {
+                    "type": "integer",
+                    "description": "The LMID which belongs to the item specific ID."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the item specific."
+                },
+                "value": {
+                    "type": "string",
+                    "description": "The value of the item specific."
+                }
+            }
+        },
         "Plenty\\Modules\\Listing\\Market\\Models\\ListingMarket": {
             "type": "object",
             "properties": {
@@ -56465,6 +56952,10 @@
                 "pluginSetId": {
                     "type": "integer",
                     "description": "The Id of the plugin set"
+                },
+                "language": {
+                    "type": "string",
+                    "description": "The language where the content is linked to."
                 }
             }
         },
