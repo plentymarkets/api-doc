@@ -18582,6 +18582,14 @@
                         "in": "query"
                     },
                     {
+                        "name": "createdBetween",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations created during the specified period. The end date (to) is optional. If no end date is specified, variations created between the start date (from) and the present will be listed. The dates can be specified as unix timestamps or in the ISO 8601 date format. Start date and optional end date are separated by a comma. For example, ...\/variations?createdBetween=1451606400,1456790400 will list variations created between 2016-01-01 and 2016-03-01. ...\/variations?createdBetween=1451606400 will list variations created since 2016-01-01. The PHP function strtotime is also supported.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
                         "name": "relatedUpdatedBetween",
                         "type": "string",
                         "required": false,
@@ -25652,6 +25660,14 @@
                         "type": "string",
                         "required": false,
                         "description": "Filter restricts the list of results to variations updated during the specified period. The end date (to) is optional. If no end date is specified, variations updated between the start date (from) and the present will be listed. The dates can be specified as unix timestamps or in the ISO 8601 date format. Start date and optional end date are separated by a comma. For example, ...\/variations?updatedBetween=1451606400,1456790400 will list variations updated between 2016-01-01 and 2016-03-01. ...\/variations?updatedBetween=1451606400 will list variations updated since 2016-01-01. The PHP function strtotime is also supported.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "createdBetween",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations created during the specified period. The end date (to) is optional. If no end date is specified, variations created between the start date (from) and the present will be listed. The dates can be specified as unix timestamps or in the ISO 8601 date format. Start date and optional end date are separated by a comma. For example, ...\/variations?createdBetween=1451606400,1456790400 will list variations created between 2016-01-01 and 2016-03-01. ...\/variations?createdBetween=1451606400 will list variations created since 2016-01-01. The PHP function strtotime is also supported.",
                         "format": "string",
                         "in": "query"
                     },
@@ -42238,7 +42254,10 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#\/definitions\/bool"
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
                         }
                     }
                 }
@@ -55434,7 +55453,7 @@
                 },
                 "typeId": {
                     "type": "integer",
-                    "description": "The ID of the property type.\n<ul>\n<li>WAREHOUSE\t\t              =\t1<\/li>\n<li>SHIPPING_PROFILE\t              =\t2<\/li>\n<li>PAYMENT_METHOD\t              =\t3<\/li>\n<li>WEIGHT\t\t\t              =\t11<\/li>\n<li>WIDTH\t\t\t              =\t12<\/li>\n<li>LENGTH\t\t                  =\t13<\/li>\n<li>HEIGHT\t      \t\t          = 14<\/li>\n<li>EXTERNAL_TOKEN_ID              =\t16<\/li>\n<li>EXTERNAL_ITEM_ID               =\t17<\/li>\n<li>COUPON_CODE\t      \t          =\t18<\/li>\n<li>COUPON_TYPE\t\t              =\t19<\/li>\n<li>ORIGINAL_WAREHOUSE\t          =\t20<\/li>\n<li>ORIGINAL_QUANTITY              =\t21<\/li>\n<li>CATEGORY_ID                    = 22<\/li>\n<li>MARKET_FEE\t\t              =\t23<\/li>\n<li>STOCK_REVERSING\t              =\t24<\/li>\n<li>DISPUTE_STATUS      \t          =\t25<\/li>\n<li>NO_CHANGE_BY_CONTACT           = 26<\/li>\n<li>SIZE \t\t\t              =\t29<\/li>\n<li>LOCATION_RESERVED\t          =\t30<\/li>\n<li>EXTERNAL_SHIPMENT_ITEM_ID      =\t31<\/li>\n<li>PARTIAL_SHIPPING_COSTS         =\t32<\/li>\n<li>MAIN_DOCUMENT_NUMBER           =\t33<\/li>\n<li>SALES_TAX_ID_NUMBER            =\t34<\/li>\n<li>RETURNS_REASON                 =\t35<\/li>\n<li>RETURNS_ITEM_STATUS            =\t36<\/li>\n<li>FULFILLMENT_CENTER_ID          = 37<\/li>\n<li>FULFILLMENT_CENTER_COUNTRY_ISO = 38<\/li>\n<li>REORDER_ITEM_ID                = 39<\/li>\n<li>LISTING_TYPE                   = 40<\/li>\n<li>SOLD_COUPON_CODE               = 46<\/li>\n<\/ul>"
+                    "description": "The ID of the property type.\n<ul>\n<li>WAREHOUSE\t\t              =\t1<\/li>\n<li>SHIPPING_PROFILE\t              =\t2<\/li>\n<li>PAYMENT_METHOD\t              =\t3<\/li>\n<li>WEIGHT\t\t\t              =\t11<\/li>\n<li>WIDTH\t\t\t              =\t12<\/li>\n<li>LENGTH\t\t                  =\t13<\/li>\n<li>HEIGHT\t      \t\t          = 14<\/li>\n<li>EXTERNAL_TOKEN_ID              =\t16<\/li>\n<li>EXTERNAL_ITEM_ID               =\t17<\/li>\n<li>COUPON_CODE\t      \t          =\t18<\/li>\n<li>COUPON_TYPE\t\t              =\t19<\/li>\n<li>ORIGINAL_WAREHOUSE\t          =\t20<\/li>\n<li>ORIGINAL_QUANTITY              =\t21<\/li>\n<li>CATEGORY_ID                    = 22<\/li>\n<li>MARKET_FEE\t\t              =\t23<\/li>\n<li>STOCK_REVERSING\t              =\t24<\/li>\n<li>DISPUTE_STATUS      \t          =\t25<\/li>\n<li>NO_CHANGE_BY_CONTACT           = 26<\/li>\n<li>SIZE \t\t\t              =\t29<\/li>\n<li>LOCATION_RESERVED\t          =\t30<\/li>\n<li>EXTERNAL_SHIPMENT_ITEM_ID      =\t31<\/li>\n<li>PARTIAL_SHIPPING_COSTS         =\t32<\/li>\n<li>MAIN_DOCUMENT_NUMBER           =\t33<\/li>\n<li>SALES_TAX_ID_NUMBER            =\t34<\/li>\n<li>RETURNS_REASON                 =\t35<\/li>\n<li>RETURNS_ITEM_STATUS            =\t36<\/li>\n<li>FULFILLMENT_CENTER_ID          = 37<\/li>\n<li>FULFILLMENT_CENTER_COUNTRY_ISO = 38<\/li>\n<li>REORDER_ITEM_ID                = 39<\/li>\n<li>LISTING_TYPE                   = 40<\/li>\n<li>SOLD_COUPON_CODE               = 46<\/li>\n<li>ORDER_ITEM_STATE               = 48<\/li>\n<\/ul>"
                 },
                 "value": {
                     "type": "string",
