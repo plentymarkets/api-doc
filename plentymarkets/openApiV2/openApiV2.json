@@ -127,6 +127,14 @@
             }
         },
         {
+            "name": "ContactAnonymization",
+            "description": "Routes for ContactAnonymization",
+            "externalDocs": {
+                "description": "Official developers site for ContactAnonymization routes",
+                "url": "https:\/\/developers.plentymarkets.com\/rest-doc\/contact_anonymization"
+            }
+        },
+        {
             "name": "CustomerContract",
             "description": "Routes for CustomerContract",
             "externalDocs": {
@@ -5553,6 +5561,41 @@
                     },
                     {
                         "name": "addressTypeId?",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/accounts\/contacts\/{contactId}\/anonymize": {
+            "put": {
+                "summary": "anonymize Contact",
+                "description": "anonymizes the given contact.",
+                "tags": [
+                    "ContactAnonymization"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Account\\Contact\\Models\\Contact"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "contactId",
                         "type": "integer",
                         "required": true,
                         "description": "",
@@ -14261,8 +14304,8 @@
         },
         "\/rest\/items\/labels": {
             "get": {
-                "summary": "Lists all item label templates",
-                "description": "Lists all item label templates.",
+                "summary": "List item label templates",
+                "description": "Lists the ID and name of all item label templates saved in the system.",
                 "tags": [
                     "Item"
                 ],
@@ -20773,8 +20816,8 @@
         },
         "\/rest\/items\/{id}\/variations\/{variationId}\/labels": {
             "post": {
-                "summary": "Gets an base64 encoded label for an item id",
-                "description": "Gets an base64 encoded label for the given item id.",
+                "summary": "Get a variation label",
+                "description": "Gets a base64 encoded label for the specified variation ID. The labelId of the label template must be specified.",
                 "tags": [
                     "Item"
                 ],
@@ -56413,6 +56456,10 @@
                     "type": "boolean",
                     "description": ""
                 },
+                "updated_at": {
+                    "type": "string",
+                    "description": ""
+                },
                 "pluginSetEntryId": {
                     "type": "integer",
                     "description": ""
@@ -56621,6 +56668,10 @@
                 "forwardLink": {
                     "type": "string",
                     "description": "A forward link to the external tool developers page"
+                },
+                "branch": {
+                    "type": "string",
+                    "description": "The branch to checkout for this particular Plugin"
                 },
                 "webstores": {
                     "type": "array",
