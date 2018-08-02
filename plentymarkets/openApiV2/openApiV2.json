@@ -14224,7 +14224,7 @@
         "\/rest\/items\/item_shipping_profiles": {
             "get": {
                 "summary": "List all shipping profiles of all items",
-                "description": "Lists all shipping profiles of all items. Results can be filtered by the timestamp of the link between items and shipping profiles (eq, lt, lte, gt, gte, between).\n\neq = Equal to\ngte = Greater than or equal to\ngt = Greater than\nlte = Less than or equal to\nlt = Less than\nbetween = Date range\n\nExample: updated=gt:2018-04-16 16:00:00 returns all items with shipping profiles that were activated after 4pm on the 16th of April 2018.",
+                "description": "Lists all shipping profiles of all items. Results can be filtered by the timestamp of the link between items and shipping profiles (eq, lt, lte, gt, gte, between).\n<ul>\n<li>eq = Equal to<\/li>\n<li>gte = Greater than or equal to<\/li>\n<li>gt = Greater than<\/li>\n<li>lte = Less than or equal to<\/li>\n<li>lt = Less than<\/li>\n<li>between = Date range<\/li>\n<\/ul>\nExample: updated=gt:2018-04-16 16:00:00 returns all items with shipping profiles that were activated after 4pm on the 16th of April 2018.",
                 "tags": [
                     "Item"
                 ],
@@ -32903,12 +32903,20 @@
                         "name": "folderIds",
                         "type": "array",
                         "required": false,
-                        "description": "The IDs of the newsletter folders. These folders were selected by the customer in the online store in order to receive newsletters included in these folders.",
+                        "description": "DEPRECATED: The IDs of the newsletter folders. These folders were selected by the customer in the online store in order to receive newsletters included in these folders.",
                         "format": "",
                         "in": "query",
                         "items": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "name": "folderId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The ID of the newsletter folder.",
+                        "format": "integer",
+                        "in": "query"
                     },
                     {
                         "name": "ipAddress",
@@ -32917,6 +32925,37 @@
                         "description": "The IP address from where the customer has confirmed the newsletter",
                         "format": "string",
                         "in": "query"
+                    },
+                    {
+                        "name": "birthday",
+                        "type": "string",
+                        "required": false,
+                        "description": "The customer birthday as Date string (e.g. '1982-11-24', '1982\/11\/24' or '24.11.1982')",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "gender",
+                        "type": "string",
+                        "required": false,
+                        "description": "The gender of the customer, one of the following values: 'm','f'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "in": "body",
+                        "name": "\/rest\/newsletters\/recipients\/{recipientId}",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "email"
+                            ],
+                            "properties": {
+                                "email": {
+                                    "type": "string"
+                                }
+                            }
+                        }
                     }
                 ],
                 "security": [
