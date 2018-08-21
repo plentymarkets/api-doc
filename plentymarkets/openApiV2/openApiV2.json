@@ -311,6 +311,14 @@
             }
         },
         {
+            "name": "TicketMessage",
+            "description": "Routes for TicketMessage",
+            "externalDocs": {
+                "description": "Official developers site for TicketMessage routes",
+                "url": "https:\/\/developers.plentymarkets.com\/rest-doc\/ticket_message"
+            }
+        },
+        {
             "name": "User",
             "description": "Routes for User",
             "externalDocs": {
@@ -1065,6 +1073,41 @@
                         "description": "OK",
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Accounting\\Models\\RevenueAccountLocationConfiguration"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "locationId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/accounting\/locations\/{locationId}\/settings": {
+            "get": {
+                "summary": "Get accounting location settings",
+                "description": "Gets accounting location settings. The ID of the accounting location must be specified.",
+                "tags": [
+                    "Accounting"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Accounting\\Models\\AccountingLocationSettings"
                         }
                     },
                     "401": {
@@ -3077,6 +3120,17 @@
                         "description": "Filter that restricts the search result to contacts with a delivery address with the id provided",
                         "format": "string",
                         "in": "query"
+                    },
+                    {
+                        "name": "tagIds",
+                        "type": "array",
+                        "required": false,
+                        "description": "Filter restricts the list of results to contacts with the specified tagIds. More than one ID should be separated by commas.",
+                        "format": "",
+                        "in": "query",
+                        "items": {
+                            "type": "integer"
+                        }
                     }
                 ],
                 "security": [
@@ -4864,6 +4918,17 @@
                         "description": "",
                         "format": "integer",
                         "in": "path"
+                    },
+                    {
+                        "name": "tagRelationships",
+                        "type": "array",
+                        "required": false,
+                        "description": "When this parameter is used, the current relations between contacts and tags will be deleted and replaced by the given ones. If the parameter is not used, the current relations remain.",
+                        "format": "",
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        }
                     },
                     {
                         "in": "body",
@@ -18444,7 +18509,7 @@
                         "name": "with",
                         "type": "string",
                         "required": false,
-                        "description": "Includes the specified variation information in the results. The following parameters are available: <ul><li>variationBarcodes = The barcode linked to the variation and the saved code<\/li><li>variationBundleComponents = The bundle components of the variation and their quantities<\/li><li>variationSalesPrices = The sales prices linked to the variation and the saved price<\/li><li>marketItemNumbers = The market ident number of the variation<\/li><li>variationCategories = The categories linked to the variation<\/li><li>variationClients = The clients (stores) for which the variation is activated<\/li><li>variationMarkets = The markets for which the variation is activated <\/li><li>variationDefaultCategory = The default category of the variation<\/li><li>variationSuppliers = The supplier data associated with the variation<\/li><li>variationWarehouses = The warehouse data associated with the variation<\/li><li>images = The images linked to the variation<\/li><li>variationAttributeValues = The attribute values of the variation<\/li><li>variationSkus = The SKU data associated with the variation<\/li><li>unit = The unit assigned to the variation<\/li><li>parent = The main variation of the variation. Value is null if this variation is the item's main variation.<\/li><li>variationDescription = The texts of the variation<\/li><li>item = The item data of the variation<\/li><li>stock = The stock data of the variation<\/li><\/ul> For example, specifying the parameters variationCategories and variationDefaultCategory will include the default category and all other categories the variations are linked to. More than one parameter should be separated by commas.",
+                        "description": "Includes the specified variation information in the results. The following parameters are available: <ul><li>variationBarcodes = The barcode linked to the variation and the saved code<\/li><li>variationBundleComponents = The bundle components of the variation and their quantities<\/li><li>variationComponentBundles<\/b> = The bundles that this variation is a component of<\/li><li>variationSalesPrices = The sales prices linked to the variation and the saved price<\/li><li>marketItemNumbers = The market ident number of the variation<\/li><li>variationCategories = The categories linked to the variation<\/li><li>variationClients = The clients (stores) for which the variation is activated<\/li><li>variationMarkets = The markets for which the variation is activated <\/li><li>variationDefaultCategory = The default category of the variation<\/li><li>variationSuppliers = The supplier data associated with the variation<\/li><li>variationWarehouses = The warehouse data associated with the variation<\/li><li>images = The images linked to the variation<\/li><li>variationAttributeValues = The attribute values of the variation<\/li><li>variationSkus = The SKU data associated with the variation<\/li><li>unit = The unit assigned to the variation<\/li><li>parent = The main variation of the variation. Value is null if this variation is the item's main variation.<\/li><li>variationDescription = The texts of the variation<\/li><li>item = The item data of the variation<\/li><li>stock = The stock data of the variation<\/li><\/ul> For example, specifying the parameters variationCategories and variationDefaultCategory will include the default category and all other categories the variations are linked to. More than one parameter should be separated by commas.",
                         "format": "string",
                         "in": "query"
                     },
@@ -23148,6 +23213,52 @@
                 ]
             }
         },
+        "\/rest\/items\/{id}\/variations\/{variationId}\/variation_component_bundles": {
+            "get": {
+                "summary": "List bundles",
+                "description": "List the bundles that the variation is a component of. The variation ID must be specified.",
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\Item\\VariationBundle\\Models\\VariationBundle"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "variationId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/items\/{id}\/variations\/{variationId}\/variation_default_categories": {
             "get": {
                 "summary": "List default category links",
@@ -25606,7 +25717,7 @@
                         "name": "with",
                         "type": "string",
                         "required": false,
-                        "description": "Includes the specified variation information in the results. The following parameters are available: <ul><li>properties<\/b> = The properties linked to the variation<\/li><li>variationProperties<\/b> = The properties linked to the variation<\/li><li>variationBarcodes<\/b> = The barcode linked to the variation and the saved code<\/li><li>variationBundleComponents<\/b> = The bundle components of the variation and their quantities<\/li><li>variationSalesPrices<\/b> = The sales prices linked to the variation and the saved price<\/li><li>marketItemNumbers<\/b> = The market ident number of the variation<\/li><li>variationCategories<\/b> = The categories linked to the variation<\/li><li>variationClients<\/b> = The clients (stores) for which the variation is activated<\/li><li>variationMarkets<\/b> = The markets for which the variation is activated <\/li><li>variationDefaultCategory<\/b> = The default category of the variation<\/li><li>variationSuppliers<\/b> = The supplier data associated with the variation<\/li><li>variationWarehouses<\/b> = The warehouse data associated with the variation<\/li><li>images<\/b> = The images linked to the variation<\/li><li>itemImages<\/b> = The images linked to the item<\/li><li>variationAttributeValues<\/b> = The attribute values of the variation<\/li><li>variationSkus<\/b> = The SKU data associated with the variation<\/li><li>variationAdditionalSkus<\/b> = The additional SKU data associated with the variation<\/li><li>unit<\/b> = The unit assigned to the variation<\/li><li>parent<\/b> = The main variation of the variation. Value is null if this variation is the item's main variation.<\/li><li>item<\/b> = <\/li><li>stock<\/b> = The stock data of the variation<\/li><\/ul> For example, specifying the parameters variationCategories and variationDefaultCategory will include the default category and all other categories the variations are linked to. More than one parameter should be separated by commas.",
+                        "description": "Includes the specified variation information in the results. The following parameters are available: <ul><li>properties<\/b> = The properties linked to the variation<\/li><li>variationProperties<\/b> = The properties linked to the variation<\/li><li>variationBarcodes<\/b> = The barcode linked to the variation and the saved code<\/li><li>variationBundleComponents<\/b> = The bundle components of the variation and their quantities<\/li><li>variationComponentBundles<\/b> = The bundles that this variation is a component of<\/li><li>variationSalesPrices<\/b> = The sales prices linked to the variation and the saved price<\/li><li>marketItemNumbers<\/b> = The market ident number of the variation<\/li><li>variationCategories<\/b> = The categories linked to the variation<\/li><li>variationClients<\/b> = The clients (stores) for which the variation is activated<\/li><li>variationMarkets<\/b> = The markets for which the variation is activated <\/li><li>variationDefaultCategory<\/b> = The default category of the variation<\/li><li>variationSuppliers<\/b> = The supplier data associated with the variation<\/li><li>variationWarehouses<\/b> = The warehouse data associated with the variation<\/li><li>images<\/b> = The images linked to the variation<\/li><li>itemImages<\/b> = The images linked to the item<\/li><li>variationAttributeValues<\/b> = The attribute values of the variation<\/li><li>variationSkus<\/b> = The SKU data associated with the variation<\/li><li>variationAdditionalSkus<\/b> = The additional SKU data associated with the variation<\/li><li>unit<\/b> = The unit assigned to the variation<\/li><li>parent<\/b> = The main variation of the variation. Value is null if this variation is the item's main variation.<\/li><li>item<\/b> = <\/li><li>stock<\/b> = The stock data of the variation<\/li><\/ul> For example, specifying the parameters variationCategories and variationDefaultCategory will include the default category and all other categories the variations are linked to. More than one parameter should be separated by commas.",
                         "format": "string",
                         "in": "query"
                     },
@@ -33795,6 +33906,124 @@
                 ]
             }
         },
+        "\/rest\/orders\/coupons\/codes": {
+            "post": {
+                "summary": "Validate multiple coupons",
+                "description": "Validates if multiple coupon codes can be used for the specified items, contact ID, etc. At least one code must be specified. Only one coupon code for special offers (promotional code) can be specified. Promotional codes are validated first. Gift card codes are validated and redeemed after the promotional code to ensure that any discounts are calculated correctly.\nIf any coupon code is invalid, a CouponCodeValidation object with an exception parameter will be added to the list. If the coupon code is valid, a CouponCodeValidation object will be added to the list.",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\Order\\Coupon\\Code\\Validation\\Models\\CouponCodeValidation"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "coupons",
+                        "type": "array",
+                        "required": true,
+                        "description": "The coupons to validate.",
+                        "format": "",
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "callFromScheduler",
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Flag that indicates whether the validation is requested by a subscription order or not. TRUE = The validation is requested by a subscription order. FALSE = The validation is not requested by a subscription order.",
+                        "format": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "name": "plentyId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The plenty id.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "shipToCountry",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The country of delivery.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "taxIdNumber",
+                        "type": "string",
+                        "required": false,
+                        "description": "The tax id number.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "contactClass",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The contact class.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "contactType",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The contact type.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "in": "body",
+                        "name": "\/rest\/orders\/coupons\/codes",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "items",
+                                "contactId"
+                            ],
+                            "properties": {
+                                "validationType": {
+                                    "type": "string"
+                                },
+                                "items": {
+                                    "type": "array",
+                                    "items": {}
+                                },
+                                "contactId": {
+                                    "type": "integer"
+                                },
+                                "currency": {
+                                    "type": "string"
+                                },
+                                "referrer": {
+                                    "type": "number"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/orders\/coupons\/codes\/contacts\/{contactId}": {
             "get": {
                 "summary": "List redeemed coupon codes of a contact",
@@ -40035,14 +40264,20 @@
         },
         "\/rest\/payments\/methods\/preview\/{language?}": {
             "get": {
-                "summary": "Get a preview list for parcel services.",
+                "summary": "Get a preview list for payment methods.",
                 "description": "",
                 "tags": [
                     "Payment"
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
                     },
                     "401": {
                         "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
@@ -44593,6 +44828,23 @@
                 ]
             }
         },
+        "\/rest\/quick_login": {
+            "post": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Authentication"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Illuminate\\Http\\Response"
+                        }
+                    }
+                }
+            }
+        },
         "\/rest\/shop_builder\/content_links": {
             "get": {
                 "summary": "List all content links for a given plugin set",
@@ -48001,6 +48253,9 @@
                                 "documentsCount": {
                                     "type": "integer"
                                 },
+                                "orderId": {
+                                    "type": "integer"
+                                },
                                 "hasDocuments": {
                                     "type": "integer"
                                 },
@@ -48015,6 +48270,41 @@
                                 }
                             }
                         }
+                    }
+                ]
+            }
+        },
+        "\/rest\/tickets\/messages\/{messageId}": {
+            "get": {
+                "summary": "Get the TicketMessage for the given message ID.",
+                "description": "",
+                "tags": [
+                    "TicketMessage"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Ticket\\Models\\TicketMessage"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "messageId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
                     }
                 ]
             }
@@ -48104,6 +48394,50 @@
             }
         },
         "\/rest\/tickets\/{ticketId}": {
+            "get": {
+                "summary": "Find ticket by ID.",
+                "description": "",
+                "tags": [
+                    "Ticket"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Ticket\\Models\\Ticket"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "ticketId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "with",
+                        "type": "array",
+                        "required": false,
+                        "description": "An array with relations to be loaded with the ticket. Possible values are 'order' and 'contact'",
+                        "format": "",
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
             "post": {
                 "summary": "Create a message",
                 "description": "Creates a message for the ticket. The ID of the ticket must be specified.",
@@ -48185,6 +48519,120 @@
                         "description": "OK",
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\Ticket\\Models\\Ticket"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "ticketId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/tickets\/{ticketId}\/messages": {
+            "get": {
+                "summary": "List all <tt>TicketMessage<\/tt>'s for the given ticket ID.",
+                "description": "",
+                "tags": [
+                    "TicketMessage"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\Ticket\\Models\\TicketMessage"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "ticketId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/tickets\/{ticketId}\/messages\/comment": {
+            "get": {
+                "summary": "List all internal <tt>TicketMessage<\/tt>'s (<tt>type == 'comment'<\/tt>) for the given ticket ID.",
+                "description": "",
+                "tags": [
+                    "TicketMessage"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\Ticket\\Models\\TicketMessage"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "ticketId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/tickets\/{ticketId}\/messages\/message": {
+            "get": {
+                "summary": "List all public <tt>TicketMessage<\/tt>'s (<tt>type == 'message'<\/tt>) for the given ticket ID.",
+                "description": "",
+                "tags": [
+                    "TicketMessage"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\Ticket\\Models\\TicketMessage"
+                            }
                         }
                     },
                     "401": {
@@ -48290,6 +48738,31 @@
                         "description": "OK",
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/user\/pin_users": {
+            "get": {
+                "summary": "get all User with a secret value",
+                "description": "",
+                "tags": [
+                    "User"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/mixed"
                         }
                     },
                     "401": {
@@ -50832,6 +51305,39 @@
                 "plentyId": {
                     "type": "integer",
                     "description": "The plenty ID of the client that the accounting location belongs to"
+                }
+            }
+        },
+        "Plenty\\Modules\\Accounting\\Models\\AccountingLocationSettings": {
+            "type": "object",
+            "properties": {
+                "locationId": {
+                    "type": "integer",
+                    "description": "The ID of the accounting location"
+                },
+                "isInvoiceEUNet": {
+                    "type": "boolean",
+                    "description": "Is the invoice net for EU?"
+                },
+                "isInvoiceExportNet": {
+                    "type": "boolean",
+                    "description": "Is the invoice net for export?"
+                },
+                "showShippingVat": {
+                    "type": "boolean",
+                    "description": "Show the vat for shipping costs on the invoice?"
+                },
+                "isSmallBusiness": {
+                    "type": "boolean",
+                    "description": "Is it a small business?"
+                },
+                "numberOfDecimalPlaces": {
+                    "type": "integer",
+                    "description": "The number of decimal places for prices"
+                },
+                "roundTotalsOnly": {
+                    "type": "boolean",
+                    "description": "Do only round totals?"
                 }
             }
         },
@@ -54329,7 +54835,7 @@
                 },
                 "availability": {
                     "type": "integer",
-                    "description": "The availability of the variation. Possible values: 1 to 10."
+                    "description": "The availability of the variation. Possible values: 1 to 10, null = Variation inherits value of main variation."
                 },
                 "estimatedAvailableAt": {
                     "type": "string",
@@ -55361,6 +55867,10 @@
                     "type": "array",
                     "description": "Validation parameters",
                     "items": {}
+                },
+                "couponCampaignType": {
+                    "type": "string",
+                    "description": "The campaign type"
                 }
             }
         },
@@ -56013,6 +56523,14 @@
                 "alternativePhone": {
                     "type": "string",
                     "description": ""
+                },
+                "isParcelBox": {
+                    "type": "integer",
+                    "description": "Indicates whether the e.g. paketshop is supported"
+                },
+                "isPostOffice": {
+                    "type": "integer",
+                    "description": "Indicates whether the e.g. postfiliale is supported"
                 }
             }
         },
@@ -57065,6 +57583,10 @@
                 "language": {
                     "type": "string",
                     "description": "The language where the content is linked to."
+                },
+                "active": {
+                    "type": "boolean",
+                    "description": "Indicates if the link is active and the content should be visible for the frontend."
                 }
             }
         },
@@ -57430,6 +57952,10 @@
                     "type": "integer",
                     "description": "The ID of the contact that is linked with the ticket"
                 },
+                "orderId": {
+                    "type": "integer",
+                    "description": "The ID of the order linked with the ticket"
+                },
                 "createdAt": {
                     "type": "string",
                     "description": "The time the ticket was created as unix timestamp or carbon object"
@@ -57516,13 +58042,17 @@
                 },
                 "type": {
                     "type": "array",
-                    "items": {},
-                    "description": "The type of the message. Two types are available:\n<ul>\n<li>message (visible for the customer)<\/li>\n<li>comment (not visible for the customer)<\/li>\n<\/ul>"
+                    "description": "The type of the message. Two types are available:\n<ul>\n<li>message (visible for the customer)<\/li>\n<li>comment (not visible for the customer)<\/li>\n<\/ul>",
+                    "items": {
+                        "type": "string"
+                    }
                 },
                 "source": {
                     "type": "array",
-                    "items": {},
-                    "description": "The origin of the message. The following sources are available by default and cannot be deleted.\n<ul>\n<li>backend<\/li>\n<li>frontend<\/li>\n<li>ebay<\/li>\n<li>email<\/li>\n<\/ul>"
+                    "description": "The origin of the message. The following sources are available by default and cannot be deleted.\n<ul>\n<li>backend<\/li>\n<li>frontend<\/li>\n<li>ebay<\/li>\n<li>email<\/li>\n<\/ul>",
+                    "items": {
+                        "type": "string"
+                    }
                 },
                 "topicId": {
                     "type": "integer",
@@ -57896,6 +58426,10 @@
                 "type": {
                     "type": "string",
                     "description": "The type of the warehouse location (array values: 'small','medium','large','europallet')"
+                },
+                "notes": {
+                    "type": "string",
+                    "description": "The notes of the warehouse location"
                 }
             }
         },
