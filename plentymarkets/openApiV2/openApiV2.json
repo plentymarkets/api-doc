@@ -18653,7 +18653,15 @@
                         "name": "plentyId",
                         "type": "integer",
                         "required": false,
-                        "description": "Filter restricts the list of results to variations to which variations were visible in specific Clients.",
+                        "description": "Filter restricts the list of results to variations that are visible in specified clients. Separate more than one client by commas.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "referrerId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations that are visible in specified markets. Separate more than one referrer by commas.",
                         "format": "integer",
                         "in": "query"
                     },
@@ -50405,6 +50413,10 @@
                     "type": "string",
                     "description": "The taxIdNumber option"
                 },
+                "title": {
+                    "type": "string",
+                    "description": "The title option"
+                },
                 "externalId": {
                     "type": "string",
                     "description": "The externalId option"
@@ -51914,6 +51926,10 @@
                 "sitemap": {
                     "type": "string",
                     "description": "Flag that indicates if the category will be included in the sitemap."
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "description": "The updated at timestamp of the category."
                 },
                 "clients": {
                     "type": "array",
