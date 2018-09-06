@@ -11925,6 +11925,134 @@
                         }
                     }
                 ]
+            },
+            "put": {
+                "summary": "Bulk update items",
+                "description": "Updates up to 50 items. The ID of the item must be specified.",
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Illuminate\\Support\\Collection"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "\/rest\/items",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "id",
+                                "ageRestriction"
+                            ],
+                            "properties": {
+                                "id": {
+                                    "type": "integer"
+                                },
+                                "position": {
+                                    "type": "integer"
+                                },
+                                "stockType": {
+                                    "type": "integer"
+                                },
+                                "storeSpecial": {
+                                    "type": "integer"
+                                },
+                                "ownerId": {
+                                    "type": "integer"
+                                },
+                                "manufacturerId": {
+                                    "type": "integer"
+                                },
+                                "createdAt": {
+                                    "type": "string"
+                                },
+                                "customsTariffNumber": {
+                                    "type": "string"
+                                },
+                                "revenueAccount": {
+                                    "type": "integer"
+                                },
+                                "couponRestriction": {
+                                    "type": "integer"
+                                },
+                                "condition": {
+                                    "type": "integer"
+                                },
+                                "conditionApi": {
+                                    "type": "integer"
+                                },
+                                "isSubscribable": {
+                                    "type": "boolean"
+                                },
+                                "isShippingPackage": {
+                                    "type": "boolean"
+                                },
+                                "amazonFbaPlatform": {
+                                    "type": "integer"
+                                },
+                                "isShippableByAmazon": {
+                                    "type": "boolean"
+                                },
+                                "amazonProductType": {
+                                    "type": "integer"
+                                },
+                                "amazonFedas": {
+                                    "type": "string"
+                                },
+                                "ebayPresetId": {
+                                    "type": "integer"
+                                },
+                                "ebayCategory": {
+                                    "type": "integer"
+                                },
+                                "ebayCategory2": {
+                                    "type": "integer"
+                                },
+                                "ebayStoreCategory": {
+                                    "type": "integer"
+                                },
+                                "ebayStoreCategory2": {
+                                    "type": "integer"
+                                },
+                                "rakutenCategoryId": {
+                                    "type": "integer"
+                                },
+                                "flagOne": {
+                                    "type": "integer"
+                                },
+                                "flagTwo": {
+                                    "type": "integer"
+                                },
+                                "ageRestriction": {
+                                    "type": "integer"
+                                },
+                                "feedback": {
+                                    "type": "integer"
+                                },
+                                "ebayTitles": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Item\\Item\\Models\\ItemEbayTitle"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ]
             }
         },
         "\/rest\/items\/attribute_values\/{valueId}\/names": {
@@ -42675,6 +42803,166 @@
                 ]
             }
         },
+        "\/rest\/properties\/amazons": {
+            "get": {
+                "summary": "List property amazons",
+                "description": "Lists property amazons",
+                "tags": [
+                    "Property"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyAmazon"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create one or multiple property amazon",
+                "description": "Creates one or multiple property amazon.",
+                "tags": [
+                    "Property"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyAmazon"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "propertyId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the property",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "platform",
+                        "type": "string",
+                        "required": true,
+                        "description": "The platform of the property amazon",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "category",
+                        "type": "string",
+                        "required": true,
+                        "description": "The category of the property amazon",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "field",
+                        "type": "string",
+                        "required": true,
+                        "description": "The field of the property amazon",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "in": "body",
+                        "name": "\/rest\/properties\/amazons",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "propertyId",
+                                "platform",
+                                "category",
+                                "field"
+                            ],
+                            "properties": {
+                                "propertyId": {
+                                    "type": "integer"
+                                },
+                                "platform": {
+                                    "type": "string"
+                                },
+                                "category": {
+                                    "type": "string"
+                                },
+                                "field": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            "put": {
+                "summary": "Update one or multiple property amazon",
+                "description": "Updates one or multiple property amazon",
+                "tags": [
+                    "Property"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyAmazon"
+                        }
+                    }
+                }
+            }
+        },
+        "\/rest\/properties\/amazons\/{propertyAmazonId}": {
+            "delete": {
+                "summary": "Delete a property amazon",
+                "description": "Deletes a property amazon",
+                "tags": [
+                    "Property"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "propertyAmazonId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            },
+            "get": {
+                "summary": "Get a property amazon",
+                "description": "Gets a proeprty amazon. The ID of the property amazon must be specified.",
+                "tags": [
+                    "Property"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyAmazon"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "propertyAmazonId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            }
+        },
         "\/rest\/properties\/availabilities": {
             "get": {
                 "summary": "List availabilities",
@@ -45123,9 +45411,139 @@
                                 },
                                 "widgets": {
                                     "type": "string"
+                                },
+                                "link": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\ShopBuilder\\Models\\ContentLink"
+                                    }
                                 }
                             }
                         }
+                    }
+                ]
+            }
+        },
+        "\/rest\/shop_builder\/contents\/search": {
+            "get": {
+                "summary": "Search for contents.",
+                "description": "",
+                "tags": [
+                    "Shop"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "page": {
+                                    "type": "integer",
+                                    "description": "Current page of the response"
+                                },
+                                "totalsCount": {
+                                    "type": "integer",
+                                    "description": "The total number of entries in the response"
+                                },
+                                "isLastPage": {
+                                    "type": "boolean",
+                                    "description": "Flag that indicates if the page shown is the last page of the response"
+                                },
+                                "lastPageNumber": {
+                                    "type": "integer",
+                                    "description": "The last page number"
+                                },
+                                "firstOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the first item of the current page result"
+                                },
+                                "lastOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the last item of the current page result"
+                                },
+                                "itemsPerPage": {
+                                    "type": "integer",
+                                    "description": "The requested amount of items per result page"
+                                },
+                                "entries": {
+                                    "items": {}
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "page",
+                        "type": "integer",
+                        "required": false,
+                        "description": "",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "itemsPerPage",
+                        "type": "integer",
+                        "required": false,
+                        "description": "",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "dataProviderName",
+                        "type": "string",
+                        "required": false,
+                        "description": "Name of the content",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "type",
+                        "type": "string",
+                        "required": false,
+                        "description": "Type of the content",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "containerName",
+                        "type": "string",
+                        "required": false,
+                        "description": "Name of the linked container",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "pluginSetId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Id of the linked plugin set",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "language",
+                        "type": "string",
+                        "required": false,
+                        "description": "Language of the content link",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "active",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Active state of the content link",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
                     }
                 ]
             }
@@ -45237,6 +45655,12 @@
                                 },
                                 "widgets": {
                                     "type": "string"
+                                },
+                                "link": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\ShopBuilder\\Models\\ContentLink"
+                                    }
                                 }
                             }
                         }
@@ -57318,6 +57742,31 @@
                 "position": {
                     "type": "integer",
                     "description": "The position of the property"
+                }
+            }
+        },
+        "Plenty\\Modules\\Property\\Models\\PropertyAmazon": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "The ID of the property amazon"
+                },
+                "propertyId": {
+                    "type": "integer",
+                    "description": "The ID of the property"
+                },
+                "platform": {
+                    "type": "string",
+                    "description": "The platform of the property amazon"
+                },
+                "category": {
+                    "type": "string",
+                    "description": "The category of the property amazon"
+                },
+                "field": {
+                    "type": "string",
+                    "description": "The field of the property amazon"
                 }
             }
         },
