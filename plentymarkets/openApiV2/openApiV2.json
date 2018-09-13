@@ -3090,6 +3090,14 @@
                         "in": "query"
                     },
                     {
+                        "name": "nameOrId",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter that restricts the search result to contacts with a specific name or id.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
                         "name": "town",
                         "type": "string",
                         "required": false,
@@ -50185,6 +50193,20 @@
                 ]
             }
         },
+        "\/rest\/warehouses\/locations\/levels\/positions": {
+            "post": {
+                "summary": "Move a warehouse location level position",
+                "description": "Moves a warehouse location level position",
+                "tags": [
+                    "Warehouse"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
         "\/rest\/warehouses\/locations\/levels\/{warehouseLocationLevelId}": {
             "delete": {
                 "summary": "Delete a warehouse location level",
@@ -50275,6 +50297,20 @@
                                 "$ref": "#\/definitions\/Plenty\\Modules\\Warehouse\\Models\\WarehouseLocationDimension"
                             }
                         }
+                    }
+                }
+            }
+        },
+        "\/rest\/warehouses\/locations\/positions": {
+            "post": {
+                "summary": "Move a warehouse location position",
+                "description": "Moves a warehouse location position",
+                "tags": [
+                    "Warehouse"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
                     }
                 }
             }
