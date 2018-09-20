@@ -1372,6 +1372,14 @@
                         "description": "Filter that restricts the search result to accounts that were created according to given filters.\n                                   <br> Usage: <ul>\n                                   <li>'createdAt=between:yyyy-mm-dd,yyyy-mm-dd'<\/li>\n                                   <li>'createdAt=eq:yyyy-mm-dd' (=)<\/li>\n                                   <li>'createdAt=gt:yyyy-mm-dd' (>)<\/li>\n                                   <li>'createdAt=gte:yyyy-mm-dd' (>=)<\/li>\n                                   <li>'createdAt=lt:yyyy-mm-dd' (<)<\/li>\n                                   <li>'createdAt=lte:yyyy-mm-dd' (<=)<\/li>\n                                   <li>Dates can also include the time. Example: 2017-03-08 13:24:17<\/li>\n                                   <li>Without including the time we will use 00:00:00 as default. Example: 2017-03-08 00:00:00<\/li>\n          <\/ul>",
                         "format": "string",
                         "in": "query"
+                    },
+                    {
+                        "name": "companyName",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter that restricts the search result to accounts that have a company name according to given filters.\n                                    <br> Usage: <ul>\n                                    <li>'companyName=like:expamle'<\/li>\n                                    <li>'companyName=eq:example' (=)<\/li>\n                                    <\/ul>",
+                        "format": "string",
+                        "in": "query"
                     }
                 ],
                 "security": [
@@ -33655,12 +33663,18 @@
                         "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
-                "security": [
-                    {
-                        "oAuth2": []
-                    }
-                ],
                 "parameters": [
+                    {
+                        "name": "coupon",
+                        "type": "array",
+                        "required": false,
+                        "description": "One or multiple coupon code to be redeemed with order creation",
+                        "format": "",
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
                     {
                         "in": "body",
                         "name": "\/rest\/orders",
@@ -33704,6 +33718,11 @@
                                 }
                             }
                         }
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
                     }
                 ]
             }
@@ -51293,6 +51312,22 @@
                 "marketplacePartner": {
                     "type": "string",
                     "description": "The marketplace partner status of the contact"
+                },
+                "valuta": {
+                    "type": "integer",
+                    "description": "The foreign currency of the contact"
+                },
+                "discountDays": {
+                    "type": "integer",
+                    "description": "The early payment discount period in days specified for the account"
+                },
+                "discountPercent": {
+                    "type": "number",
+                    "description": "The early payment discount in percent specified for the account"
+                },
+                "timeForPaymentAllowedDays": {
+                    "type": "integer",
+                    "description": "The payment due date in days specified for the account"
                 }
             }
         },
