@@ -3606,6 +3606,34 @@
                 ]
             }
         },
+        "\/rest\/accounts\/contacts\/contact_events\/types\/preview": {
+            "get": {
+                "summary": "Get the contact event types as a key\/value array.",
+                "description": "",
+                "tags": [
+                    "Account"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/accounts\/contacts\/contact_events\/{contactEventId}": {
             "delete": {
                 "summary": "Delete a contact event",
@@ -50997,7 +51025,7 @@
             "properties": {
                 "id": {
                     "type": "integer",
-                    "description": "The ID of the address option type. It is possible to define individual types. The following types are available by default:\n<ul>\n<li>1 = VAT number<\/li>\n<li>2 = External address ID<\/li>\n<li>3 = Entry certificate<\/li>\n<li>4 = Telephone<\/li>\n<li>5 = Email<\/li>\n<li>6 = Post number<\/li>\n<li>7 = Personal id<\/li>\n<li>8 = BBFC (age rating)<\/li>\n<li>9 = Birthday<\/li>\n<li>10 = Session ID<\/li>\n<li>11 = Title<\/li>\n<\/ul>"
+                    "description": "The ID of the address option type. It is possible to define individual types. The following types are available by default:\n<ul>\n<li>1 = VAT number<\/li>\n<li>2 = External address ID<\/li>\n<li>3 = Entry certificate<\/li>\n<li>4 = Telephone<\/li>\n<li>5 = Email<\/li>\n<li>6 = Post number<\/li>\n<li>7 = Personal id<\/li>\n<li>8 = BBFC (age rating)<\/li>\n<li>9 = Birthday<\/li>\n<li>10 = Session ID<\/li>\n<li>11 = Title<\/li>\n<li>12 = Contact person<\/li>\n<\/ul>"
                 },
                 "position": {
                     "type": "integer",
