@@ -39,6 +39,14 @@
             }
         },
         {
+            "name": "AddressDesign",
+            "description": "Routes for AddressDesign",
+            "externalDocs": {
+                "description": "Official developers site for AddressDesign routes",
+                "url": "https:\/\/developers.plentymarkets.com\/rest-doc\/address_design"
+            }
+        },
+        {
             "name": "Authentication",
             "description": "Routes for Authentication",
             "externalDocs": {
@@ -6686,6 +6694,615 @@
                 ]
             }
         },
+        "\/rest\/address_layout": {
+            "get": {
+                "summary": "Get all layouts with their contents",
+                "description": "Gets all the layouts including the content for each layout.",
+                "tags": [
+                    "AddressDesign"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\AddressDesign\\Models\\AddressLayout"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "post": {
+                "summary": "Create a new layout",
+                "description": "Creates a new layout with the name and isDefault flag given.",
+                "tags": [
+                    "AddressDesign"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\AddressDesign\\Models\\AddressLayout"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "$name",
+                        "type": "string",
+                        "required": true,
+                        "description": "The name of the layout",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "$isDefault",
+                        "type": "boolean",
+                        "required": true,
+                        "description": "Flag to determine if the layout is the one default or not",
+                        "format": "boolean",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/address_layout\/country\/{countryId}": {
+            "get": {
+                "summary": "Get a layout by country id",
+                "description": "Gets a layout by country id. The country id must be specified.",
+                "tags": [
+                    "AddressDesign"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\AddressDesign\\Models\\AddressLayout"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "countryId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/address_layout\/default": {
+            "get": {
+                "summary": "Get default layout",
+                "description": "Gets the default layout. If no layout is set as default, the one with the smallest ID will be returned.",
+                "tags": [
+                    "AddressDesign"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\AddressDesign\\Models\\AddressLayout"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/address_layout\/{layoutId}": {
+            "delete": {
+                "summary": "Delete a layout",
+                "description": "Deletes a layout. The ID of the layout must be specified.",
+                "tags": [
+                    "AddressDesign"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/mixed"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "layoutId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "$layoutId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the layout",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "get": {
+                "summary": "Get a layout",
+                "description": "Gets a layout. The ID of the layout must be specified.",
+                "tags": [
+                    "AddressDesign"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\AddressDesign\\Models\\AddressLayout"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "layoutId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "$layoutId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the layout",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "put": {
+                "summary": "Update a layout",
+                "description": "Updates a layout. The ID of the layout must be specified.",
+                "tags": [
+                    "AddressDesign"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\AddressDesign\\Models\\AddressLayout"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "layoutId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "$name",
+                        "type": "string",
+                        "required": false,
+                        "description": "The name of the layout",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "$isDefault",
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Flag to determine if the layout is the one default or not",
+                        "format": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "name": "$layoutId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the layout",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/address_layout_content": {
+            "post": {
+                "summary": "Create a new layout content",
+                "description": "Creates a new layout content.",
+                "tags": [
+                    "AddressDesign"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\AddressDesign\\Models\\AddressLayoutContent"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "$addressLayoutId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the layout",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "$row",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The number of the row",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "$column",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The number of the column",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "$fieldType",
+                        "type": "string",
+                        "required": true,
+                        "description": "The type of the field",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/address_layout_content\/layout\/{layoutId}": {
+            "get": {
+                "summary": "Get a layout content",
+                "description": "Gets a layout content. The ID of the layout must be specified.",
+                "tags": [
+                    "AddressDesign"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\AddressDesign\\Models\\AddressLayoutContent"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "layoutId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "$layoutId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the layout",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/address_layout_content\/{layoutId}\/{row}\/{column}": {
+            "delete": {
+                "summary": "Delete a layout content",
+                "description": "Deletes a layout content. The ID of the layout, the row number and column number must be specified.",
+                "tags": [
+                    "AddressDesign"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/mixed"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "layoutId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "row",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "column",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "$layoutId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the layout",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "$row",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The number of the row",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "$column",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The number of the column",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "put": {
+                "summary": "Update a layout content",
+                "description": "Updates a layout content.",
+                "tags": [
+                    "AddressDesign"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\AddressDesign\\Models\\AddressLayoutContent"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "layoutId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "row",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "column",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "$fieldType",
+                        "type": "string",
+                        "required": true,
+                        "description": "The type of the field",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "$layoutId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the layout",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "$row",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The number of the row",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "$column",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The number of the column",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/address_layout_countries": {
+            "delete": {
+                "summary": "Delete a layout country relation",
+                "description": "Deletes a layout country relation",
+                "tags": [
+                    "AddressDesign"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "$addressLayoutId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The id of the layout",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "$countryId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The id of the country",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "post": {
+                "summary": "Create a new layout country relation",
+                "description": "Creates a new layout country relation",
+                "tags": [
+                    "AddressDesign"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\AddressDesign\\Models\\AddressLayoutCountries"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "$addressLayoutId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The id of the layout",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "$countryId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The id of the country",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/authorized_user": {
             "get": {
                 "summary": "Get authorized user",
@@ -9425,6 +10042,40 @@
                         "oAuth2": []
                     }
                 ]
+            }
+        },
+        "\/rest\/check_password": {
+            "post": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Authentication"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/mixed"
+                        }
+                    }
+                }
+            }
+        },
+        "\/rest\/check_pin": {
+            "post": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Authentication"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/mixed"
+                        }
+                    }
+                }
             }
         },
         "\/rest\/comments": {
@@ -33454,14 +34105,6 @@
                         "in": "query"
                     },
                     {
-                        "name": "supplierId",
-                        "type": "integer",
-                        "required": false,
-                        "description": "Filter that restricts the search result to orders that include order items with variations from a supplier. The ID of the supplier must be specified.",
-                        "format": "integer",
-                        "in": "query"
-                    },
-                    {
                         "name": "referrerId",
                         "type": "number",
                         "required": false,
@@ -35988,6 +36631,177 @@
                 ]
             }
         },
+        "\/rest\/orders\/packages\/items\/{packageId}": {
+            "get": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Order\\Shipping\\Package\\Models\\OrderShippingPackageItems"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "packageId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "post": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "packageId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/orders\/packages\/items\/{packageId}\/{itemId}\/{variationId}": {
+            "delete": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Repositories\\Models\\DeleteResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "packageId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "itemId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "variationId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "put": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "packageId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "itemId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "variationId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/orders\/properties\/types": {
             "get": {
                 "summary": "List order property types",
@@ -36187,9 +37001,6 @@
                             "properties": {
                                 "position": {
                                     "type": "integer"
-                                },
-                                "cast": {
-                                    "type": "string"
                                 },
                                 "names": {
                                     "type": "array",
@@ -36593,7 +37404,13 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
                     },
                     "401": {
                         "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
@@ -36714,7 +37531,13 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
                     },
                     "401": {
                         "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
@@ -38290,6 +39113,41 @@
                                 }
                             }
                         }
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/orders\/{orderId}\/items": {
+            "get": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Order\\Shipping\\Package\\Models\\OrderShippingPackageItems"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
                     }
                 ],
                 "security": [
@@ -45443,12 +46301,15 @@
                         "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
-                "security": [
-                    {
-                        "oAuth2": []
-                    }
-                ],
                 "parameters": [
+                    {
+                        "name": "frontendLang",
+                        "type": "string",
+                        "required": false,
+                        "description": "Language to be used when rendering frontend widgets.",
+                        "format": "string",
+                        "in": "query"
+                    },
                     {
                         "in": "body",
                         "name": "\/rest\/shop_builder\/contents",
@@ -45475,6 +46336,11 @@
                                 }
                             }
                         }
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
                     }
                 ]
             }
@@ -45694,6 +46560,14 @@
                         "in": "path"
                     },
                     {
+                        "name": "frontendLang",
+                        "type": "string",
+                        "required": false,
+                        "description": "Language to be used when rendering frontend widgets.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
                         "in": "body",
                         "name": "\/rest\/shop_builder\/contents\/{contentId}",
                         "schema": {
@@ -45813,6 +46687,16 @@
                         "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
+                "parameters": [
+                    {
+                        "name": "frontendLang",
+                        "type": "string",
+                        "required": false,
+                        "description": "Language to be used when rendering frontend widgets.",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ],
                 "security": [
                     {
                         "oAuth2": []
@@ -52043,6 +52927,15 @@
                 }
             }
         },
+        "Plenty\\Modules\\AddressDesign\\Models\\AddressLayout": {
+            "type": "object"
+        },
+        "Plenty\\Modules\\AddressDesign\\Models\\AddressLayoutContent": {
+            "type": "object"
+        },
+        "Plenty\\Modules\\AddressDesign\\Models\\AddressLayoutCountries": {
+            "type": "object"
+        },
         "Plenty\\Modules\\Authentication\\Models\\TokenData": {
             "type": "object",
             "properties": {
@@ -55305,7 +56198,7 @@
                 },
                 "storageLocation": {
                     "type": "integer",
-                    "description": "The suggested storage location of the variation in this warehouse"
+                    "description": "The storage location of the variation in this warehouse"
                 },
                 "stockBuffer": {
                     "type": "integer",
@@ -55424,6 +56317,14 @@
                     "type": "boolean",
                     "description": "Flag that indicates if the variation is unavailable in the online store if net stock is not positive. If true, the variation automatically becomes available when the net stock changes to 0 or negative."
                 },
+                "isVisibleInListIfNetStockIsPositive": {
+                    "type": "boolean",
+                    "description": "Flag that indicates if the variation is visible in the item list of the online store if net stock is positive. If true, the variation automatically becomes visible in categories, search results and item lists (store specials, cross-selling, last seen items) when the net stock changes to positive."
+                },
+                "isInvisibleInListIfNetStockIsNotPositive": {
+                    "type": "boolean",
+                    "description": "Flag that indicates if the variation is invisible in the item list of the online store if net stock is not positive. If true and no net stock is available for the variation, the variation can only be opened using the direct URL. The variation is not shown in the categories, search results or item lists (store specials, cross-selling, last seen items)."
+                },
                 "mainWarehouseId": {
                     "type": "integer",
                     "description": "The ID of the main warehouse of the variation."
@@ -55527,6 +56428,10 @@
                 "automaticClientVisibility": {
                     "type": "integer",
                     "description": "Indicates if the variation is set as available for any clients (stores). Possible values:<ul><li>0 \/ -1 (GET) or 0 (POST) = Variation is not available in any client (store).<\/li><li>1 \/ 2 (GET) or 1 (POST) = Variation is available in at least one client (store).<\/li><\/ul>The variation's actual visibility depends on the settings for net stock dependency."
+                },
+                "automaticListVisibility": {
+                    "type": "integer",
+                    "description": "Indicates if the variation currently is visible in item lists. 3 = Variation is visible in item list because $isHiddenInCategoryList is false. 2, 1 = Variation is visible in item list because $isVisibleInListIfNetStockIsPositive is true and net stock is positive. 0, -1 = Variation is invisible in item list because $isInvisibleInListIfNetStockIsNotPositive is true and net stock is 0 or negative. -2 = Variation is invisible in item list because $isHiddenInCategoryList is true."
                 },
                 "isHiddenInCategoryList": {
                     "type": "boolean",
@@ -56905,6 +57810,27 @@
                 }
             }
         },
+        "Plenty\\Modules\\Order\\Shipping\\Package\\Models\\OrderShippingPackageItems": {
+            "type": "object",
+            "properties": {
+                "packageId": {
+                    "type": "integer",
+                    "description": "The ID of the package (id column from plenty_package_type2order)"
+                },
+                "itemId": {
+                    "type": "integer",
+                    "description": "The ID of the item (plenty_item_variation_base_item_id column from plenty_item_variation_base)"
+                },
+                "variationId": {
+                    "type": "integer",
+                    "description": "The ID of the variation (plenty_item_variation_base_id column from plenty_item_variation_base)"
+                },
+                "itemQuantity": {
+                    "type": "number",
+                    "description": "The quantity of the item in the package"
+                }
+            }
+        },
         "Plenty\\Modules\\Order\\Shipping\\ParcelServiceRegion\\Models\\ParcelServiceRegion": {
             "type": "object",
             "properties": {
@@ -57786,6 +58712,10 @@
             "properties": {
                 "id": {
                     "type": "integer",
+                    "description": ""
+                },
+                "hash": {
+                    "type": "string",
                     "description": ""
                 },
                 "parentPluginSetId": {
