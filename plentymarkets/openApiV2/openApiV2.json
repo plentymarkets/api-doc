@@ -159,6 +159,14 @@
             }
         },
         {
+            "name": "ElasticSync",
+            "description": "Routes for ElasticSync",
+            "externalDocs": {
+                "description": "Official developers site for ElasticSync routes",
+                "url": "https:\/\/developers.plentymarkets.com\/rest-doc\/elastic_sync"
+            }
+        },
+        {
             "name": "Export",
             "description": "Routes for Export",
             "externalDocs": {
@@ -10630,6 +10638,877 @@
                 "security": [
                     {
                         "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/elastic-sync\/log\/cache": {
+            "post": {
+                "summary": "Delete the Sync Log cache.",
+                "description": "Deletes the Sync Log cache.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/rest\/elastic-sync\/log\/id": {
+            "get": {
+                "summary": "Get Plenty ID.",
+                "description": "Gets the Plenty ID.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/mixed"
+                        }
+                    }
+                }
+            }
+        },
+        "\/rest\/elastic-sync\/log\/status": {
+            "get": {
+                "summary": "Get Logs.",
+                "description": "Gets the Logs.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/mixed"
+                        }
+                    }
+                }
+            }
+        },
+        "\/rest\/elastic-sync\/mapping\/all_mappings": {
+            "get": {
+                "summary": "Get all mappings.",
+                "description": "Gets all mappings.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/mixed"
+                        }
+                    }
+                }
+            }
+        },
+        "\/rest\/elastic-sync\/mapping\/entity\/{syncId}": {
+            "get": {
+                "summary": "Get an entity.",
+                "description": "Gets an entity by sync ID. The sync ID is required.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "syncId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            }
+        },
+        "\/rest\/elastic-sync\/mapping\/field\/fields": {
+            "get": {
+                "summary": "Get the field value map.",
+                "description": "Gets the field value map.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/rest\/elastic-sync\/mapping\/fields\/{syncType}": {
+            "get": {
+                "summary": "Get the plenty fields value map.",
+                "description": "Gets the plenty fields value map. Sync data type is required.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "syncType",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "syncDataType",
+                        "type": "string",
+                        "required": true,
+                        "description": "The sync data type",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
+        "\/rest\/elastic-sync\/mapping\/list\/{syncType}": {
+            "get": {
+                "summary": "Get all mapping list",
+                "description": "Gets all mapping list.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\ElasticSync\\Models\\Mapper\\MappingIdentifiersList"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "syncType",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            }
+        },
+        "\/rest\/elastic-sync\/mapping\/list_pagination": {
+            "get": {
+                "summary": "List all mapping locations with pagination.",
+                "description": "Lists all mapping locations with pagination.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Symfony\\Component\\HttpFoundation\\Response"
+                        }
+                    }
+                }
+            }
+        },
+        "\/rest\/elastic-sync\/mapping\/mapp\/csv_columns\/{syncId}": {
+            "get": {
+                "summary": "Get the csv columns.",
+                "description": "Gets the csv columns. Sync ID is required.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "syncId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            }
+        },
+        "\/rest\/elastic-sync\/mapping\/mapp\/filter": {
+            "get": {
+                "summary": "Get the filter label list.",
+                "description": "Gets the filter label list.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/rest\/elastic-sync\/mapping\/mapp\/tree": {
+            "get": {
+                "summary": "Get the mapping values tree.",
+                "description": "Gets the mapping values tree.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/rest\/elastic-sync\/mapping\/model\/{syncType}": {
+            "get": {
+                "summary": "Get the model key to field value key.",
+                "description": "Gets the model key to field value key. Sync data type is required.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "syncType",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "syncDataType",
+                        "type": "string",
+                        "required": true,
+                        "description": "The sync data type",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
+        "\/rest\/elastic-sync\/mapping\/row\/{syncId}": {
+            "get": {
+                "summary": "Get the rows csv.",
+                "description": "Gets the rows csv. Sync id is required.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "syncId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            }
+        },
+        "\/rest\/elastic-sync\/mapping\/values\/{syncType}": {
+            "get": {
+                "summary": "Get the mapping values.",
+                "description": "Gets the mapping values. Sync data type is required.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "syncType",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "syncDataType",
+                        "type": "string",
+                        "required": true,
+                        "description": "The sync data type",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
+        "\/rest\/elastic-sync\/mapping\/variation": {
+            "get": {
+                "summary": "Get a list with variation matched.",
+                "description": "Get a list with variation matched.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/rest\/elastic-sync\/mapping\/{mapIds}": {
+            "delete": {
+                "summary": "Delete a mapping.",
+                "description": "Deletes a mapping. The mapping ID must be specified.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "mapIds",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            }
+        },
+        "\/rest\/elastic-sync\/mapping\/{syncId}": {
+            "get": {
+                "summary": "Get a mapping.",
+                "description": "Gets a mapping by passing its sync ID. The sync ID is required.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\ElasticSync\\Models\\Sync\\Mapping"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "syncId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            },
+            "post": {
+                "summary": "Update a mapping.",
+                "description": "Updates a mapping. The sync ID is required.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\ElasticSync\\Models\\Sync\\Mapping"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "syncId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            }
+        },
+        "\/rest\/elastic-sync\/sync": {
+            "post": {
+                "summary": "Create a sync.",
+                "description": "Creates a sync.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\ElasticSync\\Models\\Sync\\Sync"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "string",
+                        "required": true,
+                        "description": "The name of the sync",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "sync_type",
+                        "type": "string",
+                        "required": true,
+                        "description": "The sync type of the sync",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "source_data_type",
+                        "type": "string",
+                        "required": true,
+                        "description": "The source data type of the sync",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "source_type",
+                        "type": "string",
+                        "required": true,
+                        "description": "The source type of the sync",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
+        "\/rest\/elastic-sync\/sync\/copy\/{syncId}": {
+            "post": {
+                "summary": "Copy the syncs.",
+                "description": "Copies the syncs.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "syncId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "syncIds",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the sync",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
+        "\/rest\/elastic-sync\/sync\/decimals": {
+            "get": {
+                "summary": "Get list decimals.",
+                "description": "Gets list decimals.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/rest\/elastic-sync\/sync\/export\/{syncId}": {
+            "get": {
+                "summary": "Export the syncs.",
+                "description": "Exports the syncs.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "syncId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "syncIds",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the sync",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
+        "\/rest\/elastic-sync\/sync\/intervals": {
+            "get": {
+                "summary": "Get list interval.",
+                "description": "Gets list interval.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/rest\/elastic-sync\/sync\/list\/import": {
+            "post": {
+                "summary": "Import the sync different.",
+                "description": "Imports the sync different.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "file",
+                        "type": "array",
+                        "required": true,
+                        "description": "The file data",
+                        "format": "",
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                ]
+            }
+        },
+        "\/rest\/elastic-sync\/sync\/list\/save": {
+            "post": {
+                "summary": "Save the CSV to S3.",
+                "description": "Saves the CSV to S3.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "file",
+                        "type": "array",
+                        "required": true,
+                        "description": "The file data",
+                        "format": "",
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                ]
+            }
+        },
+        "\/rest\/elastic-sync\/sync\/list\/syncs": {
+            "get": {
+                "summary": "List all syncs.",
+                "description": "Lists all syncs.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\ElasticSync\\Models\\Sync\\Sync"
+                        }
+                    }
+                }
+            }
+        },
+        "\/rest\/elastic-sync\/sync\/preview\/{syncId}": {
+            "get": {
+                "summary": "Get preview columns.",
+                "description": "Gets preview columns. The sync ID is required.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "syncId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            }
+        },
+        "\/rest\/elastic-sync\/sync\/run": {
+            "post": {
+                "summary": "Execute the run procedure.",
+                "description": "Executes the run procedure. Data must be specified",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "syncId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the sync",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "testRun",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The test run variable",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
+        "\/rest\/elastic-sync\/sync\/types\/show": {
+            "get": {
+                "summary": "Get list types.",
+                "description": "Gets list types.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/rest\/elastic-sync\/sync\/{syncId}": {
+            "delete": {
+                "summary": "Delete a sync.",
+                "description": "Deletes a sync. The sync ID must be specified.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "syncId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "syncIds",
+                        "type": "string",
+                        "required": true,
+                        "description": "The ID of the sync",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ]
+            },
+            "get": {
+                "summary": "Get the show sync.",
+                "description": "Gets the show sync. Sync id is required.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\ElasticSync\\Models\\Sync\\Sync"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "syncId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            },
+            "post": {
+                "summary": "Update or create sync.",
+                "description": "Updates or creates sync.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\ElasticSync\\Models\\Sync\\Sync"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "syncId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
                     }
                 ]
             }
@@ -38360,6 +39239,28 @@
                 ]
             }
         },
+        "\/rest\/orders\/statuses\/group_functions": {
+            "post": {
+                "summary": "Changes various properties for a status",
+                "description": "",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/orders\/statuses\/{statusId}": {
             "delete": {
                 "summary": "Delete an order status.",
@@ -53934,6 +54835,35 @@
                 }
             }
         },
+        "Plenty\\Modules\\ElasticSync\\Models\\Mapper\\MappingIdentifiersList": {
+            "type": "object"
+        },
+        "Plenty\\Modules\\ElasticSync\\Models\\Sync\\Mapping": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "The ID of the mapping"
+                },
+                "data": {
+                    "type": "string",
+                    "description": "The data of the mapping"
+                }
+            }
+        },
+        "Plenty\\Modules\\ElasticSync\\Models\\Sync\\Sync": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "The ID of the sync"
+                },
+                "data": {
+                    "type": "string",
+                    "description": "The data of the sync"
+                }
+            }
+        },
         "Plenty\\Modules\\Feedback\\Models\\Feedback": {
             "type": "object",
             "properties": {
@@ -60001,6 +60931,9 @@
             "type": "object"
         },
         "Plenty\\Repositories\\Models\\PaginationResponse": {
+            "type": "object"
+        },
+        "Symfony\\Component\\HttpFoundation\\Response": {
             "type": "object"
         },
         "Symfony\\Component\\HttpFoundation\\StreamedResponse": {
