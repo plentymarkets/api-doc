@@ -303,6 +303,14 @@
             }
         },
         {
+            "name": "SalesRepresentativeRegion",
+            "description": "Routes for SalesRepresentativeRegion",
+            "externalDocs": {
+                "description": "Official developers site for SalesRepresentativeRegion routes",
+                "url": "https:\/\/developers.plentymarkets.com\/rest-doc\/sales_representative_region"
+            }
+        },
+        {
             "name": "Shop",
             "description": "Routes for Shop",
             "externalDocs": {
@@ -4686,6 +4694,64 @@
                 ]
             }
         },
+        "\/rest\/accounts\/contacts\/sales_representative_regions": {
+            "get": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "SalesRepresentativeRegion"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "page": {
+                                    "type": "integer",
+                                    "description": "Current page of the response"
+                                },
+                                "totalsCount": {
+                                    "type": "integer",
+                                    "description": "The total number of entries in the response"
+                                },
+                                "isLastPage": {
+                                    "type": "boolean",
+                                    "description": "Flag that indicates if the page shown is the last page of the response"
+                                },
+                                "lastPageNumber": {
+                                    "type": "integer",
+                                    "description": "The last page number"
+                                },
+                                "firstOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the first item of the current page result"
+                                },
+                                "lastOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the last item of the current page result"
+                                },
+                                "itemsPerPage": {
+                                    "type": "integer",
+                                    "description": "The requested amount of items per result page"
+                                },
+                                "entries": {
+                                    "items": {}
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/accounts\/contacts\/types": {
             "get": {
                 "summary": "List contact types",
@@ -6285,6 +6351,41 @@
                 ]
             }
         },
+        "\/rest\/accounts\/contacts\/{contactId}\/sales_representative_regions": {
+            "get": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "SalesRepresentativeRegion"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Illuminate\\Support\\Collection"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "contactId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/accounts\/contacts\/{contactId}\/vcard": {
             "get": {
                 "summary": "get a filestream of vcard from customer",
@@ -6539,6 +6640,107 @@
                 ]
             }
         },
+        "\/rest\/accounts\/sales_representative_regions\/{salesRepresentativeRegionId}": {
+            "delete": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "SalesRepresentativeRegion"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleJsonResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "salesRepresentativeRegionId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "get": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "SalesRepresentativeRegion"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Account\\Models\\SalesRepresentativeRegion"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "salesRepresentativeRegionId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "put": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "SalesRepresentativeRegion"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Account\\Models\\SalesRepresentativeRegion"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "salesRepresentativeRegionId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/accounts\/{accountId}": {
             "delete": {
                 "summary": "Delete an account",
@@ -6688,6 +6890,104 @@
                 "parameters": [
                     {
                         "name": "accountId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/accounts\/{accountId}\/contacts\/sales_representative_regions": {
+            "get": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    ""
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "\/rest\/accounts\/{accountId}\/contacts\/{contactId}\/sales_representative_regions": {
+            "get": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "SalesRepresentativeRegion"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Account\\Models\\SalesRepresentativeRegion"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "contactId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "post": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "SalesRepresentativeRegion"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Account\\Models\\SalesRepresentativeRegion"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "contactId",
                         "type": "integer",
                         "required": true,
                         "description": "",
@@ -10646,6 +10946,56 @@
             "post": {
                 "summary": "Delete the Sync Log cache.",
                 "description": "Deletes the Sync Log cache.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/rest\/elastic-sync\/log\/check\/sync\/{syncId}": {
+            "get": {
+                "summary": "Check the progress of a sync.",
+                "description": "Checks the progress of a sync. Sync id is required.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "syncId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            }
+        },
+        "\/rest\/elastic-sync\/log\/check\/syncs": {
+            "get": {
+                "summary": "Check the progress of all sync.",
+                "description": "Checks the progress of all sync.",
                 "tags": [
                     "ElasticSync"
                 ],
@@ -52523,6 +52873,9 @@
         "Illuminate\\Support\\Collection": {
             "type": "object"
         },
+        "Plenty\\Data\\SimpleJsonResponse": {
+            "type": "object"
+        },
         "Plenty\\Data\\SimpleRestResponse": {
             "type": "object",
             "properties": {
@@ -53141,6 +53494,10 @@
                 "timeForPaymentAllowedDays": {
                     "type": "integer",
                     "description": "The payment due date in days specified for the account"
+                },
+                "salesRepresentativeContactId": {
+                    "type": "integer",
+                    "description": "The salesRepresentative ID of the contact"
                 }
             }
         },
@@ -53460,6 +53817,27 @@
                 "contactId": {
                     "type": "integer",
                     "description": "The ID of the foreign key contact"
+                }
+            }
+        },
+        "Plenty\\Modules\\Account\\Models\\SalesRepresentativeRegion": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "The ID of the account contact sales representative relation"
+                },
+                "accountContactRelationId": {
+                    "type": "integer",
+                    "description": "The ID of the foreign key account contact relation"
+                },
+                "postalCodeArea": {
+                    "type": "string",
+                    "description": ""
+                },
+                "countryId": {
+                    "type": "integer",
+                    "description": ""
                 }
             }
         },
@@ -59620,6 +59998,10 @@
                 "branch": {
                     "type": "string",
                     "description": "The branch to checkout for this particular Plugin"
+                },
+                "offerTrial": {
+                    "type": "boolean",
+                    "description": "Determines if the plugin offers a trial period for plentyMarketplace"
                 },
                 "webstores": {
                     "type": "array",
