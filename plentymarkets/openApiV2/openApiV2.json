@@ -20771,6 +20771,272 @@
                         "oAuth2": []
                     }
                 ]
+            },
+            "put": {
+                "summary": "Update up to 50 variations",
+                "description": "Updates up to 50 variations. The ID of the variation must be specified.",
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Illuminate\\Support\\Collection"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "\/rest\/items\/variations",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "itemId",
+                                "unit"
+                            ],
+                            "properties": {
+                                "id": {
+                                    "type": "integer"
+                                },
+                                "isMain": {
+                                    "type": "boolean"
+                                },
+                                "mainVariationId": {
+                                    "type": "integer"
+                                },
+                                "itemId": {
+                                    "type": "integer"
+                                },
+                                "position": {
+                                    "type": "integer"
+                                },
+                                "isActive": {
+                                    "type": "boolean"
+                                },
+                                "number": {
+                                    "type": "string"
+                                },
+                                "model": {
+                                    "type": "string"
+                                },
+                                "externalId": {
+                                    "type": "string"
+                                },
+                                "availability": {
+                                    "type": "integer"
+                                },
+                                "estimatedAvailableAt": {
+                                    "type": "string"
+                                },
+                                "purchasePrice": {
+                                    "type": "number"
+                                },
+                                "movingAveragePrice": {
+                                    "type": "number"
+                                },
+                                "createdAt": {
+                                    "type": "string"
+                                },
+                                "updatedAt": {
+                                    "type": "string"
+                                },
+                                "relatedUpdatedAt": {
+                                    "type": "string"
+                                },
+                                "priceCalculationId": {
+                                    "type": "integer"
+                                },
+                                "picking": {
+                                    "type": "string"
+                                },
+                                "stockLimitation": {
+                                    "type": "integer"
+                                },
+                                "isVisibleIfNetStockIsPositive": {
+                                    "type": "boolean"
+                                },
+                                "isInvisibleIfNetStockIsNotPositive": {
+                                    "type": "boolean"
+                                },
+                                "isAvailableIfNetStockIsPositive": {
+                                    "type": "boolean"
+                                },
+                                "isUnavailableIfNetStockIsNotPositive": {
+                                    "type": "boolean"
+                                },
+                                "mainWarehouseId": {
+                                    "type": "integer"
+                                },
+                                "maximumOrderQuantity": {
+                                    "type": "number"
+                                },
+                                "minimumOrderQuantity": {
+                                    "type": "number"
+                                },
+                                "intervalOrderQuantity": {
+                                    "type": "number"
+                                },
+                                "availableUntil": {
+                                    "type": "string"
+                                },
+                                "releasedAt": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "type": "string"
+                                },
+                                "weightG": {
+                                    "type": "integer"
+                                },
+                                "weightNetG": {
+                                    "type": "integer"
+                                },
+                                "widthMM": {
+                                    "type": "integer"
+                                },
+                                "lengthMM": {
+                                    "type": "integer"
+                                },
+                                "heightMM": {
+                                    "type": "integer"
+                                },
+                                "extraShippingCharge1": {
+                                    "type": "number"
+                                },
+                                "extraShippingCharge2": {
+                                    "type": "number"
+                                },
+                                "unitsContained": {
+                                    "type": "integer"
+                                },
+                                "palletTypeId": {
+                                    "type": "integer"
+                                },
+                                "packingUnits": {
+                                    "type": "integer"
+                                },
+                                "packingUnitTypeId": {
+                                    "type": "integer"
+                                },
+                                "transportationCosts": {
+                                    "type": "number"
+                                },
+                                "storageCosts": {
+                                    "type": "number"
+                                },
+                                "customs": {
+                                    "type": "number"
+                                },
+                                "operatingCosts": {
+                                    "type": "number"
+                                },
+                                "vatId": {
+                                    "type": "integer"
+                                },
+                                "bundleType": {
+                                    "type": "string"
+                                },
+                                "automaticClientVisibility": {
+                                    "type": "integer"
+                                },
+                                "isHiddenInCategoryList": {
+                                    "type": "boolean"
+                                },
+                                "mayShowUnitPrice": {
+                                    "type": "boolean"
+                                },
+                                "categoryVariationId": {
+                                    "type": "integer"
+                                },
+                                "marketVariationId": {
+                                    "type": "integer"
+                                },
+                                "clientVariationId": {
+                                    "type": "integer"
+                                },
+                                "salesPriceVariationId": {
+                                    "type": "integer"
+                                },
+                                "supplierVariationId": {
+                                    "type": "integer"
+                                },
+                                "warehouseVariationId": {
+                                    "type": "integer"
+                                },
+                                "variationBarcodes": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Item\\VariationBarcode\\Models\\VariationBarcode"
+                                    }
+                                },
+                                "variationSalesPrices": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Item\\VariationSalesPrice\\Models\\VariationSalesPrice"
+                                    }
+                                },
+                                "variationCategories": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Item\\VariationCategory\\Models\\VariationCategory"
+                                    }
+                                },
+                                "variationClients": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Item\\VariationClient\\Models\\VariationClient"
+                                    }
+                                },
+                                "variationMarkets": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Item\\VariationMarket\\Models\\VariationMarket"
+                                    }
+                                },
+                                "variationDefaultCategory": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Item\\VariationDefaultCategory\\Models\\VariationDefaultCategory"
+                                    }
+                                },
+                                "variationSuppliers": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Item\\VariationSupplier\\Models\\VariationSupplier"
+                                    }
+                                },
+                                "variationWarehouses": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Item\\VariationWarehouse\\Models\\VariationWarehouse"
+                                    }
+                                },
+                                "variationAttributeValues": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Item\\Attribute\\Models\\AttributeValueSet"
+                                    }
+                                },
+                                "unit": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Item\\UnitCombination\\Models\\UnitCombination"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ]
             }
         },
         "\/rest\/items\/variations\/variation_categories": {
@@ -37860,177 +38126,6 @@
                 ]
             }
         },
-        "\/rest\/orders\/packages\/items\/{packageId}": {
-            "get": {
-                "summary": "",
-                "description": "",
-                "tags": [
-                    "Order"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#\/definitions\/Plenty\\Modules\\Order\\Shipping\\Package\\Models\\OrderShippingPackageItems"
-                        }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-                    }
-                },
-                "parameters": [
-                    {
-                        "name": "packageId",
-                        "type": "integer",
-                        "required": true,
-                        "description": "",
-                        "format": "integer",
-                        "in": "path"
-                    }
-                ],
-                "security": [
-                    {
-                        "oAuth2": []
-                    }
-                ]
-            },
-            "post": {
-                "summary": "",
-                "description": "",
-                "tags": [
-                    "Order"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#\/definitions\/mixed"
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-                    }
-                },
-                "parameters": [
-                    {
-                        "name": "packageId",
-                        "type": "integer",
-                        "required": true,
-                        "description": "",
-                        "format": "integer",
-                        "in": "path"
-                    }
-                ],
-                "security": [
-                    {
-                        "oAuth2": []
-                    }
-                ]
-            }
-        },
-        "\/rest\/orders\/packages\/items\/{packageId}\/{itemId}\/{variationId}": {
-            "delete": {
-                "summary": "",
-                "description": "",
-                "tags": [
-                    "Order"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#\/definitions\/Plenty\\Repositories\\Models\\DeleteResponse"
-                        }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-                    }
-                },
-                "parameters": [
-                    {
-                        "name": "packageId",
-                        "type": "integer",
-                        "required": true,
-                        "description": "",
-                        "format": "integer",
-                        "in": "path"
-                    },
-                    {
-                        "name": "itemId",
-                        "type": "integer",
-                        "required": true,
-                        "description": "",
-                        "format": "integer",
-                        "in": "path"
-                    },
-                    {
-                        "name": "variationId",
-                        "type": "integer",
-                        "required": true,
-                        "description": "",
-                        "format": "integer",
-                        "in": "path"
-                    }
-                ],
-                "security": [
-                    {
-                        "oAuth2": []
-                    }
-                ]
-            },
-            "put": {
-                "summary": "",
-                "description": "",
-                "tags": [
-                    "Order"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
-                        }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-                    }
-                },
-                "parameters": [
-                    {
-                        "name": "packageId",
-                        "type": "integer",
-                        "required": true,
-                        "description": "",
-                        "format": "integer",
-                        "in": "path"
-                    },
-                    {
-                        "name": "itemId",
-                        "type": "integer",
-                        "required": true,
-                        "description": "",
-                        "format": "integer",
-                        "in": "path"
-                    },
-                    {
-                        "name": "variationId",
-                        "type": "integer",
-                        "required": true,
-                        "description": "",
-                        "format": "integer",
-                        "in": "path"
-                    }
-                ],
-                "security": [
-                    {
-                        "oAuth2": []
-                    }
-                ]
-            }
-        },
         "\/rest\/orders\/properties\/types": {
             "get": {
                 "summary": "List order property types",
@@ -38556,6 +38651,177 @@
                 "parameters": [
                     {
                         "name": "shippingPackageTypeId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/orders\/shipping\/packages\/items\/{packageId}\/{itemId}\/{variationId}": {
+            "delete": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Repositories\\Models\\DeleteResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "packageId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "itemId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "variationId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "put": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "packageId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "itemId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "variationId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/orders\/shipping\/packages\/{packageId}\/items": {
+            "get": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Order\\Shipping\\Package\\Models\\OrderShippingPackageItems"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "packageId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "post": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "packageId",
                         "type": "integer",
                         "required": true,
                         "description": "",
@@ -40375,8 +40641,8 @@
         },
         "\/rest\/orders\/{orderId}\/items": {
             "get": {
-                "summary": "",
-                "description": "",
+                "summary": "Search order items",
+                "description": "Searches order items. The ID of the order must be specified.",
                 "tags": [
                     "Order"
                 ],
@@ -40384,7 +40650,44 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#\/definitions\/Plenty\\Modules\\Order\\Shipping\\Package\\Models\\OrderShippingPackageItems"
+                            "type": "object",
+                            "properties": {
+                                "page": {
+                                    "type": "integer",
+                                    "description": "Current page of the response"
+                                },
+                                "totalsCount": {
+                                    "type": "integer",
+                                    "description": "The total number of entries in the response"
+                                },
+                                "isLastPage": {
+                                    "type": "boolean",
+                                    "description": "Flag that indicates if the page shown is the last page of the response"
+                                },
+                                "lastPageNumber": {
+                                    "type": "integer",
+                                    "description": "The last page number"
+                                },
+                                "firstOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the first item of the current page result"
+                                },
+                                "lastOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the last item of the current page result"
+                                },
+                                "itemsPerPage": {
+                                    "type": "integer",
+                                    "description": "The requested amount of items per result page"
+                                },
+                                "entries": {
+                                    "type": "array",
+                                    "description": "List of OrderItem",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Order\\Models\\OrderItem"
+                                    }
+                                }
+                            }
                         }
                     },
                     "401": {
@@ -40399,6 +40702,33 @@
                         "description": "",
                         "format": "integer",
                         "in": "path"
+                    },
+                    {
+                        "name": "page",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The page to get. The default page that will be returned is page 1.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "itemsPerPage",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The number of order items to be displayed per page. The default number of order items per page is 50. The maximum number is 250.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "with",
+                        "type": "array",
+                        "required": false,
+                        "description": "Load additional relations for an order item. Currently possible are:\n    <ul>\n    <li>'variation' = The variation that is associated with the order item.<\/li>\n    <li>'giftCardCodes' = The gift card codes that are associated with the order item.<\/li>\n    <li>'transactions' = The transactions that are associated with the order item.<\/li>\n    <li>'serialNumbers' = The serial numbers that are associated with the order item.<\/li>\n    <li>'variationBarcodes' = The barcodes that are associated with variation of the order item.<\/li>\n    <\/ul>",
+                        "format": "",
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "security": [
@@ -41020,6 +41350,41 @@
                                 }
                             }
                         }
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/orders\/{orderId}\/shipping\/packages\/items": {
+            "get": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Order\\Shipping\\Package\\Models\\OrderShippingPackageItems"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
                     }
                 ],
                 "security": [
@@ -47753,6 +48118,39 @@
             },
             "get": {
                 "summary": "Find a content by id.",
+                "description": "",
+                "tags": [
+                    "Shop"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\ShopBuilder\\Models\\Content"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "contentId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "post": {
+                "summary": "Duplicate a content by id.",
                 "description": "",
                 "tags": [
                     "Shop"
@@ -58780,6 +59178,75 @@
                 }
             }
         },
+        "Plenty\\Modules\\Order\\Models\\OrderItem": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "The ID of the order item"
+                },
+                "orderId": {
+                    "type": "integer",
+                    "description": "The ID of the order that the order item belongs to"
+                },
+                "typeId": {
+                    "type": "integer",
+                    "description": "The ID of the order item type\n<ul>\n<li>VARIATION\t\t\t=\t1<\/li>\n<li>ITEM_BUNDLE\t\t\t=\t2<\/li>\n<li>BUNDLE_COMPONENT\t\t=\t3<\/li>\n<li>PROMOTIONAL_COUPON\t=\t4<\/li>\n<li>GIFT_CARD\t\t\t=\t5<\/li>\n<li>SHIPPING_COSTS\t\t=\t6<\/li>\n<li>PAYMENT_SURCHARGE\t=\t7<\/li>\n<li>GIFT_WRAP\t\t\t=\t8<\/li>\n<li>UNASSIGEND_VARIATION\t=\t9<\/li>\n<li>DEPOSIT\t\t\t\t=\t10<\/li>\n<li>ORDER\t\t\t\t=\t11<\/li>\n<\/ul>"
+                },
+                "referrerId": {
+                    "type": "number",
+                    "description": "The ID of order item referrer"
+                },
+                "itemVariationId": {
+                    "type": "integer",
+                    "description": "The ID of the item variation"
+                },
+                "quantity": {
+                    "type": "number",
+                    "description": "The quantity."
+                },
+                "orderItemName": {
+                    "type": "string",
+                    "description": "The name of the order item"
+                },
+                "attributeValues": {
+                    "type": "string",
+                    "description": "The attribute value names"
+                },
+                "shippingProfileId": {
+                    "type": "integer",
+                    "description": "The ID of the order item's shipping profile"
+                },
+                "countryVatId": {
+                    "type": "integer",
+                    "description": "The ID of the country vat"
+                },
+                "vatField": {
+                    "type": "integer",
+                    "description": "The vat id (0-3)."
+                },
+                "vatRate": {
+                    "type": "number",
+                    "description": "The vat amount, e.g. 19.0 for 19% VAT."
+                },
+                "position": {
+                    "type": "integer",
+                    "description": "The order items position in the order."
+                },
+                "warehouseId": {
+                    "type": "integer",
+                    "description": "The ID of the warehouse."
+                },
+                "createdAt": {
+                    "type": "string",
+                    "description": "The date at which the order item was created."
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "description": "The date that the order item was last updated."
+                }
+            }
+        },
         "Plenty\\Modules\\Order\\Property\\Models\\OrderItemProperty": {
             "type": "object",
             "properties": {
@@ -59436,11 +59903,11 @@
                 },
                 "isFrontendVisible": {
                     "type": "boolean",
-                    "description": ""
+                    "description": "Indicates visibility in frontend."
                 },
                 "color": {
                     "type": "string",
-                    "description": ""
+                    "description": "The color of the status."
                 }
             }
         },
