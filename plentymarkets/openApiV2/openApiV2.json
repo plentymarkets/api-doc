@@ -10958,8 +10958,16 @@
                                 "$ref": "#\/definitions\/mixed"
                             }
                         }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
             }
         },
         "\/rest\/elastic-sync\/log\/check\/sync\/{syncId}": {
@@ -10978,6 +10986,9 @@
                                 "$ref": "#\/definitions\/mixed"
                             }
                         }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -10988,6 +10999,11 @@
                         "description": "",
                         "format": "integer",
                         "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
                     }
                 ]
             }
@@ -11008,8 +11024,16 @@
                                 "$ref": "#\/definitions\/mixed"
                             }
                         }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
             }
         },
         "\/rest\/elastic-sync\/log\/id": {
@@ -11025,8 +11049,16 @@
                         "schema": {
                             "$ref": "#\/definitions\/mixed"
                         }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
             }
         },
         "\/rest\/elastic-sync\/log\/status": {
@@ -11042,8 +11074,16 @@
                         "schema": {
                             "$ref": "#\/definitions\/mixed"
                         }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
             }
         },
         "\/rest\/elastic-sync\/mapping\/all_mappings": {
@@ -11059,8 +11099,16 @@
                         "schema": {
                             "$ref": "#\/definitions\/mixed"
                         }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
             }
         },
         "\/rest\/elastic-sync\/mapping\/entity\/{syncId}": {
@@ -11079,6 +11127,9 @@
                                 "$ref": "#\/definitions\/mixed"
                             }
                         }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -11089,6 +11140,11 @@
                         "description": "",
                         "format": "integer",
                         "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
                     }
                 ]
             }
@@ -11109,8 +11165,16 @@
                                 "$ref": "#\/definitions\/mixed"
                             }
                         }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
             }
         },
         "\/rest\/elastic-sync\/mapping\/fields\/{syncType}": {
@@ -11129,6 +11193,9 @@
                                 "$ref": "#\/definitions\/mixed"
                             }
                         }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -11148,6 +11215,11 @@
                         "format": "string",
                         "in": "query"
                     }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
                 ]
             }
         },
@@ -11164,6 +11236,9 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\ElasticSync\\Models\\Mapper\\MappingIdentifiersList"
                         }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -11174,6 +11249,11 @@
                         "description": "",
                         "format": "integer",
                         "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
                     }
                 ]
             }
@@ -11191,8 +11271,16 @@
                         "schema": {
                             "$ref": "#\/definitions\/Symfony\\Component\\HttpFoundation\\Response"
                         }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
             }
         },
         "\/rest\/elastic-sync\/mapping\/mapp\/csv_columns\/{syncId}": {
@@ -11211,6 +11299,9 @@
                                 "$ref": "#\/definitions\/mixed"
                             }
                         }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -11221,6 +11312,11 @@
                         "description": "",
                         "format": "integer",
                         "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
                     }
                 ]
             }
@@ -11241,8 +11337,16 @@
                                 "$ref": "#\/definitions\/mixed"
                             }
                         }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
             }
         },
         "\/rest\/elastic-sync\/mapping\/mapp\/tree": {
@@ -11261,8 +11365,16 @@
                                 "$ref": "#\/definitions\/mixed"
                             }
                         }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
             }
         },
         "\/rest\/elastic-sync\/mapping\/model\/{syncType}": {
@@ -11281,6 +11393,9 @@
                                 "$ref": "#\/definitions\/mixed"
                             }
                         }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -11299,6 +11414,11 @@
                         "description": "The sync data type",
                         "format": "string",
                         "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
                     }
                 ]
             }
@@ -11319,6 +11439,9 @@
                                 "$ref": "#\/definitions\/mixed"
                             }
                         }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -11329,6 +11452,11 @@
                         "description": "",
                         "format": "integer",
                         "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
                     }
                 ]
             }
@@ -11349,6 +11477,9 @@
                                 "$ref": "#\/definitions\/mixed"
                             }
                         }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -11367,6 +11498,11 @@
                         "description": "The sync data type",
                         "format": "string",
                         "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
                     }
                 ]
             }
@@ -11387,8 +11523,16 @@
                                 "$ref": "#\/definitions\/mixed"
                             }
                         }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
             }
         },
         "\/rest\/elastic-sync\/mapping\/{mapIds}": {
@@ -11401,6 +11545,9 @@
                 "responses": {
                     "200": {
                         "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -11411,6 +11558,11 @@
                         "description": "",
                         "format": "integer",
                         "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
                     }
                 ]
             }
@@ -11428,6 +11580,9 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\ElasticSync\\Models\\Sync\\Mapping"
                         }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -11438,6 +11593,11 @@
                         "description": "",
                         "format": "integer",
                         "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
                     }
                 ]
             },
@@ -11453,6 +11613,9 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\ElasticSync\\Models\\Sync\\Mapping"
                         }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -11463,6 +11626,11 @@
                         "description": "",
                         "format": "integer",
                         "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
                     }
                 ]
             }
@@ -11480,6 +11648,9 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\ElasticSync\\Models\\Sync\\Sync"
                         }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -11515,6 +11686,11 @@
                         "format": "string",
                         "in": "query"
                     }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
                 ]
             }
         },
@@ -11528,6 +11704,9 @@
                 "responses": {
                     "200": {
                         "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -11546,6 +11725,11 @@
                         "description": "The ID of the sync",
                         "format": "integer",
                         "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
                     }
                 ]
             }
@@ -11566,8 +11750,16 @@
                                 "$ref": "#\/definitions\/mixed"
                             }
                         }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
             }
         },
         "\/rest\/elastic-sync\/sync\/export\/{syncId}": {
@@ -11586,6 +11778,9 @@
                                 "$ref": "#\/definitions\/mixed"
                             }
                         }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -11604,6 +11799,11 @@
                         "description": "The ID of the sync",
                         "format": "integer",
                         "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
                     }
                 ]
             }
@@ -11624,8 +11824,16 @@
                                 "$ref": "#\/definitions\/mixed"
                             }
                         }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
             }
         },
         "\/rest\/elastic-sync\/sync\/list\/import": {
@@ -11638,6 +11846,9 @@
                 "responses": {
                     "200": {
                         "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -11651,6 +11862,11 @@
                         "items": {
                             "type": "string"
                         }
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
                     }
                 ]
             }
@@ -11665,6 +11881,9 @@
                 "responses": {
                     "200": {
                         "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -11678,6 +11897,11 @@
                         "items": {
                             "type": "string"
                         }
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
                     }
                 ]
             }
@@ -11695,8 +11919,16 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\ElasticSync\\Models\\Sync\\Sync"
                         }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
             }
         },
         "\/rest\/elastic-sync\/sync\/preview\/{syncId}": {
@@ -11715,6 +11947,9 @@
                                 "$ref": "#\/definitions\/mixed"
                             }
                         }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -11725,6 +11960,11 @@
                         "description": "",
                         "format": "integer",
                         "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
                     }
                 ]
             }
@@ -11739,6 +11979,9 @@
                 "responses": {
                     "200": {
                         "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -11757,6 +12000,11 @@
                         "description": "The test run variable",
                         "format": "integer",
                         "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
                     }
                 ]
             }
@@ -11777,8 +12025,16 @@
                                 "$ref": "#\/definitions\/mixed"
                             }
                         }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
             }
         },
         "\/rest\/elastic-sync\/sync\/{syncId}": {
@@ -11791,6 +12047,9 @@
                 "responses": {
                     "200": {
                         "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -11810,6 +12069,11 @@
                         "format": "string",
                         "in": "query"
                     }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
                 ]
             },
             "get": {
@@ -11824,6 +12088,9 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\ElasticSync\\Models\\Sync\\Sync"
                         }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -11834,6 +12101,11 @@
                         "description": "",
                         "format": "integer",
                         "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
                     }
                 ]
             },
@@ -11849,6 +12121,9 @@
                         "schema": {
                             "$ref": "#\/definitions\/Plenty\\Modules\\ElasticSync\\Models\\Sync\\Sync"
                         }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
                 "parameters": [
@@ -11859,6 +12134,11 @@
                         "description": "",
                         "format": "integer",
                         "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
                     }
                 ]
             }
@@ -59928,11 +60208,15 @@
                 },
                 "identification": {
                     "type": "string",
-                    "description": "External identification. Can be an arbitrary string"
+                    "description": "External identification. Can be an arbitrary string."
+                },
+                "direction": {
+                    "type": "string",
+                    "description": "The direction. Possible values are 'in' and 'out'."
                 },
                 "status": {
                     "type": "string",
-                    "description": "The status. Possible values are 'in' and 'out'"
+                    "description": "The status. Possible values are 'regular' and 'cancelled'."
                 },
                 "receiptId": {
                     "type": "integer",
