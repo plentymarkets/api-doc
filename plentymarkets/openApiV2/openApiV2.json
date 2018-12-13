@@ -79,6 +79,14 @@
             }
         },
         {
+            "name": "Blog",
+            "description": "Routes for Blog",
+            "externalDocs": {
+                "description": "Official developers site for Blog routes",
+                "url": "https:\/\/developers.plentymarkets.com\/rest-doc\/blog"
+            }
+        },
+        {
             "name": "Board",
             "description": "Routes for Board",
             "externalDocs": {
@@ -8027,6 +8035,157 @@
                                 }
                             }
                         }
+                    }
+                ]
+            }
+        },
+        "\/rest\/blogs\/post": {
+            "post": {
+                "summary": "Create a blog post",
+                "description": "Creates a blog post",
+                "tags": [
+                    "Blog"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Blog\\Models\\BlogPost"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/blogs\/post\/{postId}": {
+            "delete": {
+                "summary": "Delete a blog post",
+                "description": "Deletes a blog post",
+                "tags": [
+                    "Blog"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "postId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "get": {
+                "summary": "Get a blog post",
+                "description": "Gets a blog post",
+                "tags": [
+                    "Blog"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Blog\\Models\\BlogPost"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "postId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "put": {
+                "summary": "Update a blog post",
+                "description": "Updates a blog post",
+                "tags": [
+                    "Blog"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Blog\\Models\\BlogPost"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "postId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/blogs\/posts": {
+            "get": {
+                "summary": "List blog posts",
+                "description": "Lists blog posts",
+                "tags": [
+                    "Blog"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\Blog\\Models\\BlogPost"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
                     }
                 ]
             }
@@ -35982,6 +36141,54 @@
                         }
                     },
                     {
+                        "name": "orderItemName",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter that restricts the search results to orders with a certain item name. The name of the item must be specified.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "variationNumber",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter that restricts the search results to orders with a specific variation number. The number of the variation must be specified.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "sender.contact",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter that restricts the search results to orders with a specific sender of the type contact. The id of the sender must be specified.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "sender.warehouse",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter that restricts the search results to orders with a specific sender of the type warehouse. The id of the sender must be specified.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "receiver.contact",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter that restricts the search results to orders with a specific receiver of the type contact. The id of the receiver must be specified.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "receiver.warehouse",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter that restricts the search results to orders with a specific receiver of the type warehouse. The id of the receiver must be specified.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
                         "name": "externalOrderId",
                         "type": "string",
                         "required": false,
@@ -48464,6 +48671,31 @@
                     }
                 ]
             },
+            "options": {
+                "summary": "Get cross origin headers.",
+                "description": "",
+                "tags": [
+                    "Shop"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Response"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "contentId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            },
             "post": {
                 "summary": "Duplicate a content by id.",
                 "description": "",
@@ -48605,10 +48837,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#\/definitions\/Plenty\\Modules\\ShopBuilder\\Models\\ContentWidget"
-                            }
+                            "$ref": "#\/definitions\/Illuminate\\Http\\Response"
                         }
                     },
                     "401": {
@@ -48631,6 +48860,21 @@
                     }
                 ]
             },
+            "options": {
+                "summary": "Get cross origin headers.",
+                "description": "",
+                "tags": [
+                    "Shop"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Illuminate\\Http\\Response"
+                        }
+                    }
+                }
+            },
             "post": {
                 "summary": "Render the preview for widgets.",
                 "description": "",
@@ -48641,10 +48885,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#\/definitions\/Plenty\\Modules\\ShopBuilder\\Models\\ContentWidgetPreview"
-                            }
+                            "$ref": "#\/definitions\/Illuminate\\Http\\Response"
                         }
                     },
                     "401": {
@@ -55212,6 +55453,23 @@
                 }
             }
         },
+        "Plenty\\Modules\\Blog\\Models\\BlogPost": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": ""
+                },
+                "plentyIdHash": {
+                    "type": "string",
+                    "description": ""
+                },
+                "data": {
+                    "type": "string",
+                    "description": ""
+                }
+            }
+        },
         "Plenty\\Modules\\Board\\Models\\Board": {
             "type": "object",
             "properties": {
@@ -61191,57 +61449,6 @@
                 }
             }
         },
-        "Plenty\\Modules\\ShopBuilder\\Models\\ContentWidget": {
-            "type": "object",
-            "properties": {
-                "identifier": {
-                    "type": "string",
-                    "description": "The identifier of the content widget"
-                },
-                "widgetClass": {
-                    "type": "string",
-                    "description": "The class of the content widget"
-                },
-                "label": {
-                    "type": "string",
-                    "description": "The label of the content widget"
-                },
-                "tooltip": {
-                    "type": "string",
-                    "description": "The tooltip of the content widget"
-                },
-                "previewImageURL": {
-                    "type": "string",
-                    "description": "The preview image the content widget"
-                },
-                "type": {
-                    "type": "string",
-                    "description": "The type of the widget"
-                },
-                "allowedNestingTypes": {
-                    "type": "array",
-                    "description": "Allowed types to be nested inside this widget",
-                    "items": {}
-                },
-                "settings": {
-                    "type": "string",
-                    "description": "The settings of the content widget"
-                }
-            }
-        },
-        "Plenty\\Modules\\ShopBuilder\\Models\\ContentWidgetPreview": {
-            "type": "object",
-            "properties": {
-                "identifier": {
-                    "type": "string",
-                    "description": ""
-                },
-                "content": {
-                    "type": "string",
-                    "description": ""
-                }
-            }
-        },
         "Plenty\\Modules\\StockManagement\\Stock\\Models\\Stock": {
             "type": "object",
             "properties": {
@@ -62099,6 +62306,9 @@
             "type": "object"
         },
         "Plenty\\Repositories\\Models\\PaginationResponse": {
+            "type": "object"
+        },
+        "Response": {
             "type": "object"
         },
         "Symfony\\Component\\HttpFoundation\\Response": {
