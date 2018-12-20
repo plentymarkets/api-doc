@@ -47924,6 +47924,33 @@
                 ]
             }
         },
+        "\/rest\/properties\/relations\/{relationId}\/file": {
+            "post": {
+                "summary": "Save property relation file to S3",
+                "description": "Saves property relation file to S3.",
+                "tags": [
+                    "Property"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/string"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "relationId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            }
+        },
         "\/rest\/properties\/selections": {
             "get": {
                 "summary": "List property selections",
