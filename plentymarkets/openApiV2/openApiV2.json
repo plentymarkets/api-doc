@@ -21471,6 +21471,12 @@
                                     "items": {
                                         "$ref": "#\/definitions\/Plenty\\Modules\\Item\\UnitCombination\\Models\\UnitCombination"
                                     }
+                                },
+                                "parentVariationId": {
+                                    "type": "integer"
+                                },
+                                "parentVariationQuantity": {
+                                    "type": "number"
                                 }
                             }
                         }
@@ -28868,6 +28874,12 @@
                                     "items": {
                                         "$ref": "#\/definitions\/Plenty\\Modules\\Item\\UnitCombination\\Models\\UnitCombination"
                                     }
+                                },
+                                "parentVariationId": {
+                                    "type": "integer"
+                                },
+                                "parentVariationQuantity": {
+                                    "type": "number"
                                 }
                             }
                         }
@@ -29234,6 +29246,12 @@
                                     "items": {
                                         "$ref": "#\/definitions\/Plenty\\Modules\\Item\\UnitCombination\\Models\\UnitCombination"
                                     }
+                                },
+                                "parentVariationId": {
+                                    "type": "integer"
+                                },
+                                "parentVariationQuantity": {
+                                    "type": "number"
                                 }
                             }
                         }
@@ -50809,6 +50827,63 @@
                 ]
             }
         },
+        "\/rest\/stockmanagement\/warehouses\/{warehouseId}\/stock\/unpackVariation": {
+            "put": {
+                "summary": "Unpack variation",
+                "description": "",
+                "tags": [
+                    "StockManagement"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\StockManagement\\Warehouse\\Models\\Warehouse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "warehouseId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "VariationStockIntake",
+                        "type": "array",
+                        "required": true,
+                        "description": "The new item that will be booked in as result of the unpacking",
+                        "format": "",
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "VariationStockCorrection",
+                        "type": "array",
+                        "required": true,
+                        "description": "The item that is unpacked",
+                        "format": "",
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/storage\/frontend\/file": {
             "delete": {
                 "summary": "Remove a single object from frontend storage.",
@@ -58239,7 +58314,7 @@
                 },
                 "reasonId": {
                     "type": "integer",
-                    "description": "The reason for correction. The following reasons are available:\n<ul>\n<li>301: Stock correction<\/li>\n<li>302: Stock correction by stocktaking<\/li>\n<li>304: Stock correction because of manufacturer error<\/li>\n<li>305: Stock correction because of unusable paper<\/li>\n<li>306: Stock correction because of packing error<\/li>\n<li>307: Stock correction because of damage<\/li>\n<li>309: Stock correction (internal offset)<\/li>\n<li>317: Stock correction because of BBD<\/li>\n<li>318: Stock correction because of shipping items to FBA<\/li>\n<li>319: Stock correction because of shipping items to fulfillment service provider<\/li>\n<li>320: Stock correction because of sample for interested parties<\/li>\n<li>321: Stock correction because of sample for customers<\/li>\n<li>322: Stock correction because of sample<\/li>\n<li>323: Stock correction because quality models are booked in<\/li>\n<li>324: Stock correction because quality models are booked out<\/li>\n<li>325: Stock correction because of gift<\/li>\n<li>326: Stock correction because of malfunction (without return)<\/li>\n<\/ul>"
+                    "description": "The reason for correction. The following reasons are available:\n<ul>\n<li>301: Stock correction<\/li>\n<li>302: Stock correction by stocktaking<\/li>\n<li>304: Stock correction because of manufacturer error<\/li>\n<li>305: Stock correction because of unusable paper<\/li>\n<li>306: Stock correction because of packing error<\/li>\n<li>307: Stock correction because of damage<\/li>\n<li>309: Stock correction (internal offset)<\/li>\n<li>317: Stock correction because of BBD<\/li>\n<li>318: Stock correction because of shipping items to FBA<\/li>\n<li>319: Stock correction because of shipping items to fulfillment service provider<\/li>\n<li>320: Stock correction because of sample for interested parties<\/li>\n<li>321: Stock correction because of sample for customers<\/li>\n<li>322: Stock correction because of sample<\/li>\n<li>323: Stock correction because quality models are booked in<\/li>\n<li>324: Stock correction because quality models are booked out<\/li>\n<li>325: Stock correction because of gift<\/li>\n<li>326: Stock correction because of malfunction (without return)<\/li>\n<li>327: Stock correction because of loss<\/li>\n<li>328: Stock correction because of unpack<\/li>\n<\/ul>"
                 }
             }
         },
@@ -58296,7 +58371,7 @@
                 },
                 "reasonId": {
                     "type": "integer",
-                    "description": "The ID of the reason. The following IDs are available:\n<ul>\n<li>101: Incoming items<\/li>\n<li>102: Booked in by stocktaking<\/li>\n<li>104: Rebooked into stock because no production errors were found<\/li>\n<li>106: Maculation canceled<\/li>\n<li>107: Packing error, items are re-booked<\/li>\n<li>109: Incoming items (logistics)<\/li>\n<li>115: Incoming items (second choice)<\/li>\n<li>116: Booked in by correction<\/li>\n<\/ul>"
+                    "description": "The ID of the reason. The following IDs are available:\n<ul>\n<li>101: Incoming items<\/li>\n<li>102: Booked in by stocktaking<\/li>\n<li>104: Rebooked into stock because no production errors were found<\/li>\n<li>106: Maculation canceled<\/li>\n<li>107: Packing error, items are re-booked<\/li>\n<li>109: Incoming items (logistics)<\/li>\n<li>115: Incoming items (second choice)<\/li>\n<li>116: Booked in by correction<\/li>\n<li>117: Unpacked item<\/li>\n<\/ul>"
                 }
             }
         },
@@ -58754,6 +58829,18 @@
                 "salesRank": {
                     "type": "integer",
                     "description": "The sales rank of the variation. This ranking is used to position top items automatically if the option <b>Automatically sort by monthly sales<\/b> (<b>Settings \u00bb Client (store) \u00bb Standard \u00bb Item layouts \u00bb Basic settings<\/b>) is set to <b>Yes<\/b>. The sales ranking is calculated daily. If the option <b>Automatically sort by monthly sales<\/b> is set to <b>No<\/b>, a value of 0 is returned and variations are sorted by position instead."
+                },
+                "parentVariationId": {
+                    "type": "integer",
+                    "description": ""
+                },
+                "parentVariationQuantity": {
+                    "type": "number",
+                    "description": ""
+                },
+                "singleItemCount": {
+                    "type": "integer",
+                    "description": ""
                 },
                 "categoryVariationId": {
                     "type": "integer",
