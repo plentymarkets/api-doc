@@ -335,6 +335,14 @@
             }
         },
         {
+            "name": "Tag",
+            "description": "Routes for Tag",
+            "externalDocs": {
+                "description": "Official developers site for Tag routes",
+                "url": "https:\/\/developers.plentymarkets.com\/rest-doc\/tag"
+            }
+        },
+        {
             "name": "Ticket",
             "description": "Routes for Ticket",
             "externalDocs": {
@@ -51649,6 +51657,378 @@
                 ]
             }
         },
+        "\/rest\/tags": {
+            "get": {
+                "summary": "List tags",
+                "description": "Lists all tags. The results can be filtered by:\ntagName (eq, in, like)\ntagAvailability (eq, in)\ntagLang (eq, in)\ncolor (eq, in)",
+                "tags": [
+                    "Tag"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Illuminate\\Support\\Collection"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "with",
+                        "type": "string",
+                        "required": false,
+                        "description": "Includes the specified tag information in the results. The following parameters are available: <ul><li>availabilities = The tag availabilities<\/li><li>names = The tag names<\/li><li>relationship = The tag relationships<\/li><\/ul>More than one parameter should be separated by commas.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "tagName",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to tags with the specified tag name. The tag name must be specified.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "tagAvailability",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to tags with the specified availability type. The availability type must be specified.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "tagLang",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to tags which have names in the specified language. The language must be specified.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "color",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to tags with the specified color. The color must be specified.",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "post": {
+                "summary": "Create a tag",
+                "description": "Creates a tag.",
+                "tags": [
+                    "Tag"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Tag\\Models\\Tag"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "\/rest\/tags",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "tagName",
+                                "names"
+                            ],
+                            "properties": {
+                                "tagName": {
+                                    "type": "string"
+                                },
+                                "color": {
+                                    "type": "string"
+                                },
+                                "availabilities": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Tag\\Models\\TagAvailability"
+                                    }
+                                },
+                                "names": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Tag\\Models\\TagName"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "\/rest\/tags\/bulk": {
+            "post": {
+                "summary": "Create up to 50 tags",
+                "description": "Creates up to 50 tags. The IDs of the tags must be specified.",
+                "tags": [
+                    "Tag"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "\/rest\/tags\/bulk",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "tagName",
+                                "names"
+                            ],
+                            "properties": {
+                                "tagName": {
+                                    "type": "string"
+                                },
+                                "color": {
+                                    "type": "string"
+                                },
+                                "availabilities": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Tag\\Models\\TagAvailability"
+                                    }
+                                },
+                                "names": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Tag\\Models\\TagName"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            "put": {
+                "summary": "Update up to 50 tags.",
+                "description": "Updates up to 50 tags. The IDs of the tags must bes specified",
+                "tags": [
+                    "Tag"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "\/rest\/tags\/bulk",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "tagName",
+                                "names"
+                            ],
+                            "properties": {
+                                "tagName": {
+                                    "type": "string"
+                                },
+                                "color": {
+                                    "type": "string"
+                                },
+                                "availabilities": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Tag\\Models\\TagAvailability"
+                                    }
+                                },
+                                "names": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Tag\\Models\\TagName"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "\/rest\/tags\/{id}": {
+            "delete": {
+                "summary": "Delete a tag",
+                "description": "Deletes a tag. The ID of the tag must be specified.",
+                "tags": [
+                    "Tag"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "get": {
+                "summary": "Get a tag by ID",
+                "description": "Gets a tag by ID. The ID of the tag must be specified.",
+                "tags": [
+                    "Tag"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Tag\\Models\\Tag"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "put": {
+                "summary": "Update a tag",
+                "description": "Updates a tag. The ID of the tag must be specified.",
+                "tags": [
+                    "Tag"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Tag\\Models\\Tag"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "in": "body",
+                        "name": "\/rest\/tags\/{id}",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "tagName",
+                                "names"
+                            ],
+                            "properties": {
+                                "tagName": {
+                                    "type": "string"
+                                },
+                                "color": {
+                                    "type": "string"
+                                },
+                                "availabilities": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Tag\\Models\\TagAvailability"
+                                    }
+                                },
+                                "names": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Tag\\Models\\TagName"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/tickets": {
             "get": {
                 "summary": "List tickets by filters",
@@ -61824,6 +62204,57 @@
                 "isLastPage": {
                     "type": "boolean",
                     "description": ""
+                }
+            }
+        },
+        "Plenty\\Modules\\Tag\\Models\\Tag": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "The tag ID"
+                },
+                "tagName": {
+                    "type": "string",
+                    "description": "The name of the tag"
+                },
+                "color": {
+                    "type": "string",
+                    "description": "The color for the tag"
+                }
+            }
+        },
+        "Plenty\\Modules\\Tag\\Models\\TagAvailability": {
+            "type": "object",
+            "properties": {
+                "tagId": {
+                    "type": "integer",
+                    "description": "The Tag ID of the tag"
+                },
+                "tagType": {
+                    "type": "string",
+                    "description": "The type of the tag."
+                }
+            }
+        },
+        "Plenty\\Modules\\Tag\\Models\\TagName": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "The name ID of the tag"
+                },
+                "tagId": {
+                    "type": "integer",
+                    "description": "The tag ID"
+                },
+                "tagLang": {
+                    "type": "string",
+                    "description": "The lang of the tag name."
+                },
+                "tagName": {
+                    "type": "string",
+                    "description": "The name of the tag."
                 }
             }
         },
