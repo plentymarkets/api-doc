@@ -2744,6 +2744,28 @@
                         "description": "",
                         "format": "integer",
                         "in": "path"
+                    },
+                    {
+                        "in": "body",
+                        "name": "\/rest\/accounts\/addresses\/{addressId}\/options",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "typeId",
+                                "value"
+                            ],
+                            "properties": {
+                                "typeId": {
+                                    "type": "integer"
+                                },
+                                "value": {
+                                    "type": "string"
+                                },
+                                "position": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
                     }
                 ],
                 "security": [
@@ -3006,6 +3028,14 @@
                         "type": "integer",
                         "required": false,
                         "description": "Filter that restricts the search result to contacts with a specific contact type",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "rating",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter that restricts the search result to contacts with a specific rating",
                         "format": "integer",
                         "in": "query"
                     },
@@ -21008,7 +21038,7 @@
                         "name": "with",
                         "type": "string",
                         "required": false,
-                        "description": "Includes the specified variation information in the results. The following parameters are available: <ul><li>variationBarcodes = The barcode linked to the variation and the saved code<\/li><li>variationBundleComponents = The bundle components of the variation and their quantities<\/li><li>variationComponentBundles<\/b> = The bundles that this variation is a component of<\/li><li>variationSalesPrices = The sales prices linked to the variation and the saved price<\/li><li>marketItemNumbers = The market ident number of the variation<\/li><li>variationCategories = The categories linked to the variation<\/li><li>variationClients = The clients (stores) for which the variation is activated<\/li><li>variationMarkets = The markets for which the variation is activated <\/li><li>variationDefaultCategory = The default category of the variation<\/li><li>variationSuppliers = The supplier data associated with the variation<\/li><li>variationWarehouses = The warehouse data associated with the variation<\/li><li>images = The images linked to the variation<\/li><li>variationAttributeValues = The attribute values of the variation<\/li><li>variationSkus = The SKU data associated with the variation<\/li><li>unit = The unit assigned to the variation<\/li><li>parent = The main variation of the variation. Value is null if this variation is the item's main variation.<\/li><li>variationDescription = The texts of the variation<\/li><li>item = The item data of the variation<\/li><li>stock = The stock data of the variation<\/li><\/ul> For example, specifying the parameters variationCategories and variationDefaultCategory will include the default category and all other categories the variations are linked to. More than one parameter should be separated by commas.",
+                        "description": "Includes the specified variation information in the results. The following parameters are available: <ul><li>variationBarcodes = The barcode linked to the variation and the saved code<\/li><li>variationBundleComponents = The bundle components of the variation and their quantities<\/li><li>variationComponentBundles<\/b> = The bundles that this variation is a component of<\/li><li>variationSalesPrices = The sales prices linked to the variation and the saved price<\/li><li>marketItemNumbers = The market ident number of the variation<\/li><li>variationCategories = The categories linked to the variation<\/li><li>variationClients = The clients (stores) for which the variation is activated<\/li><li>variationMarkets = The markets for which the variation is activated <\/li><li>variationDefaultCategory = The default category of the variation<\/li><li>variationSuppliers = The supplier data associated with the variation<\/li><li>variationWarehouses = The warehouse data associated with the variation<\/li><li>images = The images linked to the variation<\/li><li>variationAttributeValues = The attribute values of the variation<\/li><li>variationSkus = The SKU data associated with the variation<\/li><li>unit = The unit assigned to the variation<\/li><li>parent = The main variation of the variation. Value is null if this variation is the item's main variation.<\/li><li>variationTexts = The texts of the variation<\/li><li>item = The item data of the variation<\/li><li>stock = The stock data of the variation<\/li><li>stockStorageLocations = The storage location stock data of the variation<\/li><\/ul> For example, specifying the parameters variationCategories and variationDefaultCategory will include the default category and all other categories the variations are linked to. More than one parameter should be separated by commas.",
                         "format": "string",
                         "in": "query"
                     },
@@ -21209,6 +21239,22 @@
                         "type": "string",
                         "required": false,
                         "description": "Filter restricts the list of results to those variations for which related information was updated during the specified period. Related information is defined as information linked to the variation, i.e. barcodes, categories, images, markets, clients (stores), prices, suppliers, warehouses and the default category. See variationUpdatedBetween for supported formats.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "itemDescription",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations with descriptions that contain the specified string.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "stockWarehouseId",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which have physical stock on the given warehouse.",
                         "format": "string",
                         "in": "query"
                     }
@@ -28284,6 +28330,38 @@
                 ]
             }
         },
+        "\/rest\/items\/{itemId}\/fill": {
+            "post": {
+                "summary": "Fill item to es",
+                "description": "",
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "itemId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/items\/{itemId}\/item_shipping_profiles": {
             "delete": {
                 "summary": "Deactivate shipping profiles of an item",
@@ -29263,6 +29341,46 @@
                                 }
                             }
                         }
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/items\/{itemId}\/variations\/{variationId}\/fill": {
+            "post": {
+                "summary": "Fill a variation",
+                "description": "",
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "itemId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "variationId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
                     }
                 ],
                 "security": [
@@ -36346,7 +36464,7 @@
                         "name": "with",
                         "type": "array",
                         "required": false,
-                        "description": "Load additional relations for an order. Currently possible are:\n    <ul>\n    <li>'addresses' = The address objects that are associated with the order.<\/li>\n    <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the the reference type, the ID of the reference and the relation itself.<\/li>\n    <li>'comments' = The order comments.<\/li>\n    <li>'location' = The accounting location of the order.<\/li>\n    <li>'payments' = The payments that are associated with the order.<\/li>\n    <li>'documents' = The documents that are associated with the order.<\/li>\n    <li>'orderItems.variation' = The variation that is associated with the order item.<\/li>\n    <li>'orderItems.giftCardCodes' = The gift card codes that are associated with the order item.<\/li>\n    <li>'orderItems.transactions' = The transactions that are associated with the order item.<\/li>\n    <li>'orderItems.serialNumbers' = The serial numbers that are associated with the order item.<\/li>\n    <li>'orderItems.variationBarcodes' = The barcodes that are associated with variation of the order item.<\/li>\n    <li>'originOrderReferences' = The references to other orders, e.g. returns or credit notes, associated with this order.<\/li>\n    <\/ul>\n    Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
+                        "description": "Load additional relations for an order. Currently possible are:\n    <ul>\n    <li>'addresses' = The address objects that are associated with the order.<\/li>\n    <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the the reference type, the ID of the reference and the relation itself.<\/li>\n    <li>'comments' = The order comments.<\/li>\n    <li>'location' = The accounting location of the order.<\/li>\n    <li>'payments' = The payments that are associated with the order.<\/li>\n    <li>'documents' = The documents that are associated with the order.<\/li>\n    <li>'contactSender' = The associated contact for the contact-sender relation.<\/li>\n    <li>'contactReceiver' = The associated contact for the contact-receiver relation.<\/li>\n    <li>'warehouseSender' = The associated warehouse for the warehouse-sender relation.<\/li>\n    <li>'warehouseReceiver' = The associated warehouse for the warehouse-receiver relation.<\/li>\n    <li>'orderItems.variation' = The variation that is associated with the order item.<\/li>\n    <li>'orderItems.giftCardCodes' = The gift card codes that are associated with the order item.<\/li>\n    <li>'orderItems.transactions' = The transactions that are associated with the order item.<\/li>\n    <li>'orderItems.serialNumbers' = The serial numbers that are associated with the order item.<\/li>\n    <li>'orderItems.variationBarcodes' = The barcodes that are associated with variation of the order item.<\/li>\n    <li>'originOrderReferences' = The references to other orders, e.g. returns or credit notes, associated with this order.<\/li>\n    <\/ul>\n    Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
                         "format": "",
                         "in": "query",
                         "items": {
@@ -36550,7 +36668,7 @@
                         "name": "with",
                         "type": "array",
                         "required": false,
-                        "description": "Load additional relations for an order. Currently possible are:\n    <ul>\n    <li>'addresses' = The address objects that are associated with the order.<\/li>\n    <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the the reference type, the ID of the reference and the relation itself.<\/li>\n    <li>'comments' = The order comments.<\/li>\n    <li>'location' = The accounting location of the order.<\/li>\n    <li>'payments' = The payments that are associated with the order.<\/li>\n    <li>'documents' = The documents that are associated with the order.<\/li>\n    <li>'orderItems.variation' = The variation that is associated with the order item.<\/li>\n    <li>'orderItems.giftCardCodes' = The gift card codes that are associated with the order item.<\/li>\n    <li>'orderItems.transactions' = The transactions that are associated with the order item.<\/li>\n    <li>'orderItems.serialNumbers' = The serial numbers that are associated with the order item.<\/li>\n    <li>'orderItems.variationBarcodes' = The barcodes that are associated with variation of the order item.<\/li>\n    <\/ul>\n    Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
+                        "description": "Load additional relations for an order. Currently possible are:\n    <ul>\n    <li>'addresses' = The address objects that are associated with the order.<\/li>\n    <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the the reference type, the ID of the reference and the relation itself.<\/li>\n    <li>'comments' = The order comments.<\/li>\n    <li>'location' = The accounting location of the order.<\/li>\n    <li>'payments' = The payments that are associated with the order.<\/li>\n    <li>'documents' = The documents that are associated with the order.<\/li>\n    <li>'contactSender' = The associated contact for the contact-sender relation.<\/li>\n    <li>'contactReceiver' = The associated contact for the contact-receiver relation.<\/li>\n    <li>'warehouseSender' = The associated warehouse for the warehouse-sender relation.<\/li>\n    <li>'warehouseReceiver' = The associated warehouse for the warehouse-receiver relation.<\/li>\n    <li>'orderItems.variation' = The variation that is associated with the order item.<\/li>\n    <li>'orderItems.giftCardCodes' = The gift card codes that are associated with the order item.<\/li>\n    <li>'orderItems.transactions' = The transactions that are associated with the order item.<\/li>\n    <li>'orderItems.serialNumbers' = The serial numbers that are associated with the order item.<\/li>\n    <li>'orderItems.variationBarcodes' = The barcodes that are associated with variation of the order item.<\/li>\n    <\/ul>\n    Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
                         "format": "",
                         "in": "query",
                         "items": {
@@ -37560,6 +37678,22 @@
                         "in": "path"
                     },
                     {
+                        "name": "contactId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter that restricts the search results to documents belonging to a specific contact ID.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "plentyId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter that restricts the search results to documents belonging to the specific plenty ID.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
                         "name": "createdAtFrom",
                         "type": "string",
                         "required": false,
@@ -37589,14 +37723,6 @@
                         "required": false,
                         "description": "Filter that restricts the search result to documents that were displayed within a certain period of time. This filter can be used alone or can be combined with the displayDateFrom filter. The date has to be in the W3C format, e.g. '2016-10-24T13:33:23+02:00'.",
                         "format": "string",
-                        "in": "query"
-                    },
-                    {
-                        "name": "plentyId",
-                        "type": "integer",
-                        "required": true,
-                        "description": "The plenty ID of the order documents.",
-                        "format": "integer",
                         "in": "query"
                     },
                     {
@@ -37686,6 +37812,22 @@
                         "description": "",
                         "format": "integer",
                         "in": "path"
+                    },
+                    {
+                        "name": "contactId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter that restricts the search results to documents belonging to a specific contact ID.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "plentyId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter that restricts the search results to documents belonging to the specific plenty ID.",
+                        "format": "integer",
+                        "in": "query"
                     },
                     {
                         "name": "createdAtFrom",
@@ -39537,7 +39679,7 @@
                         "name": "with",
                         "type": "string",
                         "required": false,
-                        "description": "The name of an relation to the preset. The following parameter is available: parcelServiceRegion, parcelServicePresetNames and parcelServiceNames.",
+                        "description": "The name of an relation to the preset. The following parameter is available: parcelServiceRegion, parcelServiceRegionConstraint, parcelServicePresetNames and parcelServiceNames.",
                         "format": "string",
                         "in": "query"
                     },
@@ -40599,7 +40741,7 @@
                         "name": "with",
                         "type": "array",
                         "required": false,
-                        "description": "Load additional relations for an order. Currently possible are:\n     * <ul>\n       <li>'addresses' = The address objects that are associated with the order.<\/li>\n       <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the the reference type, the ID of the reference and the relation itself.<\/li>\n       <li>'comments' = The order comments.<\/li>\n       <li>'location' = The accounting location of the order.<\/li>\n       <li>'payments' = The payments that are associated with the order.<\/li>\n       <li>'documents' = The documents that are associated with the order.<\/li>\n       <li>'orderItems.variation' = The variation that is associated with the order item.<\/li>\n       <li>'orderItems.giftCardCodes' = The gift card codes that are associated with the order item.<\/li>\n       <li>'orderItems.transactions' = The transactions that are associated with the order item.<\/li>\n       <li>'orderItems.serialNumbers' = The serial numbers that are associated with the order item.<\/li>\n       <li>'orderItems.variationBarcodes' = The barcodes that are associated with variation of the order item.<\/li>\n     <\/ul>\n     Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
+                        "description": "Load additional relations for an order. Currently possible are:\n     * <ul>\n       <li>'addresses' = The address objects that are associated with the order.<\/li>\n       <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the the reference type, the ID of the reference and the relation itself.<\/li>\n       <li>'comments' = The order comments.<\/li>\n       <li>'location' = The accounting location of the order.<\/li>\n       <li>'payments' = The payments that are associated with the order.<\/li>\n       <li>'documents' = The documents that are associated with the order.<\/li>\n       <li>'contactSender' = The associated contact for the contact-sender relation.<\/li>\n       <li>'contactReceiver' = The associated contact for the contact-receiver relation.<\/li>\n       <li>'warehouseSender' = The associated warehouse for the warehouse-sender relation.<\/li>\n       <li>'warehouseReceiver' = The associated warehouse for the warehouse-receiver relation.<\/li>\n       <li>'orderItems.variation' = The variation that is associated with the order item.<\/li>\n       <li>'orderItems.giftCardCodes' = The gift card codes that are associated with the order item.<\/li>\n       <li>'orderItems.transactions' = The transactions that are associated with the order item.<\/li>\n       <li>'orderItems.serialNumbers' = The serial numbers that are associated with the order item.<\/li>\n       <li>'orderItems.variationBarcodes' = The barcodes that are associated with variation of the order item.<\/li>\n     <\/ul>\n     Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
                         "format": "",
                         "in": "query",
                         "items": {
@@ -40975,6 +41117,49 @@
                         "description": "The type of the document. The types available are receipt, invoiceExternal, invoice, deliveryNote, creditNote, orderConfirmation, offer, dunningLetter, returnNote, successConfirmation and correction.",
                         "format": "string",
                         "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/orders\/{orderId}\/documents\/{documentId}": {
+            "delete": {
+                "summary": "Delete document of an order",
+                "description": "Deletes document of an order. The ID of the order and the ID of the document must be specified.",
+                "tags": [
+                    "Document"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Repositories\\Models\\DeleteResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "documentId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
                     }
                 ],
                 "security": [
@@ -47961,7 +48146,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#\/definitions\/string"
+                            "$ref": "#\/definitions\/mixed"
                         }
                     }
                 },
@@ -47973,6 +48158,30 @@
                         "description": "",
                         "format": "integer",
                         "in": "path"
+                    },
+                    {
+                        "name": "key",
+                        "type": "string",
+                        "required": true,
+                        "description": "The name of the file that needs to be saved",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "content",
+                        "type": "string",
+                        "required": true,
+                        "description": "The actual file content in text format",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "deleteIfExists",
+                        "type": "boolean",
+                        "required": true,
+                        "description": "Condition for the check of already existing file",
+                        "format": "boolean",
+                        "in": "query"
                     }
                 ]
             }
@@ -48529,6 +48738,29 @@
                         }
                     }
                 ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "put": {
+                "summary": "Generate templates for all contents.",
+                "description": "",
+                "tags": [
+                    "Shop"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
                 "security": [
                     {
                         "oAuth2": []
@@ -53514,7 +53746,20 @@
                     "200": {
                         "description": "OK"
                     }
-                }
+                },
+                "parameters": [
+                    {
+                        "name": "warehouseLocationIds",
+                        "type": "array",
+                        "required": true,
+                        "description": "An array containing all the ID's for the warehouse locations that need to be deleted",
+                        "format": "",
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                ]
             },
             "post": {
                 "summary": "Create a warehouse location",
@@ -53757,7 +54002,25 @@
                             }
                         }
                     }
-                }
+                },
+                "parameters": [
+                    {
+                        "name": "purpose",
+                        "type": "string",
+                        "required": true,
+                        "description": "The purpose key value for warehouse location purposeKey field",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "status",
+                        "type": "string",
+                        "required": true,
+                        "description": "The status key value for warehouse location status field",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ]
             }
         },
         "\/rest\/warehouses\/locations\/levels": {
@@ -53822,7 +54085,33 @@
                     "200": {
                         "description": "OK"
                     }
-                }
+                },
+                "parameters": [
+                    {
+                        "name": "toMove",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The warehouse location level ID that needs needs to be moved",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "target",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The warehouse location level ID that stands as position for the warehouse location level that needs to be moved",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "side",
+                        "type": "string",
+                        "required": true,
+                        "description": "The actual position from the left or right side of target",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ]
             }
         },
         "\/rest\/warehouses\/locations\/levels\/{warehouseLocationLevelId}": {
@@ -53916,7 +54205,20 @@
                             }
                         }
                     }
-                }
+                },
+                "parameters": [
+                    {
+                        "name": "dimensions",
+                        "type": "array",
+                        "required": true,
+                        "description": "The dimensions array that contains data for creating multiple dimensions",
+                        "format": "",
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                ]
             }
         },
         "\/rest\/warehouses\/locations\/positions": {
@@ -53930,7 +54232,33 @@
                     "200": {
                         "description": "OK"
                     }
-                }
+                },
+                "parameters": [
+                    {
+                        "name": "toMove",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The warehouse location ID that needs needs to be moved",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "target",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The warehouse location ID that stands as position for the warehouse location that needs to be moved",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "side",
+                        "type": "string",
+                        "required": true,
+                        "description": "The actual position from the left or right side of target",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ]
             }
         },
         "\/rest\/warehouses\/locations\/previews": {
@@ -53942,9 +54270,55 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/mixed"
+                        }
                     }
-                }
+                },
+                "parameters": [
+                    {
+                        "name": "dimensions",
+                        "type": "array",
+                        "required": true,
+                        "description": "The warehouse location dimensions used by the generator",
+                        "format": "",
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "storageLocationData",
+                        "type": "array",
+                        "required": true,
+                        "description": "The warehouse location data used by the generator",
+                        "format": "",
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "levelData",
+                        "type": "array",
+                        "required": true,
+                        "description": "The warehouse location level data used by the generator",
+                        "format": "",
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "save",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The save parameter that triggers the preview method or the process save method",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ]
             }
         },
         "\/rest\/warehouses\/locations\/{warehouseId}\/label": {
@@ -53956,7 +54330,10 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/mixed"
+                        }
                     }
                 },
                 "parameters": [
@@ -53967,6 +54344,14 @@
                         "description": "",
                         "format": "integer",
                         "in": "path"
+                    },
+                    {
+                        "name": "warehouseLocationIds",
+                        "type": "string",
+                        "required": true,
+                        "description": "A string with all warehouse location ID's for which a label needs to be generated",
+                        "format": "string",
+                        "in": "query"
                     }
                 ]
             }
@@ -54591,6 +54976,14 @@
                 "position": {
                     "type": "integer",
                     "description": "The position for sorting"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "description": "The time the option was created as unix timestamp"
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "description": "The time the option was last updated as unix timestamp"
                 }
             }
         },
