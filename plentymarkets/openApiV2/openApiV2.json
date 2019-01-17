@@ -7094,19 +7094,11 @@
                 },
                 "parameters": [
                     {
-                        "name": "$name",
+                        "name": "layout",
                         "type": "string",
                         "required": true,
-                        "description": "The name of the layout",
+                        "description": "The layout array",
                         "format": "string",
-                        "in": "query"
-                    },
-                    {
-                        "name": "$isDefault",
-                        "type": "boolean",
-                        "required": true,
-                        "description": "Flag to determine if the layout is the one default or not",
-                        "format": "boolean",
                         "in": "query"
                     }
                 ],
@@ -7177,7 +7169,53 @@
                 ]
             }
         },
-        "\/rest\/address_layout\/{layoutId}": {
+        "\/rest\/address_layout\/used_countries\/{uuid?}": {
+            "get": {
+                "summary": "Return the countries in use",
+                "description": "Returns the countries used already by other layouts",
+                "tags": [
+                    "AddressDesign"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\Order\\Shipping\\Countries\\Models\\Country"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "uuid?",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "uuid",
+                        "type": "string",
+                        "required": true,
+                        "description": "The UUID of the current layout",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/address_layout\/{uuid}": {
             "delete": {
                 "summary": "Delete a layout",
                 "description": "Deletes a layout. The ID of the layout must be specified.",
@@ -7197,20 +7235,12 @@
                 },
                 "parameters": [
                     {
-                        "name": "layoutId",
+                        "name": "uuid",
                         "type": "integer",
                         "required": true,
                         "description": "",
                         "format": "integer",
                         "in": "path"
-                    },
-                    {
-                        "name": "$layoutId",
-                        "type": "integer",
-                        "required": true,
-                        "description": "The ID of the layout",
-                        "format": "integer",
-                        "in": "query"
                     }
                 ],
                 "security": [
@@ -7238,20 +7268,12 @@
                 },
                 "parameters": [
                     {
-                        "name": "layoutId",
+                        "name": "uuid",
                         "type": "integer",
                         "required": true,
                         "description": "",
                         "format": "integer",
                         "in": "path"
-                    },
-                    {
-                        "name": "$layoutId",
-                        "type": "integer",
-                        "required": true,
-                        "description": "The ID of the layout",
-                        "format": "integer",
-                        "in": "query"
                     }
                 ],
                 "security": [
@@ -7279,7 +7301,7 @@
                 },
                 "parameters": [
                     {
-                        "name": "layoutId",
+                        "name": "uuid",
                         "type": "integer",
                         "required": true,
                         "description": "",
@@ -7287,85 +7309,10 @@
                         "in": "path"
                     },
                     {
-                        "name": "$name",
-                        "type": "string",
-                        "required": false,
-                        "description": "The name of the layout",
-                        "format": "string",
-                        "in": "query"
-                    },
-                    {
-                        "name": "$isDefault",
-                        "type": "boolean",
-                        "required": false,
-                        "description": "Flag to determine if the layout is the one default or not",
-                        "format": "boolean",
-                        "in": "query"
-                    },
-                    {
-                        "name": "$layoutId",
-                        "type": "integer",
-                        "required": true,
-                        "description": "The ID of the layout",
-                        "format": "integer",
-                        "in": "query"
-                    }
-                ],
-                "security": [
-                    {
-                        "oAuth2": []
-                    }
-                ]
-            }
-        },
-        "\/rest\/address_layout_content": {
-            "post": {
-                "summary": "Create a new layout content",
-                "description": "Creates a new layout content.",
-                "tags": [
-                    "AddressDesign"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#\/definitions\/Plenty\\Modules\\AddressDesign\\Models\\AddressLayoutContent"
-                        }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-                    }
-                },
-                "parameters": [
-                    {
-                        "name": "$addressLayoutId",
-                        "type": "integer",
-                        "required": true,
-                        "description": "The ID of the layout",
-                        "format": "integer",
-                        "in": "query"
-                    },
-                    {
-                        "name": "$row",
-                        "type": "integer",
-                        "required": true,
-                        "description": "The number of the row",
-                        "format": "integer",
-                        "in": "query"
-                    },
-                    {
-                        "name": "$column",
-                        "type": "integer",
-                        "required": true,
-                        "description": "The number of the column",
-                        "format": "integer",
-                        "in": "query"
-                    },
-                    {
-                        "name": "$fieldType",
+                        "name": "layout",
                         "type": "string",
                         "required": true,
-                        "description": "The type of the field",
+                        "description": "The layout array",
                         "format": "string",
                         "in": "query"
                     }
@@ -7377,53 +7324,10 @@
                 ]
             }
         },
-        "\/rest\/address_layout_content\/layout\/{layoutId}": {
+        "\/rest\/address_layout_fields": {
             "get": {
-                "summary": "Get a layout content",
-                "description": "Gets a layout content. The ID of the layout must be specified.",
-                "tags": [
-                    "AddressDesign"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#\/definitions\/Plenty\\Modules\\AddressDesign\\Models\\AddressLayoutContent"
-                        }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-                    }
-                },
-                "parameters": [
-                    {
-                        "name": "layoutId",
-                        "type": "integer",
-                        "required": true,
-                        "description": "",
-                        "format": "integer",
-                        "in": "path"
-                    },
-                    {
-                        "name": "$layoutId",
-                        "type": "integer",
-                        "required": true,
-                        "description": "The ID of the layout",
-                        "format": "integer",
-                        "in": "query"
-                    }
-                ],
-                "security": [
-                    {
-                        "oAuth2": []
-                    }
-                ]
-            }
-        },
-        "\/rest\/address_layout_content\/{layoutId}\/{row}\/{column}": {
-            "delete": {
-                "summary": "Delete a layout content",
-                "description": "Deletes a layout content. The ID of the layout, the row number and column number must be specified.",
+                "summary": "Get all the available fields.",
+                "description": "Gets all the available fields",
                 "tags": [
                     "AddressDesign"
                 ],
@@ -7438,218 +7342,6 @@
                         "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
-                "parameters": [
-                    {
-                        "name": "layoutId",
-                        "type": "integer",
-                        "required": true,
-                        "description": "",
-                        "format": "integer",
-                        "in": "path"
-                    },
-                    {
-                        "name": "row",
-                        "type": "integer",
-                        "required": true,
-                        "description": "",
-                        "format": "integer",
-                        "in": "path"
-                    },
-                    {
-                        "name": "column",
-                        "type": "integer",
-                        "required": true,
-                        "description": "",
-                        "format": "integer",
-                        "in": "path"
-                    },
-                    {
-                        "name": "$layoutId",
-                        "type": "integer",
-                        "required": true,
-                        "description": "The ID of the layout",
-                        "format": "integer",
-                        "in": "query"
-                    },
-                    {
-                        "name": "$row",
-                        "type": "integer",
-                        "required": true,
-                        "description": "The number of the row",
-                        "format": "integer",
-                        "in": "query"
-                    },
-                    {
-                        "name": "$column",
-                        "type": "integer",
-                        "required": true,
-                        "description": "The number of the column",
-                        "format": "integer",
-                        "in": "query"
-                    }
-                ],
-                "security": [
-                    {
-                        "oAuth2": []
-                    }
-                ]
-            },
-            "put": {
-                "summary": "Update a layout content",
-                "description": "Updates a layout content.",
-                "tags": [
-                    "AddressDesign"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#\/definitions\/Plenty\\Modules\\AddressDesign\\Models\\AddressLayoutContent"
-                        }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-                    }
-                },
-                "parameters": [
-                    {
-                        "name": "layoutId",
-                        "type": "integer",
-                        "required": true,
-                        "description": "",
-                        "format": "integer",
-                        "in": "path"
-                    },
-                    {
-                        "name": "row",
-                        "type": "integer",
-                        "required": true,
-                        "description": "",
-                        "format": "integer",
-                        "in": "path"
-                    },
-                    {
-                        "name": "column",
-                        "type": "integer",
-                        "required": true,
-                        "description": "",
-                        "format": "integer",
-                        "in": "path"
-                    },
-                    {
-                        "name": "$fieldType",
-                        "type": "string",
-                        "required": true,
-                        "description": "The type of the field",
-                        "format": "string",
-                        "in": "query"
-                    },
-                    {
-                        "name": "$layoutId",
-                        "type": "integer",
-                        "required": true,
-                        "description": "The ID of the layout",
-                        "format": "integer",
-                        "in": "query"
-                    },
-                    {
-                        "name": "$row",
-                        "type": "integer",
-                        "required": true,
-                        "description": "The number of the row",
-                        "format": "integer",
-                        "in": "query"
-                    },
-                    {
-                        "name": "$column",
-                        "type": "integer",
-                        "required": true,
-                        "description": "The number of the column",
-                        "format": "integer",
-                        "in": "query"
-                    }
-                ],
-                "security": [
-                    {
-                        "oAuth2": []
-                    }
-                ]
-            }
-        },
-        "\/rest\/address_layout_countries": {
-            "delete": {
-                "summary": "Delete a layout country relation",
-                "description": "Deletes a layout country relation",
-                "tags": [
-                    "AddressDesign"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-                    }
-                },
-                "parameters": [
-                    {
-                        "name": "$addressLayoutId",
-                        "type": "integer",
-                        "required": true,
-                        "description": "The id of the layout",
-                        "format": "integer",
-                        "in": "query"
-                    },
-                    {
-                        "name": "$countryId",
-                        "type": "integer",
-                        "required": true,
-                        "description": "The id of the country",
-                        "format": "integer",
-                        "in": "query"
-                    }
-                ],
-                "security": [
-                    {
-                        "oAuth2": []
-                    }
-                ]
-            },
-            "post": {
-                "summary": "Create a new layout country relation",
-                "description": "Creates a new layout country relation",
-                "tags": [
-                    "AddressDesign"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#\/definitions\/Plenty\\Modules\\AddressDesign\\Models\\AddressLayoutCountries"
-                        }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-                    }
-                },
-                "parameters": [
-                    {
-                        "name": "$addressLayoutId",
-                        "type": "integer",
-                        "required": true,
-                        "description": "The id of the layout",
-                        "format": "integer",
-                        "in": "query"
-                    },
-                    {
-                        "name": "$countryId",
-                        "type": "integer",
-                        "required": true,
-                        "description": "The id of the country",
-                        "format": "integer",
-                        "in": "query"
-                    }
-                ],
                 "security": [
                     {
                         "oAuth2": []
@@ -36445,6 +36137,14 @@
                         "in": "query"
                     },
                     {
+                        "name": "hasDocumentNumber",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter that restricts the search result to orders which hold documents with given number.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
                         "name": "page",
                         "type": "integer",
                         "required": false,
@@ -36464,7 +36164,7 @@
                         "name": "with",
                         "type": "array",
                         "required": false,
-                        "description": "Load additional relations for an order. Currently possible are:\n    <ul>\n    <li>'addresses' = The address objects that are associated with the order.<\/li>\n    <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the the reference type, the ID of the reference and the relation itself.<\/li>\n    <li>'comments' = The order comments.<\/li>\n    <li>'location' = The accounting location of the order.<\/li>\n    <li>'payments' = The payments that are associated with the order.<\/li>\n    <li>'documents' = The documents that are associated with the order.<\/li>\n    <li>'contactSender' = The associated contact for the contact-sender relation.<\/li>\n    <li>'contactReceiver' = The associated contact for the contact-receiver relation.<\/li>\n    <li>'warehouseSender' = The associated warehouse for the warehouse-sender relation.<\/li>\n    <li>'warehouseReceiver' = The associated warehouse for the warehouse-receiver relation.<\/li>\n    <li>'orderItems.variation' = The variation that is associated with the order item.<\/li>\n    <li>'orderItems.giftCardCodes' = The gift card codes that are associated with the order item.<\/li>\n    <li>'orderItems.transactions' = The transactions that are associated with the order item.<\/li>\n    <li>'orderItems.serialNumbers' = The serial numbers that are associated with the order item.<\/li>\n    <li>'orderItems.variationBarcodes' = The barcodes that are associated with variation of the order item.<\/li>\n    <li>'originOrderReferences' = The references to other orders, e.g. returns or credit notes, associated with this order.<\/li>\n    <\/ul>\n    Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
+                        "description": "Load additional relations for an order. Currently possible are:\n    <ul>\n    <li>'addresses' = The address objects that are associated with the order.<\/li>\n    <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the the reference type, the ID of the reference and the relation itself.<\/li>\n    <li>'comments' = The order comments.<\/li>\n    <li>'location' = The accounting location of the order.<\/li>\n    <li>'payments' = The payments that are associated with the order.<\/li>\n    <li>'documents' = The documents that are associated with the order.<\/li>\n    <li>'contactSender' = The associated contact for the contact-sender relation.<\/li>\n    <li>'contactReceiver' = The associated contact for the contact-receiver relation.<\/li>\n    <li>'warehouseSender' = The associated warehouse for the warehouse-sender relation.<\/li>\n    <li>'warehouseReceiver' = The associated warehouse for the warehouse-receiver relation.<\/li>\n    <li>'orderItems.variation' = The variation that is associated with the order item.<\/li>\n    <li>'orderItems.giftCardCodes' = The gift card codes that are associated with the order item.<\/li>\n    <li>'orderItems.transactions' = The transactions that are associated with the order item.<\/li>\n    <li>'orderItems.serialNumbers' = The serial numbers that are associated with the order item.<\/li>\n    <li>'orderItems.variationBarcodes' = The barcodes that are associated with variation of the order item.<\/li>\n    <li>'orderItems.comments' = The comments that are associated with the order item.<\/li>\n    <li>'originOrderReferences' = The references to other orders, e.g. returns or credit notes, associated with this order.<\/li>\n    <\/ul>\n    Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
                         "format": "",
                         "in": "query",
                         "items": {
@@ -36668,7 +36368,7 @@
                         "name": "with",
                         "type": "array",
                         "required": false,
-                        "description": "Load additional relations for an order. Currently possible are:\n    <ul>\n    <li>'addresses' = The address objects that are associated with the order.<\/li>\n    <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the the reference type, the ID of the reference and the relation itself.<\/li>\n    <li>'comments' = The order comments.<\/li>\n    <li>'location' = The accounting location of the order.<\/li>\n    <li>'payments' = The payments that are associated with the order.<\/li>\n    <li>'documents' = The documents that are associated with the order.<\/li>\n    <li>'contactSender' = The associated contact for the contact-sender relation.<\/li>\n    <li>'contactReceiver' = The associated contact for the contact-receiver relation.<\/li>\n    <li>'warehouseSender' = The associated warehouse for the warehouse-sender relation.<\/li>\n    <li>'warehouseReceiver' = The associated warehouse for the warehouse-receiver relation.<\/li>\n    <li>'orderItems.variation' = The variation that is associated with the order item.<\/li>\n    <li>'orderItems.giftCardCodes' = The gift card codes that are associated with the order item.<\/li>\n    <li>'orderItems.transactions' = The transactions that are associated with the order item.<\/li>\n    <li>'orderItems.serialNumbers' = The serial numbers that are associated with the order item.<\/li>\n    <li>'orderItems.variationBarcodes' = The barcodes that are associated with variation of the order item.<\/li>\n    <\/ul>\n    Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
+                        "description": "Load additional relations for an order. Currently possible are:\n    <ul>\n    <li>'addresses' = The address objects that are associated with the order.<\/li>\n    <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the the reference type, the ID of the reference and the relation itself.<\/li>\n    <li>'comments' = The order comments.<\/li>\n    <li>'location' = The accounting location of the order.<\/li>\n    <li>'payments' = The payments that are associated with the order.<\/li>\n    <li>'documents' = The documents that are associated with the order.<\/li>\n    <li>'contactSender' = The associated contact for the contact-sender relation.<\/li>\n    <li>'contactReceiver' = The associated contact for the contact-receiver relation.<\/li>\n    <li>'warehouseSender' = The associated warehouse for the warehouse-sender relation.<\/li>\n    <li>'warehouseReceiver' = The associated warehouse for the warehouse-receiver relation.<\/li>\n    <li>'orderItems.variation' = The variation that is associated with the order item.<\/li>\n    <li>'orderItems.giftCardCodes' = The gift card codes that are associated with the order item.<\/li>\n    <li>'orderItems.transactions' = The transactions that are associated with the order item.<\/li>\n    <li>'orderItems.serialNumbers' = The serial numbers that are associated with the order item.<\/li>\n    <li>'orderItems.variationBarcodes' = The barcodes that are associated with variation of the order item.<\/li>\n    <li>'orderItems.comments' = The comments that are associated with the order item.<\/li>\n    <\/ul>\n    Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
                         "format": "",
                         "in": "query",
                         "items": {
@@ -40741,7 +40441,7 @@
                         "name": "with",
                         "type": "array",
                         "required": false,
-                        "description": "Load additional relations for an order. Currently possible are:\n     * <ul>\n       <li>'addresses' = The address objects that are associated with the order.<\/li>\n       <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the the reference type, the ID of the reference and the relation itself.<\/li>\n       <li>'comments' = The order comments.<\/li>\n       <li>'location' = The accounting location of the order.<\/li>\n       <li>'payments' = The payments that are associated with the order.<\/li>\n       <li>'documents' = The documents that are associated with the order.<\/li>\n       <li>'contactSender' = The associated contact for the contact-sender relation.<\/li>\n       <li>'contactReceiver' = The associated contact for the contact-receiver relation.<\/li>\n       <li>'warehouseSender' = The associated warehouse for the warehouse-sender relation.<\/li>\n       <li>'warehouseReceiver' = The associated warehouse for the warehouse-receiver relation.<\/li>\n       <li>'orderItems.variation' = The variation that is associated with the order item.<\/li>\n       <li>'orderItems.giftCardCodes' = The gift card codes that are associated with the order item.<\/li>\n       <li>'orderItems.transactions' = The transactions that are associated with the order item.<\/li>\n       <li>'orderItems.serialNumbers' = The serial numbers that are associated with the order item.<\/li>\n       <li>'orderItems.variationBarcodes' = The barcodes that are associated with variation of the order item.<\/li>\n     <\/ul>\n     Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
+                        "description": "Load additional relations for an order. Currently possible are:\n     * <ul>\n       <li>'addresses' = The address objects that are associated with the order.<\/li>\n       <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the the reference type, the ID of the reference and the relation itself.<\/li>\n       <li>'comments' = The order comments.<\/li>\n       <li>'location' = The accounting location of the order.<\/li>\n       <li>'payments' = The payments that are associated with the order.<\/li>\n       <li>'documents' = The documents that are associated with the order.<\/li>\n       <li>'contactSender' = The associated contact for the contact-sender relation.<\/li>\n       <li>'contactReceiver' = The associated contact for the contact-receiver relation.<\/li>\n       <li>'warehouseSender' = The associated warehouse for the warehouse-sender relation.<\/li>\n       <li>'warehouseReceiver' = The associated warehouse for the warehouse-receiver relation.<\/li>\n       <li>'orderItems.variation' = The variation that is associated with the order item.<\/li>\n       <li>'orderItems.giftCardCodes' = The gift card codes that are associated with the order item.<\/li>\n       <li>'orderItems.transactions' = The transactions that are associated with the order item.<\/li>\n       <li>'orderItems.serialNumbers' = The serial numbers that are associated with the order item.<\/li>\n       <li>'orderItems.variationBarcodes' = The barcodes that are associated with variation of the order item.<\/li>\n       <li>'orderItems.comments' = The comments that are associated with the order item.<\/li>\n     <\/ul>\n     Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
                         "format": "",
                         "in": "query",
                         "items": {
@@ -56038,12 +55738,6 @@
         "Plenty\\Modules\\AddressDesign\\Models\\AddressLayout": {
             "type": "object"
         },
-        "Plenty\\Modules\\AddressDesign\\Models\\AddressLayoutContent": {
-            "type": "object"
-        },
-        "Plenty\\Modules\\AddressDesign\\Models\\AddressLayoutCountries": {
-            "type": "object"
-        },
         "Plenty\\Modules\\Authentication\\Models\\TokenData": {
             "type": "object",
             "properties": {
@@ -56758,7 +56452,7 @@
                 },
                 "referenceType": {
                     "type": "string",
-                    "description": "The reference type. Valid types are:\n<ul>\n\t<li>category<\/li>\n\t<li>contact<\/li>\n\t<li>order<\/li>\n <li>item_variation<\/li>\n\t<\/ul>"
+                    "description": "The reference type. Valid types are:\n<ul>\n\t<li>category<\/li>\n\t<li>contact<\/li>\n\t<li>order<\/li>\n <li>item_variation<\/li>\n <li>order_item<\/li>\n\t<\/ul>"
                 },
                 "referenceValue": {
                     "type": "integer",
@@ -59144,7 +58838,7 @@
                 },
                 "reasonId": {
                     "type": "integer",
-                    "description": "The ID of the reason. The following IDs are available:\n<ul>\n<li>101: Incoming items<\/li>\n<li>102: Booked in by stocktaking<\/li>\n<li>104: Rebooked into stock because no production errors were found<\/li>\n<li>106: Maculation canceled<\/li>\n<li>107: Packing error, items are re-booked<\/li>\n<li>109: Incoming items (logistics)<\/li>\n<li>115: Incoming items (second choice)<\/li>\n<li>116: Booked in by correction<\/li>\n<li>117: Unpacked item<\/li>\n<\/ul>"
+                    "description": "The ID of the reason. The following IDs are available:\n<ul>\n<li>101: Incoming items<\/li>\n<li>102: Booked in by stocktaking<\/li>\n<li>104: Rebooked into stock because no production errors were found<\/li>\n<li>106: Maculation canceled<\/li>\n<li>107: Packing error, items are re-booked<\/li>\n<li>109: Incoming items (logistics)<\/li>\n<li>115: Incoming items (second choice)<\/li>\n<li>116: Booked in by correction<\/li>\n<li>117: Unpacked item<\/li>\n<li>180: Incoming items (purchase order)<\/li>\n<li>181: Incoming items (warehousing)<\/li>\n<\/ul>"
                 }
             }
         },
