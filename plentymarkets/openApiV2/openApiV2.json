@@ -39088,6 +39088,74 @@
                 ]
             }
         },
+        "\/rest\/orders\/shipping\/packages\/items\/{id}": {
+            "delete": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Repositories\\Models\\DeleteResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "put": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/orders\/shipping\/packages\/items\/{packageId}\/{itemId}\/{variationId}": {
             "delete": {
                 "summary": "",
@@ -40520,9 +40588,6 @@
                         "schema": {
                             "type": "object",
                             "properties": {
-                                "typeId": {
-                                    "type": "integer"
-                                },
                                 "plentyId": {
                                     "type": "integer"
                                 },
@@ -40847,7 +40912,7 @@
                         "name": "type",
                         "type": "string",
                         "required": false,
-                        "description": "The type of the document. The types available are receipt, invoiceExternal, invoice, deliveryNote, creditNote, orderConfirmation, offer, dunningLetter, returnNote, successConfirmation and correction.",
+                        "description": "The type of the document. The types available are receipt, invoiceExternal, invoice, deliveryNote, poDeliveryNote, creditNote, orderConfirmation, offer, dunningLetter, returnNote, successConfirmation and correction.",
                         "format": "string",
                         "in": "query"
                     }
@@ -41010,7 +41075,7 @@
                         "name": "type",
                         "type": "string",
                         "required": false,
-                        "description": "The type of the order documents. The types available are receipt, invoiceExternal, invoice, deliveryNote, creditNote, orderConfirmation, offer, dunningLetter, returnNote, successConfirmation, correction.",
+                        "description": "The type of the order documents. The types available are receipt, invoiceExternal, invoice, deliveryNote, poDeliveryNote, creditNote, orderConfirmation, offer, dunningLetter, returnNote, successConfirmation, correction.",
                         "format": "string",
                         "in": "query"
                     },
@@ -59170,6 +59235,10 @@
                     "type": "string",
                     "description": "The time at which related information for this variation was last updated. Related information is defined as information that is linked to the variation, i.e. barcodes, categories, images, markets, clients (stores), prices, suppliers, warehouses and the default category."
                 },
+                "availabilityUpdatedAt": {
+                    "type": "string",
+                    "description": "The time at which the availability of this variation was last updated. Not yet ready to use."
+                },
                 "priceCalculationId": {
                     "type": "integer",
                     "description": "The ID of the price calculation linked to the variation."
@@ -60245,7 +60314,7 @@
                 },
                 "typeId": {
                     "type": "integer",
-                    "description": "The ID of the date type. The following types are available:\n<ul>\n<li>Deleted on = 1<\/li>\n<li>Created on = 2<\/li>\n<li>Paid date = 3<\/li>\n<li>Last update = 4<\/li>\n<li>Completed date = 5<\/li>\n<li>Return date = 6<\/li>\n<li>Payment due date = 7<\/li>\n<li>Estimated shipping date = 8<\/li>\n<li>Start date = 9<\/li>\n<li>End date = 10<\/li>\n<li>Estimated delivery date = 11<\/li>\n<li>Market transfer date = 12<\/li>\n<li>Subscription cancelled on = 13<\/li>\n<li>Subscription last run = 14<\/li>\n<li>Subscription next run = 15<\/li>\n<\/ul>"
+                    "description": "The ID of the date type. The following types are available:\n<ul>\n<li>Deleted on = 1<\/li>\n<li>Created on = 2<\/li>\n<li>Paid date = 3<\/li>\n<li>Last update = 4<\/li>\n<li>Completed date = 5<\/li>\n<li>Return date = 6<\/li>\n<li>Payment due date = 7<\/li>\n<li>Estimated shipping date = 8<\/li>\n<li>Start date = 9<\/li>\n<li>End date = 10<\/li>\n<li>Estimated delivery date = 11<\/li>\n<li>Market transfer date = 12<\/li>\n<li>Subscription cancelled on = 13<\/li>\n<li>Subscription last run = 14<\/li>\n<li>Subscription next run = 15<\/li>\n<li>Purchase date = 16<\/li>\n<li>Finish date = 17<\/li>\n<\/ul>"
                 },
                 "createdAt": {
                     "type": "string",
@@ -60775,6 +60844,10 @@
         "Plenty\\Modules\\Order\\Shipping\\Package\\Models\\OrderShippingPackageItems": {
             "type": "object",
             "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "The ID of the order shipping package item. Primary key auto-increment"
+                },
                 "packageId": {
                     "type": "integer",
                     "description": "The ID of the package (id column from plenty_package_type2order)"
@@ -61133,9 +61206,17 @@
                     "type": "integer",
                     "description": "The ID of the warehouse location"
                 },
+                "batch": {
+                    "type": "string",
+                    "description": "The batch"
+                },
+                "bestBeforeDate": {
+                    "type": "string",
+                    "description": "The best before date"
+                },
                 "batchBestBeforeDateId": {
                     "type": "integer",
-                    "description": "The ID of the batch or best before date"
+                    "description": "Deprecated. Replaced by $batch and $bestBeforeDate."
                 },
                 "createdAt": {
                     "type": "string",
