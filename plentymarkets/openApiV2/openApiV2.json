@@ -311,6 +311,14 @@
             }
         },
         {
+            "name": "Report",
+            "description": "Routes for Report",
+            "externalDocs": {
+                "description": "Official developers site for Report routes",
+                "url": "https:\/\/developers.plentymarkets.com\/rest-doc\/report"
+            }
+        },
+        {
             "name": "Returns",
             "description": "Routes for Returns",
             "externalDocs": {
@@ -11891,6 +11899,44 @@
                 ]
             }
         },
+        "\/rest\/elastic-sync\/sync\/previewValues\/{syncId}": {
+            "get": {
+                "summary": "Get preview values.",
+                "description": "Gets preview values. The sync ID is required.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "syncId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/elastic-sync\/sync\/run": {
             "post": {
                 "summary": "Execute the run procedure.",
@@ -20808,7 +20854,7 @@
                         "in": "query"
                     },
                     {
-                        "name": "itemTagId",
+                        "name": "variationTagId",
                         "type": "integer",
                         "required": false,
                         "description": "Filter restricts the list of results to variations with the specified tag ID. An tag ID must be specified. More than one ID should be separated by commas.",
@@ -48252,6 +48298,200 @@
                 }
             }
         },
+        "\/rest\/report\/raw-data": {
+            "get": {
+                "summary": "Get list of raw data files",
+                "description": "",
+                "tags": [
+                    "Report"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "dataNames",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter that restricts the search result to raw data files. The list of data names must be separated by comma e.g. orders,orderItems,orderItemsAmount.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "createdAtTimestampFrom",
+                        "type": "string",
+                        "required": false,
+                        "description": "Timestamp from when daily generated raw data are to be filtered. The maximum distance may not exceed one year.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "createdAtTimestampTo",
+                        "type": "string",
+                        "required": false,
+                        "description": "Timestamp until when daily generated raw data are to be filtered. The maximum distance may not exceed one year.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "page",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The page to get. The default page that will be returned is page 1.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "afterId",
+                        "type": "string",
+                        "required": false,
+                        "description": "Returns the results from the transferred ID of the last search query with the same filter parameters.",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/report\/raw-data\/config": {
+            "get": {
+                "summary": "Returns list of all saved configurations",
+                "description": "",
+                "tags": [
+                    "Report"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Report\\Models\\RawDataConfigs"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "put": {
+                "summary": "Resets all saved raw data configurations with given data",
+                "description": "",
+                "tags": [
+                    "Report"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Report\\Models\\RawDataConfigs"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "",
+                        "type": "array",
+                        "required": true,
+                        "description": "Resets all saved raw data configurations with given configs",
+                        "format": "",
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/report\/raw-data\/creators": {
+            "get": {
+                "summary": "Get list of all raw data creators",
+                "description": "",
+                "tags": [
+                    "Report"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\Report\\Models\\RawDataCreator"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/report\/raw-data\/file": {
+            "get": {
+                "summary": "Get a raw data file from the storage, the storage path of the file must be specified.",
+                "description": "",
+                "tags": [
+                    "Report"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Cloud\\Storage\\Models\\StorageObject"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "path",
+                        "type": "string",
+                        "required": true,
+                        "description": "The raw data file path",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/shop_builder\/content_links": {
             "get": {
                 "summary": "List all content links for a given plugin set",
@@ -59438,6 +59678,10 @@
                 "propertyVariationId": {
                     "type": "integer",
                     "description": "Either the ID of the variation or the ID of the item's main variation. No other values are permitted.<ul><li>ID of the variation = Properties are not inherited from the main variation.<\/li><li>ID of the item's main variation = Inheritance of properties is active.<\/li><\/ul>"
+                },
+                "tagVariationId": {
+                    "type": "integer",
+                    "description": "Either the ID of the variation or the ID of the item's main variation. No other values are permitted.<ul><li>ID of the variation = Tags are not inherited from the main variation.<\/li><li>ID of the item's main variation = Inheritance of tags is active.<\/li><\/ul>"
                 }
             }
         },
@@ -62085,6 +62329,56 @@
                 }
             }
         },
+        "Plenty\\Modules\\Report\\Models\\RawDataConfigs": {
+            "type": "object",
+            "properties": {
+                "plentyIdHash": {
+                    "type": "string",
+                    "description": "System id hash"
+                }
+            }
+        },
+        "Plenty\\Modules\\Report\\Models\\RawDataCreator": {
+            "type": "object",
+            "properties": {
+                "dataName": {
+                    "type": "string",
+                    "description": "Exclusive identifier for this raw data."
+                },
+                "limitPage": {
+                    "type": "integer",
+                    "description": "Number of data rows to be queried maximum per request."
+                },
+                "limitDay": {
+                    "type": "integer",
+                    "description": "Number of data rows to be queried maximum per day."
+                },
+                "earliestPossibleDataDate": {
+                    "type": "string",
+                    "description": "Earliest possible date from which data should be requested."
+                },
+                "deleteRawDataAfterDaysMinimum": {
+                    "type": "integer",
+                    "description": "Minimum number of days after the generated raw data is deleted"
+                },
+                "deleteRawDataAfterDaysMaximum": {
+                    "type": "integer",
+                    "description": "Maximum number of days after the generated raw data is deleted"
+                },
+                "filterType": {
+                    "type": "string",
+                    "description": "Defines how this raw data is filtered."
+                },
+                "dataUpdatedAtColumnName": {
+                    "type": "string",
+                    "description": "Name of the column that contains the date of the last change to a data row."
+                },
+                "defaultActive": {
+                    "type": "boolean",
+                    "description": "If true, then these raw data are collected independently of the user configuration."
+                }
+            }
+        },
         "Plenty\\Modules\\ShopBuilder\\Models\\Content": {
             "type": "object",
             "properties": {
@@ -62438,7 +62732,7 @@
                 },
                 "tagType": {
                     "type": "string",
-                    "description": "The type of the tag."
+                    "description": "The type of the tag. The following types are available.\n<ul>\n<li>blog<\/li>\n<li>category<\/li>\n<li>content_page<\/li>\n<li>variation<\/li>\n<li>ticket<\/li>\n<li>board<\/li>\n<li>order<\/li>\n<\/ul>"
                 }
             }
         },
