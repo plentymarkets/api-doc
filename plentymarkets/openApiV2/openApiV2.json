@@ -44410,6 +44410,34 @@
                 ]
             }
         },
+        "\/rest\/plugin_sets\/s3-inbox-opensource-plugins": {
+            "get": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "PluginSet"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\Plugin\\PluginSet\\Models\\PluginSet"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/plugin_sets\/{pluginSetId}\/languages": {
             "get": {
                 "summary": "List all the plugins translations for a plugin set",
@@ -48300,7 +48328,7 @@
         },
         "\/rest\/report\/raw-data": {
             "get": {
-                "summary": "Get list of raw data files",
+                "summary": "Get list of raw data files. Valid filter combinations: (dataName), (dataName & processStatus), (createdAtTimestamp)",
                 "description": "",
                 "tags": [
                     "Report"
@@ -48329,27 +48357,35 @@
                         "in": "query"
                     },
                     {
-                        "name": "createdAtTimestampFrom",
+                        "name": "processStatus",
                         "type": "string",
                         "required": false,
-                        "description": "Timestamp from when daily generated raw data are to be filtered. The maximum distance may not exceed one year.",
+                        "description": "Current process status, the status is only changed by internal processing. If this filter is used, the filter dataNames may only contain one value.",
                         "format": "string",
                         "in": "query"
                     },
                     {
-                        "name": "createdAtTimestampTo",
-                        "type": "string",
-                        "required": false,
-                        "description": "Timestamp until when daily generated raw data are to be filtered. The maximum distance may not exceed one year.",
-                        "format": "string",
-                        "in": "query"
-                    },
-                    {
-                        "name": "page",
+                        "name": "createdAtTimestamp",
                         "type": "integer",
                         "required": false,
-                        "description": "The page to get. The default page that will be returned is page 1.",
+                        "description": "Timestamp from when daily generated raw data are to be filtered. This filter cannot be combined with the following filters: dataNames, processStatus",
                         "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "itemsPerPage",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The number of raw data files to be returned. The default number of files is 20 and the maximum is 100.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "sortOrder",
+                        "type": "string",
+                        "required": false,
+                        "description": "Defines the sort order, possible values are: asc, desc",
+                        "format": "string",
                         "in": "query"
                     },
                     {
@@ -60789,7 +60825,7 @@
                 },
                 "typeId": {
                     "type": "integer",
-                    "description": "The ID of the property type. The following types are available:\n<ul>\n  <li>WAREHOUSE\t\t=\t1<\/li>\n  <li>SHIPPING_PROFILE\t=\t2<\/li>\n  <li>PAYMENT_METHOD\t\t\t=\t3<\/li>\n  <li>PAYMENT_STATUS\t\t\t=\t4<\/li>\n  <li>EXTERNAL_SHIPPING_PROFILE\t\t\t=\t5<\/li>\n  <li>DOCUMENT_LANGUAGE\t\t\t=\t6<\/li>\n  <li>EXTERNAL_ORDER_ID\t\t\t=\t7<\/li>\n  <li>CUSTOMER_SIGN\t\t\t=\t8<\/li>\n  <li>DUNNING_LEVEL\t\t\t=\t9<\/li>\n  <li>SELLER_ACCOUNT\t\t\t=\t10<\/li>\n  <li>WEIGHT\t\t\t=\t11<\/li>\n  <li>WIDTH\t\t\t=\t12<\/li>\n  <li>LENGTH          =\t13<\/li>\n  <li>HEIGHT\t\t=\t14<\/li>\n  <li>FLAG\t\t\t=\t15<\/li>\n  <li>EXTERNAL_TOKEN_ID\t\t\t=\t16<\/li>\n  <li>EXTERNAL_ITEM_ID\t\t\t=\t17<\/li>\n  <li>COUPON_CODE\t\t\t=\t18<\/li>\n  <li>COUPON_TYPE         =   19<\/li>\n  <li>SALES_TAX_ID_NUMBER =   34<\/li>\n  <li>MAIN_DOCUMENT_NUMBER = 33<\/li>\n  <li>PAYMENT_TRANSACTION_ID = 45<\/li>\n  <li>EXTERNAL_TAX_SERVICE = 47<\/li>\n<\/ul>"
+                    "description": "The ID of the property type. The following types are available:\n<ul>\n  <li>WAREHOUSE\t\t=\t1<\/li>\n  <li>SHIPPING_PROFILE\t=\t2<\/li>\n  <li>PAYMENT_METHOD\t\t\t=\t3<\/li>\n  <li>PAYMENT_STATUS\t\t\t=\t4<\/li>\n  <li>EXTERNAL_SHIPPING_PROFILE\t\t\t=\t5<\/li>\n  <li>DOCUMENT_LANGUAGE\t\t\t=\t6<\/li>\n  <li>EXTERNAL_ORDER_ID\t\t\t=\t7<\/li>\n  <li>CUSTOMER_SIGN\t\t\t=\t8<\/li>\n  <li>DUNNING_LEVEL\t\t\t=\t9<\/li>\n  <li>SELLER_ACCOUNT\t\t\t=\t10<\/li>\n  <li>WEIGHT\t\t\t=\t11<\/li>\n  <li>WIDTH\t\t\t=\t12<\/li>\n  <li>LENGTH          =\t13<\/li>\n  <li>HEIGHT\t\t=\t14<\/li>\n  <li>FLAG\t\t\t=\t15<\/li>\n  <li>EXTERNAL_TOKEN_ID\t\t\t=\t16<\/li>\n  <li>EXTERNAL_ITEM_ID\t\t\t=\t17<\/li>\n  <li>COUPON_CODE\t\t\t=\t18<\/li>\n  <li>COUPON_TYPE         =   19<\/li>\n  <li>SALES_TAX_ID_NUMBER =   34<\/li>\n  <li>MAIN_DOCUMENT_NUMBER = 33<\/li>\n  <li>PAYMENT_TRANSACTION_ID = 45<\/li>\n  <li>EXTERNAL_TAX_SERVICE = 47<\/li>\n  <li>MERCHANT_ID = 60<\/li>\n  <li>REPORT_ID = 61<\/li>\n<\/ul>"
                 },
                 "value": {
                     "type": "string",
@@ -62345,6 +62381,10 @@
                     "type": "string",
                     "description": "Exclusive identifier for this raw data."
                 },
+                "fileFormat": {
+                    "type": "string",
+                    "description": "File format"
+                },
                 "limitPage": {
                     "type": "integer",
                     "description": "Number of data rows to be queried maximum per request."
@@ -62376,6 +62416,10 @@
                 "defaultActive": {
                     "type": "boolean",
                     "description": "If true, then these raw data are collected independently of the user configuration."
+                },
+                "interval": {
+                    "type": "string",
+                    "description": "Interval in which this creator runs through"
                 }
             }
         },
