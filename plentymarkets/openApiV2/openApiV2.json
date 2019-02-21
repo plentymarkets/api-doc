@@ -36243,7 +36243,7 @@
                         "name": "with",
                         "type": "array",
                         "required": false,
-                        "description": "Load additional relations for an order. Currently possible are:\n    <ul>\n    <li>'addresses' = The address objects that are associated with the order.<\/li>\n    <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the the reference type, the ID of the reference and the relation itself.<\/li>\n    <li>'comments' = The order comments.<\/li>\n    <li>'location' = The accounting location of the order.<\/li>\n    <li>'payments' = The payments that are associated with the order.<\/li>\n    <li>'documents' = The documents that are associated with the order.<\/li>\n    <li>'contactSender' = The associated contact for the contact-sender relation.<\/li>\n    <li>'contactReceiver' = The associated contact for the contact-receiver relation.<\/li>\n    <li>'warehouseSender' = The associated warehouse for the warehouse-sender relation.<\/li>\n    <li>'warehouseReceiver' = The associated warehouse for the warehouse-receiver relation.<\/li>\n    <li>'orderItems.variation' = The variation that is associated with the order item.<\/li>\n    <li>'orderItems.giftCardCodes' = The gift card codes that are associated with the order item.<\/li>\n    <li>'orderItems.transactions' = The transactions that are associated with the order item.<\/li>\n    <li>'orderItems.serialNumbers' = The serial numbers that are associated with the order item.<\/li>\n    <li>'orderItems.variationBarcodes' = The barcodes that are associated with variation of the order item.<\/li>\n    <li>'orderItems.comments' = The comments that are associated with the order item.<\/li>\n    <li>'originOrderReferences' = The references to other orders, e.g. returns or credit notes, associated with this order.<\/li>\n    <\/ul>\n    Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
+                        "description": "Load additional relations for an order. Currently possible are:\n    <ul>\n    <li>'addresses' = The address objects that are associated with the order.<\/li>\n    <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the the reference type, the ID of the reference and the relation itself.<\/li>\n    <li>'comments' = The order comments.<\/li>\n    <li>'location' = The accounting location of the order.<\/li>\n    <li>'payments' = The payments that are associated with the order.<\/li>\n    <li>'documents' = The documents that are associated with the order.<\/li>\n    <li>'contactSender' = The associated contact for the contact-sender relation.<\/li>\n    <li>'contactReceiver' = The associated contact for the contact-receiver relation.<\/li>\n    <li>'warehouseSender' = The associated warehouse for the warehouse-sender relation.<\/li>\n    <li>'warehouseReceiver' = The associated warehouse for the warehouse-receiver relation.<\/li>\n    <li>'orderItems.variation' = The variation that is associated with the order item.<\/li>\n    <li>'orderItems.giftCardCodes' = The gift card codes that are associated with the order item.<\/li>\n    <li>'orderItems.transactions' = The transactions that are associated with the order item.<\/li>\n    <li>'orderItems.serialNumbers' = The serial numbers that are associated with the order item.<\/li>\n    <li>'orderItems.variationBarcodes' = The barcodes that are associated with variation of the order item.<\/li>\n    <li>'orderItems.comments' = The comments that are associated with the order item.<\/li>\n    <li>'originOrderReferences' = The references to other orders, e.g. returns or credit notes, associated with this order.<\/li>\n    <li><b>deprecated<\/b> 'orderItems.warehouseLocations' = The warehouse locations that are associated with the order item.<\/li>\n    <\/ul>\n    Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
                         "format": "",
                         "in": "query",
                         "items": {
@@ -36447,7 +36447,7 @@
                         "name": "with",
                         "type": "array",
                         "required": false,
-                        "description": "Load additional relations for an order. Currently possible are:\n    <ul>\n    <li>'addresses' = The address objects that are associated with the order.<\/li>\n    <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the the reference type, the ID of the reference and the relation itself.<\/li>\n    <li>'comments' = The order comments.<\/li>\n    <li>'location' = The accounting location of the order.<\/li>\n    <li>'payments' = The payments that are associated with the order.<\/li>\n    <li>'documents' = The documents that are associated with the order.<\/li>\n    <li>'contactSender' = The associated contact for the contact-sender relation.<\/li>\n    <li>'contactReceiver' = The associated contact for the contact-receiver relation.<\/li>\n    <li>'warehouseSender' = The associated warehouse for the warehouse-sender relation.<\/li>\n    <li>'warehouseReceiver' = The associated warehouse for the warehouse-receiver relation.<\/li>\n    <li>'orderItems.variation' = The variation that is associated with the order item.<\/li>\n    <li>'orderItems.giftCardCodes' = The gift card codes that are associated with the order item.<\/li>\n    <li>'orderItems.transactions' = The transactions that are associated with the order item.<\/li>\n    <li>'orderItems.serialNumbers' = The serial numbers that are associated with the order item.<\/li>\n    <li>'orderItems.variationBarcodes' = The barcodes that are associated with variation of the order item.<\/li>\n    <li>'orderItems.comments' = The comments that are associated with the order item.<\/li>\n    <\/ul>\n    Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
+                        "description": "Load additional relations for an order. Currently possible are:\n    <ul>\n    <li>'addresses' = The address objects that are associated with the order.<\/li>\n    <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the the reference type, the ID of the reference and the relation itself.<\/li>\n    <li>'comments' = The order comments.<\/li>\n    <li>'location' = The accounting location of the order.<\/li>\n    <li>'payments' = The payments that are associated with the order.<\/li>\n    <li>'documents' = The documents that are associated with the order.<\/li>\n    <li>'contactSender' = The associated contact for the contact-sender relation.<\/li>\n    <li>'contactReceiver' = The associated contact for the contact-receiver relation.<\/li>\n    <li>'warehouseSender' = The associated warehouse for the warehouse-sender relation.<\/li>\n    <li>'warehouseReceiver' = The associated warehouse for the warehouse-receiver relation.<\/li>\n    <li>'orderItems.variation' = The variation that is associated with the order item.<\/li>\n    <li>'orderItems.giftCardCodes' = The gift card codes that are associated with the order item.<\/li>\n    <li>'orderItems.transactions' = The transactions that are associated with the order item.<\/li>\n    <li>'orderItems.serialNumbers' = The serial numbers that are associated with the order item.<\/li>\n    <li>'orderItems.variationBarcodes' = The barcodes that are associated with variation of the order item.<\/li>\n    <li>'orderItems.comments' = The comments that are associated with the order item.<\/li>\n    <li><b>deprecated<\/b> 'orderItems.warehouseLocations' = The warehouse locations that are associated with the order item.<\/li>\n    <\/ul>\n    Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
                         "format": "",
                         "in": "query",
                         "items": {
@@ -37852,6 +37852,62 @@
                 ]
             }
         },
+        "\/rest\/orders\/items\/outgoing_stocks": {
+            "delete": {
+                "summary": "Revert outgoing stock for order items",
+                "description": "Reverts the booking of the given order items of an order. The order items have to be specified.",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "\/rest\/orders\/items\/outgoing_stocks",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "id",
+                                "warehouseId",
+                                "quantity"
+                            ],
+                            "properties": {
+                                "id": {
+                                    "type": "integer"
+                                },
+                                "warehouseId": {
+                                    "type": "integer"
+                                },
+                                "quantity": {
+                                    "type": "number"
+                                },
+                                "batch": {
+                                    "type": "string"
+                                },
+                                "bestBeforeDate": {
+                                    "type": "string"
+                                },
+                                "reasonId": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        },
         "\/rest\/orders\/items\/properties": {
             "post": {
                 "summary": "Create an order item property.",
@@ -38009,6 +38065,216 @@
                                 }
                             }
                         }
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/orders\/items\/transactions": {
+            "get": {
+                "summary": "Search transactions",
+                "description": "Searches transactions by filter parameters.",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "page": {
+                                    "type": "integer",
+                                    "description": "Current page of the response"
+                                },
+                                "totalsCount": {
+                                    "type": "integer",
+                                    "description": "The total number of entries in the response"
+                                },
+                                "isLastPage": {
+                                    "type": "boolean",
+                                    "description": "Flag that indicates if the page shown is the last page of the response"
+                                },
+                                "lastPageNumber": {
+                                    "type": "integer",
+                                    "description": "The last page number"
+                                },
+                                "firstOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the first item of the current page result"
+                                },
+                                "lastOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the last item of the current page result"
+                                },
+                                "itemsPerPage": {
+                                    "type": "integer",
+                                    "description": "The requested amount of items per result page"
+                                },
+                                "entries": {
+                                    "type": "array",
+                                    "description": "List of OrderItemTransaction",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Order\\Transaction\\Models\\OrderItemTransaction"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "page",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The page to get. The default page that will be returned is page 1.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "itemsPerPage",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The number of orders to be displayed per page. The default number of orders per page is 50.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "columns",
+                        "type": "array",
+                        "required": false,
+                        "description": "The properties to be loaded",
+                        "format": "",
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "with",
+                        "type": "array",
+                        "required": false,
+                        "description": "Load additional relations for a transaction. Currently possible are 'orderItem' and 'warehouseLocation'.",
+                        "format": "",
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "orderItemId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The ID of the order item",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The ID of the order",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "direction",
+                        "type": "string",
+                        "required": false,
+                        "description": "The direction of the transaction",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "status",
+                        "type": "string",
+                        "required": false,
+                        "description": "The status of the transaction",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "isBooked",
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Returns all booked transactions",
+                        "format": "boolean",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/orders\/items\/transactions\/{transactionId}": {
+            "delete": {
+                "summary": "Delete a transaction",
+                "description": "",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Repositories\\Models\\DeleteResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "transactionId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "put": {
+                "summary": "Update a transaction",
+                "description": "",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Order\\Transaction\\Models\\OrderItemTransaction"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "transactionId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
                     }
                 ],
                 "security": [
@@ -38547,7 +38813,7 @@
                         "name": "with",
                         "type": "array",
                         "required": false,
-                        "description": "Load additional relations for a transaction. Currently possible is 'orderItem'.",
+                        "description": "Load additional relations for a transaction. Currently possible are 'orderItem' and 'warehouseLocation'.",
                         "format": "",
                         "in": "query",
                         "items": {
@@ -40588,7 +40854,7 @@
                         "name": "with",
                         "type": "array",
                         "required": false,
-                        "description": "Load additional relations for an order. Currently possible are:\n     * <ul>\n       <li>'addresses' = The address objects that are associated with the order.<\/li>\n       <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the the reference type, the ID of the reference and the relation itself.<\/li>\n       <li>'comments' = The order comments.<\/li>\n       <li>'location' = The accounting location of the order.<\/li>\n       <li>'payments' = The payments that are associated with the order.<\/li>\n       <li>'documents' = The documents that are associated with the order.<\/li>\n       <li>'contactSender' = The associated contact for the contact-sender relation.<\/li>\n       <li>'contactReceiver' = The associated contact for the contact-receiver relation.<\/li>\n       <li>'warehouseSender' = The associated warehouse for the warehouse-sender relation.<\/li>\n       <li>'warehouseReceiver' = The associated warehouse for the warehouse-receiver relation.<\/li>\n       <li>'orderItems.variation' = The variation that is associated with the order item.<\/li>\n       <li>'orderItems.giftCardCodes' = The gift card codes that are associated with the order item.<\/li>\n       <li>'orderItems.transactions' = The transactions that are associated with the order item.<\/li>\n       <li>'orderItems.serialNumbers' = The serial numbers that are associated with the order item.<\/li>\n       <li>'orderItems.variationBarcodes' = The barcodes that are associated with variation of the order item.<\/li>\n       <li>'orderItems.comments' = The comments that are associated with the order item.<\/li>\n     <\/ul>\n     Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
+                        "description": "Load additional relations for an order. Currently possible are:\n     * <ul>\n       <li>'addresses' = The address objects that are associated with the order.<\/li>\n       <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the the reference type, the ID of the reference and the relation itself.<\/li>\n       <li>'comments' = The order comments.<\/li>\n       <li>'location' = The accounting location of the order.<\/li>\n       <li>'payments' = The payments that are associated with the order.<\/li>\n       <li>'documents' = The documents that are associated with the order.<\/li>\n       <li>'contactSender' = The associated contact for the contact-sender relation.<\/li>\n       <li>'contactReceiver' = The associated contact for the contact-receiver relation.<\/li>\n       <li>'warehouseSender' = The associated warehouse for the warehouse-sender relation.<\/li>\n       <li>'warehouseReceiver' = The associated warehouse for the warehouse-receiver relation.<\/li>\n       <li>'orderItems.variation' = The variation that is associated with the order item.<\/li>\n       <li>'orderItems.giftCardCodes' = The gift card codes that are associated with the order item.<\/li>\n       <li>'orderItems.transactions' = The transactions that are associated with the order item.<\/li>\n       <li>'orderItems.serialNumbers' = The serial numbers that are associated with the order item.<\/li>\n       <li>'orderItems.variationBarcodes' = The barcodes that are associated with variation of the order item.<\/li>\n       <li>'orderItems.comments' = The comments that are associated with the order item.<\/li>\n       <li><b>deprecated<\/b> 'orderItems.warehouseLocations' = The warehouse locations that are associated with the order item.<\/li>\n     <\/ul>\n     Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
                         "format": "",
                         "in": "query",
                         "items": {
@@ -41004,6 +41270,69 @@
                         "description": "",
                         "format": "integer",
                         "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/orders\/{orderId}\/documents\/{documentId}\/generate": {
+            "post": {
+                "summary": "Generate document of an order",
+                "description": "Generate document of an order. The ID of the order and the type of the document must be specified.",
+                "tags": [
+                    "Document"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "documentId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "type",
+                        "type": "string",
+                        "required": true,
+                        "description": "The document type. Supported types are 'reorder', 'poDeliveryNote'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "in": "body",
+                        "name": "\/rest\/orders\/{orderId}\/documents\/{documentId}\/generate",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "allowRegenerate": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
                     }
                 ],
                 "security": [
@@ -47480,7 +47809,49 @@
                             }
                         }
                     }
-                }
+                },
+                "parameters": [
+                    {
+                        "name": "page",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Current page of the response",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "itemsPerPage",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The requested amount of items per result page",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "paginate",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The condition that determines if the pagination should be used (default value is set to 0)",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "relationTypeIdentifier",
+                        "type": "string",
+                        "required": false,
+                        "description": "The parameter that decides the type of relation",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "relationTargetId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The ID of the target of the relation",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ]
             },
             "post": {
                 "summary": "Create a property relation",
@@ -48337,10 +48708,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#\/definitions\/mixed"
-                            }
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Report\\Models\\RawDataSearchResult"
                         }
                     },
                     "401": {
@@ -48349,10 +48717,10 @@
                 },
                 "parameters": [
                     {
-                        "name": "dataNames",
+                        "name": "dataName",
                         "type": "string",
                         "required": false,
-                        "description": "Filter that restricts the search result to raw data files. The list of data names must be separated by comma e.g. orders,orderItems,orderItemsAmount.",
+                        "description": "Filter that restricts the search result to raw data files e.g. orders,orderItems.",
                         "format": "string",
                         "in": "query"
                     },
@@ -48389,12 +48757,15 @@
                         "in": "query"
                     },
                     {
-                        "name": "afterId",
-                        "type": "string",
+                        "name": "lastEvaluatedKey",
+                        "type": "array",
                         "required": false,
-                        "description": "Returns the results from the transferred ID of the last search query with the same filter parameters.",
-                        "format": "string",
-                        "in": "query"
+                        "description": "The last evaluated key, provide that as the starting point for the next query (pagination).",
+                        "format": "",
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "security": [
@@ -48504,7 +48875,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#\/definitions\/Plenty\\Modules\\Cloud\\Storage\\Models\\StorageObject"
+                            "$ref": "#\/definitions\/mixed"
                         }
                     },
                     "401": {
@@ -60825,7 +61196,7 @@
                 },
                 "typeId": {
                     "type": "integer",
-                    "description": "The ID of the property type. The following types are available:\n<ul>\n  <li>WAREHOUSE\t\t=\t1<\/li>\n  <li>SHIPPING_PROFILE\t=\t2<\/li>\n  <li>PAYMENT_METHOD\t\t\t=\t3<\/li>\n  <li>PAYMENT_STATUS\t\t\t=\t4<\/li>\n  <li>EXTERNAL_SHIPPING_PROFILE\t\t\t=\t5<\/li>\n  <li>DOCUMENT_LANGUAGE\t\t\t=\t6<\/li>\n  <li>EXTERNAL_ORDER_ID\t\t\t=\t7<\/li>\n  <li>CUSTOMER_SIGN\t\t\t=\t8<\/li>\n  <li>DUNNING_LEVEL\t\t\t=\t9<\/li>\n  <li>SELLER_ACCOUNT\t\t\t=\t10<\/li>\n  <li>WEIGHT\t\t\t=\t11<\/li>\n  <li>WIDTH\t\t\t=\t12<\/li>\n  <li>LENGTH          =\t13<\/li>\n  <li>HEIGHT\t\t=\t14<\/li>\n  <li>FLAG\t\t\t=\t15<\/li>\n  <li>EXTERNAL_TOKEN_ID\t\t\t=\t16<\/li>\n  <li>EXTERNAL_ITEM_ID\t\t\t=\t17<\/li>\n  <li>COUPON_CODE\t\t\t=\t18<\/li>\n  <li>COUPON_TYPE         =   19<\/li>\n  <li>SALES_TAX_ID_NUMBER =   34<\/li>\n  <li>MAIN_DOCUMENT_NUMBER = 33<\/li>\n  <li>PAYMENT_TRANSACTION_ID = 45<\/li>\n  <li>EXTERNAL_TAX_SERVICE = 47<\/li>\n  <li>MERCHANT_ID = 60<\/li>\n  <li>REPORT_ID = 61<\/li>\n<\/ul>"
+                    "description": "The ID of the property type. The following types are available:\n<ul>\n  <li>WAREHOUSE\t\t=\t1<\/li>\n  <li>SHIPPING_PROFILE\t=\t2<\/li>\n  <li>PAYMENT_METHOD\t\t\t=\t3<\/li>\n  <li>PAYMENT_STATUS\t\t\t=\t4<\/li>\n  <li>EXTERNAL_SHIPPING_PROFILE\t\t\t=\t5<\/li>\n  <li>DOCUMENT_LANGUAGE\t\t\t=\t6<\/li>\n  <li>EXTERNAL_ORDER_ID\t\t\t=\t7<\/li>\n  <li>CUSTOMER_SIGN\t\t\t=\t8<\/li>\n  <li>DUNNING_LEVEL\t\t\t=\t9<\/li>\n  <li>SELLER_ACCOUNT\t\t\t=\t10<\/li>\n  <li>WEIGHT\t\t\t=\t11<\/li>\n  <li>WIDTH\t\t\t=\t12<\/li>\n  <li>LENGTH          =\t13<\/li>\n  <li>HEIGHT\t\t=\t14<\/li>\n  <li>FLAG\t\t\t=\t15<\/li>\n  <li>EXTERNAL_TOKEN_ID\t\t\t=\t16<\/li>\n  <li>EXTERNAL_ITEM_ID\t\t\t=\t17<\/li>\n  <li>COUPON_CODE\t\t\t=\t18<\/li>\n  <li>COUPON_TYPE         =   19<\/li>\n  <li>SALES_TAX_ID_NUMBER =   34<\/li>\n  <li>MAIN_DOCUMENT_NUMBER = 33<\/li>\n  <li>PAYMENT_TRANSACTION_ID = 45<\/li>\n  <li>EXTERNAL_TAX_SERVICE = 47<\/li>\n  <li>MERCHANT_ID = 60<\/li>\n  <li>REPORT_ID = 61<\/li>\n  <li>EBAY_PLUS = 994<\/li>\n  <li>FULFILLMENT_SERVICE = 995<\/li>\n<\/ul>"
                 },
                 "value": {
                     "type": "string",
@@ -61454,6 +61825,10 @@
         "Plenty\\Modules\\Order\\Transaction\\Models\\OrderItemTransaction": {
             "type": "object",
             "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "The ID of the transaction"
+                },
                 "orderItemId": {
                     "type": "integer",
                     "description": "The ID of the order item"
@@ -62420,6 +62795,16 @@
                 "interval": {
                     "type": "string",
                     "description": "Interval in which this creator runs through"
+                }
+            }
+        },
+        "Plenty\\Modules\\Report\\Models\\RawDataSearchResult": {
+            "type": "object",
+            "properties": {
+                "lastEvaluatedKey": {
+                    "type": "array",
+                    "description": "The last evaluated key, provide that as the starting point for the next query (pagination).",
+                    "items": {}
                 }
             }
         },
