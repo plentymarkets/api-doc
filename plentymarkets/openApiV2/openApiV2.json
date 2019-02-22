@@ -48697,7 +48697,7 @@
                 }
             }
         },
-        "\/rest\/report\/raw-data": {
+        "\/rest\/reports\/raw-data": {
             "get": {
                 "summary": "Get list of raw data files. Valid filter combinations: (dataName), (dataName & processStatus), (createdAtTimestamp)",
                 "description": "",
@@ -48757,15 +48757,12 @@
                         "in": "query"
                     },
                     {
-                        "name": "lastEvaluatedKey",
-                        "type": "array",
+                        "name": "after",
+                        "type": "string",
                         "required": false,
-                        "description": "The last evaluated key, provide that as the starting point for the next query (pagination).",
-                        "format": "",
-                        "in": "query",
-                        "items": {
-                            "type": "string"
-                        }
+                        "description": "The last evaluated key as base64, provide that as the starting point for the next query (pagination)",
+                        "format": "string",
+                        "in": "query"
                     }
                 ],
                 "security": [
@@ -48775,7 +48772,7 @@
                 ]
             }
         },
-        "\/rest\/report\/raw-data\/config": {
+        "\/rest\/reports\/raw-data\/config": {
             "get": {
                 "summary": "Returns list of all saved configurations",
                 "description": "",
@@ -48836,7 +48833,7 @@
                 ]
             }
         },
-        "\/rest\/report\/raw-data\/creators": {
+        "\/rest\/reports\/raw-data\/creators": {
             "get": {
                 "summary": "Get list of all raw data creators",
                 "description": "",
@@ -48864,7 +48861,7 @@
                 ]
             }
         },
-        "\/rest\/report\/raw-data\/file": {
+        "\/rest\/reports\/raw-data\/file": {
             "get": {
                 "summary": "Get a raw data file from the storage, the storage path of the file must be specified.",
                 "description": "",
@@ -62341,6 +62338,10 @@
                     "type": "boolean",
                     "description": "is closed source"
                 },
+                "inboxPath": {
+                    "type": "string",
+                    "description": "path in the inbox (closed source, open source)"
+                },
                 "marketplaceName": {
                     "type": "array",
                     "description": "The plugin name displayed in marketplace",
@@ -62801,10 +62802,9 @@
         "Plenty\\Modules\\Report\\Models\\RawDataSearchResult": {
             "type": "object",
             "properties": {
-                "lastEvaluatedKey": {
-                    "type": "array",
-                    "description": "The last evaluated key, provide that as the starting point for the next query (pagination).",
-                    "items": {}
+                "after": {
+                    "type": "string",
+                    "description": "The last evaluated key as base64, provide that as the starting point for the next query (pagination)."
                 }
             }
         },
