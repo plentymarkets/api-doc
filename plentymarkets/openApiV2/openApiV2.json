@@ -14084,6 +14084,12 @@
                                         "$ref": "#\/definitions\/Plenty\\Modules\\Item\\Item\\Models\\ItemEbayTitle"
                                     }
                                 },
+                                "itemShippingProfiles": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Item\\ItemShippingProfiles\\Models\\ItemShippingProfiles"
+                                    }
+                                },
                                 "id": {
                                     "type": "integer"
                                 },
@@ -14219,6 +14225,12 @@
                                     "type": "array",
                                     "items": {
                                         "$ref": "#\/definitions\/Plenty\\Modules\\Item\\Item\\Models\\ItemEbayTitle"
+                                    }
+                                },
+                                "itemShippingProfiles": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Item\\ItemShippingProfiles\\Models\\ItemShippingProfiles"
                                     }
                                 }
                             }
@@ -28088,6 +28100,12 @@
                                     "type": "array",
                                     "items": {
                                         "$ref": "#\/definitions\/Plenty\\Modules\\Item\\Item\\Models\\ItemEbayTitle"
+                                    }
+                                },
+                                "itemShippingProfiles": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Item\\ItemShippingProfiles\\Models\\ItemShippingProfiles"
                                     }
                                 }
                             }
@@ -47809,49 +47827,7 @@
                             }
                         }
                     }
-                },
-                "parameters": [
-                    {
-                        "name": "page",
-                        "type": "integer",
-                        "required": false,
-                        "description": "Current page of the response",
-                        "format": "integer",
-                        "in": "query"
-                    },
-                    {
-                        "name": "itemsPerPage",
-                        "type": "integer",
-                        "required": false,
-                        "description": "The requested amount of items per result page",
-                        "format": "integer",
-                        "in": "query"
-                    },
-                    {
-                        "name": "paginate",
-                        "type": "integer",
-                        "required": false,
-                        "description": "The condition that determines if the pagination should be used (default value is set to 0)",
-                        "format": "integer",
-                        "in": "query"
-                    },
-                    {
-                        "name": "relationTypeIdentifier",
-                        "type": "string",
-                        "required": false,
-                        "description": "The parameter that decides the type of relation",
-                        "format": "string",
-                        "in": "query"
-                    },
-                    {
-                        "name": "relationTargetId",
-                        "type": "integer",
-                        "required": false,
-                        "description": "The ID of the target of the relation",
-                        "format": "integer",
-                        "in": "query"
-                    }
-                ]
+                }
             },
             "post": {
                 "summary": "Create a property relation",
@@ -52334,7 +52310,7 @@
         "\/rest\/tags": {
             "get": {
                 "summary": "List tags",
-                "description": "Lists all tags. The results can be filtered by:\ntagName (eq, in, like)\ntagAvailability (eq, in)\ntagLang (eq, in)\ncolor (eq, in)",
+                "description": "Lists all tags. The results can be filtered.",
                 "tags": [
                     "Tag"
                 ],
@@ -52399,7 +52375,7 @@
             },
             "post": {
                 "summary": "Create a tag",
-                "description": "Creates a tag.",
+                "description": "",
                 "tags": [
                     "Tag"
                 ],
@@ -52516,7 +52492,7 @@
             },
             "put": {
                 "summary": "Update up to 50 tags.",
-                "description": "Updates up to 50 tags. The IDs of the tags must bes specified",
+                "description": "Updates up to 50 tags. The IDs of the tags must be specified.",
                 "tags": [
                     "Tag"
                 ],
@@ -52570,6 +52546,164 @@
                                 }
                             }
                         }
+                    }
+                ]
+            }
+        },
+        "\/rest\/tags\/relationships": {
+            "get": {
+                "summary": "List relationships",
+                "description": "Lists all relationships. The results can be filtered.",
+                "tags": [
+                    "Tag"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Illuminate\\Support\\Collection"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "with",
+                        "type": "string",
+                        "required": false,
+                        "description": "Includes the specified tag information in the results. The following parameters are available: <ul><li>availability = The tag availability<\/li><li>tag = The tag<\/li><\/ul>More than one parameter should be separated by commas.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "tagId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter restricts the list of results to tag relationships with the specified tag ID. The tag ID must be specified.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "tagType",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to tag relationships with the specified tag type. The tag type must be specified.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "relationshipValue",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter restricts the list of results to tag relationships with the specified relationship value. This is the ID of the data record. The relationship value must be specified.",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "post": {
+                "summary": "Create a tag relationship",
+                "description": "Creates a tag relationship by linking a tag to a data record.",
+                "tags": [
+                    "Tag"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Tag\\Models\\TagRelationship"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "\/rest\/tags\/relationships",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "tagId",
+                                "tagType",
+                                "relationshipValue"
+                            ],
+                            "properties": {
+                                "tagId": {
+                                    "type": "integer"
+                                },
+                                "tagType": {
+                                    "type": "string"
+                                },
+                                "relationshipValue": {
+                                    "type": "integer"
+                                },
+                                "relationshipUUID5": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "\/rest\/tags\/relationships\/{relationshipValue}\/{tagType}\/{id}": {
+            "delete": {
+                "summary": "Delete a tag relationship",
+                "description": "Deletes a specific tag relationship that matches the specified data.",
+                "tags": [
+                    "Tag"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "relationshipValue",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "tagType",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
                     }
                 ]
             }
@@ -52694,6 +52828,57 @@
                                 }
                             }
                         }
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/tags\/{id}\/relationships\/{tagType}\/{relationshipUUID}": {
+            "delete": {
+                "summary": "Delete a tag relationship",
+                "description": "Deletes a specific tag relationship that matches the specified data.",
+                "tags": [
+                    "Tag"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Repositories\\Models\\DeleteResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "tagType",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "relationshipUUID",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
                     }
                 ],
                 "security": [
@@ -54188,20 +54373,7 @@
                     "200": {
                         "description": "OK"
                     }
-                },
-                "parameters": [
-                    {
-                        "name": "warehouseLocationIds",
-                        "type": "array",
-                        "required": true,
-                        "description": "An array containing all the ID's for the warehouse locations that need to be deleted",
-                        "format": "",
-                        "in": "query",
-                        "items": {
-                            "type": "string"
-                        }
-                    }
-                ]
+                }
             },
             "post": {
                 "summary": "Create a warehouse location",
@@ -54444,25 +54616,7 @@
                             }
                         }
                     }
-                },
-                "parameters": [
-                    {
-                        "name": "purpose",
-                        "type": "string",
-                        "required": true,
-                        "description": "The purpose key value for warehouse location purposeKey field",
-                        "format": "string",
-                        "in": "query"
-                    },
-                    {
-                        "name": "status",
-                        "type": "string",
-                        "required": true,
-                        "description": "The status key value for warehouse location status field",
-                        "format": "string",
-                        "in": "query"
-                    }
-                ]
+                }
             }
         },
         "\/rest\/warehouses\/locations\/levels": {
@@ -54527,33 +54681,7 @@
                     "200": {
                         "description": "OK"
                     }
-                },
-                "parameters": [
-                    {
-                        "name": "toMove",
-                        "type": "integer",
-                        "required": true,
-                        "description": "The warehouse location level ID that needs needs to be moved",
-                        "format": "integer",
-                        "in": "query"
-                    },
-                    {
-                        "name": "target",
-                        "type": "integer",
-                        "required": true,
-                        "description": "The warehouse location level ID that stands as position for the warehouse location level that needs to be moved",
-                        "format": "integer",
-                        "in": "query"
-                    },
-                    {
-                        "name": "side",
-                        "type": "string",
-                        "required": true,
-                        "description": "The actual position from the left or right side of target",
-                        "format": "string",
-                        "in": "query"
-                    }
-                ]
+                }
             }
         },
         "\/rest\/warehouses\/locations\/levels\/{warehouseLocationLevelId}": {
@@ -54647,20 +54775,7 @@
                             }
                         }
                     }
-                },
-                "parameters": [
-                    {
-                        "name": "dimensions",
-                        "type": "array",
-                        "required": true,
-                        "description": "The dimensions array that contains data for creating multiple dimensions",
-                        "format": "",
-                        "in": "query",
-                        "items": {
-                            "type": "string"
-                        }
-                    }
-                ]
+                }
             }
         },
         "\/rest\/warehouses\/locations\/positions": {
@@ -54674,33 +54789,7 @@
                     "200": {
                         "description": "OK"
                     }
-                },
-                "parameters": [
-                    {
-                        "name": "toMove",
-                        "type": "integer",
-                        "required": true,
-                        "description": "The warehouse location ID that needs needs to be moved",
-                        "format": "integer",
-                        "in": "query"
-                    },
-                    {
-                        "name": "target",
-                        "type": "integer",
-                        "required": true,
-                        "description": "The warehouse location ID that stands as position for the warehouse location that needs to be moved",
-                        "format": "integer",
-                        "in": "query"
-                    },
-                    {
-                        "name": "side",
-                        "type": "string",
-                        "required": true,
-                        "description": "The actual position from the left or right side of target",
-                        "format": "string",
-                        "in": "query"
-                    }
-                ]
+                }
             }
         },
         "\/rest\/warehouses\/locations\/previews": {
@@ -54712,55 +54801,9 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#\/definitions\/mixed"
-                        }
+                        "description": "OK"
                     }
-                },
-                "parameters": [
-                    {
-                        "name": "dimensions",
-                        "type": "array",
-                        "required": true,
-                        "description": "The warehouse location dimensions used by the generator",
-                        "format": "",
-                        "in": "query",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "storageLocationData",
-                        "type": "array",
-                        "required": true,
-                        "description": "The warehouse location data used by the generator",
-                        "format": "",
-                        "in": "query",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "levelData",
-                        "type": "array",
-                        "required": true,
-                        "description": "The warehouse location level data used by the generator",
-                        "format": "",
-                        "in": "query",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "save",
-                        "type": "integer",
-                        "required": true,
-                        "description": "The save parameter that triggers the preview method or the process save method",
-                        "format": "integer",
-                        "in": "query"
-                    }
-                ]
+                }
             }
         },
         "\/rest\/warehouses\/locations\/{warehouseId}\/label": {
@@ -54772,10 +54815,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#\/definitions\/mixed"
-                        }
+                        "description": "OK"
                     }
                 },
                 "parameters": [
@@ -54786,14 +54826,6 @@
                         "description": "",
                         "format": "integer",
                         "in": "path"
-                    },
-                    {
-                        "name": "warehouseLocationIds",
-                        "type": "string",
-                        "required": true,
-                        "description": "A string with all warehouse location ID's for which a label needs to be generated",
-                        "format": "string",
-                        "in": "query"
                     }
                 ]
             }
@@ -61060,6 +61092,10 @@
                     "type": "integer",
                     "description": "The user ID of the order's owner"
                 },
+                "referrerId": {
+                    "type": "number",
+                    "description": "The referrer ID of the order"
+                },
                 "createdAt": {
                     "type": "string",
                     "description": "The date that the order was created"
@@ -62741,12 +62777,69 @@
                 }
             }
         },
+        "Plenty\\Modules\\Report\\Models\\RawData": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "The raw data id"
+                },
+                "createdAtTimestamp": {
+                    "type": "integer",
+                    "description": "Unix timestamp of creation of this raw data file"
+                },
+                "plentyIdHash": {
+                    "type": "string",
+                    "description": "The plentymarkets system id hash"
+                },
+                "dataName": {
+                    "type": "string",
+                    "description": "The raw data name"
+                },
+                "dataNameProcessStatus": {
+                    "type": "string",
+                    "description": "Composite index of dataName#processStatus#"
+                },
+                "processStatusPlentyIdHash": {
+                    "type": "string",
+                    "description": "Composite index of processStatus#plentyIdHash#"
+                },
+                "path": {
+                    "type": "string",
+                    "description": "Storage path to raw data file"
+                }
+            }
+        },
+        "Plenty\\Modules\\Report\\Models\\RawDataConfig": {
+            "type": "object",
+            "properties": {
+                "dataName": {
+                    "type": "string",
+                    "description": "The raw data name"
+                },
+                "active": {
+                    "type": "integer",
+                    "description": "If active, raw data is generated daily"
+                },
+                "deleteRawDataAfterDays": {
+                    "type": "integer",
+                    "description": ""
+                }
+            }
+        },
         "Plenty\\Modules\\Report\\Models\\RawDataConfigs": {
             "type": "object",
             "properties": {
                 "plentyIdHash": {
                     "type": "string",
                     "description": "System id hash"
+                },
+                "configs": {
+                    "type": "array",
+                    "description": "List of all saved configurations (List)",
+                    "items": {
+                        "$ref": "#\/definitions\/Plenty\\Modules\\Report\\Models\\RawDataConfig"
+                    }
                 }
             }
         },
@@ -62805,6 +62898,13 @@
                 "after": {
                     "type": "string",
                     "description": "The last evaluated key as base64, provide that as the starting point for the next query (pagination)."
+                },
+                "searchResult": {
+                    "type": "array",
+                    "description": "The raw data search result (List)",
+                    "items": {
+                        "$ref": "#\/definitions\/Plenty\\Modules\\Report\\Models\\RawData"
+                    }
                 }
             }
         },
@@ -63090,6 +63190,14 @@
                 "logisticsType": {
                     "type": "string",
                     "description": "The id of the logistics type of the warehouse. The logistics type states which service provider fulfills the storage and shipping. The following logistics types are available:\n<ul>\n<li>own<\/li>\n<li>amazon<\/li>\n<li>dhlFulfillment<\/li>\n<\/ul>"
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "description": "The updated at timestamp of the warehouse"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "description": "The created at timestamp of the warehouse"
                 }
             }
         },
@@ -63149,6 +63257,14 @@
                 "color": {
                     "type": "string",
                     "description": "The color for the tag"
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "description": "The updated at timestamp of the tag."
+                },
+                "createdAt": {
+                    "type": "string",
+                    "description": "The created at timestamp of the tag."
                 }
             }
         },
@@ -63183,6 +63299,27 @@
                 "tagName": {
                     "type": "string",
                     "description": "The name of the tag."
+                }
+            }
+        },
+        "Plenty\\Modules\\Tag\\Models\\TagRelationship": {
+            "type": "object",
+            "properties": {
+                "tagId": {
+                    "type": "integer",
+                    "description": "The ID of the tag"
+                },
+                "tagType": {
+                    "type": "string",
+                    "description": "The type of tag."
+                },
+                "relationshipValue": {
+                    "type": "integer",
+                    "description": "The ID of the data record for which a tag relationship is created"
+                },
+                "relationshipUUID5": {
+                    "type": "string",
+                    "description": "The ID of the data record for which a tag relationship is created. For models with uuid5 as primary key"
                 }
             }
         },
