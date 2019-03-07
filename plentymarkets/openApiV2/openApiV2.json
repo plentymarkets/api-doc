@@ -17186,6 +17186,22 @@
                         "description": "Filter restricts the list of results to items linked to a specified property group",
                         "format": "string",
                         "in": "query"
+                    },
+                    {
+                        "name": "page",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Limits the results to a specific page. The page number must be specified.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "itemsPerPage",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Limits the number of results listed per page to a specific number. The number of properties to be listed per page must be specified.",
+                        "format": "integer",
+                        "in": "query"
                     }
                 ],
                 "security": [
@@ -47827,7 +47843,49 @@
                             }
                         }
                     }
-                }
+                },
+                "parameters": [
+                    {
+                        "name": "page",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Current page of the response",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "itemsPerPage",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The requested amount of items per result page",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "paginate",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The condition that determines if the pagination should be used (default value is set to 0)",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "relationTypeIdentifier",
+                        "type": "string",
+                        "required": false,
+                        "description": "The parameter that decides the type of relation",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "relationTargetId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The ID of the target of the relation",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ]
             },
             "post": {
                 "summary": "Create a property relation",
@@ -59913,7 +59971,7 @@
                 },
                 "availabilityUpdatedAt": {
                     "type": "string",
-                    "description": "The time at which the availability of this variation was last updated. Not yet ready to use."
+                    "description": "The time at which the availability of this variation was last updated."
                 },
                 "priceCalculationId": {
                     "type": "integer",
