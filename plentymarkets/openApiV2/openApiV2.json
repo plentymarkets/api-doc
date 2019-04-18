@@ -11070,7 +11070,7 @@
         "\/rest\/elastic-sync\/document": {
             "get": {
                 "summary": "Get a single storage object from sync documents",
-                "description": "",
+                "description": "Gets a single storage object from sync documents",
                 "tags": [
                     "Sync"
                 ],
@@ -11103,7 +11103,7 @@
             },
             "post": {
                 "summary": "Upload a document to sync directory",
-                "description": "",
+                "description": "Uploads a document to sync directory",
                 "tags": [
                     "Sync"
                 ],
@@ -11138,7 +11138,7 @@
         "\/rest\/elastic-sync\/document\/url": {
             "get": {
                 "summary": "Get a temporary url for a single document",
-                "description": "",
+                "description": "Gets a temporary url for a single document",
                 "tags": [
                     "Sync"
                 ],
@@ -11173,7 +11173,7 @@
         "\/rest\/elastic-sync\/documents": {
             "delete": {
                 "summary": "Delete files from sync documents",
-                "description": "",
+                "description": "Deletes files from sync documents",
                 "tags": [
                     "Sync"
                 ],
@@ -11209,7 +11209,7 @@
             },
             "get": {
                 "summary": "List documents for a single sync",
-                "description": "",
+                "description": "Lists documents for a single sync",
                 "tags": [
                     "Sync"
                 ],
@@ -11243,8 +11243,8 @@
         },
         "\/rest\/elastic-sync\/log\/cache": {
             "post": {
-                "summary": "Delete the Sync Log cache.",
-                "description": "Deletes the Sync Log cache.",
+                "summary": "Delete the sync log cache.",
+                "description": "Deletes the sync log cache.",
                 "tags": [
                     "ElasticSync"
                 ],
@@ -11272,7 +11272,7 @@
         "\/rest\/elastic-sync\/log\/check\/sync\/{syncId}": {
             "get": {
                 "summary": "Check the progress of a sync.",
-                "description": "Checks the progress of a sync. Sync id is required.",
+                "description": "Checks the progress of a sync. Sync ID is required.",
                 "tags": [
                     "ElasticSync"
                 ],
@@ -11309,8 +11309,8 @@
         },
         "\/rest\/elastic-sync\/log\/check\/syncs": {
             "get": {
-                "summary": "Check the progress of all sync.",
-                "description": "Checks the progress of all sync.",
+                "summary": "Check the progress of all syncs.",
+                "description": "Checks the progress of all syncs.",
                 "tags": [
                     "ElasticSync"
                 ],
@@ -11337,8 +11337,8 @@
         },
         "\/rest\/elastic-sync\/log\/id": {
             "get": {
-                "summary": "Get Plenty ID.",
-                "description": "Gets the Plenty ID.",
+                "summary": "Get plenty ID.",
+                "description": "Gets the plenty ID.",
                 "tags": [
                     "ElasticSync"
                 ],
@@ -11362,8 +11362,8 @@
         },
         "\/rest\/elastic-sync\/log\/id\/{id}": {
             "get": {
-                "summary": "Get Log Id",
-                "description": "Get Log Id",
+                "summary": "Get Log ID",
+                "description": "Gets Log ID",
                 "tags": [
                     "ElasticSync"
                 ],
@@ -11435,8 +11435,8 @@
         },
         "\/rest\/elastic-sync\/log\/status": {
             "get": {
-                "summary": "Get Logs.",
-                "description": "Gets the Logs.",
+                "summary": "Get all logs for ElasticSync.",
+                "description": "Gets all the logs for ElasticSync.",
                 "tags": [
                     "ElasticSync"
                 ],
@@ -11523,8 +11523,8 @@
         },
         "\/rest\/elastic-sync\/mapping\/field\/fields": {
             "get": {
-                "summary": "Get the field value map.",
-                "description": "Gets the field value map.",
+                "summary": "Get the field value map for all sync types.",
+                "description": "Gets the field value map for all sync types.",
                 "tags": [
                     "ElasticSync"
                 ],
@@ -11551,8 +11551,8 @@
         },
         "\/rest\/elastic-sync\/mapping\/fields\/{syncType}": {
             "get": {
-                "summary": "Get the plenty fields value map.",
-                "description": "Gets the plenty fields value map. Sync data type is required.",
+                "summary": "Get the plenty fields value map for a particular sync type.",
+                "description": "Gets the plenty fields value map for a particular sync type. Sync data type is required.",
                 "tags": [
                     "ElasticSync"
                 ],
@@ -11597,8 +11597,8 @@
         },
         "\/rest\/elastic-sync\/mapping\/list\/{syncType}": {
             "get": {
-                "summary": "Get all mapping list",
-                "description": "Gets all mapping list.",
+                "summary": "Get a list of all mappings for a particular sync type.",
+                "description": "Gets a list of all mappings for a particular sync type.",
                 "tags": [
                     "ElasticSync"
                 ],
@@ -11657,8 +11657,8 @@
         },
         "\/rest\/elastic-sync\/mapping\/mapp\/csv_columns\/{syncId}": {
             "get": {
-                "summary": "Get the csv columns.",
-                "description": "Gets the csv columns. Sync ID is required.",
+                "summary": "Get the csv columns of a sync.",
+                "description": "Gets the csv columns of a sync. Sync ID is required.",
                 "tags": [
                     "ElasticSync"
                 ],
@@ -11695,8 +11695,8 @@
         },
         "\/rest\/elastic-sync\/mapping\/mapp\/filter": {
             "get": {
-                "summary": "Get the filter label list.",
-                "description": "Gets the filter label list.",
+                "summary": "Get the label list for mapping filtration.",
+                "description": "Gets the label list for mapping filtration.",
                 "tags": [
                     "ElasticSync"
                 ],
@@ -11724,7 +11724,7 @@
         "\/rest\/elastic-sync\/mapping\/mapp\/tree": {
             "get": {
                 "summary": "Get the mapping values tree.",
-                "description": "Gets the mapping values tree.",
+                "description": "Gets the mapping values. Sync data type is required.",
                 "tags": [
                     "ElasticSync"
                 ],
@@ -11797,8 +11797,8 @@
         },
         "\/rest\/elastic-sync\/mapping\/row\/{syncId}": {
             "get": {
-                "summary": "Get the rows csv.",
-                "description": "Gets the rows csv. Sync id is required.",
+                "summary": "Get the csv rows.",
+                "description": "Gets the csv rows. Sync ID is required.",
                 "tags": [
                     "ElasticSync"
                 ],
@@ -11881,8 +11881,8 @@
         },
         "\/rest\/elastic-sync\/mapping\/variation": {
             "get": {
-                "summary": "Get a list with variation matched.",
-                "description": "Get a list with variation matched.",
+                "summary": "Get a list with variation matches.",
+                "description": "Get a list with variation matches.",
                 "tags": [
                     "ElasticSync"
                 ],
@@ -11909,8 +11909,8 @@
         },
         "\/rest\/elastic-sync\/mapping\/{mapIds}": {
             "delete": {
-                "summary": "Delete a mapping.",
-                "description": "Deletes a mapping. The mapping ID must be specified.",
+                "summary": "Delete one or a mappings.",
+                "description": "Deletes one or multiple mappings. The mapping ID must be specified.",
                 "tags": [
                     "ElasticSync"
                 ],
@@ -12108,8 +12108,8 @@
         },
         "\/rest\/elastic-sync\/sync\/decimals": {
             "get": {
-                "summary": "Get list decimals.",
-                "description": "Gets list decimals.",
+                "summary": "Get list of decimals.",
+                "description": "Gets list of decimals.",
                 "tags": [
                     "ElasticSync"
                 ],
@@ -12137,7 +12137,7 @@
         "\/rest\/elastic-sync\/sync\/export\/{syncId}": {
             "get": {
                 "summary": "Export the syncs.",
-                "description": "Exports the syncs.",
+                "description": "Exports the syncs. The sync ID is required.",
                 "tags": [
                     "ElasticSync"
                 ],
@@ -12182,8 +12182,8 @@
         },
         "\/rest\/elastic-sync\/sync\/intervals": {
             "get": {
-                "summary": "Get list interval.",
-                "description": "Gets list interval.",
+                "summary": "Get list of time intervals.",
+                "description": "Gets list of time intervals.",
                 "tags": [
                     "ElasticSync"
                 ],
@@ -12210,8 +12210,8 @@
         },
         "\/rest\/elastic-sync\/sync\/list\/import": {
             "post": {
-                "summary": "Import the sync different.",
-                "description": "Imports the sync different.",
+                "summary": "Import the sync with different plentyId.",
+                "description": "Imports the sync with different plentyId.",
                 "tags": [
                     "ElasticSync"
                 ],
@@ -12245,8 +12245,8 @@
         },
         "\/rest\/elastic-sync\/sync\/list\/save": {
             "post": {
-                "summary": "Save the CSV to S3.",
-                "description": "Saves the CSV to S3.",
+                "summary": "Save the CSV on S3.",
+                "description": "Saves the CSV on S3.",
                 "tags": [
                     "ElasticSync"
                 ],
@@ -12305,8 +12305,8 @@
         },
         "\/rest\/elastic-sync\/sync\/preview\/{syncId}": {
             "get": {
-                "summary": "Get preview columns.",
-                "description": "Gets preview columns. The sync ID is required.",
+                "summary": "Get preview of csv columns.",
+                "description": "Gets preview of csv columns. The sync ID is required.",
                 "tags": [
                     "ElasticSync"
                 ],
@@ -12343,8 +12343,8 @@
         },
         "\/rest\/elastic-sync\/sync\/previewValues\/{syncId}": {
             "get": {
-                "summary": "Get preview values.",
-                "description": "Gets preview values. The sync ID is required.",
+                "summary": "Get preview of csv values.",
+                "description": "Gets preview of csv values. The sync ID is required.",
                 "tags": [
                     "ElasticSync"
                 ],
@@ -12382,7 +12382,7 @@
         "\/rest\/elastic-sync\/sync\/run": {
             "post": {
                 "summary": "Execute the run procedure.",
-                "description": "Executes the run procedure. Data must be specified",
+                "description": "Executes the run procedure. Data with sync ID must be specified.",
                 "tags": [
                     "ElasticSync"
                 ],
@@ -12404,7 +12404,7 @@
                         "in": "query"
                     },
                     {
-                        "name": "testRun",
+                        "name": "testrun",
                         "type": "integer",
                         "required": true,
                         "description": "The test run variable",
@@ -12446,8 +12446,8 @@
         },
         "\/rest\/elastic-sync\/sync\/types\/show": {
             "get": {
-                "summary": "Get list types.",
-                "description": "Gets list types.",
+                "summary": "Get list of sync types.",
+                "description": "Gets list of sync types.",
                 "tags": [
                     "ElasticSync"
                 ],
@@ -12512,8 +12512,8 @@
                 ]
             },
             "get": {
-                "summary": "Get the show sync.",
-                "description": "Gets the show sync. Sync id is required.",
+                "summary": "Get a sync.",
+                "description": "Gets a sync. The sync ID is required.",
                 "tags": [
                     "ElasticSync"
                 ],
@@ -12545,8 +12545,8 @@
                 ]
             },
             "post": {
-                "summary": "Update or create sync.",
-                "description": "Updates or creates sync.",
+                "summary": "Update or create a sync.",
+                "description": "Updates or creates a sync. Sync id is required.",
                 "tags": [
                     "ElasticSync"
                 ],
@@ -37696,6 +37696,14 @@
                         }
                     },
                     {
+                        "name": "countryId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter that restricts the search result to orders of one country. The id of the country must be specified.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
                         "name": "orderItemName",
                         "type": "string",
                         "required": false,
@@ -38860,6 +38868,41 @@
                         "items": {
                             "type": "string"
                         }
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/orders\/currencies\/{currencyIso}\/exchangeRate": {
+            "get": {
+                "summary": "Get the exchange rate for a currency",
+                "description": "Gets the exchange rate for a currency. The ISO 4271 code of the currency must be specified.",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Order\\Currency\\Models\\CurrencyExchangeRate"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "currencyIso",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
                     }
                 ],
                 "security": [
@@ -56691,6 +56734,31 @@
                 ]
             }
         },
+        "\/rest\/users\/me": {
+            "get": {
+                "summary": "Get authorized user",
+                "description": "Gets an authorized user. This call returns a JSON object with information about the user after login. This information is used for correctly displaying the plentymarkets back end.",
+                "tags": [
+                    "Authorization"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Illuminate\\Http\\JsonResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/vat": {
             "get": {
                 "summary": "List VAT configurations.",
@@ -58624,10 +58692,10 @@
                 ]
             }
         },
-        "\/rest\/wizards\/data": {
-            "post": {
-                "summary": "Create a wizard data",
-                "description": "Creates a wizard data",
+        "\/rest\/wizards\/{wizardKey}": {
+            "get": {
+                "summary": "Get a wizard",
+                "description": "Gets a wizard",
                 "tags": [
                     "Wizard"
                 ],
@@ -58635,13 +58703,23 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#\/definitions\/Plenty\\Modules\\Wizard\\Models\\WizardData"
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Wizard\\Models\\Wizard"
                         }
                     },
                     "401": {
                         "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 },
+                "parameters": [
+                    {
+                        "name": "wizardKey",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
                 "security": [
                     {
                         "oAuth2": []
@@ -58649,7 +58727,50 @@
                 ]
             }
         },
-        "\/rest\/wizards\/data\/{uuid}": {
+        "\/rest\/wizards\/{wizardKey}\/actions\/{actionKey}": {
+            "post": {
+                "summary": "Perform an action of a registered actionHandlerClass of a given wizard.",
+                "description": "",
+                "tags": [
+                    "Wizard"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "wizardKey",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "actionKey",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/wizards\/{wizardKey}\/data": {
             "delete": {
                 "summary": "Delete a wizard data",
                 "description": "Deletes a wizard data",
@@ -58666,7 +58787,7 @@
                 },
                 "parameters": [
                     {
-                        "name": "uuid",
+                        "name": "wizardKey",
                         "type": "integer",
                         "required": true,
                         "description": "",
@@ -58690,7 +58811,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#\/definitions\/Plenty\\Modules\\Wizard\\Models\\WizardData"
+                            "$ref": "#\/definitions\/mixed"
                         }
                     },
                     "401": {
@@ -58699,7 +58820,40 @@
                 },
                 "parameters": [
                     {
-                        "name": "uuid",
+                        "name": "wizardKey",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            },
+            "post": {
+                "summary": "Create a wizard data",
+                "description": "Creates a wizard data",
+                "tags": [
+                    "Wizard"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/mixed"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "wizardKey",
                         "type": "integer",
                         "required": true,
                         "description": "",
@@ -58723,7 +58877,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#\/definitions\/Plenty\\Modules\\Wizard\\Models\\WizardData"
+                            "$ref": "#\/definitions\/mixed"
                         }
                     },
                     "401": {
@@ -58732,7 +58886,7 @@
                 },
                 "parameters": [
                     {
-                        "name": "uuid",
+                        "name": "wizardKey",
                         "type": "integer",
                         "required": true,
                         "description": "",
@@ -58747,42 +58901,7 @@
                 ]
             }
         },
-        "\/rest\/wizards\/data\/{uuid}\/settings": {
-            "post": {
-                "summary": "Finalize the wizard",
-                "description": "",
-                "tags": [
-                    "Wizard"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
-                        }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-                    }
-                },
-                "parameters": [
-                    {
-                        "name": "uuid",
-                        "type": "integer",
-                        "required": true,
-                        "description": "",
-                        "format": "integer",
-                        "in": "path"
-                    }
-                ],
-                "security": [
-                    {
-                        "oAuth2": []
-                    }
-                ]
-            }
-        },
-        "\/rest\/wizards\/data\/{uuid}\/{optionId}": {
+        "\/rest\/wizards\/{wizardKey}\/data\/{optionId}": {
             "delete": {
                 "summary": "Delete a wizard data's option",
                 "description": "Deletes a wizard data option",
@@ -58799,7 +58918,7 @@
                 },
                 "parameters": [
                     {
-                        "name": "uuid",
+                        "name": "wizardKey",
                         "type": "integer",
                         "required": true,
                         "description": "",
@@ -58831,7 +58950,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#\/definitions\/Plenty\\Modules\\Wizard\\Models\\WizardData"
+                            "$ref": "#\/definitions\/mixed"
                         }
                     },
                     "401": {
@@ -58840,7 +58959,7 @@
                 },
                 "parameters": [
                     {
-                        "name": "uuid",
+                        "name": "wizardKey",
                         "type": "integer",
                         "required": true,
                         "description": "",
@@ -58872,7 +58991,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#\/definitions\/Plenty\\Modules\\Wizard\\Models\\WizardData"
+                            "$ref": "#\/definitions\/mixed"
                         }
                     },
                     "401": {
@@ -58881,7 +59000,7 @@
                 },
                 "parameters": [
                     {
-                        "name": "uuid",
+                        "name": "wizardKey",
                         "type": "integer",
                         "required": true,
                         "description": "",
@@ -58913,50 +59032,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#\/definitions\/Plenty\\Modules\\Wizard\\Models\\WizardData"
-                        }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-                    }
-                },
-                "parameters": [
-                    {
-                        "name": "uuid",
-                        "type": "integer",
-                        "required": true,
-                        "description": "",
-                        "format": "integer",
-                        "in": "path"
-                    },
-                    {
-                        "name": "optionId",
-                        "type": "integer",
-                        "required": true,
-                        "description": "",
-                        "format": "integer",
-                        "in": "path"
-                    }
-                ],
-                "security": [
-                    {
-                        "oAuth2": []
-                    }
-                ]
-            }
-        },
-        "\/rest\/wizards\/{wizardKey}": {
-            "get": {
-                "summary": "Get a wizard",
-                "description": "Gets a wizard",
-                "tags": [
-                    "Wizard"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#\/definitions\/Plenty\\Modules\\Wizard\\Models\\Wizard"
+                            "$ref": "#\/definitions\/mixed"
                         }
                     },
                     "401": {
@@ -58966,6 +59042,14 @@
                 "parameters": [
                     {
                         "name": "wizardKey",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "optionId",
                         "type": "integer",
                         "required": true,
                         "description": "",
@@ -59009,6 +59093,49 @@
                     },
                     {
                         "name": "formfieldKey",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/wizards\/{wizardKey}\/settings\/{optionId}": {
+            "post": {
+                "summary": "Finalize the wizard",
+                "description": "",
+                "tags": [
+                    "Wizard"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "wizardKey",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "optionId",
                         "type": "integer",
                         "required": true,
                         "description": "",
@@ -65076,6 +65203,15 @@
                 }
             }
         },
+        "Plenty\\Modules\\Order\\Currency\\Models\\CurrencyExchangeRate": {
+            "type": "object",
+            "properties": {
+                "exchangeRate": {
+                    "type": "number",
+                    "description": "The exchange rate"
+                }
+            }
+        },
         "Plenty\\Modules\\Order\\Date\\Models\\OrderDate": {
             "type": "object",
             "properties": {
@@ -67107,6 +67243,14 @@
                 "active": {
                     "type": "boolean",
                     "description": "Indicates if the link is active and the content should be visible for the frontend."
+                },
+                "relatedContentType": {
+                    "type": "string",
+                    "description": "The content type the content is linked to"
+                },
+                "relatedContainerName": {
+                    "type": "string",
+                    "description": "The container name the content is linked to"
                 }
             }
         },
@@ -68095,33 +68239,6 @@
                 "steps": {
                     "type": "array",
                     "description": "Wizard's structure",
-                    "items": {}
-                }
-            }
-        },
-        "Plenty\\Modules\\Wizard\\Models\\WizardData": {
-            "type": "object",
-            "properties": {
-                "uuid": {
-                    "type": "string",
-                    "description": ""
-                },
-                "plentyIdHash": {
-                    "type": "string",
-                    "description": ""
-                },
-                "wizardKey": {
-                    "type": "string",
-                    "description": ""
-                },
-                "data": {
-                    "type": "array",
-                    "description": "",
-                    "items": {}
-                },
-                "steps": {
-                    "type": "array",
-                    "description": "",
                     "items": {}
                 }
             }
