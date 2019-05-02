@@ -39931,6 +39931,49 @@
                 ]
             }
         },
+        "\/rest\/orders\/items\/transactions\/booking": {
+            "post": {
+                "summary": "Book order item transactions",
+                "description": "Books order item transactions. The IDs of the order item transactions must be specified.",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Order\\Booking\\Models\\OrderBooking"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "transactionIds",
+                        "type": "string",
+                        "required": true,
+                        "description": "The IDs of the order item transactions.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "deliveryNoteNumber",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The delivery note number.",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
         "\/rest\/orders\/items\/transactions\/{transactionId}": {
             "delete": {
                 "summary": "Delete a transaction",
@@ -39990,6 +40033,49 @@
                         "description": "",
                         "format": "integer",
                         "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/orders\/items\/{orderItemId}\/booking": {
+            "post": {
+                "summary": "Book an order item",
+                "description": "Books an order item. The ID of the order item must be specified.",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Order\\Booking\\Models\\OrderBooking"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderItemId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "deliveryNoteNumber",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The delivery note number.",
+                        "format": "integer",
+                        "in": "query"
                     }
                 ],
                 "security": [
@@ -42965,6 +43051,49 @@
                         "description": "",
                         "format": "integer",
                         "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/orders\/{orderId}\/booking": {
+            "post": {
+                "summary": "Book an order",
+                "description": "Books an order. The ID of the order must be specified.",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Order\\Booking\\Models\\OrderBooking"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "deliveryNoteNumber",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The delivery note number.",
+                        "format": "integer",
+                        "in": "query"
                     }
                 ],
                 "security": [
@@ -51637,6 +51766,252 @@
                         }
                     }
                 }
+            }
+        },
+        "\/rest\/redistributions": {
+            "post": {
+                "summary": "Create a redistribution",
+                "description": "",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Order\\Models\\Order"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "\/rest\/redistributions",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "typeId": {
+                                    "type": "integer",
+                                    "description": "The ID of the order type\n                                                              It is possible to define individual order types. However,\n                                                              the following types are available by default:\n\n    Sales order = 1\n    Delivery = 2\n    Returns = 3\n    Credit note = 4\n    Warranty = 5\n    Repair = 6\n    Offer = 7\n    Advance order = 8\n    Multi-order = 9\n    Multi credit note = 10\n    Multi delivery = 11\n    Reorder = 12\n    Partial delivery = 13\n    Subscription = 14\n    Redistribution = 15\n optional allowed values are 15"
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "\/rest\/redistributions\/{orderId}": {
+            "put": {
+                "summary": "Update a redistribution",
+                "description": "Updates a redistribution. The ID of the order must be specified.",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Order\\Models\\Order"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "in": "body",
+                        "name": "\/rest\/redistributions\/{orderId}",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "typeId": {
+                                    "type": "integer",
+                                    "description": "The ID of the order type\n                                                              It is possible to define individual order types. However,\n                                                              the following types are available by default:\n\n    Sales order = 1\n    Delivery = 2\n    Returns = 3\n    Credit note = 4\n    Warranty = 5\n    Repair = 6\n    Offer = 7\n    Advance order = 8\n    Multi-order = 9\n    Multi credit note = 10\n    Multi delivery = 11\n    Reorder = 12\n    Partial delivery = 13\n    Subscription = 14\n    Redistribution = 15\n optional allowed values are 15"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/reorders": {
+            "post": {
+                "summary": "Create a reorder",
+                "description": "",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Order\\Models\\Order"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "\/rest\/reorders",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "typeId": {
+                                    "type": "integer",
+                                    "description": "The ID of the order type\n                                                              It is possible to define individual order types. However,\n                                                              the following types are available by default:\n\n    Sales order = 1\n    Delivery = 2\n    Returns = 3\n    Credit note = 4\n    Warranty = 5\n    Repair = 6\n    Offer = 7\n    Advance order = 8\n    Multi-order = 9\n    Multi credit note = 10\n    Multi delivery = 11\n    Reorder = 12\n    Partial delivery = 13\n    Subscription = 14\n    Redistribution = 15\n optional allowed values are 12"
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "\/rest\/reorders\/{orderId}": {
+            "put": {
+                "summary": "Update a reorder",
+                "description": "Updates a reorder. The order ID must be specified.",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Order\\Models\\Order"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "in": "body",
+                        "name": "\/rest\/reorders\/{orderId}",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "typeId": {
+                                    "type": "integer",
+                                    "description": "The ID of the order type\n                                                              It is possible to define individual order types. However,\n                                                              the following types are available by default:\n\n    Sales order = 1\n    Delivery = 2\n    Returns = 3\n    Credit note = 4\n    Warranty = 5\n    Repair = 6\n    Offer = 7\n    Advance order = 8\n    Multi-order = 9\n    Multi credit note = 10\n    Multi delivery = 11\n    Reorder = 12\n    Partial delivery = 13\n    Subscription = 14\n    Redistribution = 15\n optional allowed values are 12"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/reorders\/{orderId}\/currency": {
+            "put": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Order\\Models\\Order"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
+            }
+        },
+        "\/rest\/reorders\/{orderId}\/delivery_date": {
+            "get": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Order"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ]
             }
         },
         "\/rest\/reports\/raw-data": {
@@ -65026,6 +65401,9 @@
                     "description": "An optional name for the instance. For type {@link MessageTypesService::REFERRER_TYPE_PLUGIN} it is\nthe plugin namespace, the user name otherwise."
                 }
             }
+        },
+        "Plenty\\Modules\\Order\\Booking\\Models\\OrderBooking": {
+            "type": "object"
         },
         "Plenty\\Modules\\Order\\ContactWish\\Models\\ContactWish": {
             "type": "object",
