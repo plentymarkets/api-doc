@@ -1511,9 +1511,17 @@
                                 "companyName"
                             ],
                             "properties": {
+                                "number": {
+                                    "type": "string",
+                                    "description": "The number of the account optional"
+                                },
                                 "companyName": {
                                     "type": "string",
                                     "description": "The company name"
+                                },
+                                "taxIdNumber": {
+                                    "type": "string",
+                                    "description": "The ID of the tax number optional"
                                 },
                                 "discountPercent": {
                                     "type": "number",
@@ -1530,6 +1538,22 @@
                                 "timeForPaymentAllowedDays": {
                                     "type": "integer",
                                     "description": "The payment due date in days specified for the account optional"
+                                },
+                                "salesRepresentativeContactId": {
+                                    "type": "integer",
+                                    "description": "The contact ID of the sales representative optional"
+                                },
+                                "userId": {
+                                    "type": "integer",
+                                    "description": "The ID of the account owner optional"
+                                },
+                                "deliveryTime": {
+                                    "type": "integer",
+                                    "description": "The delivery time for the supplier optional"
+                                },
+                                "dealerMinOrderValue": {
+                                    "type": "number",
+                                    "description": "The minimum order value for the supplier optional"
                                 }
                             }
                         }
@@ -3397,8 +3421,7 @@
                             "type": "object",
                             "required": [
                                 "lastUpdateBy",
-                                "accountOwner",
-                                "iban"
+                                "accountOwner"
                             ],
                             "properties": {
                                 "lastUpdateBy": {
@@ -3413,13 +3436,21 @@
                                     "type": "integer",
                                     "description": "The ID of the contact the bank account belongs to optional"
                                 },
-                                "accountOwner": {
+                                "accountNumber": {
                                     "type": "string",
-                                    "description": "The owner of the bank account"
+                                    "description": "The account number of the bank account optional"
+                                },
+                                "sortCode": {
+                                    "type": "string",
+                                    "description": "The sort code of the bank account optional"
                                 },
                                 "iban": {
                                     "type": "string",
-                                    "description": "The IBAN of the bank account"
+                                    "description": "The IBAN of the bank account optional"
+                                },
+                                "accountOwner": {
+                                    "type": "string",
+                                    "description": "The owner of the bank account"
                                 }
                             }
                         }
@@ -3524,8 +3555,7 @@
                             "type": "object",
                             "required": [
                                 "lastUpdateBy",
-                                "accountOwner",
-                                "iban"
+                                "accountOwner"
                             ],
                             "properties": {
                                 "lastUpdateBy": {
@@ -3540,13 +3570,21 @@
                                     "type": "integer",
                                     "description": "The ID of the contact the bank account belongs to optional"
                                 },
-                                "accountOwner": {
+                                "accountNumber": {
                                     "type": "string",
-                                    "description": "The owner of the bank account"
+                                    "description": "The account number of the bank account optional"
+                                },
+                                "sortCode": {
+                                    "type": "string",
+                                    "description": "The sort code of the bank account optional"
                                 },
                                 "iban": {
                                     "type": "string",
-                                    "description": "The IBAN of the bank account"
+                                    "description": "The IBAN of the bank account optional"
+                                },
+                                "accountOwner": {
+                                    "type": "string",
+                                    "description": "The owner of the bank account"
                                 }
                             }
                         }
@@ -5425,9 +5463,17 @@
                                 "companyName"
                             ],
                             "properties": {
+                                "number": {
+                                    "type": "string",
+                                    "description": "The number of the account optional"
+                                },
                                 "companyName": {
                                     "type": "string",
                                     "description": "The company name"
+                                },
+                                "taxIdNumber": {
+                                    "type": "string",
+                                    "description": "The ID of the tax number optional"
                                 },
                                 "discountPercent": {
                                     "type": "number",
@@ -5444,6 +5490,22 @@
                                 "timeForPaymentAllowedDays": {
                                     "type": "integer",
                                     "description": "The payment due date in days specified for the account optional"
+                                },
+                                "salesRepresentativeContactId": {
+                                    "type": "integer",
+                                    "description": "The contact ID of the sales representative optional"
+                                },
+                                "userId": {
+                                    "type": "integer",
+                                    "description": "The ID of the account owner optional"
+                                },
+                                "deliveryTime": {
+                                    "type": "integer",
+                                    "description": "The delivery time for the supplier optional"
+                                },
+                                "dealerMinOrderValue": {
+                                    "type": "number",
+                                    "description": "The minimum order value for the supplier optional"
                                 }
                             }
                         }
@@ -7048,9 +7110,17 @@
                                 "companyName"
                             ],
                             "properties": {
+                                "number": {
+                                    "type": "string",
+                                    "description": "The number of the account optional"
+                                },
                                 "companyName": {
                                     "type": "string",
                                     "description": "The company name"
+                                },
+                                "taxIdNumber": {
+                                    "type": "string",
+                                    "description": "The ID of the tax number optional"
                                 },
                                 "discountPercent": {
                                     "type": "number",
@@ -7067,6 +7137,22 @@
                                 "timeForPaymentAllowedDays": {
                                     "type": "integer",
                                     "description": "The payment due date in days specified for the account optional"
+                                },
+                                "salesRepresentativeContactId": {
+                                    "type": "integer",
+                                    "description": "The contact ID of the sales representative optional"
+                                },
+                                "userId": {
+                                    "type": "integer",
+                                    "description": "The ID of the account owner optional"
+                                },
+                                "deliveryTime": {
+                                    "type": "integer",
+                                    "description": "The delivery time for the supplier optional"
+                                },
+                                "dealerMinOrderValue": {
+                                    "type": "number",
+                                    "description": "The minimum order value for the supplier optional"
                                 }
                             }
                         }
@@ -12738,7 +12824,7 @@
                                 },
                                 "type": {
                                     "type": "string",
-                                    "description": "export type  allowed values are item, order, order_item, contact, contactNewsletter, warehouse, attribute, category, property, item_image, manufacturer"
+                                    "description": "export type  allowed values are item, order, order_item, contact, contactNewsletter, warehouse, attribute, category, property, item_image, manufacturer, stock_movement"
                                 },
                                 "outputType": {
                                     "type": "string",
@@ -12980,7 +13066,7 @@
                                 },
                                 "type": {
                                     "type": "string",
-                                    "description": "export type  allowed values are item, order, order_item, contact, contactNewsletter, warehouse, attribute, category, property, item_image, manufacturer"
+                                    "description": "export type  allowed values are item, order, order_item, contact, contactNewsletter, warehouse, attribute, category, property, item_image, manufacturer, stock_movement"
                                 },
                                 "outputType": {
                                     "type": "string",
@@ -40969,7 +41055,7 @@
                                 },
                                 "typeId": {
                                     "type": "integer",
-                                    "description": "The ID of the property type. The following types are available:\n\n  WAREHOUSE\t\t=\t1\n  SHIPPING_PROFILE\t=\t2\n  PAYMENT_METHOD\t\t\t=\t3\n  PAYMENT_STATUS\t\t\t=\t4\n  EXTERNAL_SHIPPING_PROFILE\t\t\t=\t5\n  DOCUMENT_LANGUAGE\t\t\t=\t6\n  EXTERNAL_ORDER_ID\t\t\t=\t7\n  CUSTOMER_SIGN\t\t\t=\t8\n  DUNNING_LEVEL\t\t\t=\t9\n  SELLER_ACCOUNT\t\t\t=\t10\n  WEIGHT\t\t\t=\t11\n  WIDTH\t\t\t=\t12\n  LENGTH          =\t13\n  HEIGHT\t\t=\t14\n  FLAG\t\t\t=\t15\n  EXTERNAL_TOKEN_ID\t\t\t=\t16\n  EXTERNAL_ITEM_ID\t\t\t=\t17\n  COUPON_CODE\t\t\t=\t18\n  COUPON_TYPE         =   19\n  SALES_TAX_ID_NUMBER =   34\n  MAIN_DOCUMENT_NUMBER = 33\n  PAYMENT_TRANSACTION_ID = 45\n  EXTERNAL_TAX_SERVICE = 47\n  MERCHANT_ID = 60\n  REPORT_ID = 61\n  EBAY_PLUS = 994\n  FULFILLMENT_SERVICE = 995"
+                                    "description": "The ID of the property type. The following types are available:\n\n  WAREHOUSE\t\t=\t1\n  SHIPPING_PROFILE\t=\t2\n  PAYMENT_METHOD\t\t\t=\t3\n  PAYMENT_STATUS\t\t\t=\t4\n  EXTERNAL_SHIPPING_PROFILE\t\t\t=\t5\n  DOCUMENT_LANGUAGE\t\t\t=\t6\n  EXTERNAL_ORDER_ID\t\t\t=\t7\n  CUSTOMER_SIGN\t\t\t=\t8\n  DUNNING_LEVEL\t\t\t=\t9\n  SELLER_ACCOUNT\t\t\t=\t10\n  WEIGHT\t\t\t=\t11\n  WIDTH\t\t\t=\t12\n  LENGTH          =\t13\n  HEIGHT\t\t=\t14\n  FLAG\t\t\t=\t15\n  EXTERNAL_TOKEN_ID\t\t\t=\t16\n  EXTERNAL_ITEM_ID\t\t\t=\t17\n  COUPON_CODE\t\t\t=\t18\n  COUPON_TYPE         =   19\n  SALES_TAX_ID_NUMBER =   34\n  MAIN_DOCUMENT_NUMBER = 33\n  PAYMENT_TRANSACTION_ID = 45\n  EXTERNAL_TAX_SERVICE = 47\n  MERCHANT_ID = 60\n  REPORT_ID = 61\n  PREFERRED_STORAGE_LOCATION_ID = 63\n  EBAY_PLUS = 994\n  FULFILLMENT_SERVICE = 995"
                                 },
                                 "value": {
                                     "type": "string",
@@ -44039,7 +44125,7 @@
                                 },
                                 "typeId": {
                                     "type": "integer",
-                                    "description": "The ID of the property type. The following types are available:\n\n  WAREHOUSE\t\t=\t1\n  SHIPPING_PROFILE\t=\t2\n  PAYMENT_METHOD\t\t\t=\t3\n  PAYMENT_STATUS\t\t\t=\t4\n  EXTERNAL_SHIPPING_PROFILE\t\t\t=\t5\n  DOCUMENT_LANGUAGE\t\t\t=\t6\n  EXTERNAL_ORDER_ID\t\t\t=\t7\n  CUSTOMER_SIGN\t\t\t=\t8\n  DUNNING_LEVEL\t\t\t=\t9\n  SELLER_ACCOUNT\t\t\t=\t10\n  WEIGHT\t\t\t=\t11\n  WIDTH\t\t\t=\t12\n  LENGTH          =\t13\n  HEIGHT\t\t=\t14\n  FLAG\t\t\t=\t15\n  EXTERNAL_TOKEN_ID\t\t\t=\t16\n  EXTERNAL_ITEM_ID\t\t\t=\t17\n  COUPON_CODE\t\t\t=\t18\n  COUPON_TYPE         =   19\n  SALES_TAX_ID_NUMBER =   34\n  MAIN_DOCUMENT_NUMBER = 33\n  PAYMENT_TRANSACTION_ID = 45\n  EXTERNAL_TAX_SERVICE = 47\n  MERCHANT_ID = 60\n  REPORT_ID = 61\n  EBAY_PLUS = 994\n  FULFILLMENT_SERVICE = 995"
+                                    "description": "The ID of the property type. The following types are available:\n\n  WAREHOUSE\t\t=\t1\n  SHIPPING_PROFILE\t=\t2\n  PAYMENT_METHOD\t\t\t=\t3\n  PAYMENT_STATUS\t\t\t=\t4\n  EXTERNAL_SHIPPING_PROFILE\t\t\t=\t5\n  DOCUMENT_LANGUAGE\t\t\t=\t6\n  EXTERNAL_ORDER_ID\t\t\t=\t7\n  CUSTOMER_SIGN\t\t\t=\t8\n  DUNNING_LEVEL\t\t\t=\t9\n  SELLER_ACCOUNT\t\t\t=\t10\n  WEIGHT\t\t\t=\t11\n  WIDTH\t\t\t=\t12\n  LENGTH          =\t13\n  HEIGHT\t\t=\t14\n  FLAG\t\t\t=\t15\n  EXTERNAL_TOKEN_ID\t\t\t=\t16\n  EXTERNAL_ITEM_ID\t\t\t=\t17\n  COUPON_CODE\t\t\t=\t18\n  COUPON_TYPE         =   19\n  SALES_TAX_ID_NUMBER =   34\n  MAIN_DOCUMENT_NUMBER = 33\n  PAYMENT_TRANSACTION_ID = 45\n  EXTERNAL_TAX_SERVICE = 47\n  MERCHANT_ID = 60\n  REPORT_ID = 61\n  PREFERRED_STORAGE_LOCATION_ID = 63\n  EBAY_PLUS = 994\n  FULFILLMENT_SERVICE = 995"
                                 },
                                 "value": {
                                     "type": "string",
@@ -44161,7 +44247,7 @@
                                 },
                                 "typeId": {
                                     "type": "integer",
-                                    "description": "The ID of the property type. The following types are available:\n\n  WAREHOUSE\t\t=\t1\n  SHIPPING_PROFILE\t=\t2\n  PAYMENT_METHOD\t\t\t=\t3\n  PAYMENT_STATUS\t\t\t=\t4\n  EXTERNAL_SHIPPING_PROFILE\t\t\t=\t5\n  DOCUMENT_LANGUAGE\t\t\t=\t6\n  EXTERNAL_ORDER_ID\t\t\t=\t7\n  CUSTOMER_SIGN\t\t\t=\t8\n  DUNNING_LEVEL\t\t\t=\t9\n  SELLER_ACCOUNT\t\t\t=\t10\n  WEIGHT\t\t\t=\t11\n  WIDTH\t\t\t=\t12\n  LENGTH          =\t13\n  HEIGHT\t\t=\t14\n  FLAG\t\t\t=\t15\n  EXTERNAL_TOKEN_ID\t\t\t=\t16\n  EXTERNAL_ITEM_ID\t\t\t=\t17\n  COUPON_CODE\t\t\t=\t18\n  COUPON_TYPE         =   19\n  SALES_TAX_ID_NUMBER =   34\n  MAIN_DOCUMENT_NUMBER = 33\n  PAYMENT_TRANSACTION_ID = 45\n  EXTERNAL_TAX_SERVICE = 47\n  MERCHANT_ID = 60\n  REPORT_ID = 61\n  EBAY_PLUS = 994\n  FULFILLMENT_SERVICE = 995"
+                                    "description": "The ID of the property type. The following types are available:\n\n  WAREHOUSE\t\t=\t1\n  SHIPPING_PROFILE\t=\t2\n  PAYMENT_METHOD\t\t\t=\t3\n  PAYMENT_STATUS\t\t\t=\t4\n  EXTERNAL_SHIPPING_PROFILE\t\t\t=\t5\n  DOCUMENT_LANGUAGE\t\t\t=\t6\n  EXTERNAL_ORDER_ID\t\t\t=\t7\n  CUSTOMER_SIGN\t\t\t=\t8\n  DUNNING_LEVEL\t\t\t=\t9\n  SELLER_ACCOUNT\t\t\t=\t10\n  WEIGHT\t\t\t=\t11\n  WIDTH\t\t\t=\t12\n  LENGTH          =\t13\n  HEIGHT\t\t=\t14\n  FLAG\t\t\t=\t15\n  EXTERNAL_TOKEN_ID\t\t\t=\t16\n  EXTERNAL_ITEM_ID\t\t\t=\t17\n  COUPON_CODE\t\t\t=\t18\n  COUPON_TYPE         =   19\n  SALES_TAX_ID_NUMBER =   34\n  MAIN_DOCUMENT_NUMBER = 33\n  PAYMENT_TRANSACTION_ID = 45\n  EXTERNAL_TAX_SERVICE = 47\n  MERCHANT_ID = 60\n  REPORT_ID = 61\n  PREFERRED_STORAGE_LOCATION_ID = 63\n  EBAY_PLUS = 994\n  FULFILLMENT_SERVICE = 995"
                                 }
                             }
                         }
@@ -44224,7 +44310,7 @@
                                 },
                                 "typeId": {
                                     "type": "integer",
-                                    "description": "The ID of the property type. The following types are available:\n\n  WAREHOUSE\t\t=\t1\n  SHIPPING_PROFILE\t=\t2\n  PAYMENT_METHOD\t\t\t=\t3\n  PAYMENT_STATUS\t\t\t=\t4\n  EXTERNAL_SHIPPING_PROFILE\t\t\t=\t5\n  DOCUMENT_LANGUAGE\t\t\t=\t6\n  EXTERNAL_ORDER_ID\t\t\t=\t7\n  CUSTOMER_SIGN\t\t\t=\t8\n  DUNNING_LEVEL\t\t\t=\t9\n  SELLER_ACCOUNT\t\t\t=\t10\n  WEIGHT\t\t\t=\t11\n  WIDTH\t\t\t=\t12\n  LENGTH          =\t13\n  HEIGHT\t\t=\t14\n  FLAG\t\t\t=\t15\n  EXTERNAL_TOKEN_ID\t\t\t=\t16\n  EXTERNAL_ITEM_ID\t\t\t=\t17\n  COUPON_CODE\t\t\t=\t18\n  COUPON_TYPE         =   19\n  SALES_TAX_ID_NUMBER =   34\n  MAIN_DOCUMENT_NUMBER = 33\n  PAYMENT_TRANSACTION_ID = 45\n  EXTERNAL_TAX_SERVICE = 47\n  MERCHANT_ID = 60\n  REPORT_ID = 61\n  EBAY_PLUS = 994\n  FULFILLMENT_SERVICE = 995"
+                                    "description": "The ID of the property type. The following types are available:\n\n  WAREHOUSE\t\t=\t1\n  SHIPPING_PROFILE\t=\t2\n  PAYMENT_METHOD\t\t\t=\t3\n  PAYMENT_STATUS\t\t\t=\t4\n  EXTERNAL_SHIPPING_PROFILE\t\t\t=\t5\n  DOCUMENT_LANGUAGE\t\t\t=\t6\n  EXTERNAL_ORDER_ID\t\t\t=\t7\n  CUSTOMER_SIGN\t\t\t=\t8\n  DUNNING_LEVEL\t\t\t=\t9\n  SELLER_ACCOUNT\t\t\t=\t10\n  WEIGHT\t\t\t=\t11\n  WIDTH\t\t\t=\t12\n  LENGTH          =\t13\n  HEIGHT\t\t=\t14\n  FLAG\t\t\t=\t15\n  EXTERNAL_TOKEN_ID\t\t\t=\t16\n  EXTERNAL_ITEM_ID\t\t\t=\t17\n  COUPON_CODE\t\t\t=\t18\n  COUPON_TYPE         =   19\n  SALES_TAX_ID_NUMBER =   34\n  MAIN_DOCUMENT_NUMBER = 33\n  PAYMENT_TRANSACTION_ID = 45\n  EXTERNAL_TAX_SERVICE = 47\n  MERCHANT_ID = 60\n  REPORT_ID = 61\n  PREFERRED_STORAGE_LOCATION_ID = 63\n  EBAY_PLUS = 994\n  FULFILLMENT_SERVICE = 995"
                                 },
                                 "value": {
                                     "type": "string",
@@ -65846,7 +65932,7 @@
                 },
                 "typeId": {
                     "type": "integer",
-                    "description": "The ID of the property type. The following types are available:\n<ul>\n  <li>WAREHOUSE\t\t=\t1<\/li>\n  <li>SHIPPING_PROFILE\t=\t2<\/li>\n  <li>PAYMENT_METHOD\t\t\t=\t3<\/li>\n  <li>PAYMENT_STATUS\t\t\t=\t4<\/li>\n  <li>EXTERNAL_SHIPPING_PROFILE\t\t\t=\t5<\/li>\n  <li>DOCUMENT_LANGUAGE\t\t\t=\t6<\/li>\n  <li>EXTERNAL_ORDER_ID\t\t\t=\t7<\/li>\n  <li>CUSTOMER_SIGN\t\t\t=\t8<\/li>\n  <li>DUNNING_LEVEL\t\t\t=\t9<\/li>\n  <li>SELLER_ACCOUNT\t\t\t=\t10<\/li>\n  <li>WEIGHT\t\t\t=\t11<\/li>\n  <li>WIDTH\t\t\t=\t12<\/li>\n  <li>LENGTH          =\t13<\/li>\n  <li>HEIGHT\t\t=\t14<\/li>\n  <li>FLAG\t\t\t=\t15<\/li>\n  <li>EXTERNAL_TOKEN_ID\t\t\t=\t16<\/li>\n  <li>EXTERNAL_ITEM_ID\t\t\t=\t17<\/li>\n  <li>COUPON_CODE\t\t\t=\t18<\/li>\n  <li>COUPON_TYPE         =   19<\/li>\n  <li>SALES_TAX_ID_NUMBER =   34<\/li>\n  <li>MAIN_DOCUMENT_NUMBER = 33<\/li>\n  <li>PAYMENT_TRANSACTION_ID = 45<\/li>\n  <li>EXTERNAL_TAX_SERVICE = 47<\/li>\n  <li>MERCHANT_ID = 60<\/li>\n  <li>REPORT_ID = 61<\/li>\n  <li>EBAY_PLUS = 994<\/li>\n  <li>FULFILLMENT_SERVICE = 995<\/li>\n<\/ul>"
+                    "description": "The ID of the property type. The following types are available:\n<ul>\n  <li>WAREHOUSE\t\t=\t1<\/li>\n  <li>SHIPPING_PROFILE\t=\t2<\/li>\n  <li>PAYMENT_METHOD\t\t\t=\t3<\/li>\n  <li>PAYMENT_STATUS\t\t\t=\t4<\/li>\n  <li>EXTERNAL_SHIPPING_PROFILE\t\t\t=\t5<\/li>\n  <li>DOCUMENT_LANGUAGE\t\t\t=\t6<\/li>\n  <li>EXTERNAL_ORDER_ID\t\t\t=\t7<\/li>\n  <li>CUSTOMER_SIGN\t\t\t=\t8<\/li>\n  <li>DUNNING_LEVEL\t\t\t=\t9<\/li>\n  <li>SELLER_ACCOUNT\t\t\t=\t10<\/li>\n  <li>WEIGHT\t\t\t=\t11<\/li>\n  <li>WIDTH\t\t\t=\t12<\/li>\n  <li>LENGTH          =\t13<\/li>\n  <li>HEIGHT\t\t=\t14<\/li>\n  <li>FLAG\t\t\t=\t15<\/li>\n  <li>EXTERNAL_TOKEN_ID\t\t\t=\t16<\/li>\n  <li>EXTERNAL_ITEM_ID\t\t\t=\t17<\/li>\n  <li>COUPON_CODE\t\t\t=\t18<\/li>\n  <li>COUPON_TYPE         =   19<\/li>\n  <li>SALES_TAX_ID_NUMBER =   34<\/li>\n  <li>MAIN_DOCUMENT_NUMBER = 33<\/li>\n  <li>PAYMENT_TRANSACTION_ID = 45<\/li>\n  <li>EXTERNAL_TAX_SERVICE = 47<\/li>\n  <li>MERCHANT_ID = 60<\/li>\n  <li>REPORT_ID = 61<\/li>\n  <li>PREFERRED_STORAGE_LOCATION_ID = 63<\/li>\n  <li>EBAY_PLUS = 994<\/li>\n  <li>FULFILLMENT_SERVICE = 995<\/li>\n<\/ul>"
                 },
                 "value": {
                     "type": "string",
