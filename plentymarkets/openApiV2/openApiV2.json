@@ -67300,6 +67300,10 @@
                 "interval": {
                     "type": "string",
                     "description": "Interval in which this creator runs through"
+                },
+                "shouldProcessed": {
+                    "type": "boolean",
+                    "description": "Internal param"
                 }
             }
         },
