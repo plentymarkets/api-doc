@@ -42577,6 +42577,32 @@
             }
         },
         "\/rest\/orders\/shipping\/shipping_information": {
+            "get": {
+                "summary": "Get orders with shipping information",
+                "description": "Gets all the orders with their shipping information",
+                "tags": [
+                    "Order"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                }
+            },
             "post": {
                 "summary": "Create shipping information",
                 "description": "",
