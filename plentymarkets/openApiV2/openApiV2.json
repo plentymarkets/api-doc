@@ -12776,7 +12776,7 @@
                                 },
                                 "type": {
                                     "type": "string",
-                                    "description": "export type  allowed values are item, order, order_item, contact, contactNewsletter, warehouse, attribute, category, property, item_image, manufacturer, stock_movement"
+                                    "description": "export type  allowed values are item, order, order_item, contact, contactNewsletter, warehouse, attribute, category, property, item_image, manufacturer, stock_movement, stock"
                                 },
                                 "outputType": {
                                     "type": "string",
@@ -13023,7 +13023,7 @@
                                 },
                                 "type": {
                                     "type": "string",
-                                    "description": "export type  allowed values are item, order, order_item, contact, contactNewsletter, warehouse, attribute, category, property, item_image, manufacturer, stock_movement"
+                                    "description": "export type  allowed values are item, order, order_item, contact, contactNewsletter, warehouse, attribute, category, property, item_image, manufacturer, stock_movement, stock"
                                 },
                                 "outputType": {
                                     "type": "string",
@@ -66295,7 +66295,7 @@
                 },
                 "origin": {
                     "type": "integer",
-                    "description": "The origin of the payment. The following origins are available:\n<ul>\n    <li>Undefined = 0<\/li>\n    <li>System = 1<\/li>\n    <li>Manually = 2<\/li>\n    <li>SOAP = 3<\/li>\n    <li>Import = 4<\/li>\n    <li>Split payment = 5<\/li>\n    <li>Plugin = 6<\/li>\n<\/ul>"
+                    "description": "The origin of the payment. The following origins are available:\n<ul>\n    <li>Undefined = 0<\/li>\n    <li>System = 1<\/li>\n    <li>Manually = 2<\/li>\n    <li>SOAP = 3<\/li>\n    <li>Import = 4<\/li>\n    <li>Split payment = 5<\/li>\n    <li>Plugin = 6<\/li>\n    <li>POS = 7<\/li>\n<\/ul>"
                 },
                 "receivedAt": {
                     "type": "string",
