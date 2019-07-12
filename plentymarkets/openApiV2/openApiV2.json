@@ -37477,6 +37477,12 @@
                                     "items": {
                                         "$ref": "#\/definitions\/Plenty\\Modules\\Messenger\\Models\\MessageReferrer"
                                     }
+                                },
+                                "attachments": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Messenger\\Models\\Attachment"
+                                    }
                                 }
                             }
                         }
@@ -37554,6 +37560,49 @@
                     },
                     {
                         "name": "uuid5",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            }
+        },
+        "\/rest\/messages\/{uuid5}\/attachments\/{fileName}": {
+            "get": {
+                "summary": "Gets an attachment by UUID and fileName",
+                "description": "",
+                "tags": [
+                    "Messenger"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Illuminate\\Http\\Response"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "uuid5",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "fileName",
                         "type": "integer",
                         "required": true,
                         "description": "",
@@ -40441,7 +40490,7 @@
                         "name": "type",
                         "type": "string",
                         "required": true,
-                        "description": "The type of the order documents. The types available are receipt, invoiceExternal, invoice, deliveryNote, creditNote, creditNoteExternal, orderConfirmation, offer, dunningLetter, returnNote, successConfirmation, correction.",
+                        "description": "The type of the order document. The available types are receipt, zReport, tillCount, posCouponReceipt, posInvoice, posInvoiceCancellation, cancellation, invoiceExternal, invoice, deliveryNote, creditNote, creditNoteExternal, orderConfirmation, offer, dunningLetter, returnNote, successConfirmation, correction.",
                         "format": "string",
                         "in": "path"
                     },
@@ -40577,7 +40626,7 @@
                         "name": "type",
                         "type": "string",
                         "required": true,
-                        "description": "The type of the order documents. The types available are receipt, invoiceExternal, invoice, deliveryNote, poDeliveryNote, creditNote, creditNoteExternal, orderConfirmation, offer, dunningLetter, returnNote, successConfirmation, correction, reversal, reversalRefund, proFormaInvoice.",
+                        "description": "The type of the order document. The available types are receipt, tillCount, posCouponReceipt, posInvoice, posInvoiceCancellation, cancellation, zReport, invoiceExternal, invoice, deliveryNote, poDeliveryNote, creditNote, creditNoteExternal, orderConfirmation, offer, dunningLetter, returnNote, successConfirmation, correction, reversal, reversalRefund, proFormaInvoice.",
                         "format": "string",
                         "in": "path"
                     },
@@ -41185,18 +41234,18 @@
                 "parameters": [
                     {
                         "name": "transactionIds",
-                        "type": "string",
+                        "type": "integer",
                         "required": true,
                         "description": "The IDs of the order item transactions.",
-                        "format": "string",
+                        "format": "integer",
                         "in": "query"
                     },
                     {
                         "name": "deliveryNoteNumber",
-                        "type": "integer",
+                        "type": "string",
                         "required": false,
                         "description": "The delivery note number.",
-                        "format": "integer",
+                        "format": "string",
                         "in": "query"
                     }
                 ]
@@ -41325,10 +41374,10 @@
                     },
                     {
                         "name": "deliveryNoteNumber",
-                        "type": "integer",
+                        "type": "string",
                         "required": false,
                         "description": "The delivery note number.",
-                        "format": "integer",
+                        "format": "string",
                         "in": "query"
                     }
                 ]
@@ -44365,10 +44414,10 @@
                     },
                     {
                         "name": "deliveryNoteNumber",
-                        "type": "integer",
+                        "type": "string",
                         "required": false,
                         "description": "The delivery note number.",
-                        "format": "integer",
+                        "format": "string",
                         "in": "query"
                     }
                 ]
@@ -44582,6 +44631,175 @@
                 ]
             }
         },
+        "\/rest\/orders\/{orderId}\/documents\/correction_document\/generate": {
+            "post": {
+                "summary": "Generate adjustment form of an order",
+                "description": "Generate adjustment form of an order. The ID of the order must be specified.\nThe document can only be generated for orders of the type 'credit note'.",
+                "tags": [
+                    "Document"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the order",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "documentDate",
+                        "type": "string",
+                        "required": false,
+                        "description": "If not set, the current date will be used. The date has to be entered in W3C format, e.g. '2019-05-29T13:33:23+02:00'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "comment",
+                        "type": "string",
+                        "required": false,
+                        "description": "Comment that appears below the stock units.",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
+        "\/rest\/orders\/{orderId}\/documents\/credit_note\/generate": {
+            "post": {
+                "summary": "Generate credit note of an order",
+                "description": "Generate credit note of an order. The ID of the order must be specified.\nThe document can only be generated for orders of the type 'credit note'.",
+                "tags": [
+                    "Document"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the order",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "documentDate",
+                        "type": "string",
+                        "required": false,
+                        "description": "If not set, the current date will be used. The date has to be entered in W3C format, e.g. '2019-05-29T13:33:23+02:00'",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "allowRegenerate",
+                        "type": "boolean",
+                        "required": false,
+                        "description": "If true, existing credit not document without reversal is generated once again.",
+                        "format": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "name": "comment",
+                        "type": "string",
+                        "required": false,
+                        "description": "Comment that appears below the stock units.",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
+        "\/rest\/orders\/{orderId}\/documents\/delivery_note\/generate": {
+            "post": {
+                "summary": "Generate delivery note of an order",
+                "description": "Generate delivery note of an order. The ID of the order must be specified.\nThe document can only be generated for orders of the type 'order', 'warranty', 'repair' and 'delivery order'.",
+                "tags": [
+                    "Document"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the order",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "documentDate",
+                        "type": "string",
+                        "required": false,
+                        "description": "If not set, the current date will be used. The date has to be entered in W3C format, e.g. '2019-05-29T13:33:23+02:00'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "comment",
+                        "type": "string",
+                        "required": false,
+                        "description": "Comment that appears below the stock units.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "storehouseId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "If set, only items with the given warehouse ID are included on the document.",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
         "\/rest\/orders\/{orderId}\/documents\/downloads\/{type?}": {
             "get": {
                 "summary": "Download documents of an order",
@@ -44618,9 +44836,832 @@
                         "name": "type",
                         "type": "string",
                         "required": true,
-                        "description": "The type of the document. The types available are receipt, invoiceExternal, invoice, deliveryNote, poDeliveryNote, creditNote, creditNoreExternal, orderConfirmation, offer, dunningLetter, returnNote, successConfirmation and correction.",
+                        "description": "The type of the document. The types available are receipt, zReport, tillCount, posCouponReceipt, cancellation, posInvoice, posInvoiceCancellation, invoiceExternal, invoice, deliveryNote, poDeliveryNote, creditNote, creditNoreExternal, orderConfirmation, offer, dunningLetter, returnNote, successConfirmation and correction.",
                         "format": "string",
                         "in": "path"
+                    }
+                ]
+            }
+        },
+        "\/rest\/orders\/{orderId}\/documents\/dunning_letter\/generate": {
+            "post": {
+                "summary": "Generate dunning letter of an order",
+                "description": "Generate dunning letter of an order. The ID of the order must be specified.\nThe document can only be generated for orders of the type 'order', 'warranty', 'repair' and 'multi order'.",
+                "tags": [
+                    "Document"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the order",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "documentDate",
+                        "type": "string",
+                        "required": false,
+                        "description": "If not set, the current date will be used. The date has to be entered in W3C format, e.g. '2019-05-29T13:33:23+02:00'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "comment",
+                        "type": "string",
+                        "required": false,
+                        "description": "Comment that appears below the stock units.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "articleId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Add an item to the order.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "variationId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Add a variation to the order.",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
+        "\/rest\/orders\/{orderId}\/documents\/invoice\/generate": {
+            "post": {
+                "summary": "Generate invoice of an order",
+                "description": "Generate invoice of an order. The ID of the order must be specified.\nThe document can only be generated for orders of the type 'order', 'warranty', 'repair' and 'advance order'.",
+                "tags": [
+                    "Document"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the order",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "documentDate",
+                        "type": "string",
+                        "required": false,
+                        "description": "If not set, the current date will be used. The date has to be entered in W3C format, e.g. '2019-05-29T13:33:23+02:00'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "allowRegenerate",
+                        "type": "boolean",
+                        "required": false,
+                        "description": "If true, existing invoice document without reversal is generated once again.",
+                        "format": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "name": "comment",
+                        "type": "string",
+                        "required": false,
+                        "description": "Comment that appears below the stock units.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "valuta",
+                        "type": "boolean",
+                        "required": false,
+                        "description": "If true, valuta is enabled.",
+                        "format": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "name": "discount",
+                        "type": "boolean",
+                        "required": false,
+                        "description": "If true, discount is enabled for the document.",
+                        "format": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "name": "discountPercentage",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Overwrite percentage discount value. Possible values are 2, 3, 4, 5.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "discountDays",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Overwrite discount in days. Possible values are 1, 5, 7, 10, 14, 21, 28, 30, 60, 90.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "paymentDue",
+                        "type": "boolean",
+                        "required": false,
+                        "description": "If true, payment due is enabled.",
+                        "format": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "name": "paymentDueDays",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Overwrite payment due in days.",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
+        "\/rest\/orders\/{orderId}\/documents\/offer\/generate": {
+            "post": {
+                "summary": "Generate offer document of an order",
+                "description": "Generate offer document of an order. The ID of the order must be specified.\nThe document can only be generated for orders of the type 'offer'.",
+                "tags": [
+                    "Document"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the order",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "documentDate",
+                        "type": "string",
+                        "required": false,
+                        "description": "If not set, the current date will be used. The date has to be entered in W3C format, e.g. '2019-05-29T13:33:23+02:00'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "comment",
+                        "type": "string",
+                        "required": false,
+                        "description": "Comment that appears below the stock units.",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
+        "\/rest\/orders\/{orderId}\/documents\/order_confirmation\/generate": {
+            "post": {
+                "summary": "Generate order confirmation of an order",
+                "description": "Generate order confirmation of an order. The ID of the order must be specified.\nThe document can only be generated for orders of the type 'order', 'warranty', 'repair', 'advance order' and 'offer'.",
+                "tags": [
+                    "Document"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the order",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "documentDate",
+                        "type": "string",
+                        "required": false,
+                        "description": "If not set, the current date will be used. The date has to be entered in W3C format, e.g. '2019-05-29T13:33:23+02:00'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "comment",
+                        "type": "string",
+                        "required": false,
+                        "description": "Comment that appears below the stock units.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "valuta",
+                        "type": "boolean",
+                        "required": false,
+                        "description": "If true, valuta is enabled.",
+                        "format": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "name": "discount",
+                        "type": "boolean",
+                        "required": false,
+                        "description": "If true, discount is enabled for the document.",
+                        "format": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "name": "discountPercentage",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Overwrite percentage discount value. Possible values are 2, 3, 4, 5.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "discountDays",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Overwrite discount in days. Possible values are 1, 5, 7, 10, 14, 21, 28, 30, 60, 90.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "paymentDue",
+                        "type": "boolean",
+                        "required": false,
+                        "description": "If true, payment due is enabled.",
+                        "format": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "name": "paymentDueDays",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Overwrite payment due in days.",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
+        "\/rest\/orders\/{orderId}\/documents\/pickup_delivery\/generate": {
+            "post": {
+                "summary": "Generate pick-up delivery note of an order",
+                "description": "Generate pick-up delivery note of an order. The ID of the order must be specified.\nThe document can only be generated for orders of the type 'order', 'warranty' and 'repair'.",
+                "tags": [
+                    "Document"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the order",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "documentDate",
+                        "type": "string",
+                        "required": false,
+                        "description": "If not set, the current date will be used. The date has to be entered in W3C format, e.g. '2019-05-29T13:33:23+02:00'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "comment",
+                        "type": "string",
+                        "required": false,
+                        "description": "Comment that appears below the stock units.",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
+        "\/rest\/orders\/{orderId}\/documents\/po_delivery_note\/generate": {
+            "post": {
+                "summary": "Generate purchase order (PO) delivery note of an order",
+                "description": "Generate PO delivery note of an order. The ID of the order must be specified.\nThe document can only be generated for orders of the type 'redistribution'.",
+                "tags": [
+                    "Document"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the order",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "documentDate",
+                        "type": "string",
+                        "required": false,
+                        "description": "If not set, the current date will be used. The date has to be entered in W3C format, e.g. '2019-05-29T13:33:23+02:00'.",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
+        "\/rest\/orders\/{orderId}\/documents\/pro_forma_invoice\/generate": {
+            "post": {
+                "summary": "Generate pro forma invoice of an order",
+                "description": "Generate pro forma invoice of an order. The ID of the order must be specified.\nThe document can only be generated for orders of the type 'order', 'warranty', 'repair', 'advance order' and 'delivery order'.",
+                "tags": [
+                    "Document"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the order",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "documentDate",
+                        "type": "string",
+                        "required": false,
+                        "description": "If not set, the current date will be used. The date has to be entered in W3C format, e.g. '2019-05-29T13:33:23+02:00'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "comment",
+                        "type": "string",
+                        "required": false,
+                        "description": "Comment that appears below the stock units.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "valuta",
+                        "type": "boolean",
+                        "required": false,
+                        "description": "If true, valuta is enabled.",
+                        "format": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "name": "discount",
+                        "type": "boolean",
+                        "required": false,
+                        "description": "If true, discount is enabled for the document.",
+                        "format": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "name": "discountPercentage",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Overwrite percentage discount value. Possible values are 2, 3, 4, 5.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "discountDays",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Overwrite discount in days. Possible values are 1, 5, 7, 10, 14, 21, 28, 30, 60, 90.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "paymentDue",
+                        "type": "boolean",
+                        "required": false,
+                        "description": "If true, payment due is enabled.",
+                        "format": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "name": "paymentDueDays",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Overwrite payment due in days.",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
+        "\/rest\/orders\/{orderId}\/documents\/reorder\/generate": {
+            "post": {
+                "summary": "Generate reorder document of an order",
+                "description": "Generate reorder document of an order. The ID of the order must be specified.\nThe document can only be generated for orders of the type 'reorder'.",
+                "tags": [
+                    "Document"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the order",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "allowRegenerate",
+                        "type": "boolean",
+                        "required": false,
+                        "description": "If true, existing reorder document is generated once again.",
+                        "format": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "name": "comment",
+                        "type": "string",
+                        "required": false,
+                        "description": "Comment that appears below the stock units.",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
+        "\/rest\/orders\/{orderId}\/documents\/repair_bill\/generate": {
+            "post": {
+                "summary": "Generate repair slip of an order",
+                "description": "Generate repair slip of an order. The ID of the order must be specified.\nThe document can only be generated for orders of the type 'repair'.",
+                "tags": [
+                    "Document"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the order",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "documentDate",
+                        "type": "string",
+                        "required": false,
+                        "description": "If not set, the current date will be used. The date has to be entered in W3C format, e.g. '2019-05-29T13:33:23+02:00'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "comment",
+                        "type": "string",
+                        "required": false,
+                        "description": "Comment that appears below the stock units.",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
+        "\/rest\/orders\/{orderId}\/documents\/return_note\/generate": {
+            "post": {
+                "summary": "Generate return slip of an order",
+                "description": "Generate return slip of an order. The ID of the order must be specified.\nThe document can only be generated for orders of the type 'order', 'warranty', 'repair' and 'returns'.",
+                "tags": [
+                    "Document"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the order",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "documentDate",
+                        "type": "string",
+                        "required": false,
+                        "description": "If not set, the current date will be used. The date has to be entered in W3C format, e.g. '2019-05-29T13:33:23+02:00'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "comment",
+                        "type": "string",
+                        "required": false,
+                        "description": "Comment that appears below the stock units.",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
+        "\/rest\/orders\/{orderId}\/documents\/reversal_document\/generate": {
+            "post": {
+                "summary": "Generate reversal document of an order",
+                "description": "Generate reversal document of an order. The ID of the order must be specified.\nThe document can only be generated for orders of the type 'order', 'warranty', 'repair' and 'advance order'. A valid invoice must exist.",
+                "tags": [
+                    "Document"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the order",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "documentDate",
+                        "type": "string",
+                        "required": false,
+                        "description": "If not set, the current date will be used. The date has to be entered in W3C format, e.g. '2019-05-29T13:33:23+02:00'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "comment",
+                        "type": "string",
+                        "required": false,
+                        "description": "Comment that appears below the stock units.",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
+        "\/rest\/orders\/{orderId}\/documents\/reversal_refund\/generate": {
+            "post": {
+                "summary": "Generate refund reversal document of an order",
+                "description": "Generate refund reversal document of an order. The ID of the order must be specified.\nThe document can only be generated for orders of the type 'credit note'. A valid credit note document must exist.",
+                "tags": [
+                    "Document"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the order",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "documentDate",
+                        "type": "string",
+                        "required": false,
+                        "description": "If not set, the current date will be used. The date has to be entered in W3C format, e.g. '2019-05-29T13:33:23+02:00'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "comment",
+                        "type": "string",
+                        "required": false,
+                        "description": "Comment that appears below the stock units.",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
+        "\/rest\/orders\/{orderId}\/documents\/success_confirmation\/generate": {
+            "post": {
+                "summary": "Generate success confirmation of an order",
+                "description": "Generate success confirmation of an order. The ID of the order must be specified.\nThe document can only be generated for orders of the type 'order', 'warranty', 'repair', 'advance order' and 'offer'.",
+                "tags": [
+                    "Document"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the order",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "documentDate",
+                        "type": "string",
+                        "required": false,
+                        "description": "If not set, the current date will be used. The date has to be entered in W3C format, e.g. '2019-05-29T13:33:23+02:00'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "comment",
+                        "type": "string",
+                        "required": false,
+                        "description": "Comment that appears below the stock units.",
+                        "format": "string",
+                        "in": "query"
                     }
                 ]
             }
@@ -44773,7 +45814,7 @@
                         "name": "type",
                         "type": "string",
                         "required": true,
-                        "description": "The type of the order documents. The types available are receipt, invoiceExternal, invoice, deliveryNote, poDeliveryNote, creditNote, creditNoteExternal, orderConfirmation, offer, dunningLetter, returnNote, successConfirmation, correction.",
+                        "description": "The type of the order document. The available types are receipt, zReport, tillCount, posCouponReceipt, posInvoice, posInvoiceCancellation, cancellation, invoiceExternal, invoice, deliveryNote, poDeliveryNote, creditNote, creditNoteExternal, orderConfirmation, offer, dunningLetter, returnNote, successConfirmation, correction.",
                         "format": "string",
                         "in": "path"
                     },
@@ -44860,6 +45901,57 @@
                 ]
             }
         },
+        "\/rest\/orders\/{orderId}\/documents\/{type}\/current": {
+            "get": {
+                "summary": "Get current invoice or credit note of an order",
+                "description": "Get current invoice or credit note of an order. The ID of the order must be specified. The last valid document for which no reversal document exists is found.",
+                "tags": [
+                    "Document"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Document\\Models\\Document"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the order",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "type",
+                        "type": "string",
+                        "required": true,
+                        "description": "The type of the order document. The available types are invoice, creditNote",
+                        "format": "string",
+                        "in": "path"
+                    },
+                    {
+                        "name": "withContent",
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Load also the document content as base64 encoded string.",
+                        "format": "boolean",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
         "\/rest\/orders\/{orderId}\/documents\/{type}\/generate": {
             "post": {
                 "summary": "Generate document of an order",
@@ -44888,6 +45980,49 @@
                         "name": "orderId",
                         "type": "integer",
                         "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "type",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            }
+        },
+        "\/rest\/orders\/{orderId}\/documents\/{type}\/recent": {
+            "get": {
+                "summary": "Get most recent document of an order",
+                "description": "Get most recent document of an order. The ID of the order must be specified.",
+                "tags": [
+                    "Document"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Document\\Models\\Document"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
                         "description": "The ID of the order",
                         "format": "integer",
                         "in": "path"
@@ -44896,22 +46031,17 @@
                         "name": "type",
                         "type": "string",
                         "required": true,
-                        "description": "The document type. Supported types are 'reorder', 'poDeliveryNote'.",
+                        "description": "The type of the order document. The available types are receipt, invoiceExternal, invoice, deliveryNote, poDeliveryNote, creditNote, creditNoteExternal, orderConfirmation, offer, dunningLetter, returnNote, successConfirmation, correction.",
                         "format": "string",
                         "in": "path"
                     },
                     {
-                        "in": "body",
-                        "name": "\/rest\/orders\/{orderId}\/documents\/{type}\/generate",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "allowRegenerate": {
-                                    "type": "boolean",
-                                    "description": "If true, existing document is generated once again. optional"
-                                }
-                            }
-                        }
+                        "name": "withContent",
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Load also the document content as base64 encoded string.",
+                        "format": "boolean",
+                        "in": "query"
                     }
                 ]
             }
@@ -53515,7 +54645,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#\/definitions\/Plenty\\Modules\\Report\\Models\\RawDataCreator"
+                                "$ref": "#\/definitions\/mixed"
                             }
                         }
                     },
@@ -68470,59 +69600,6 @@
                     "items": {
                         "$ref": "#\/definitions\/Plenty\\Modules\\Report\\Models\\RawDataConfig"
                     }
-                }
-            }
-        },
-        "Plenty\\Modules\\Report\\Models\\RawDataCreator": {
-            "type": "object",
-            "properties": {
-                "dataName": {
-                    "type": "string",
-                    "description": "Exclusive identifier for this raw data."
-                },
-                "fileFormat": {
-                    "type": "string",
-                    "description": "File format"
-                },
-                "limitPage": {
-                    "type": "integer",
-                    "description": "Number of data rows to be queried maximum per request."
-                },
-                "limitDay": {
-                    "type": "integer",
-                    "description": "Number of data rows to be queried maximum per day."
-                },
-                "earliestPossibleDataDate": {
-                    "type": "string",
-                    "description": "Earliest possible date from which data should be requested."
-                },
-                "deleteRawDataAfterDaysMinimum": {
-                    "type": "integer",
-                    "description": "Minimum number of days after the generated raw data is deleted"
-                },
-                "deleteRawDataAfterDaysMaximum": {
-                    "type": "integer",
-                    "description": "Maximum number of days after the generated raw data is deleted"
-                },
-                "filterType": {
-                    "type": "string",
-                    "description": "Defines how this raw data is filtered."
-                },
-                "dataUpdatedAtColumnName": {
-                    "type": "string",
-                    "description": "Name of the column that contains the date of the last change to a data row."
-                },
-                "defaultActive": {
-                    "type": "boolean",
-                    "description": "If true, then these raw data are collected independently of the user configuration."
-                },
-                "interval": {
-                    "type": "string",
-                    "description": "Interval in which this creator runs through"
-                },
-                "shouldProcessed": {
-                    "type": "boolean",
-                    "description": "Internal param"
                 }
             }
         },
