@@ -5733,6 +5733,41 @@
                 ]
             }
         },
+        "\/rest\/accounts\/contacts\/{contactId}\/addresses\/primary": {
+            "get": {
+                "summary": "Returns primary or last created addresses of contact",
+                "description": "",
+                "tags": [
+                    "Account"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Illuminate\\Database\\Eloquent\\Collection"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "contactId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            }
+        },
         "\/rest\/accounts\/contacts\/{contactId}\/addresses\/{addressId}": {
             "delete": {
                 "summary": "Delete an address of the contact",
