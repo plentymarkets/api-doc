@@ -7748,7 +7748,7 @@
                             "properties": {
                                 "id": {
                                     "type": "integer",
-                                    "description": "The ID of this availability"
+                                    "description": "The ID of this availability  allowed values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10"
                                 },
                                 "averageDays": {
                                     "type": "integer",
@@ -14300,18 +14300,6 @@
                         "in": "path"
                     }
                 ]
-            },
-            "put": {
-                "summary": "",
-                "description": "",
-                "tags": [
-                    ""
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }
-                }
             }
         },
         "\/rest\/feedbacks\/comments": {
@@ -14792,18 +14780,6 @@
                         "in": "path"
                     }
                 ]
-            },
-            "put": {
-                "summary": "",
-                "description": "",
-                "tags": [
-                    ""
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }
-                }
             }
         },
         "\/rest\/feedbacks\/ratings": {
@@ -20902,7 +20878,7 @@
                                 },
                                 "interval": {
                                     "type": "string",
-                                    "description": "The interval of the price. Possible values are: daily, weekly, monthly, quarterly, half-yearly and yearly. optional allowed values are none, daily, weekly, monthly, quarterly, semi-annual, annual"
+                                    "description": "The interval of the price. Possible values are: daily, weekly, monthly, quarterly, semi-annual and annual. optional allowed values are none, daily, weekly, monthly, quarterly, semi-annual, annual"
                                 },
                                 "names": {
                                     "type": "array",
@@ -21096,7 +21072,7 @@
                                 },
                                 "interval": {
                                     "type": "string",
-                                    "description": "The interval of the price. Possible values are: daily, weekly, monthly, quarterly, half-yearly and yearly. optional allowed values are none, daily, weekly, monthly, quarterly, semi-annual, annual"
+                                    "description": "The interval of the price. Possible values are: daily, weekly, monthly, quarterly, semi-annual and annual. optional allowed values are none, daily, weekly, monthly, quarterly, semi-annual, annual"
                                 },
                                 "names": {
                                     "type": "array",
@@ -22954,6 +22930,14 @@
                         "required": false,
                         "description": "Filter restricts the list of results to variations which have physical stock on the given warehouse.",
                         "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "supplierId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations with the specified supplier ID.",
+                        "format": "integer",
                         "in": "query"
                     }
                 ]
@@ -37604,7 +37588,7 @@
                 ]
             }
         },
-        "\/rest\/messages\/{uuid5}\/attachments\/{fileName}": {
+        "\/rest\/messages\/{uuid5}\/attachments": {
             "get": {
                 "summary": "Gets an attachment by UUID and fileName",
                 "description": "",
@@ -37630,14 +37614,6 @@
                 "parameters": [
                     {
                         "name": "uuid5",
-                        "type": "integer",
-                        "required": true,
-                        "description": "",
-                        "format": "integer",
-                        "in": "path"
-                    },
-                    {
-                        "name": "fileName",
                         "type": "integer",
                         "required": true,
                         "description": "",
@@ -65780,7 +65756,7 @@
                 },
                 "interval": {
                     "type": "string",
-                    "description": "The interval of the price. Possible values are: daily, weekly, monthly, quarterly, half-yearly and yearly."
+                    "description": "The interval of the price. Possible values are: daily, weekly, monthly, quarterly, semi-annual and annual."
                 },
                 "names": {
                     "type": "array",
@@ -69627,7 +69603,7 @@
             "properties": {
                 "plentyIdHash": {
                     "type": "string",
-                    "description": "System id hash"
+                    "description": "The plentymarkets system id hash"
                 },
                 "configs": {
                     "type": "array",
@@ -70569,6 +70545,11 @@
                 "relevance": {
                     "type": "string",
                     "description": "Wizard's level of relevance"
+                },
+                "keywords": {
+                    "type": "array",
+                    "description": "Keywords describing the wizard",
+                    "items": {}
                 }
             }
         },
