@@ -22942,6 +22942,131 @@
                     }
                 ]
             },
+            "patch": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Item"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Illuminate\\Support\\Collection"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "\/rest\/items\/variations",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "id"
+                            ],
+                            "properties": {
+                                "id": {
+                                    "type": "integer",
+                                    "description": "The ID of the variation. The ID must be unique."
+                                },
+                                "position": {
+                                    "type": "integer",
+                                    "description": "The position of the variation. Value is inherited from the item's main variation if inheritance is active. optional"
+                                },
+                                "isActive": {
+                                    "type": "boolean",
+                                    "description": "Flag that indicates if the variation is active. Only active variations can be offered in the online store and\/or on markets. optional allowed values are Y, N"
+                                },
+                                "model": {
+                                    "type": "string",
+                                    "description": "The model of the variation. Value is inherited from the item's main variation if inheritance is active. optional"
+                                },
+                                "externalId": {
+                                    "type": "string",
+                                    "description": "The external variation ID of this variation. The external variation number is optional and allows importing items and variations from external systems to plentymarkets. optional"
+                                },
+                                "availability": {
+                                    "type": "integer",
+                                    "description": "The availability of the variation. Possible values: 1 to 10, null = Variation inherits value of main variation. optional"
+                                },
+                                "availabilityUpdatedAt": {
+                                    "type": "string",
+                                    "description": "The time at which the availability of this variation was last updated. optional"
+                                },
+                                "estimatedAvailableAt": {
+                                    "type": "string",
+                                    "description": "The estimated delivery date of variations on reorder. optional"
+                                },
+                                "picking": {
+                                    "type": "string",
+                                    "description": "The order picking type of the variation. Possible values: single_picking, no_single_picking, exclude_from_picklist, null (no order picking type) optional allowed values are single_picking, no_single_picking, exclude_from_picklist"
+                                },
+                                "stockLimitation": {
+                                    "type": "integer",
+                                    "description": "The stock limitation for the variation. Possible values: 0 = No limitation, i.e. stock is not limited. The variations's availability is not checked automatically.1 = Stock is limited to net stock. The variation's availability is checked automatically.2 = Do not administer stock for this variation. optional allowed values are 0, 1, 2"
+                                },
+                                "mainWarehouseId": {
+                                    "type": "integer",
+                                    "description": "The ID of the main warehouse of the variation. optional"
+                                },
+                                "maximumOrderQuantity": {
+                                    "type": "number",
+                                    "description": "The maximum order quantity permitted per order. Decimal values are possible to allow orders by weight or length. Default value is 0. If value is 0, the maximum order quantity is unlimited. optional"
+                                },
+                                "minimumOrderQuantity": {
+                                    "type": "number",
+                                    "description": "The minimum order quantity. Decimal values are possible to allow orders by weight or length. optional"
+                                },
+                                "intervalOrderQuantity": {
+                                    "type": "number",
+                                    "description": "The quantity intervals the variation can be ordered in. Decimal values are possible to allow orders by weight or length. optional"
+                                },
+                                "availableUntil": {
+                                    "type": "string",
+                                    "description": "The last date the item will be available for sale. optional"
+                                },
+                                "releasedAt": {
+                                    "type": "string",
+                                    "description": "The release date of the variation. This is the date on which the variation will become available. The variation can be visible in the online store before this date, e.g. for preorders. optional"
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "description": "The name of the variation optional"
+                                },
+                                "unitsContained": {
+                                    "type": "integer",
+                                    "description": "The number of sales units contained in one package. Default value is 1. optional"
+                                },
+                                "palletTypeId": {
+                                    "type": "integer",
+                                    "description": "The ID of the pallet type optional"
+                                },
+                                "packingUnits": {
+                                    "type": "integer",
+                                    "description": "The number of packing units if the item consists of multiple packages. Value is 0 if an item is sent as one package. All items of an order that have the value 0 will be packed into one package. optional"
+                                },
+                                "packingUnitTypeId": {
+                                    "type": "integer",
+                                    "description": "The ID of the packing unit type. optional"
+                                },
+                                "vatId": {
+                                    "type": "integer",
+                                    "description": "The ID of the VAT rate of the variation. VAT rates are created for each client (store) and linked to the variation. optional"
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
             "put": {
                 "summary": "Update up to 50 variations",
                 "description": "Updates up to 50 variations. The ID of the variation must be specified.",
@@ -69798,6 +69923,13 @@
                 "typeId": {
                     "type": "integer",
                     "description": "The id of the warehouse type. The following types are available:\n<ul>\n    <li>0 = Sales warehouse<\/li>\n    <li>1 = Repair warehouse<\/li>\n    <li>4 = Storage warehouse<\/li>\n    <li>5 = Transit warehouse<\/li>\n    <li>6 = Distribution warehouse<\/li>\n    <li>7 = Other<\/li>\n<\/ul>"
+                },
+                "allocationReferrerIds": {
+                    "type": "array",
+                    "description": "Allocation Referrer Ids by automatic warehouse detection",
+                    "items": {
+                        "type": "number"
+                    }
                 },
                 "onStockAvailability": {
                     "type": "integer",
