@@ -40670,7 +40670,7 @@
                         "name": "type",
                         "type": "string",
                         "required": true,
-                        "description": "The type of the order document. The available types are receipt, zReport, tillCount, posCouponReceipt, posInvoice, posInvoiceCancellation, cancellation, invoiceExternal, invoice, deliveryNote, creditNote, creditNoteExternal, orderConfirmation, offer, dunningLetter, returnNote, successConfirmation, correction.",
+                        "description": "The type of the order document. The available types are receipt, zReport, tillCount, posCouponReceipt, posInvoice, posInvoiceCancellation, cancellation, invoiceExternal, invoice, deliveryNote, creditNote, creditNoteExternal, orderConfirmation, offer, dunningLetter, returnNote, successConfirmation, correction, reorder.",
                         "format": "string",
                         "in": "path"
                     },
@@ -40806,7 +40806,7 @@
                         "name": "type",
                         "type": "string",
                         "required": true,
-                        "description": "The type of the order document. The available types are receipt, tillCount, posCouponReceipt, posInvoice, posInvoiceCancellation, cancellation, zReport, invoiceExternal, invoice, deliveryNote, poDeliveryNote, creditNote, creditNoteExternal, orderConfirmation, offer, dunningLetter, returnNote, successConfirmation, correction, reversal, reversalRefund, proFormaInvoice.",
+                        "description": "The type of the order document. The available types are receipt, tillCount, posCouponReceipt, posInvoice, posInvoiceCancellation, cancellation, zReport, invoiceExternal, invoice, deliveryNote, poDeliveryNote, creditNote, creditNoteExternal, orderConfirmation, offer, dunningLetter, returnNote, successConfirmation, correction, reversal, reversalRefund, proFormaInvoice, reorder.",
                         "format": "string",
                         "in": "path"
                     },
@@ -45016,7 +45016,7 @@
                         "name": "type",
                         "type": "string",
                         "required": true,
-                        "description": "The type of the document. The types available are receipt, zReport, tillCount, posCouponReceipt, cancellation, posInvoice, posInvoiceCancellation, invoiceExternal, invoice, deliveryNote, poDeliveryNote, creditNote, creditNoreExternal, orderConfirmation, offer, dunningLetter, returnNote, successConfirmation and correction.",
+                        "description": "The type of the document. The types available are receipt, zReport, tillCount, posCouponReceipt, cancellation, posInvoice, posInvoiceCancellation, invoiceExternal, invoice, deliveryNote, poDeliveryNote, creditNote, creditNoreExternal, orderConfirmation, offer, dunningLetter, returnNote, successConfirmation, reorder and correction.",
                         "format": "string",
                         "in": "path"
                     }
@@ -45994,7 +45994,7 @@
                         "name": "type",
                         "type": "string",
                         "required": true,
-                        "description": "The type of the order document. The available types are receipt, zReport, tillCount, posCouponReceipt, posInvoice, posInvoiceCancellation, cancellation, invoiceExternal, invoice, deliveryNote, poDeliveryNote, creditNote, creditNoteExternal, orderConfirmation, offer, dunningLetter, returnNote, successConfirmation, correction.",
+                        "description": "The type of the order document. The available types are receipt, zReport, tillCount, posCouponReceipt, posInvoice, posInvoiceCancellation, cancellation, invoiceExternal, invoice, deliveryNote, poDeliveryNote, creditNote, creditNoteExternal, orderConfirmation, offer, dunningLetter, returnNote, successConfirmation, correction, reorder.",
                         "format": "string",
                         "in": "path"
                     },
@@ -68401,6 +68401,10 @@
                 "exportLabelBase64": {
                     "type": "string",
                     "description": "The base64 encoded export label"
+                },
+                "returnPackageNumber": {
+                    "type": "string",
+                    "description": "The return package number"
                 },
                 "packageType": {
                     "type": "integer",
