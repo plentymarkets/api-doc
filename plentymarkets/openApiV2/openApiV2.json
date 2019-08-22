@@ -1399,7 +1399,7 @@
         "\/rest\/accounts": {
             "get": {
                 "summary": "List accounts",
-                "description": "",
+                "description": "Lists all accounts.",
                 "tags": [
                     "Account"
                 ],
@@ -1412,40 +1412,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
-                            "properties": {
-                                "page": {
-                                    "type": "integer",
-                                    "description": "Current page of the response"
-                                },
-                                "totalsCount": {
-                                    "type": "integer",
-                                    "description": "The total number of entries in the response"
-                                },
-                                "isLastPage": {
-                                    "type": "boolean",
-                                    "description": "Flag that indicates if the page shown is the last page of the response"
-                                },
-                                "lastPageNumber": {
-                                    "type": "integer",
-                                    "description": "The last page number"
-                                },
-                                "firstOnPage": {
-                                    "type": "integer",
-                                    "description": "The index of the first item of the current page result"
-                                },
-                                "lastOnPage": {
-                                    "type": "integer",
-                                    "description": "The index of the last item of the current page result"
-                                },
-                                "itemsPerPage": {
-                                    "type": "integer",
-                                    "description": "The requested amount of items per result page"
-                                },
-                                "entries": {
-                                    "items": {}
-                                }
-                            }
+                            "$ref": "#\/definitions\/Illuminate\\Database\\Eloquent\\Collection"
                         }
                     },
                     "401": {
@@ -1457,7 +1424,7 @@
                         "name": "updatedAt",
                         "type": "string",
                         "required": false,
-                        "description": "Filter that restricts the search result to accounts that were updated according to given filters.\n                                   <br> Usage: <ul>\n                                   <li>'updatedAt=between:yyyy-mm-dd,yyyy-mm-dd'<\/li>\n                                   <li>'updatedAt=eq:yyyy-mm-dd' (=)<\/li>\n                                   <li>'updatedAt=gt:yyyy-mm-dd' (>)<\/li>\n                                   <li>'updatedAt=gte:yyyy-mm-dd' (>=)<\/li>\n                                   <li>'updatedAt=lt:yyyy-mm-dd' (<)<\/li>\n                                   <li>'updatedAt=lte:yyyy-mm-dd' (<=)<\/li>\n                                   <li>Dates can also include the time. Example: 2017-03-08 13:24:17<\/li>\n                                   <li>Without including the time we will use 00:00:00 as default. Example: 2017-03-08 00:00:00<\/li>\n          <\/ul>",
+                        "description": "Filter that restricts the search result to accounts that were updated according to given filters.\n                                   <br> Usage: <ul>\n                                   <li>'updatedAt=between:yyyy-mm-dd,yyyy-mm-dd'<\/li>\n                                   <li>'updatedAt=eq:yyyy-mm-dd' (=)<\/li>\n                                   <li>'updatedAt=gt:yyyy-mm-dd' (>)<\/li>\n                                   <li>'updatedAt=gte:yyyy-mm-dd' (>=)<\/li>\n                                   <li>'updatedAt=lt:yyyy-mm-dd' (<)<\/li>\n                                   <li>'updatedAt=lte:yyyy-mm-dd' (<=)<\/li>\n                                   <li>Dates can also include the time. Example: 2017-03-08 13:24:17<\/li>\n                                   <li>Without including the time we will use 00:00:00 as default. Example: 2017-03-08 00:00:00<\/li>\n                                   <\/ul>",
                         "format": "string",
                         "in": "query"
                     },
@@ -1465,7 +1432,7 @@
                         "name": "createdAt",
                         "type": "string",
                         "required": false,
-                        "description": "Filter that restricts the search result to accounts that were created according to given filters.\n                                   <br> Usage: <ul>\n                                   <li>'createdAt=between:yyyy-mm-dd,yyyy-mm-dd'<\/li>\n                                   <li>'createdAt=eq:yyyy-mm-dd' (=)<\/li>\n                                   <li>'createdAt=gt:yyyy-mm-dd' (>)<\/li>\n                                   <li>'createdAt=gte:yyyy-mm-dd' (>=)<\/li>\n                                   <li>'createdAt=lt:yyyy-mm-dd' (<)<\/li>\n                                   <li>'createdAt=lte:yyyy-mm-dd' (<=)<\/li>\n                                   <li>Dates can also include the time. Example: 2017-03-08 13:24:17<\/li>\n                                   <li>Without including the time we will use 00:00:00 as default. Example: 2017-03-08 00:00:00<\/li>\n          <\/ul>",
+                        "description": "Filter that restricts the search result to accounts that were created according to given filters.\n                                   <br> Usage: <ul>\n                                   <li>'createdAt=between:yyyy-mm-dd,yyyy-mm-dd'<\/li>\n                                   <li>'createdAt=eq:yyyy-mm-dd' (=)<\/li>\n                                   <li>'createdAt=gt:yyyy-mm-dd' (>)<\/li>\n                                   <li>'createdAt=gte:yyyy-mm-dd' (>=)<\/li>\n                                   <li>'createdAt=lt:yyyy-mm-dd' (<)<\/li>\n                                  <li>'createdAt=lte:yyyy-mm-dd' (<=)<\/li>\n                                  <li>Dates can also include the time. Example: 2017-03-08 13:24:17<\/li>\n                                   <li>Without including the time we will use 00:00:00 as default. Example: 2017-03-08 00:00:00<\/li>\n         <\/ul>",
                         "format": "string",
                         "in": "query"
                     },
@@ -1473,15 +1440,15 @@
                         "name": "companyName",
                         "type": "string",
                         "required": false,
-                        "description": "Filter that restricts the search result to accounts that have a company name according to given filters.\n                                    <br> Usage: <ul>\n                                    <li>'companyName=like:expamle'<\/li>\n                                    <li>'companyName=eq:example' (=)<\/li>\n                                    <\/ul>",
+                        "description": "Filter that restricts the search result to accounts that have a company name according to given filters.\n                                   <br> Usage: <ul>\n                                   <li>'companyName=like:expamle'<\/li>\n                                   <li>'companyName=eq:example' (=)<\/li>\n                                   <\/ul>",
                         "format": "string",
                         "in": "query"
                     }
                 ]
             },
             "post": {
-                "summary": "Create an account",
-                "description": "",
+                "summary": "Create account",
+                "description": "Creates an account.",
                 "tags": [
                     "Account"
                 ],
@@ -1563,8 +1530,8 @@
         },
         "\/rest\/accounts\/addresses": {
             "post": {
-                "summary": "Create an address",
-                "description": "",
+                "summary": "Create address",
+                "description": "Creates an address.",
                 "tags": [
                     "Account"
                 ],
@@ -1666,7 +1633,7 @@
         "\/rest\/accounts\/addresses\/contact_relations": {
             "get": {
                 "summary": "List address contact relations",
-                "description": "",
+                "description": "Lists the address contact relations.",
                 "tags": [
                     "Account"
                 ],
@@ -1792,7 +1759,7 @@
             },
             "post": {
                 "summary": "Create address contact relations",
-                "description": "",
+                "description": "Creates an address contact relation.",
                 "tags": [
                     "Account"
                 ],
@@ -1850,7 +1817,7 @@
             },
             "put": {
                 "summary": "Update address contact relations",
-                "description": "",
+                "description": "Updates an address contact relation.",
                 "tags": [
                     "Account"
                 ],
@@ -1911,8 +1878,8 @@
         },
         "\/rest\/accounts\/addresses\/contact_relations\/{addressContactRelationId}": {
             "delete": {
-                "summary": "Delete an address contact relation",
-                "description": "Deletes an address contact relation. The ID of the relation must be specified.",
+                "summary": "Delete address contact relation",
+                "description": "Deletes an address contact relation. The ID of the address contact relation must be specified.",
                 "tags": [
                     "Account"
                 ],
@@ -1941,7 +1908,7 @@
                 ]
             },
             "get": {
-                "summary": "Get an address contact relation",
+                "summary": "Get address contact relation",
                 "description": "Gets an address contact relation. The ID of the address contact relation must be specified.",
                 "tags": [
                     "Account"
@@ -1977,7 +1944,7 @@
         "\/rest\/accounts\/addresses\/option_types": {
             "get": {
                 "summary": "List address option types",
-                "description": "",
+                "description": "Lists the address option types.",
                 "tags": [
                     "Account"
                 ],
@@ -2003,7 +1970,7 @@
             },
             "post": {
                 "summary": "Create an address option type",
-                "description": "",
+                "description": "Creates an address option type.",
                 "tags": [
                     "Account"
                 ],
@@ -2163,7 +2130,7 @@
         },
         "\/rest\/accounts\/addresses\/options\/{optionId}": {
             "delete": {
-                "summary": "Delete an address option by the option ID",
+                "summary": "Delete address option by option ID",
                 "description": "Deletes an address option. The ID of the option must be specified.",
                 "tags": [
                     "Account"
@@ -2193,7 +2160,7 @@
                 ]
             },
             "get": {
-                "summary": "Get an address option",
+                "summary": "Get address option",
                 "description": "Gets an address option. The ID of the option must be specified.",
                 "tags": [
                     "Account"
@@ -2226,7 +2193,7 @@
                 ]
             },
             "put": {
-                "summary": "Update an address option",
+                "summary": "Update address option",
                 "description": "Updates an address option. The ID of the option must be specified.",
                 "tags": [
                     "Account"
@@ -2262,7 +2229,7 @@
         "\/rest\/accounts\/addresses\/pos_relations": {
             "get": {
                 "summary": "List address POS relations",
-                "description": "",
+                "description": "Lists address POS relations.",
                 "tags": [
                     "Account"
                 ],
@@ -2347,8 +2314,8 @@
                 ]
             },
             "post": {
-                "summary": "Create an address POS relation",
-                "description": "",
+                "summary": "Create address POS relation",
+                "description": "Creates an address POS relation.",
                 "tags": [
                     "Account"
                 ],
@@ -2372,7 +2339,7 @@
         },
         "\/rest\/accounts\/addresses\/pos_relations\/{addressPosRelationId}": {
             "delete": {
-                "summary": "Delete an address POS relation",
+                "summary": "Delete address POS relation",
                 "description": "Deletes an address POS relation. The ID of the address POS relation must be specified.",
                 "tags": [
                     "Account"
@@ -2402,7 +2369,7 @@
                 ]
             },
             "get": {
-                "summary": "Get an address POS relation",
+                "summary": "Get address POS relation",
                 "description": "Gets an address POS relation. The ID of the address POS relation must be specified.",
                 "tags": [
                     "Account"
@@ -2435,7 +2402,7 @@
                 ]
             },
             "put": {
-                "summary": "Update an address POS relation",
+                "summary": "Update address POS relation",
                 "description": "Updates an address POS relation. The ID of the address POS relation must be specified.",
                 "tags": [
                     "Account"
@@ -2471,7 +2438,7 @@
         "\/rest\/accounts\/addresses\/relation_types": {
             "get": {
                 "summary": "List address relation types",
-                "description": "",
+                "description": "Lists the address relation types.",
                 "tags": [
                     "Account"
                 ],
@@ -2499,7 +2466,7 @@
         "\/rest\/accounts\/addresses\/relations\/types\/applications\/{application}\/{lang}": {
             "get": {
                 "summary": "List address relation types",
-                "description": "Lists address relation types. The application and the language must be specified.\n<br>Possible applications:\n<ul>\n<li>contact<\/li>\n<li>order<\/li>\n<li>warehouse<\/li>\n<li>pos<\/li>\n<\/ul>",
+                "description": "Lists address relation types. The application and the language must be specified.\n\n<br>Possible applications:\n<ul>\n<li>contact<\/li>\n<li>order<\/li>\n<li>warehouse<\/li>\n<li>pos<\/li>\n<\/ul>",
                 "tags": [
                     "Account"
                 ],
@@ -2541,8 +2508,8 @@
         },
         "\/rest\/accounts\/addresses\/warehouse_relations": {
             "post": {
-                "summary": "Create an address warehouse relation",
-                "description": "",
+                "summary": "Create address warehouse relation",
+                "description": "Creates an address warehouse relation.",
                 "tags": [
                     "Account"
                 ],
@@ -2566,7 +2533,7 @@
         },
         "\/rest\/accounts\/addresses\/warehouse_relations\/{relationId}": {
             "delete": {
-                "summary": "Delete an address warehouse relation",
+                "summary": "Delete address warehouse relation",
                 "description": "Deletes an address warehouse relation. The ID of the relation must be specified.",
                 "tags": [
                     "Account"
@@ -2596,7 +2563,7 @@
                 ]
             },
             "put": {
-                "summary": "Update an address warehouse relation",
+                "summary": "Update address warehouse relation",
                 "description": "Updates an address warehouse relation. The ID of the relation must be specified.",
                 "tags": [
                     "Account"
@@ -2631,7 +2598,7 @@
         },
         "\/rest\/accounts\/addresses\/{addressId}": {
             "delete": {
-                "summary": "Delete an address",
+                "summary": "Delete address",
                 "description": "Deletes an address. The ID of the address must be specified.",
                 "tags": [
                     "Account"
@@ -2661,7 +2628,7 @@
                 ]
             },
             "get": {
-                "summary": "Get an address",
+                "summary": "Get address",
                 "description": "Gets an address. The ID of the address must be specified.",
                 "tags": [
                     "Account"
@@ -2694,7 +2661,7 @@
                 ]
             },
             "put": {
-                "summary": "Update an address",
+                "summary": "Update address",
                 "description": "Updates an address. The ID of the address must be specified.",
                 "tags": [
                     "Account"
@@ -2804,7 +2771,7 @@
         },
         "\/rest\/accounts\/addresses\/{addressId}\/options": {
             "delete": {
-                "summary": "Delete an address option by the address ID",
+                "summary": "Delete address option by addressId",
                 "description": "Deletes an address option. The ID of the address must be specified.",
                 "tags": [
                     "Account"
@@ -2870,7 +2837,7 @@
                 ]
             },
             "post": {
-                "summary": "Create an address option",
+                "summary": "Create address option",
                 "description": "Creates an address option. The ID of the address must be specified.",
                 "tags": [
                     "Account"
@@ -2931,8 +2898,8 @@
                 ]
             },
             "put": {
-                "summary": "Update the address options for an address",
-                "description": "",
+                "summary": "Update address option by addressId",
+                "description": "Updates an address option. The ID of the address must be specified.",
                 "tags": [
                     "Account"
                 ],
@@ -2969,8 +2936,8 @@
         },
         "\/rest\/accounts\/addresses\/{addressId}\/related_data": {
             "get": {
-                "summary": "Find address data by address id",
-                "description": "",
+                "summary": "Get address data by addressId",
+                "description": "Gets address data by addressId. The ID of the address must be specified.",
                 "tags": [
                     "Account"
                 ],
@@ -3004,8 +2971,8 @@
         },
         "\/rest\/accounts\/contact_relations\/{accountContactRelationId}": {
             "delete": {
-                "summary": "Deletes an account contact relation. The ID of the account contact relation must be specified.",
-                "description": "",
+                "summary": "Delete account contact relation",
+                "description": "Deletes an account contact relation. The ID of the account contact relation must be specified.",
                 "tags": [
                     "Account"
                 ],
@@ -3034,8 +3001,8 @@
                 ]
             },
             "get": {
-                "summary": "Gets an account contact releation. The ID of the account contact relation must be specified.",
-                "description": "",
+                "summary": "Get account contact relation",
+                "description": "Gets an account contact relation. The ID of the account contact relation must be specified.",
                 "tags": [
                     "Account"
                 ],
@@ -3070,7 +3037,7 @@
         "\/rest\/accounts\/contacts": {
             "get": {
                 "summary": "List contacts",
-                "description": "",
+                "description": "Lists all contacts.",
                 "tags": [
                     "Account"
                 ],
@@ -3233,6 +3200,22 @@
                         "in": "query"
                     },
                     {
+                        "name": "lastOrderAtBefore",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter that restricts the search result to contacts whose last order was created before a specific date. Possible formats: yyyy-mm-dd, mm\/dd\/yyyy.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "lastOrderAtAfter",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter that restricts the search result to contacts whose last order was created after a specific date. Possible formats: yyyy-mm-dd, mm\/dd\/yyyy.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
                         "name": "with",
                         "type": "string",
                         "required": false,
@@ -3379,8 +3362,8 @@
                 ]
             },
             "post": {
-                "summary": "Create a contact",
-                "description": "",
+                "summary": "Create contact",
+                "description": "Creates a contact.",
                 "tags": [
                     "Account"
                 ],
@@ -3437,8 +3420,8 @@
         },
         "\/rest\/accounts\/contacts\/banks": {
             "post": {
-                "summary": "Create a bank account",
-                "description": "",
+                "summary": "Create bank account",
+                "description": "Creates a bank account.",
                 "tags": [
                     "Account"
                 ],
@@ -3505,7 +3488,7 @@
         },
         "\/rest\/accounts\/contacts\/banks\/{contactBankId}": {
             "delete": {
-                "summary": "Delete a bank account",
+                "summary": "Delete bank account",
                 "description": "Deletes a bank account. The ID of the bank account must be specified.",
                 "tags": [
                     "Account"
@@ -3535,7 +3518,7 @@
                 ]
             },
             "get": {
-                "summary": "Get a bank account",
+                "summary": "Get bank account",
                 "description": "Gets a bank account of the contact. The ID of the bank account must be specified.",
                 "tags": [
                     "Account"
@@ -3568,7 +3551,7 @@
                 ]
             },
             "put": {
-                "summary": "Update a bank account",
+                "summary": "Update bank account",
                 "description": "Updates a bank account. The ID of the bank account must be specified.",
                 "tags": [
                     "Account"
@@ -3645,7 +3628,7 @@
         "\/rest\/accounts\/contacts\/classes": {
             "get": {
                 "summary": "List contact classes",
-                "description": "",
+                "description": "Lists the contact classes.",
                 "tags": [
                     "Account"
                 ],
@@ -3672,7 +3655,7 @@
         },
         "\/rest\/accounts\/contacts\/classes\/{contactClassId}": {
             "get": {
-                "summary": "Get a contact class",
+                "summary": "Get contact class",
                 "description": "Gets a contact class. The ID of the contact class must be specified.",
                 "tags": [
                     "Account"
@@ -3992,7 +3975,7 @@
         "\/rest\/accounts\/contacts\/departments": {
             "get": {
                 "summary": "List contact departments",
-                "description": "",
+                "description": "Lists all contact departments.",
                 "tags": [
                     "Account"
                 ],
@@ -4017,8 +4000,8 @@
                 }
             },
             "post": {
-                "summary": "Create a contact department",
-                "description": "",
+                "summary": "Create contact department",
+                "description": "Creates a contact department.",
                 "tags": [
                     "Account"
                 ],
@@ -4062,7 +4045,7 @@
         },
         "\/rest\/accounts\/contacts\/departments\/{departmentId}": {
             "delete": {
-                "summary": "Delete a contact department",
+                "summary": "Delete contact department",
                 "description": "Deletes a contact department. The ID of the department must be specified.",
                 "tags": [
                     "Account"
@@ -4092,7 +4075,7 @@
                 ]
             },
             "get": {
-                "summary": "Get a contact department",
+                "summary": "Get contact department",
                 "description": "Gets a contact department. The ID of the department must be specified.",
                 "tags": [
                     "Account"
@@ -4125,7 +4108,7 @@
                 ]
             },
             "put": {
-                "summary": "Update a contact department",
+                "summary": "Update contact department",
                 "description": "Updates a contact department. The ID of the department must be specified.",
                 "tags": [
                     "Account"
@@ -4261,7 +4244,7 @@
         "\/rest\/accounts\/contacts\/option_sub_types": {
             "get": {
                 "summary": "List contact option sub-types",
-                "description": "",
+                "description": "Lists all contact option sub-types.",
                 "tags": [
                     "Account"
                 ],
@@ -4286,8 +4269,8 @@
                 }
             },
             "post": {
-                "summary": "Create a contact option sub-type",
-                "description": "",
+                "summary": "Create contact option sub-type",
+                "description": "Creates a contact option sub-type.",
                 "tags": [
                     "Account"
                 ],
@@ -4331,8 +4314,8 @@
         },
         "\/rest\/accounts\/contacts\/option_sub_types\/{optionSubTypeId}": {
             "delete": {
-                "summary": "Delete a contact option sub-type",
-                "description": "Deletes a contact option sub-type. The ID of the option sub-type must be specified.",
+                "summary": "Delete contact option sub-type",
+                "description": "Deletes a contact option sub-type. The ID of the contact option sub-type must be specified.",
                 "tags": [
                     "Account"
                 ],
@@ -4361,8 +4344,8 @@
                 ]
             },
             "get": {
-                "summary": "Get a contact option sub-type",
-                "description": "Gets a contact option sub-type. The ID of the option sub-type must be specified.",
+                "summary": "Get contact option sub-type",
+                "description": "Gets a contact option sub-type. The ID of the contact option sub-type must be specified.",
                 "tags": [
                     "Account"
                 ],
@@ -4394,8 +4377,8 @@
                 ]
             },
             "put": {
-                "summary": "Update a contact option sub-type",
-                "description": "Updates a contact option sub-type. The ID of the option sub-type must be specified.",
+                "summary": "Update contact option sub-type",
+                "description": "Updates a contact option sub-type. The ID of the contact option sub-type must be specified.",
                 "tags": [
                     "Account"
                 ],
@@ -4448,7 +4431,7 @@
         "\/rest\/accounts\/contacts\/option_types": {
             "get": {
                 "summary": "List contact option types",
-                "description": "",
+                "description": "Lists all contact option types.",
                 "tags": [
                     "Account"
                 ],
@@ -4483,8 +4466,8 @@
                 ]
             },
             "post": {
-                "summary": "Create a contact option type",
-                "description": "",
+                "summary": "Create contact option type",
+                "description": "Creates a contact option type.",
                 "tags": [
                     "Account"
                 ],
@@ -4528,8 +4511,8 @@
         },
         "\/rest\/accounts\/contacts\/option_types\/{optionTypeId}": {
             "delete": {
-                "summary": "Delete a contact option type",
-                "description": "Deletes a contact option type. The ID of the option type must be specified.",
+                "summary": "Delete contact option type",
+                "description": "Deletes a contact option type. The ID of the contact option type must be specified.",
                 "tags": [
                     "Account"
                 ],
@@ -4558,8 +4541,8 @@
                 ]
             },
             "get": {
-                "summary": "Get a contact option type",
-                "description": "Gets a contact option type. The ID of the option type must be specified.",
+                "summary": "Get contact option type",
+                "description": "Gets a contact option type. The ID of the contact option type must be specified.",
                 "tags": [
                     "Account"
                 ],
@@ -4591,8 +4574,8 @@
                 ]
             },
             "put": {
-                "summary": "Update a contact option type",
-                "description": "Updates a contact option type. The ID of the option type must be specified.",
+                "summary": "Update contact option type",
+                "description": "Updates a contact option type. The ID of the contact option type must be specified.",
                 "tags": [
                     "Account"
                 ],
@@ -4644,8 +4627,8 @@
         },
         "\/rest\/accounts\/contacts\/options\/{optionId}": {
             "delete": {
-                "summary": "Delete a contact option by the option ID",
-                "description": "Deletes a contact option. The ID of the option must be specified.",
+                "summary": "Delete contact option",
+                "description": "Deletes a contact option. The ID of the option and the contact option must be specified.",
                 "tags": [
                     "Account"
                 ],
@@ -4674,7 +4657,7 @@
                 ]
             },
             "get": {
-                "summary": "Get a contact option by the option ID",
+                "summary": "Get contact option",
                 "description": "Gets a contact option. The ID of the option must be specified.",
                 "tags": [
                     "Account"
@@ -4707,8 +4690,8 @@
                 ]
             },
             "put": {
-                "summary": "Update a contact option by the option ID",
-                "description": "Updates a contact option. The ID of the option must be specified.",
+                "summary": "Update contact option",
+                "description": "Updates a contact option. The ID of the option and the contact option must be specified.",
                 "tags": [
                     "Account"
                 ],
@@ -4743,7 +4726,7 @@
         "\/rest\/accounts\/contacts\/positions": {
             "get": {
                 "summary": "List contact positions",
-                "description": "",
+                "description": "Lists all contact positions.",
                 "tags": [
                     "Account"
                 ],
@@ -4768,8 +4751,8 @@
                 }
             },
             "post": {
-                "summary": "Create a contact position",
-                "description": "",
+                "summary": "Create contact position",
+                "description": "Creates a contact position.",
                 "tags": [
                     "Account"
                 ],
@@ -4813,7 +4796,7 @@
         },
         "\/rest\/accounts\/contacts\/positions\/{positionId}": {
             "delete": {
-                "summary": "Delete a contact position",
+                "summary": "Delete contact position",
                 "description": "Deletes a contact position. The ID of the position must be specified.",
                 "tags": [
                     "Account"
@@ -4843,7 +4826,7 @@
                 ]
             },
             "get": {
-                "summary": "Get a contact position",
+                "summary": "Get contact position",
                 "description": "Gets a contact position. The ID of the position must be specified.",
                 "tags": [
                     "Account"
@@ -4876,7 +4859,7 @@
                 ]
             },
             "put": {
-                "summary": "Update a contact position",
+                "summary": "Update contact position",
                 "description": "Updates a contact position. The ID of the position must be specified.",
                 "tags": [
                     "Account"
@@ -4929,8 +4912,8 @@
         },
         "\/rest\/accounts\/contacts\/sales_representative_regions": {
             "get": {
-                "summary": "",
-                "description": "",
+                "summary": "Get sales representative of region",
+                "description": "Gets the a sales representative of the region.",
                 "tags": [
                     "SalesRepresentativeRegion"
                 ],
@@ -4988,7 +4971,7 @@
         "\/rest\/accounts\/contacts\/types": {
             "get": {
                 "summary": "List contact types",
-                "description": "",
+                "description": "Lists all contact types.",
                 "tags": [
                     "Account"
                 ],
@@ -5013,8 +4996,8 @@
                 }
             },
             "post": {
-                "summary": "Create a contact type",
-                "description": "",
+                "summary": "Create contact type",
+                "description": "Creates a contact type.",
                 "tags": [
                     "Account"
                 ],
@@ -5058,7 +5041,7 @@
         },
         "\/rest\/accounts\/contacts\/types\/{typeId}": {
             "delete": {
-                "summary": "Delete a contact type",
+                "summary": "Delete contact type",
                 "description": "Deletes a contact type. The ID of the contact type must be specified.",
                 "tags": [
                     "Account"
@@ -5088,7 +5071,7 @@
                 ]
             },
             "get": {
-                "summary": "Get a contact type",
+                "summary": "Get contact type",
                 "description": "Gets a contact type. The ID of the contact type must be specified.",
                 "tags": [
                     "Account"
@@ -5121,7 +5104,7 @@
                 ]
             },
             "put": {
-                "summary": "Update a contact type",
+                "summary": "Update contact type",
                 "description": "Updates a contact type. The ID of the contact type must be specified.",
                 "tags": [
                     "Account"
@@ -5174,7 +5157,7 @@
         },
         "\/rest\/accounts\/contacts\/{contactId}": {
             "delete": {
-                "summary": "Delete a contact",
+                "summary": "Delete contact",
                 "description": "Deletes a contact. The ID of the contact must be specified.",
                 "tags": [
                     "Account"
@@ -5253,7 +5236,7 @@
                 ]
             },
             "put": {
-                "summary": "Update a contact",
+                "summary": "Update contact",
                 "description": "Updates a contact. The ID of the contact must be specified.",
                 "tags": [
                     "Account"
@@ -5315,7 +5298,7 @@
         },
         "\/rest\/accounts\/contacts\/{contactId}\/access_data\/login_url": {
             "get": {
-                "summary": "Get the login URL",
+                "summary": "Get login URL",
                 "description": "Gets the URL to login as the given contact. The ID of the contact must be specified.",
                 "tags": [
                     "Account"
@@ -5347,7 +5330,7 @@
         },
         "\/rest\/accounts\/contacts\/{contactId}\/access_data\/new_password": {
             "put": {
-                "summary": "Send password link for a contact",
+                "summary": "Send password link for contact",
                 "description": "Sends an email to a contact with a link to change the password. The ID of the contact must be specified.",
                 "tags": [
                     "Account"
@@ -5390,7 +5373,7 @@
         },
         "\/rest\/accounts\/contacts\/{contactId}\/access_data\/set_password": {
             "put": {
-                "summary": "Update the password for a contact",
+                "summary": "Update password for contact",
                 "description": "Updates the password for a contact. The ID of the contact must be specified.",
                 "tags": [
                     "Account"
@@ -5433,7 +5416,7 @@
         },
         "\/rest\/accounts\/contacts\/{contactId}\/access_data\/unblock_user": {
             "put": {
-                "summary": "Unblock a contact",
+                "summary": "Unblock contact",
                 "description": "Unblocks a contact to allow this contact to log in again. The ID of the contact must be specified.",
                 "tags": [
                     "Account"
@@ -5681,8 +5664,8 @@
         },
         "\/rest\/accounts\/contacts\/{contactId}\/addresses": {
             "post": {
-                "summary": "Create an address for existing contact and type",
-                "description": "Creates an address. The ID of the contact must be specified.",
+                "summary": "Create address for existing contact and type",
+                "description": "Creates an address. The ID of the contact and the address of the contact must be specified.",
                 "tags": [
                     "Account"
                 ],
@@ -5807,8 +5790,8 @@
         },
         "\/rest\/accounts\/contacts\/{contactId}\/addresses\/primary": {
             "get": {
-                "summary": "Returns primary or last created addresses of contact",
-                "description": "",
+                "summary": "Get primary or last created addresses of contact",
+                "description": "Gets primary or last created addresses of the contact. The ID of contact must be specified.",
                 "tags": [
                     "Account"
                 ],
@@ -5842,7 +5825,7 @@
         },
         "\/rest\/accounts\/contacts\/{contactId}\/addresses\/{addressId}": {
             "delete": {
-                "summary": "Delete an address of the contact",
+                "summary": "Delete address of the contact",
                 "description": "Deletes an address of the contact. The ID of the contact and the ID of the address must be specified.",
                 "tags": [
                     "Account"
@@ -5888,7 +5871,7 @@
                 ]
             },
             "put": {
-                "summary": "Update an address of the contact",
+                "summary": "Update address of the contact",
                 "description": "Updates an address of the contact. The ID of the contact and the ID of the address must be specified.",
                 "tags": [
                     "Account"
@@ -5947,8 +5930,8 @@
         },
         "\/rest\/accounts\/contacts\/{contactId}\/addresses\/{addressId}\/types\/{addressTypeId}\/primary": {
             "put": {
-                "summary": "Set a contact address per address type as the primary address",
-                "description": "Sets a contact address per address type as the primary address. The ID of the contact, the ID of the address and the ID of the address type must be specified. A primary address is also definable if you create or update a contact address.",
+                "summary": "Set a contact address per address type as primary address",
+                "description": "Sets a contact address per address type as the primary address. The ID of the contact, the ID of the address and the ID of the address type must be specified. A primary address can also be defined when you create or update a contact address.",
                 "tags": [
                     "Account"
                 ],
@@ -5998,8 +5981,8 @@
         },
         "\/rest\/accounts\/contacts\/{contactId}\/addresses\/{addressId}\/types\/{addressTypeId}\/reset_primary": {
             "put": {
-                "summary": "Resets a contact primary address",
-                "description": "Resets a contact primary address. The ID of the contact, the ID of the address and the ID of the address type must be specified.",
+                "summary": "Reset contact primary address",
+                "description": "Resets the primary address of the contact. The ID of the contact, the ID of the address and the ID of the address type must be specified.",
                 "tags": [
                     "Account"
                 ],
@@ -6147,7 +6130,7 @@
         "\/rest\/accounts\/contacts\/{contactId}\/banks": {
             "get": {
                 "summary": "List bank accounts",
-                "description": "Lists bank accounts of the contact. The ID of the contact must be specified.",
+                "description": "Lists all bank accounts of the contact. The ID of the contact must be specified.",
                 "tags": [
                     "Account"
                 ],
@@ -6272,8 +6255,8 @@
         },
         "\/rest\/accounts\/contacts\/{contactId}\/document": {
             "get": {
-                "summary": "Get a single storage object from contact documents",
-                "description": "",
+                "summary": "Get storage object from contact documents",
+                "description": "Gets a storage object from contact documents. The ID of the contact must be specified.",
                 "tags": [
                     "Contact"
                 ],
@@ -6313,8 +6296,8 @@
                 ]
             },
             "post": {
-                "summary": "Upload a document to contact directory",
-                "description": "",
+                "summary": "Upload document to contact directory",
+                "description": "Uploads a document to the contact directory. The ID of the contact must be specified.",
                 "tags": [
                     "Contact"
                 ],
@@ -6356,8 +6339,8 @@
         },
         "\/rest\/accounts\/contacts\/{contactId}\/document\/url": {
             "get": {
-                "summary": "Get a temporary url for a single document",
-                "description": "",
+                "summary": "Get temporary url for document",
+                "description": "Gets a temporary url for a document. The ID of the contact must be specified.",
                 "tags": [
                     "Contact"
                 ],
@@ -6400,7 +6383,7 @@
         "\/rest\/accounts\/contacts\/{contactId}\/documents": {
             "delete": {
                 "summary": "Delete files from contact documents",
-                "description": "",
+                "description": "Deletes files from contact documents. The ID of the contact must be specified.",
                 "tags": [
                     "Contact"
                 ],
@@ -6440,8 +6423,8 @@
                 ]
             },
             "get": {
-                "summary": "List documents for a single contact",
-                "description": "",
+                "summary": "List documents of a contact",
+                "description": "Lists all documents that are saved for a contact. The ID of the contact must be specified.",
                 "tags": [
                     "Contact"
                 ],
@@ -6483,8 +6466,8 @@
         },
         "\/rest\/accounts\/contacts\/{contactId}\/options": {
             "delete": {
-                "summary": "Delete a contact option by the contact ID",
-                "description": "Deletes a contact option for an existing contact. The ID of the contact must be specified.",
+                "summary": "Delete contact option",
+                "description": "Deletes a contact option for an existing contact. The ID of the option and the contact option must be specified.",
                 "tags": [
                     "Account"
                 ],
@@ -6513,8 +6496,8 @@
                 ]
             },
             "get": {
-                "summary": "List contact options by the contact ID",
-                "description": "Lists contact options. The ID of the contact must be specified.",
+                "summary": "List contact options",
+                "description": "Lists contact options. The ID of the option and the contact option must be specified.",
                 "tags": [
                     "Account"
                 ],
@@ -6549,8 +6532,8 @@
                 ]
             },
             "post": {
-                "summary": "Create a contact option by the contact ID",
-                "description": "Creates a contact option for an existing contact. The ID of the contact must be specified.",
+                "summary": "Create contact option",
+                "description": "Creates a contact option for an existing contact. The ID of the option and the contact option must be specified.",
                 "tags": [
                     "Account"
                 ],
@@ -6585,8 +6568,8 @@
                 ]
             },
             "put": {
-                "summary": "Update a contact option by the contact ID",
-                "description": "Updates a contact option for an existing contact. The ID of the contact must be specified.",
+                "summary": "Update contact option",
+                "description": "Updates a contact option for an existing contact. The ID of the option and the contact option must be specified.",
                 "tags": [
                     "Account"
                 ],
@@ -6623,8 +6606,8 @@
         },
         "\/rest\/accounts\/contacts\/{contactId}\/options\/validate": {
             "get": {
-                "summary": "Validate a contact option by a given value",
-                "description": "validates a contact option by a given value",
+                "summary": "Validate contact option by given value",
+                "description": "validates a contact option by a given value. The ID of the contact and the contact option must be specified.",
                 "tags": [
                     "Account"
                 ],
@@ -6658,8 +6641,8 @@
         },
         "\/rest\/accounts\/contacts\/{contactId}\/related_data": {
             "get": {
-                "summary": "Return all contact related data",
-                "description": "Returns all contact related data.",
+                "summary": "List contact related data",
+                "description": "Lists all contact related data. The ID of the contact must be specified.",
                 "tags": [
                     "Account"
                 ],
@@ -6693,8 +6676,8 @@
         },
         "\/rest\/accounts\/contacts\/{contactId}\/sales_representative_regions": {
             "get": {
-                "summary": "",
-                "description": "",
+                "summary": "List regions by contactId",
+                "description": "Lists the regions. The ID of the contact must be specified.",
                 "tags": [
                     "SalesRepresentativeRegion"
                 ],
@@ -6728,8 +6711,8 @@
         },
         "\/rest\/accounts\/contacts\/{contactId}\/vcard": {
             "get": {
-                "summary": "get a filestream of vcard from customer",
-                "description": "",
+                "summary": "Get filestream of vcard from contact",
+                "description": "Gets a filestream of the contact\u00b4s vcard. The ID of the contact must be specified.",
                 "tags": [
                     "Account"
                 ],
@@ -6789,7 +6772,7 @@
         "\/rest\/accounts\/order_summaries": {
             "get": {
                 "summary": "List order summaries",
-                "description": "",
+                "description": "Lists order summaries.",
                 "tags": [
                     "OrderSummary"
                 ],
@@ -6814,8 +6797,8 @@
                 }
             },
             "post": {
-                "summary": "Create an order summary",
-                "description": "",
+                "summary": "Create order summary",
+                "description": "Creates an order summary.",
                 "tags": [
                     "OrderSummary"
                 ],
@@ -6839,7 +6822,7 @@
         },
         "\/rest\/accounts\/order_summaries\/contacts\/{contactId}": {
             "get": {
-                "summary": "Get an order summary by the contact ID",
+                "summary": "Get order summary by contact ID",
                 "description": "Gets an order summary. The ID of the contact must be specified.",
                 "tags": [
                     "OrderSummary"
@@ -6874,7 +6857,7 @@
         },
         "\/rest\/accounts\/order_summaries\/orders\/{addressId}": {
             "get": {
-                "summary": "Get an order summary by the address ID",
+                "summary": "Get order summary by address ID",
                 "description": "Gets an order summary. The ID of the address must be specified.",
                 "tags": [
                     "OrderSummary"
@@ -6909,7 +6892,7 @@
         },
         "\/rest\/accounts\/order_summaries\/{orderSummaryId}": {
             "delete": {
-                "summary": "Delete an order summary",
+                "summary": "Delete order summary",
                 "description": "Deletes an order summary. The ID of the order summary must be specified.",
                 "tags": [
                     "OrderSummary"
@@ -6939,7 +6922,7 @@
                 ]
             },
             "get": {
-                "summary": "Get an order summary by the order summary ID",
+                "summary": "Get order summary by order summary ID",
                 "description": "Gets an order summary. The ID of the order summary must be specified.",
                 "tags": [
                     "OrderSummary"
@@ -6972,7 +6955,7 @@
                 ]
             },
             "put": {
-                "summary": "Update an order summary",
+                "summary": "Update order summary",
                 "description": "Updates an order summary. The ID of the order summary must be specified.",
                 "tags": [
                     "OrderSummary"
@@ -7007,8 +6990,8 @@
         },
         "\/rest\/accounts\/sales_representative_regions\/{salesRepresentativeRegionId}": {
             "delete": {
-                "summary": "",
-                "description": "",
+                "summary": "Delete region",
+                "description": "Deletes a region. The ID of the sales representative`s region must be specified.",
                 "tags": [
                     "SalesRepresentativeRegion"
                 ],
@@ -7040,8 +7023,8 @@
                 ]
             },
             "get": {
-                "summary": "",
-                "description": "",
+                "summary": "Get region by ID",
+                "description": "Gets the region of the sales representative. The ID of the sales representative`s region must be specified.",
                 "tags": [
                     "SalesRepresentativeRegion"
                 ],
@@ -7073,8 +7056,8 @@
                 ]
             },
             "put": {
-                "summary": "",
-                "description": "",
+                "summary": "Update region",
+                "description": "Updates the region. The ID of the sales representative`s region must be specified.",
                 "tags": [
                     "SalesRepresentativeRegion"
                 ],
@@ -7108,7 +7091,7 @@
         },
         "\/rest\/accounts\/{accountId}": {
             "delete": {
-                "summary": "Delete an account",
+                "summary": "Delete account",
                 "description": "Deletes an account. The ID of the account must be specified.",
                 "tags": [
                     "Account"
@@ -7138,7 +7121,7 @@
                 ]
             },
             "get": {
-                "summary": "Get an account",
+                "summary": "Get account",
                 "description": "Gets an account. The ID of the account must be specified.",
                 "tags": [
                     "Account"
@@ -7171,7 +7154,7 @@
                 ]
             },
             "put": {
-                "summary": "Update an account",
+                "summary": "Update account",
                 "description": "Updates an account. The ID of the account must be specified.",
                 "tags": [
                     "Account"
@@ -7263,7 +7246,7 @@
         "\/rest\/accounts\/{accountId}\/contacts": {
             "get": {
                 "summary": "List contacts",
-                "description": "Lists contacts of the account. The ID of the account must be specified.",
+                "description": "Lists all contacts of the account. The ID of the account must be specified.",
                 "tags": [
                     "Account"
                 ],
@@ -7314,8 +7297,8 @@
         },
         "\/rest\/accounts\/{accountId}\/contacts\/{contactId}\/sales_representative_regions": {
             "get": {
-                "summary": "",
-                "description": "",
+                "summary": "Get region by contactId and accountId",
+                "description": "Gets a region. The ID of the contact and the ID of the account must be specified.",
                 "tags": [
                     "SalesRepresentativeRegion"
                 ],
@@ -7355,8 +7338,8 @@
                 ]
             },
             "post": {
-                "summary": "",
-                "description": "",
+                "summary": "Create region for sales representative",
+                "description": "Creates a region for the sales representative. The ID of the account and the ID of the sales representative (contactId) must be specified.",
                 "tags": [
                     "SalesRepresentativeRegion"
                 ],
@@ -7398,8 +7381,8 @@
         },
         "\/rest\/address_layout": {
             "get": {
-                "summary": "Get all layouts with their contents",
-                "description": "Gets all the layouts including the content for each layout.",
+                "summary": "List all layouts with their contents",
+                "description": "Lists all layouts including the content for each layout.",
                 "tags": [
                     "AddressDesign"
                 ],
@@ -7459,8 +7442,8 @@
         },
         "\/rest\/address_layout\/country\/{countryId}": {
             "get": {
-                "summary": "Get a layout by country id",
-                "description": "Gets a layout by country id. The country id must be specified.",
+                "summary": "Get layout by country id",
+                "description": "Gets a layout by the country ID. The ID of the country must be specified.",
                 "tags": [
                     "AddressDesign"
                 ],
@@ -7495,7 +7478,7 @@
         "\/rest\/address_layout\/default": {
             "get": {
                 "summary": "Get default layout",
-                "description": "Gets the default layout. If no layout is set as default, the one with the smallest ID will be returned.",
+                "description": "Gets the default layout. If no layout is set as default, the layout with the lowest ID will be returned.",
                 "tags": [
                     "AddressDesign"
                 ],
@@ -7519,8 +7502,8 @@
         },
         "\/rest\/address_layout\/used_countries\/{uuid?}": {
             "get": {
-                "summary": "Return the countries in use",
-                "description": "Returns the countries used already by other layouts",
+                "summary": "List countries used in other layouts",
+                "description": "Lists the countries that are already used in other layouts.",
                 "tags": [
                     "AddressDesign"
                 ],
@@ -7557,7 +7540,7 @@
         },
         "\/rest\/address_layout\/{uuid}": {
             "delete": {
-                "summary": "Delete a layout",
+                "summary": "Delete layout",
                 "description": "Deletes a layout. The ID of the layout must be specified.",
                 "tags": [
                     "AddressDesign"
@@ -7666,8 +7649,8 @@
         },
         "\/rest\/address_layout_fields": {
             "get": {
-                "summary": "Get all the available fields.",
-                "description": "Gets all the available fields",
+                "summary": "List all available fields",
+                "description": "Lists all available fields.",
                 "tags": [
                     "AddressDesign"
                 ],
@@ -8049,7 +8032,7 @@
         "\/rest\/basket\/items\/{id}": {
             "get": {
                 "summary": "Find a basket item by it's ID",
-                "description": "",
+                "description": "Retrieve an item that is currently in the basket by it's ID",
                 "tags": [
                     "Basket"
                 ],
@@ -8274,8 +8257,8 @@
         },
         "\/rest\/boards": {
             "get": {
-                "summary": "Lists all boards.",
-                "description": "",
+                "summary": "List all boards",
+                "description": "Lists all boards.",
                 "tags": [
                     "Boards"
                 ],
@@ -8300,8 +8283,8 @@
                 }
             },
             "post": {
-                "summary": "Creates a new board.",
-                "description": "",
+                "summary": "Create new board",
+                "description": "Creates a new board.",
                 "tags": [
                     "Boards"
                 ],
@@ -8347,8 +8330,8 @@
         },
         "\/rest\/boards\/{boardId}": {
             "delete": {
-                "summary": "Deletes a specific board.",
-                "description": "",
+                "summary": "Delete board",
+                "description": "Deletes a specific board.  The ID of the board must be specified.",
                 "tags": [
                     "Boards"
                 ],
@@ -8380,8 +8363,8 @@
                 ]
             },
             "get": {
-                "summary": "Gets a single board by its ID",
-                "description": "",
+                "summary": "Get board by ID",
+                "description": "Gets a single board by its ID. The ID of the board must be specified.",
                 "tags": [
                     "Boards"
                 ],
@@ -8421,8 +8404,8 @@
                 ]
             },
             "post": {
-                "summary": "Copies a specific board.",
-                "description": "",
+                "summary": "Copy board",
+                "description": "Copies a specific board.  The ID of the board must be specified.",
                 "tags": [
                     "Boards"
                 ],
@@ -8454,8 +8437,8 @@
                 ]
             },
             "put": {
-                "summary": "Updates a specific board.",
-                "description": "",
+                "summary": "Update board",
+                "description": "Updates a specific board. The ID of the board must be specified.",
                 "tags": [
                     "Boards"
                 ],
@@ -8502,8 +8485,8 @@
         },
         "\/rest\/boards\/{boardId}\/columns": {
             "get": {
-                "summary": "Lists all columns for a given board",
-                "description": "",
+                "summary": "List all columns for a given board",
+                "description": "Lists all columns for a given board. The ID of the board must be specified.",
                 "tags": [
                     "Board"
                 ],
@@ -8531,15 +8514,15 @@
                         "name": "boardId",
                         "type": "string",
                         "required": true,
-                        "description": "",
+                        "description": "The ID of the board",
                         "format": "string",
                         "in": "path"
                     }
                 ]
             },
             "post": {
-                "summary": "Creates a new column and assigns it to a given board",
-                "description": "",
+                "summary": "Create column and assign it to a board",
+                "description": "Creates a new column and assigns it to a given board. The ID of the board must be specified.",
                 "tags": [
                     "Board"
                 ],
@@ -8564,7 +8547,7 @@
                         "name": "boardId",
                         "type": "string",
                         "required": true,
-                        "description": "",
+                        "description": "The ID of the board",
                         "format": "string",
                         "in": "path"
                     },
@@ -8594,8 +8577,8 @@
         },
         "\/rest\/boards\/{boardId}\/columns\/{columnId}": {
             "delete": {
-                "summary": "Deletes a specific column.",
-                "description": "",
+                "summary": "Delete column",
+                "description": "Deletes a specific column. The ID of the board and the ID of column must be specified.",
                 "tags": [
                     "Board"
                 ],
@@ -8620,7 +8603,7 @@
                         "name": "boardId",
                         "type": "string",
                         "required": true,
-                        "description": "",
+                        "description": "The ID of the board",
                         "format": "string",
                         "in": "path"
                     },
@@ -8628,15 +8611,15 @@
                         "name": "columnId",
                         "type": "string",
                         "required": true,
-                        "description": "",
+                        "description": "The ID of the column",
                         "format": "string",
                         "in": "path"
                     }
                 ]
             },
             "post": {
-                "summary": "Copies a specific column.",
-                "description": "",
+                "summary": "Copy column",
+                "description": "Copies a specific column. The ID of the board and the ID of the column must be specified.",
                 "tags": [
                     "Board"
                 ],
@@ -8676,8 +8659,8 @@
                 ]
             },
             "put": {
-                "summary": "Updates a specific column.",
-                "description": "",
+                "summary": "Update column",
+                "description": "Updates a specific column. The ID of the board and the ID of the column must be specified.",
                 "tags": [
                     "Board"
                 ],
@@ -8702,7 +8685,7 @@
                         "name": "boardId",
                         "type": "string",
                         "required": true,
-                        "description": "",
+                        "description": "The ID of the board",
                         "format": "string",
                         "in": "path"
                     },
@@ -8710,7 +8693,7 @@
                         "name": "columnId",
                         "type": "string",
                         "required": true,
-                        "description": "",
+                        "description": "The ID of the column",
                         "format": "string",
                         "in": "path"
                     },
@@ -8736,8 +8719,8 @@
         },
         "\/rest\/boards\/{boardId}\/columns\/{columnId}\/position": {
             "put": {
-                "summary": "Updates the position of a specific column. Also updates the positions of all following columns on the same board.",
-                "description": "",
+                "summary": "Update position of of a column",
+                "description": "Updates the position of a specific column. Also updates the positions of all following columns on the same board. The ID of the board and the ID of the column must be specified.",
                 "tags": [
                     "Board"
                 ],
@@ -8762,7 +8745,7 @@
                         "name": "position",
                         "type": "integer",
                         "required": true,
-                        "description": "",
+                        "description": "The position number",
                         "format": "integer",
                         "in": "query"
                     },
@@ -8770,7 +8753,7 @@
                         "name": "boardId",
                         "type": "string",
                         "required": true,
-                        "description": "",
+                        "description": "The ID of the board",
                         "format": "string",
                         "in": "path"
                     },
@@ -8778,7 +8761,7 @@
                         "name": "columnId",
                         "type": "string",
                         "required": true,
-                        "description": "",
+                        "description": "The ID of the column",
                         "format": "string",
                         "in": "path"
                     }
@@ -8787,8 +8770,8 @@
         },
         "\/rest\/boards\/{boardId}\/columns\/{columnId}\/tasks": {
             "get": {
-                "summary": "Lists all tasks for a given column.",
-                "description": "",
+                "summary": "List all task for given column",
+                "description": "Lists all tasks for a given column. The ID of the board and the ID of the column must be specified.",
                 "tags": [
                     "Board"
                 ],
@@ -8847,8 +8830,8 @@
                 ]
             },
             "post": {
-                "summary": "Creates a new tasks on a specified column.",
-                "description": "",
+                "summary": "Create task in specific column",
+                "description": "Creates a new task in a specific column. The ID of the board and the ID of the column must be specified.",
                 "tags": [
                     "Board"
                 ],
@@ -8919,8 +8902,8 @@
         },
         "\/rest\/boards\/{boardId}\/columns\/{columnId}\/tasks\/{taskId}": {
             "delete": {
-                "summary": "Deletes a task.",
-                "description": "",
+                "summary": "Delete task",
+                "description": "Deletes a task. The ID of the board, the ID of the column and the ID of the task must be specified.",
                 "tags": [
                     "Board"
                 ],
@@ -8968,8 +8951,8 @@
                 ]
             },
             "get": {
-                "summary": "Gets a task by its ID.",
-                "description": "",
+                "summary": "Get task by ID",
+                "description": "Gets a task by its ID. The ID of the board, the ID of the column and the ID of the task must be specified.",
                 "tags": [
                     "Board"
                 ],
@@ -9017,8 +9000,8 @@
                 ]
             },
             "post": {
-                "summary": "Copies a specific task.",
-                "description": "",
+                "summary": "Copy task",
+                "description": "Copies a specific task. The ID of the board, the ID of the column and the ID of the task must be specified.",
                 "tags": [
                     "Board"
                 ],
@@ -9066,8 +9049,8 @@
                 ]
             },
             "put": {
-                "summary": "Updates a task.",
-                "description": "",
+                "summary": "Update task",
+                "description": "Updates a task. The ID of the board, the ID of the column and the ID of the task must be specified.",
                 "tags": [
                     "Board"
                 ],
@@ -9146,8 +9129,8 @@
         },
         "\/rest\/boards\/{boardId}\/columns\/{columnId}\/tasks\/{taskId}\/position": {
             "put": {
-                "summary": "Updates the position of a task.",
-                "description": "",
+                "summary": "Update task position",
+                "description": "Updates the position of a task. The ID of the board, the ID of the column and the ID of the task must be specified.",
                 "tags": [
                     "Board"
                 ],
@@ -9205,8 +9188,8 @@
         },
         "\/rest\/boards\/{boardId}\/columns\/{columnId}\/tasks\/{taskId}\/references": {
             "post": {
-                "summary": "Creates a new reference from a given task to a contact or a ticket.",
-                "description": "",
+                "summary": "Create reference",
+                "description": "Creates a new reference from a given task to a contact or a ticket. The ID of the board, the ID of the column and the ID of the task must be specified.",
                 "tags": [
                     "Board"
                 ],
@@ -9264,8 +9247,8 @@
         },
         "\/rest\/boards\/{boardId}\/columns\/{columnId}\/tasks\/{taskId}\/references\/{referenceId}": {
             "delete": {
-                "summary": "Deletes a reference from a given task.",
-                "description": "",
+                "summary": "Delete reference from a given task",
+                "description": "Deletes a reference from a given task. The ID of the board, the ID of the column, the ID of the task and the ID of the reference must be specified.",
                 "tags": [
                     "Board"
                 ],
@@ -9323,8 +9306,8 @@
         },
         "\/rest\/boards\/{boardId}\/columns\/{columnId}\/tasks\/{taskId}\/references\/{referenceType}\/{referenceKey}": {
             "get": {
-                "summary": "",
-                "description": "",
+                "summary": "Check reference key",
+                "description": "Checks the reference key. The ID of the board, the ID of the column and the ID of the task must be specified.",
                 "tags": [
                     "Board"
                 ],
@@ -15571,10 +15554,10 @@
                         "in": "query"
                     },
                     {
-                        "name": "tagId",
+                        "name": "id",
                         "type": "integer",
                         "required": false,
-                        "description": "Filter restricts the list of results to items with the specified tagId. More than one ID should be separated by commas.",
+                        "description": "Filter restricts the list of results to items with the specified ID. More than one ID should be separated by commas.",
                         "format": "integer",
                         "in": "query"
                     },
@@ -36173,7 +36156,7 @@
         "\/rest\/markets\/credentials": {
             "get": {
                 "summary": "List credentials",
-                "description": "",
+                "description": "Lists credentials by filter options.",
                 "tags": [
                     "Market"
                 ],
@@ -36345,7 +36328,7 @@
             },
             "get": {
                 "summary": "Get a credential",
-                "description": "",
+                "description": "Gets a credential by given ID.",
                 "tags": [
                     "Market"
                 ],
@@ -36449,8 +36432,8 @@
         },
         "\/rest\/markets\/ebay\/auth\/login": {
             "get": {
-                "summary": "Get the login url.",
-                "description": "",
+                "summary": "Get the login URL.",
+                "description": "Generates the eBay login URL.",
                 "tags": [
                     "Market"
                 ],
@@ -36475,7 +36458,7 @@
         "\/rest\/markets\/ebay\/auth\/refresh-token": {
             "put": {
                 "summary": "Refresh an expired access token.",
-                "description": "",
+                "description": "Refreshes the expired eBay access token.",
                 "tags": [
                     "Market"
                 ],
@@ -37967,7 +37950,7 @@
         "\/rest\/newsletters": {
             "delete": {
                 "summary": "Delete entries",
-                "description": "",
+                "description": "Deletes all entries.",
                 "tags": [
                     "Newsletter"
                 ],
@@ -37993,7 +37976,7 @@
             },
             "get": {
                 "summary": "List newsletter entries",
-                "description": "",
+                "description": "Lists all newsletter entries.",
                 "tags": [
                     "Newsletter"
                 ],
@@ -38018,8 +38001,8 @@
                 }
             },
             "post": {
-                "summary": "Create an entry",
-                "description": "",
+                "summary": "Create entry",
+                "description": "Creates an entry.",
                 "tags": [
                     "Newsletter"
                 ],
@@ -38093,8 +38076,8 @@
         },
         "\/rest\/newsletters\/double_opt_in\/{contactId}": {
             "post": {
-                "summary": "",
-                "description": "",
+                "summary": "Send doubleOptIn mail",
+                "description": "Sends a mail with a doubleOptIn. The ID of the costumer must be specified.",
                 "tags": [
                     "Newsletter"
                 ],
@@ -38129,7 +38112,7 @@
         "\/rest\/newsletters\/folders": {
             "delete": {
                 "summary": "Delete folders",
-                "description": "",
+                "description": "Deletes all folders.",
                 "tags": [
                     "Newsletter"
                 ],
@@ -38155,7 +38138,7 @@
             },
             "get": {
                 "summary": "List newsletter folders",
-                "description": "",
+                "description": "Lists all newsletter folders.",
                 "tags": [
                     "Newsletter"
                 ],
@@ -38180,8 +38163,8 @@
                 }
             },
             "post": {
-                "summary": "Create a folder",
-                "description": "",
+                "summary": "Create folder",
+                "description": "Creates a folder.",
                 "tags": [
                     "Newsletter"
                 ],
@@ -38279,7 +38262,7 @@
         },
         "\/rest\/newsletters\/folders\/{folderId}": {
             "delete": {
-                "summary": "Delete a folder",
+                "summary": "Delete folder",
                 "description": "Deletes a folder. The ID of the folder must be specified.",
                 "tags": [
                     "Newsletter"
@@ -38345,7 +38328,7 @@
                 ]
             },
             "put": {
-                "summary": "Update a folder",
+                "summary": "Update folder",
                 "description": "Updates a folder. The ID of the folder must be specified.",
                 "tags": [
                     "Newsletter"
@@ -38459,7 +38442,7 @@
         "\/rest\/newsletters\/list_recipients": {
             "get": {
                 "summary": "List recipients",
-                "description": "",
+                "description": "Lists a recipients.",
                 "tags": [
                     "Newsletter"
                 ],
@@ -38567,7 +38550,7 @@
         "\/rest\/newsletters\/recipients": {
             "delete": {
                 "summary": "Delete recipients",
-                "description": "",
+                "description": "Deletes a recipients.",
                 "tags": [
                     "Newsletter"
                 ],
@@ -38592,8 +38575,8 @@
                 }
             },
             "get": {
-                "summary": "List recipients of a folder",
-                "description": "",
+                "summary": "List recipients of folder",
+                "description": "Lists all recipients of a folder.",
                 "tags": [
                     "Newsletter"
                 ],
@@ -38644,8 +38627,8 @@
                 ]
             },
             "post": {
-                "summary": "Create a recipient",
-                "description": "",
+                "summary": "Create recipient",
+                "description": "Creates a recipient.",
                 "tags": [
                     "Newsletter"
                 ],
@@ -38746,7 +38729,7 @@
         },
         "\/rest\/newsletters\/recipients\/{recipientId}": {
             "delete": {
-                "summary": "Delete a recipient",
+                "summary": "Delete recipient",
                 "description": "Deletes a recipient. The ID of the recipient must be specified.",
                 "tags": [
                     "Newsletter"
@@ -38779,7 +38762,7 @@
                 ]
             },
             "get": {
-                "summary": "List a recipient",
+                "summary": "List recipient",
                 "description": "Lists a recipient. The ID of the recipient must be specified.",
                 "tags": [
                     "Newsletter"
@@ -38820,7 +38803,7 @@
                 ]
             },
             "put": {
-                "summary": "Update a recipient",
+                "summary": "Update recipient",
                 "description": "Updates a recipient that is assigned to a folder. The ID of the recipient must be specified.",
                 "tags": [
                     "Newsletter"
@@ -38935,7 +38918,7 @@
         },
         "\/rest\/newsletters\/{entryId}": {
             "delete": {
-                "summary": "Delete an entry",
+                "summary": "Delete entry",
                 "description": "Deletes an entry. The ID of the entry must be specified.",
                 "tags": [
                     "Newsletter"
@@ -39001,7 +38984,7 @@
                 ]
             },
             "put": {
-                "summary": "Update an entry",
+                "summary": "Update entry",
                 "description": "Updates an entry. The ID of the entry must be specified.",
                 "tags": [
                     "Newsletter"
@@ -39486,7 +39469,7 @@
         },
         "\/rest\/orders\/addresses": {
             "post": {
-                "summary": "Create an address for existing order",
+                "summary": "Create address for existing order",
                 "description": "Creates an address for an existing order.",
                 "tags": [
                     "Account"
@@ -44520,7 +44503,7 @@
         "\/rest\/orders\/{orderId}\/addresses\/{relationTypeId?}": {
             "get": {
                 "summary": "List order addresses",
-                "description": "Lists order addresses. The ID of the order must be specified.",
+                "description": "Lists order addresses. The ID of the order and the ID of the relation type must be specified.",
                 "tags": [
                     "Account"
                 ],
@@ -54457,10 +54440,17 @@
                         "name": "\/rest\/redistributions",
                         "schema": {
                             "type": "object",
+                            "required": [
+                                "relations"
+                            ],
                             "properties": {
                                 "typeId": {
                                     "type": "integer",
                                     "description": "The ID of the order type\n                                                              It is possible to define individual order types. However,\n                                                              the following types are available by default:\n\n    Sales order = 1\n    Delivery = 2\n    Returns = 3\n    Credit note = 4\n    Warranty = 5\n    Repair = 6\n    Offer = 7\n    Advance order = 8\n    Multi-order = 9\n    Multi credit note = 10\n    Multi delivery = 11\n    Reorder = 12\n    Partial delivery = 13\n    Subscription = 14\n    Redistribution = 15\n optional allowed values are 15"
+                                },
+                                "relations": {
+                                    "type": "array",
+                                    "items": {}
                                 }
                             }
                         }
@@ -54505,10 +54495,17 @@
                         "name": "\/rest\/redistributions\/{orderId}",
                         "schema": {
                             "type": "object",
+                            "required": [
+                                "relations"
+                            ],
                             "properties": {
                                 "typeId": {
                                     "type": "integer",
                                     "description": "The ID of the order type\n                                                              It is possible to define individual order types. However,\n                                                              the following types are available by default:\n\n    Sales order = 1\n    Delivery = 2\n    Returns = 3\n    Credit note = 4\n    Warranty = 5\n    Repair = 6\n    Offer = 7\n    Advance order = 8\n    Multi-order = 9\n    Multi credit note = 10\n    Multi delivery = 11\n    Reorder = 12\n    Partial delivery = 13\n    Subscription = 14\n    Redistribution = 15\n optional allowed values are 15"
+                                },
+                                "relations": {
+                                    "type": "array",
+                                    "items": {}
                                 }
                             }
                         }
@@ -54545,10 +54542,17 @@
                         "name": "\/rest\/reorders",
                         "schema": {
                             "type": "object",
+                            "required": [
+                                "relations"
+                            ],
                             "properties": {
                                 "typeId": {
                                     "type": "integer",
                                     "description": "The ID of the order type\n                                                              It is possible to define individual order types. However,\n                                                              the following types are available by default:\n\n    Sales order = 1\n    Delivery = 2\n    Returns = 3\n    Credit note = 4\n    Warranty = 5\n    Repair = 6\n    Offer = 7\n    Advance order = 8\n    Multi-order = 9\n    Multi credit note = 10\n    Multi delivery = 11\n    Reorder = 12\n    Partial delivery = 13\n    Subscription = 14\n    Redistribution = 15\n optional allowed values are 12"
+                                },
+                                "relations": {
+                                    "type": "array",
+                                    "items": {}
                                 }
                             }
                         }
@@ -54593,10 +54597,17 @@
                         "name": "\/rest\/reorders\/{orderId}",
                         "schema": {
                             "type": "object",
+                            "required": [
+                                "relations"
+                            ],
                             "properties": {
                                 "typeId": {
                                     "type": "integer",
                                     "description": "The ID of the order type\n                                                              It is possible to define individual order types. However,\n                                                              the following types are available by default:\n\n    Sales order = 1\n    Delivery = 2\n    Returns = 3\n    Credit note = 4\n    Warranty = 5\n    Repair = 6\n    Offer = 7\n    Advance order = 8\n    Multi-order = 9\n    Multi credit note = 10\n    Multi delivery = 11\n    Reorder = 12\n    Partial delivery = 13\n    Subscription = 14\n    Redistribution = 15\n optional allowed values are 12"
+                                },
+                                "relations": {
+                                    "type": "array",
+                                    "items": {}
                                 }
                             }
                         }
@@ -55959,7 +55970,7 @@
             },
             "post": {
                 "summary": "Create a warehouse",
-                "description": "",
+                "description": "Creates a warehouse.",
                 "tags": [
                     "StockManagement"
                 ],
@@ -56043,8 +56054,8 @@
         },
         "\/rest\/stockmanagement\/warehouses\/addresses": {
             "post": {
-                "summary": "Create an address for existing warehouse",
-                "description": "",
+                "summary": "Create address for existing warehouse",
+                "description": "Creates an address for an existing warehouse. The address must be specified.",
                 "tags": [
                     "Account"
                 ],
@@ -56112,7 +56123,7 @@
         "\/rest\/stockmanagement\/warehouses\/{warehouseId}\/addresses\/{relationTypeId?}": {
             "get": {
                 "summary": "List warehouse addresses",
-                "description": "List warehouse addresses. The ID of the warehouse must be specified.",
+                "description": "List warehouse addresses. The ID of the warehouse, the address and the ID of the relation type must be specified.",
                 "tags": [
                     "Account"
                 ],
@@ -57511,7 +57522,7 @@
         "\/rest\/stockmanagement\/warehouses\/{warehouseId}\/stock\/unpackVariation": {
             "put": {
                 "summary": "Unpack variation",
-                "description": "",
+                "description": "Unpacks a variation.",
                 "tags": [
                     "StockManagement"
                 ],
@@ -58908,7 +58919,7 @@
         "\/rest\/tickets": {
             "get": {
                 "summary": "List tickets by filters",
-                "description": "",
+                "description": "Lists the tickets by filters.",
                 "tags": [
                     "Ticket"
                 ],
@@ -59113,8 +59124,8 @@
                 ]
             },
             "post": {
-                "summary": "Create a ticket",
-                "description": "",
+                "summary": "Create ticket",
+                "description": "Creates a ticket.",
                 "tags": [
                     "Ticket"
                 ],
@@ -59223,8 +59234,8 @@
         },
         "\/rest\/tickets\/messages\/{messageId}": {
             "get": {
-                "summary": "Get the TicketMessage for the given message ID.",
-                "description": "",
+                "summary": "Get ticket message for given message ID",
+                "description": "Gets a ticket message. The ID of the message must be specified.",
                 "tags": [
                     "TicketMessage"
                 ],
@@ -59258,8 +59269,8 @@
         },
         "\/rest\/tickets\/status\/names": {
             "get": {
-                "summary": "",
-                "description": "",
+                "summary": "List status names",
+                "description": "Lists status names.",
                 "tags": [
                     "Ticket"
                 ],
@@ -59286,8 +59297,8 @@
         },
         "\/rest\/tickets\/status\/type\/names": {
             "get": {
-                "summary": "",
-                "description": "",
+                "summary": "List status names with typeId",
+                "description": "Lists status names with typeId.",
                 "tags": [
                     "Ticket"
                 ],
@@ -59314,8 +59325,8 @@
         },
         "\/rest\/tickets\/types\/names": {
             "get": {
-                "summary": "",
-                "description": "",
+                "summary": "List type names",
+                "description": "Lists all type names.",
                 "tags": [
                     "Ticket"
                 ],
@@ -59342,8 +59353,8 @@
         },
         "\/rest\/tickets\/{ticketId}": {
             "get": {
-                "summary": "Find ticket by ID.",
-                "description": "",
+                "summary": "Get ticket",
+                "description": "Gets the ticket. The ID of the ticket must be specified.",
                 "tags": [
                     "Ticket"
                 ],
@@ -59383,7 +59394,7 @@
                 ]
             },
             "post": {
-                "summary": "Create a message",
+                "summary": "Create message",
                 "description": "Creates a message for the ticket. The ID of the ticket must be specified.",
                 "tags": [
                     "Ticket"
@@ -59397,44 +59408,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
-                            "properties": {
-                                "page": {
-                                    "type": "integer",
-                                    "description": "Current page of the response"
-                                },
-                                "totalsCount": {
-                                    "type": "integer",
-                                    "description": "The total number of entries in the response"
-                                },
-                                "isLastPage": {
-                                    "type": "boolean",
-                                    "description": "Flag that indicates if the page shown is the last page of the response"
-                                },
-                                "lastPageNumber": {
-                                    "type": "integer",
-                                    "description": "The last page number"
-                                },
-                                "firstOnPage": {
-                                    "type": "integer",
-                                    "description": "The index of the first item of the current page result"
-                                },
-                                "lastOnPage": {
-                                    "type": "integer",
-                                    "description": "The index of the last item of the current page result"
-                                },
-                                "itemsPerPage": {
-                                    "type": "integer",
-                                    "description": "The requested amount of items per result page"
-                                },
-                                "entries": {
-                                    "type": "array",
-                                    "description": "List of TicketMessage",
-                                    "items": {
-                                        "$ref": "#\/definitions\/Plenty\\Modules\\Ticket\\Models\\TicketMessage"
-                                    }
-                                }
-                            }
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Ticket\\Models\\TicketMessage"
                         }
                     },
                     "401": {
@@ -59453,7 +59427,7 @@
                 ]
             },
             "put": {
-                "summary": "Update a ticket",
+                "summary": "Update ticket",
                 "description": "Updates a ticket. The ID of the ticket must be specified.",
                 "tags": [
                     "Ticket"
@@ -59488,8 +59462,8 @@
         },
         "\/rest\/tickets\/{ticketId}\/messages": {
             "get": {
-                "summary": "List all <tt>TicketMessage<\/tt>'s for the given ticket ID.",
-                "description": "",
+                "summary": "List all ticket messages for given ticket ID",
+                "description": "Lists all ticket messages. The ID of the ticket must be specified.",
                 "tags": [
                     "TicketMessage"
                 ],
@@ -59526,8 +59500,8 @@
         },
         "\/rest\/tickets\/{ticketId}\/messages\/comment": {
             "get": {
-                "summary": "List all internal <tt>TicketMessage<\/tt>'s (<tt>type == 'comment'<\/tt>) for the given ticket ID.",
-                "description": "",
+                "summary": "List all internal ticket messages",
+                "description": "Lists all internal ticket messages. The ID of the ticket must be specified. When type = 'comment', the message is internal.",
                 "tags": [
                     "TicketMessage"
                 ],
@@ -59564,8 +59538,8 @@
         },
         "\/rest\/tickets\/{ticketId}\/messages\/message": {
             "get": {
-                "summary": "List all public <tt>TicketMessage<\/tt>'s (<tt>type == 'message'<\/tt>) for the given ticket ID.",
-                "description": "",
+                "summary": "List all public ticket messages",
+                "description": "Lists all public ticket messages. The ID of the ticket must be specified. When type = 'message', the message is public.",
                 "tags": [
                     "TicketMessage"
                 ],
@@ -61642,7 +61616,7 @@
         "\/rest\/webstores": {
             "get": {
                 "summary": "List clients (stores)",
-                "description": "",
+                "description": "Lists all clients (stores)",
                 "tags": [
                     "Webstore"
                 ],
@@ -61669,8 +61643,8 @@
         },
         "\/rest\/webstores\/{webstoreId}\/plugin_set": {
             "get": {
-                "summary": "",
-                "description": "",
+                "summary": "Find a plugin set",
+                "description": "Retrieve a plugin set by a webstore id",
                 "tags": [
                     "Webstore"
                 ],
@@ -61702,8 +61676,8 @@
                 ]
             },
             "post": {
-                "summary": "",
-                "description": "",
+                "summary": "Set a plugin set relation to a webstore",
+                "description": "Set a plugin set relation to a webstore by a webstore id and plugin set id",
                 "tags": [
                     "Webstore"
                 ],
@@ -62368,21 +62342,7 @@
             "type": "object"
         },
         "Plenty\\Data\\SimpleRestResponse": {
-            "type": "object",
-            "properties": {
-                "contentType": {
-                    "type": "string",
-                    "description": "response content type"
-                },
-                "contentLength": {
-                    "type": "integer",
-                    "description": "response content length"
-                },
-                "content": {
-                    "type": "string",
-                    "description": "response content"
-                }
-            }
+            "type": "object"
         },
         "Plenty\\Log\\Models\\Log": {
             "type": "object",
