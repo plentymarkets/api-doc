@@ -1521,6 +1521,10 @@
                                 "dealerMinOrderValue": {
                                     "type": "number",
                                     "description": "The minimum order value for the supplier optional"
+                                },
+                                "supplierCurrency": {
+                                    "type": "string",
+                                    "description": "The currency used by a supplier optional"
                                 }
                             }
                         }
@@ -5533,6 +5537,10 @@
                                 "dealerMinOrderValue": {
                                     "type": "number",
                                     "description": "The minimum order value for the supplier optional"
+                                },
+                                "supplierCurrency": {
+                                    "type": "string",
+                                    "description": "The currency used by a supplier optional"
                                 }
                             }
                         }
@@ -7236,6 +7244,10 @@
                                 "dealerMinOrderValue": {
                                     "type": "number",
                                     "description": "The minimum order value for the supplier optional"
+                                },
+                                "supplierCurrency": {
+                                    "type": "string",
+                                    "description": "The currency used by a supplier optional"
                                 }
                             }
                         }
@@ -14955,7 +14967,7 @@
             },
             "post": {
                 "summary": "Create item sets",
-                "description": "",
+                "description": "Creates item Sets",
                 "tags": [
                     "Item"
                 ],
@@ -14988,7 +15000,7 @@
             },
             "put": {
                 "summary": "Update item sets",
-                "description": "",
+                "description": "Updates item sets",
                 "tags": [
                     "Item"
                 ],
@@ -15117,7 +15129,7 @@
         "\/rest\/item_sets\/{setId}\/components": {
             "delete": {
                 "summary": "Delete item set components",
-                "description": "",
+                "description": "Deletes item set components. The ID of the set and the component must be specified",
                 "tags": [
                     "Item"
                 ],
@@ -15186,7 +15198,7 @@
             },
             "post": {
                 "summary": "Create item set components",
-                "description": "",
+                "description": "Creates item set components. The id of the set must be specified",
                 "tags": [
                     "Item"
                 ],
@@ -15219,7 +15231,7 @@
             },
             "put": {
                 "summary": "Update item set components",
-                "description": "",
+                "description": "Updates item set components. The id of the set must be specified",
                 "tags": [
                     "Item"
                 ],
@@ -15295,7 +15307,7 @@
             },
             "get": {
                 "summary": "Get an item set component",
-                "description": "",
+                "description": "Gets an item set component. The ID of the component and the set must be specified",
                 "tags": [
                     "Item"
                 ],
@@ -15336,7 +15348,7 @@
             },
             "put": {
                 "summary": "Update an item set component",
-                "description": "",
+                "description": "Updates an item set component. The ID of the set and the component must be specified",
                 "tags": [
                     "Item"
                 ],
@@ -15379,7 +15391,7 @@
         "\/rest\/item_sets\/{setId}\/config": {
             "get": {
                 "summary": "Get the item set configuration of an item set",
-                "description": "",
+                "description": "Gets the item set configuration of an item set",
                 "tags": [
                     "Item"
                 ],
@@ -15412,7 +15424,7 @@
             },
             "put": {
                 "summary": "Update an item set configuration",
-                "description": "",
+                "description": "Updates an item set configuration. The id of the item set must be specified",
                 "tags": [
                     "Item"
                 ],
@@ -22970,8 +22982,8 @@
                 ]
             },
             "patch": {
-                "summary": "",
-                "description": "",
+                "summary": "Bulk update Variations",
+                "description": "Update up to 1000 variations.",
                 "tags": [
                     "Item"
                 ],
@@ -30598,7 +30610,7 @@
         "\/rest\/items\/{itemId}\/fill": {
             "post": {
                 "summary": "Fill item to es",
-                "description": "",
+                "description": "Fills item to es. The ID of the item must be specified.",
                 "tags": [
                     "Item"
                 ],
@@ -31826,7 +31838,7 @@
         "\/rest\/items\/{itemId}\/variations\/{variationId}\/fill": {
             "post": {
                 "summary": "Fill a variation",
-                "description": "",
+                "description": "Fills a variation. The ID of the variation must be specified.",
                 "tags": [
                     "Item"
                 ],
@@ -31970,8 +31982,7 @@
                             "type": "object",
                             "required": [
                                 "valueId",
-                                "lang",
-                                "value"
+                                "lang"
                             ],
                             "properties": {
                                 "valueId": {
@@ -31984,7 +31995,7 @@
                                 },
                                 "value": {
                                     "type": "string",
-                                    "description": "The text saved for the property of the type Text"
+                                    "description": "The text saved for the property of the type Text optional"
                                 }
                             }
                         }
@@ -32169,8 +32180,7 @@
                             "type": "object",
                             "required": [
                                 "valueId",
-                                "lang",
-                                "value"
+                                "lang"
                             ],
                             "properties": {
                                 "valueId": {
@@ -32183,7 +32193,7 @@
                                 },
                                 "value": {
                                     "type": "string",
-                                    "description": "The text saved for the property of the type Text"
+                                    "description": "The text saved for the property of the type Text optional"
                                 }
                             }
                         }
@@ -37527,8 +37537,8 @@
         },
         "\/rest\/messages": {
             "get": {
-                "summary": "List the amount following\/preceeding messages begining by the message with the given UUID5 (exclusive).",
-                "description": "",
+                "summary": "List amount following\/preceding messages beginning with the message with UUID5 (exclusive)",
+                "description": "Lists the amount following\/preceding messages beginning with the message with the given UUID5 (exclusive).",
                 "tags": [
                     "Messenger"
                 ],
@@ -37579,8 +37589,8 @@
                 ]
             },
             "post": {
-                "summary": "Create a new message.",
-                "description": "",
+                "summary": "Create new message",
+                "description": "Creates a new message.",
                 "tags": [
                     "Messenger"
                 ],
@@ -37663,8 +37673,8 @@
         },
         "\/rest\/messages\/{uuid5}": {
             "delete": {
-                "summary": "Deletes Message by UUID",
-                "description": "",
+                "summary": "Delete message by UUID",
+                "description": "Deletes a message by the UUID. The UUID must be specified.",
                 "tags": [
                     "Messenger"
                 ],
@@ -37696,8 +37706,8 @@
                 ]
             },
             "get": {
-                "summary": "Get the message for the given UUID5 and all its associated successors.",
-                "description": "",
+                "summary": "Get message for the given UUID5 and all its associated successors",
+                "description": "Gets the message for the given UUID5 and all its associated successors. The UUID must be specified.",
                 "tags": [
                     "Messenger"
                 ],
@@ -37742,8 +37752,8 @@
         },
         "\/rest\/messages\/{uuid5}\/attachments": {
             "get": {
-                "summary": "Gets an attachment by UUID and fileName",
-                "description": "",
+                "summary": "Get attachment by UUID and fileName",
+                "description": "Gets an attachment. The UUID and the file name must be specified.",
                 "tags": [
                     "Messenger"
                 ],
@@ -37777,8 +37787,8 @@
         },
         "\/rest\/messages\/{uuid5}\/done": {
             "put": {
-                "summary": "Set or unset the doneAt date of the message.",
-                "description": "",
+                "summary": "Set or unset doneAt date of message",
+                "description": "Sets or unsets the doneAt date of the message. The UUID must be specified.",
                 "tags": [
                     "Messenger"
                 ],
@@ -37849,7 +37859,7 @@
         "\/rest\/messages\/{uuid5}\/readBy": {
             "put": {
                 "summary": "Update ReadBy array of message",
-                "description": "",
+                "description": "Updates the ReadBy array of the message. The UUID must be specified.",
                 "tags": [
                     "Messenger"
                 ],
@@ -37887,7 +37897,7 @@
         "\/rest\/messages\/{uuid5}\/visibility": {
             "put": {
                 "summary": "Update message visibility",
-                "description": "",
+                "description": "Updates the message visibility. The UUID must be specified.",
                 "tags": [
                     "Messenger"
                 ],
@@ -41326,6 +41336,22 @@
                         "required": false,
                         "description": "Load additional relations for a transaction. Currently possible are 'orderItem' and 'warehouseLocation'.",
                         "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "sortBy",
+                        "type": "string",
+                        "required": false,
+                        "description": "Sort search result according to createdAt, updatedAt, orderItemId, receiptId or quantity. The default value is orderItemId.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "sortOrder",
+                        "type": "string",
+                        "required": false,
+                        "description": "Sort direction desc or asc. The default value is asc.",
+                        "format": "string",
                         "in": "query"
                     },
                     {
@@ -46276,6 +46302,22 @@
                         "required": false,
                         "description": "The page to get. The default page that will be returned is page 1.",
                         "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "sortBy",
+                        "type": "string",
+                        "required": false,
+                        "description": "Sort search result according to itemVariationId, orderItemName, createdAt, updatedAt or id. The default value is orderItemId.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "sortOrder",
+                        "type": "string",
+                        "required": false,
+                        "description": "Sort direction desc or asc. The default value is asc.",
+                        "format": "string",
                         "in": "query"
                     },
                     {
@@ -54069,6 +54111,38 @@
                 ]
             }
         },
+        "\/rest\/properties\/relations\/{relationId}\/values": {
+            "delete": {
+                "summary": "Delete all property relation values of a specified property relation",
+                "description": "Delete all property relation values of a specified property relation.",
+                "tags": [
+                    "Property"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "relationId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            }
+        },
         "\/rest\/properties\/selections": {
             "get": {
                 "summary": "List property selections",
@@ -54459,6 +54533,39 @@
             }
         },
         "\/rest\/redistributions\/{orderId}": {
+            "delete": {
+                "summary": "Delete a redistribution",
+                "description": "Deletes a redistribution. The order ID must be specified.",
+                "tags": [
+                    "Order"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            },
             "put": {
                 "summary": "Update a redistribution",
                 "description": "Updates a redistribution. The ID of the order must be specified.",
@@ -54561,6 +54668,39 @@
             }
         },
         "\/rest\/reorders\/{orderId}": {
+            "delete": {
+                "summary": "Delete a reorder",
+                "description": "Deletes a reorder. The order ID must be specified.",
+                "tags": [
+                    "Order"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Data\\SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            },
             "put": {
                 "summary": "Update a reorder",
                 "description": "Updates a reorder. The order ID must be specified.",
@@ -63214,6 +63354,10 @@
                     "type": "number",
                     "description": "The minimum order value for the supplier"
                 },
+                "supplierCurrency": {
+                    "type": "string",
+                    "description": "The currency used by a supplier"
+                },
                 "createdAt": {
                     "type": "string",
                     "description": "The time the account was created as unix timestamp"
@@ -69338,6 +69482,10 @@
                     "type": "string",
                     "description": "The branch to checkout for this particular Plugin"
                 },
+                "commit": {
+                    "type": "string",
+                    "description": "The commit to checkout for this particular Plugin"
+                },
                 "offerTrial": {
                     "type": "boolean",
                     "description": "Determines if the plugin offers a trial period for plentyMarketplace"
@@ -69399,6 +69547,10 @@
                     "description": ""
                 },
                 "branchName": {
+                    "type": "string",
+                    "description": ""
+                },
+                "commit": {
                     "type": "string",
                     "description": ""
                 },
