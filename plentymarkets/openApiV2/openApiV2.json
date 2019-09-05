@@ -12815,6 +12815,34 @@
                 }
             }
         },
+        "\/rest\/elastic-sync\/sync\/status": {
+            "get": {
+                "summary": "Get syncs status.",
+                "description": "Get syncs status.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                }
+            }
+        },
         "\/rest\/elastic-sync\/sync\/types": {
             "get": {
                 "summary": "Get list of sync types.",
@@ -37671,6 +37699,52 @@
                 ]
             }
         },
+        "\/rest\/messages\/get": {
+            "get": {
+                "summary": "Lists the amount of messages per page",
+                "description": "",
+                "tags": [
+                    "Messenger"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Plenty\\Modules\\Messenger\\Models\\Message"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "page",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The number of the retured page of messages, default is 1 (the first)",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "itemsPerPage",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The amount of messages to list (defaults to 50)",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
         "\/rest\/messages\/{uuid5}": {
             "delete": {
                 "summary": "Delete message by UUID",
@@ -52879,6 +52953,69 @@
                                 }
                             }
                         }
+                    }
+                ]
+            }
+        },
+        "\/rest\/properties\/multiple\/options": {
+            "delete": {
+                "summary": "Delete property options",
+                "description": "Deletes property options.",
+                "tags": [
+                    "Property"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create property options",
+                "description": "Creates property options.",
+                "tags": [
+                    "Property"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Property\\Models\\PropertyOption"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "propertyId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "ID of the property",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "typeOptionIdentifier",
+                        "type": "string",
+                        "required": true,
+                        "description": "The identifier of the property option type",
+                        "format": "string",
+                        "in": "query"
                     }
                 ]
             }
