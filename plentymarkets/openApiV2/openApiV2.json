@@ -37671,6 +37671,12 @@
                                         "$ref": "#\/definitions\/Plenty\\Modules\\Messenger\\Models\\MessageLinkedTo"
                                     }
                                 },
+                                "metaData": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Messenger\\Models\\MessageMetaData"
+                                    }
+                                },
                                 "from": {
                                     "type": "array",
                                     "items": {
