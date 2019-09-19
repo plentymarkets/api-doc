@@ -14196,8 +14196,8 @@
         },
         "\/rest\/exports\/{exportId}\/filters\/{key}": {
             "delete": {
-                "summary": "",
-                "description": "",
+                "summary": "Delete filter from the export",
+                "description": "Deletes filter from the export. The ID of the export and the ID of the filter must be specified.",
                 "tags": [
                     "ExportSettings"
                 ],
@@ -34266,6 +34266,95 @@
                 ]
             }
         },
+        "\/rest\/listings\/markets\/item_specifics\/find": {
+            "get": {
+                "summary": "Gets all ListingMarketItemSpecifics.",
+                "description": "",
+                "tags": [
+                    "Listing"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "page": {
+                                    "type": "integer",
+                                    "description": "Current page of the response"
+                                },
+                                "totalsCount": {
+                                    "type": "integer",
+                                    "description": "The total number of entries in the response"
+                                },
+                                "isLastPage": {
+                                    "type": "boolean",
+                                    "description": "Flag that indicates if the page shown is the last page of the response"
+                                },
+                                "lastPageNumber": {
+                                    "type": "integer",
+                                    "description": "The last page number"
+                                },
+                                "firstOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the first item of the current page result"
+                                },
+                                "lastOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the last item of the current page result"
+                                },
+                                "itemsPerPage": {
+                                    "type": "integer",
+                                    "description": "The requested amount of items per result page"
+                                },
+                                "entries": {
+                                    "type": "array",
+                                    "description": "List of ListingMarketItemSpecific",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Plenty\\Modules\\Listing\\Market\\ItemSpecific\\Models\\ListingMarketItemSpecific"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "\/rest\/listings\/markets\/item_specifics\/find",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "integer",
+                                    "description": "The ID of the item specific. optional"
+                                },
+                                "listingMarketId": {
+                                    "type": "integer",
+                                    "description": "The LMID which belongs to the item specific ID. optional"
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "description": "The name of the item specific. optional"
+                                },
+                                "value": {
+                                    "type": "string",
+                                    "description": "The value of the item specific. optional"
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        },
         "\/rest\/listings\/markets\/item_specifics\/{id}": {
             "delete": {
                 "summary": "Deletes a ListingMarketItemSpecific.",
@@ -37405,10 +37494,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#\/definitions\/Plenty\\Modules\\Market\\Settings\\Models\\Settings"
-                            }
+                            "$ref": "#\/definitions\/Plenty\\Modules\\Market\\Settings\\Models\\Settings"
                         }
                     },
                     "401": {
@@ -40929,7 +41015,7 @@
         "\/rest\/orders\/items\/dates": {
             "post": {
                 "summary": "Create a date for an order item",
-                "description": "Creates a date for an order item. The ID of the order item must be specified",
+                "description": "Creates a date for an order item. The ID of the order item must be specified\n<b>DEPRECATED: Use the following route: PUT \/rest\/orders\/{orderId}<\/b>",
                 "tags": [
                     "Order"
                 ],
@@ -40981,7 +41067,7 @@
         "\/rest\/orders\/items\/dates\/{id}": {
             "delete": {
                 "summary": "Delete a date from an order item",
-                "description": "Deletes the date from an order item. The ID of the date must be specified.",
+                "description": "Deletes the date from an order item. The ID of the date must be specified.\n<b>DEPRECATED: Use the following route: PUT \/rest\/orders\/{orderId}<\/b>",
                 "tags": [
                     "Order"
                 ],
@@ -41011,7 +41097,7 @@
             },
             "get": {
                 "summary": "Get a date of an order item",
-                "description": "Gets a date of an order item. The ID of the date must be specified.",
+                "description": "Gets a date of an order item. The ID of the date must be specified.\n<b>DEPRECATED: Use the following route: GET \/rest\/orders\/{orderId}<\/b>",
                 "tags": [
                     "Order"
                 ],
@@ -41044,7 +41130,7 @@
             },
             "put": {
                 "summary": "Update a date of an order item",
-                "description": "Updates a date of an order item. The ID of the date must be specified.",
+                "description": "Updates a date of an order item. The ID of the date must be specified.\n<b>DEPRECATED: Use the following route: PUT \/rest\/orders\/{orderId}<\/b>",
                 "tags": [
                     "Order"
                 ],
@@ -41164,7 +41250,7 @@
         "\/rest\/orders\/items\/properties": {
             "post": {
                 "summary": "Create an order item property.",
-                "description": "",
+                "description": "<b>DEPRECATED: Use the following route: PUT \/rest\/orders\/{orderId}<\/b>",
                 "tags": [
                     "Order"
                 ],
@@ -41217,7 +41303,7 @@
         "\/rest\/orders\/items\/properties\/{id}": {
             "delete": {
                 "summary": "Delete an order item property by ID.",
-                "description": "",
+                "description": "<b>DEPRECATED: Use the following route: PUT \/rest\/orders\/{orderId}<\/b>",
                 "tags": [
                     "Order"
                 ],
@@ -41247,7 +41333,7 @@
             },
             "get": {
                 "summary": "Get an order item property by ID.",
-                "description": "",
+                "description": "<b>DEPRECATED: Use the following route: GET \/rest\/orders\/{orderId}<\/b>",
                 "tags": [
                     "Order"
                 ],
@@ -41280,7 +41366,7 @@
             },
             "put": {
                 "summary": "Update an order item property by ID.",
-                "description": "",
+                "description": "<b>DEPRECATED: Use the following route: PUT \/rest\/orders\/{orderId}<\/b>",
                 "tags": [
                     "Order"
                 ],
@@ -41663,7 +41749,7 @@
         "\/rest\/orders\/items\/{orderItemId}\/dates": {
             "get": {
                 "summary": "List dates of an order item",
-                "description": "Lists the dates of an order item. The ID of the order item must be specified.",
+                "description": "Lists the dates of an order item. The ID of the order item must be specified.\n<b>DEPRECATED: Use the following route: GET \/rest\/orders\/{orderId}<\/b>",
                 "tags": [
                     "Order"
                 ],
@@ -41701,7 +41787,7 @@
         "\/rest\/orders\/items\/{orderItemId}\/dates\/{typeId}": {
             "delete": {
                 "summary": "Delete a date from an order item by order item and date type",
-                "description": "Deletest a date from an order item. The ID of the order item and the ID of the date type must be specified.",
+                "description": "Deletest a date from an order item. The ID of the order item and the ID of the date type must be specified.\n<b>DEPRECATED: Use the following route: PUT \/rest\/orders\/{orderId}<\/b>",
                 "tags": [
                     "Order"
                 ],
@@ -41739,7 +41825,7 @@
             },
             "get": {
                 "summary": "Get a date of an order item by order item and date type",
-                "description": "Gets a date of an order item. The ID of the order item and the ID of the date type must be specified.",
+                "description": "Gets a date of an order item. The ID of the order item and the ID of the date type must be specified.\n<b>DEPRECATED: Use the following route: GET \/rest\/orders\/{orderId}<\/b>",
                 "tags": [
                     "Order"
                 ],
@@ -41780,7 +41866,7 @@
             },
             "post": {
                 "summary": "Create a date for an order item by order item and date type",
-                "description": "Creates a date for an order item. The ID of the order item and the ID of the date type must be specified.",
+                "description": "Creates a date for an order item. The ID of the order item and the ID of the date type must be specified.\n<b>DEPRECATED: Use the following route: PUT \/rest\/orders\/{orderId}<\/b>",
                 "tags": [
                     "Order"
                 ],
@@ -41846,7 +41932,7 @@
             },
             "put": {
                 "summary": "Update a date of an order item by order item and date type",
-                "description": "Updates the date of an order item. The ID of the order item and the ID of the date type must be specified.",
+                "description": "Updates the date of an order item. The ID of the order item and the ID of the date type must be specified.\n<b>DEPRECATED: Use the following route: PUT \/rest\/orders\/{orderId}<\/b>",
                 "tags": [
                     "Order"
                 ],
@@ -41912,7 +41998,7 @@
         "\/rest\/orders\/items\/{orderItemId}\/properties": {
             "get": {
                 "summary": "Get all order item propertys for one order item by its order item id.",
-                "description": "",
+                "description": "<b>DEPRECATED: Use the following route: GET \/rest\/orders\/{orderId}<\/b>",
                 "tags": [
                     "Order"
                 ],
@@ -41950,7 +42036,7 @@
         "\/rest\/orders\/items\/{orderItemId}\/properties\/{typeId}": {
             "delete": {
                 "summary": "Delete an order item property by order item ID and order property type ID.",
-                "description": "",
+                "description": "<b>DEPRECATED: Use the following route: PUT \/rest\/orders\/{orderId}<\/b>",
                 "tags": [
                     "Order"
                 ],
@@ -41988,7 +42074,7 @@
             },
             "get": {
                 "summary": "Get an order item property by order item ID and order property type ID.",
-                "description": "",
+                "description": "<b>DEPRECATED: Use the following route: GET \/rest\/orders\/{orderId}<\/b>",
                 "tags": [
                     "Order"
                 ],
@@ -42029,7 +42115,7 @@
             },
             "post": {
                 "summary": "Create an order item property by order item ID and order property type ID.",
-                "description": "",
+                "description": "<b>DEPRECATED: Use the following route: PUT \/rest\/orders\/{orderId}<\/b>",
                 "tags": [
                     "Order"
                 ],
@@ -42096,7 +42182,7 @@
             },
             "put": {
                 "summary": "Update an order item property by order item ID and order property type ID.",
-                "description": "",
+                "description": "<b>DEPRECATED: Use the following route: PUT \/rest\/orders\/{orderId}<\/b>",
                 "tags": [
                     "Order"
                 ],
@@ -42509,7 +42595,7 @@
         "\/rest\/orders\/properties\/{id}": {
             "delete": {
                 "summary": "Delete a property of an order by property ID",
-                "description": "Deletes a property of an order. The ID of the property must be specified.",
+                "description": "Deletes a property of an order. The ID of the property must be specified.\n<b>DEPRECATED: Use the following route: PUT \/rest\/orders\/{orderId}<\/b>",
                 "tags": [
                     "Order"
                 ],
@@ -42542,7 +42628,7 @@
             },
             "put": {
                 "summary": "Update a property of an order by property ID",
-                "description": "Updates the value of a property. The ID of the property must be specified.",
+                "description": "Updates the value of a property. The ID of the property must be specified.\n<b>DEPRECATED: Use the following route: PUT \/rest\/orders\/{orderId}<\/b>",
                 "tags": [
                     "Order"
                 ],
@@ -44830,7 +44916,7 @@
         "\/rest\/orders\/{orderId}\/dates": {
             "get": {
                 "summary": "List dates of an order",
-                "description": "Lists dates of an order. The ID of the order must be specified.",
+                "description": "Lists dates of an order. The ID of the order must be specified.\n<b>DEPRECATED: Use the following route: GET \/rest\/orders\/{orderId}<\/b>",
                 "tags": [
                     "Order"
                 ],
@@ -44868,7 +44954,7 @@
         "\/rest\/orders\/{orderId}\/dates\/{typeId}": {
             "get": {
                 "summary": "Get a date",
-                "description": "Gets a date. The ID of the order and the ID of the date type must be specified.",
+                "description": "Gets a date. The ID of the order and the ID of the date type must be specified.\n<b>DEPRECATED: Use the following route: GET \/rest\/orders\/{orderId}<\/b>",
                 "tags": [
                     "Order"
                 ],
@@ -46670,7 +46756,7 @@
         "\/rest\/orders\/{orderId}\/properties": {
             "post": {
                 "summary": "Create a property for an order",
-                "description": "Creates a property and attaches it to an order. The ID of the order must be specified.",
+                "description": "Creates a property and attaches it to an order. The ID of the order must be specified.\n<b>DEPRECATED: Use the following route: PUT \/rest\/orders\/{orderId}<\/b>",
                 "tags": [
                     "Order"
                 ],
@@ -46731,7 +46817,7 @@
         "\/rest\/orders\/{orderId}\/properties\/{typeId?}": {
             "get": {
                 "summary": "List properties of an order",
-                "description": "Lists properties of an order. The ID of the order must be specified.",
+                "description": "Lists properties of an order. The ID of the order must be specified.\n<b>DEPRECATED: Use the following route: GET \/rest\/orders\/{orderId}<\/b>",
                 "tags": [
                     "Order"
                 ],
@@ -46777,7 +46863,7 @@
         "\/rest\/orders\/{orderId}\/properties\/{typeId}": {
             "delete": {
                 "summary": "Delete a property of an order by order ID and type ID",
-                "description": "Deletes a property of an order. The composite key of the property must be specified. The composite key is composed of the ID of the order and the ID of the order property type.",
+                "description": "Deletes a property of an order. The composite key of the property must be specified. The composite key is composed of the ID of the order and the ID of the order property type.\n<b>DEPRECATED: Use the following route: PUT \/rest\/orders\/{orderId}<\/b>",
                 "tags": [
                     "Order"
                 ],
@@ -46839,7 +46925,7 @@
             },
             "put": {
                 "summary": "Update a property of an order by order ID and property ID",
-                "description": "Updates the value of a property. The composite key of the property must be specified. The composite key is composed of the ID of the order and the ID of the order property type.",
+                "description": "Updates the value of a property. The composite key of the property must be specified. The composite key is composed of the ID of the order and the ID of the order property type.\n<b>DEPRECATED: Use the following route: PUT \/rest\/orders\/{orderId}<\/b>",
                 "tags": [
                     "Order"
                 ],
@@ -55200,7 +55286,7 @@
         "\/rest\/shop_builder\/content_links": {
             "get": {
                 "summary": "List all content links for a given plugin set",
-                "description": "",
+                "description": "List all content links for a given plugin set",
                 "tags": [
                     "Shop"
                 ],
@@ -55225,8 +55311,8 @@
                 }
             },
             "post": {
-                "summary": "Link a content to a a layout container of a frontend plugin.",
-                "description": "",
+                "summary": "Link a content to a layout container of a frontend plugin.",
+                "description": "Link a content to a layout container of a frontend plugin",
                 "tags": [
                     "Shop"
                 ],
@@ -55283,7 +55369,7 @@
         "\/rest\/shop_builder\/content_links\/{contentLinkId}": {
             "delete": {
                 "summary": "Delete a content link.",
-                "description": "",
+                "description": "Delete a content link",
                 "tags": [
                     "Shop"
                 ],
@@ -55313,7 +55399,7 @@
             },
             "get": {
                 "summary": "Find a content link by id.",
-                "description": "",
+                "description": "Find a content link by id",
                 "tags": [
                     "Shop"
                 ],
@@ -55346,7 +55432,7 @@
             },
             "put": {
                 "summary": "Update a content link.",
-                "description": "",
+                "description": "Update a content link",
                 "tags": [
                     "Shop"
                 ],
@@ -55411,7 +55497,7 @@
         "\/rest\/shop_builder\/contents": {
             "get": {
                 "summary": "List all contents.",
-                "description": "",
+                "description": "Lists all available ShopBuilder contents.",
                 "tags": [
                     "Shop"
                 ],
@@ -55436,8 +55522,8 @@
                 }
             },
             "post": {
-                "summary": "Create a new content.",
-                "description": "",
+                "summary": "Create new content.",
+                "description": "Creates a new ShopBuilder content.",
                 "tags": [
                     "Shop"
                 ],
@@ -55500,7 +55586,7 @@
             },
             "put": {
                 "summary": "Generate templates for all contents.",
-                "description": "",
+                "description": "Re-generates the templates for all ShopBuilder contents.",
                 "tags": [
                     "Shop"
                 ],
@@ -55525,7 +55611,7 @@
         "\/rest\/shop_builder\/contents\/search": {
             "get": {
                 "summary": "Search for contents.",
-                "description": "",
+                "description": "Searches for specific contents based on the provided parameters.",
                 "tags": [
                     "Shop"
                 ],
@@ -55583,7 +55669,7 @@
                         "name": "page",
                         "type": "integer",
                         "required": false,
-                        "description": "",
+                        "description": "The page of results to search for",
                         "format": "integer",
                         "in": "query"
                     },
@@ -55591,7 +55677,7 @@
                         "name": "itemsPerPage",
                         "type": "integer",
                         "required": false,
-                        "description": "",
+                        "description": "The number of items to list per page",
                         "format": "integer",
                         "in": "query"
                     },
@@ -55649,7 +55735,7 @@
         "\/rest\/shop_builder\/contents\/{contentId}": {
             "delete": {
                 "summary": "Delete a content",
-                "description": "",
+                "description": "Deletes a ShopBuilder content.",
                 "tags": [
                     "Shop"
                 ],
@@ -55679,7 +55765,7 @@
             },
             "get": {
                 "summary": "Find a content by id.",
-                "description": "",
+                "description": "Finds a ShopBuilder content by its id.",
                 "tags": [
                     "Shop"
                 ],
@@ -55712,7 +55798,7 @@
             },
             "options": {
                 "summary": "Get cross origin headers.",
-                "description": "",
+                "description": "Get cross origin headers.",
                 "tags": [
                     "Shop"
                 ],
@@ -55737,7 +55823,7 @@
             },
             "post": {
                 "summary": "Duplicate a content by id.",
-                "description": "",
+                "description": "Duplicates a ShopBuilder content by id.",
                 "tags": [
                     "Shop"
                 ],
@@ -55770,7 +55856,7 @@
             },
             "put": {
                 "summary": "Update a content.",
-                "description": "",
+                "description": "Updates a ShopBuilder content.",
                 "tags": [
                     "Shop"
                 ],
@@ -55842,8 +55928,8 @@
         },
         "\/rest\/shop_builder\/pages": {
             "get": {
-                "summary": "List content pages from all plugins in a given plugin set.",
-                "description": "",
+                "summary": "List content pages",
+                "description": "List content pages from all plugins in a given plugin set.",
                 "tags": [
                     "Shop"
                 ],
@@ -55870,8 +55956,8 @@
         },
         "\/rest\/shop_builder\/widgets": {
             "get": {
-                "summary": "List all widgets provided by all frontend plugins of a given plugin set.",
-                "description": "",
+                "summary": "List all widgets",
+                "description": "List all widgets provided by all frontend plugins of a given plugin set.",
                 "tags": [
                     "Shop"
                 ],
@@ -55904,7 +55990,7 @@
             },
             "options": {
                 "summary": "Get cross origin headers.",
-                "description": "",
+                "description": "Get cross origin headers.",
                 "tags": [
                     "Shop"
                 ],
@@ -55918,8 +56004,8 @@
                 }
             },
             "post": {
-                "summary": "Render the preview for widgets.",
-                "description": "",
+                "summary": "Render the preview for widgets",
+                "description": "Render the preview for widgets",
                 "tags": [
                     "Shop"
                 ],
@@ -61498,7 +61584,7 @@
             }
         },
         "\/rest\/warehouses\/locations\/{warehouseId}\/label": {
-            "get": {
+            "post": {
                 "summary": "Generate the warehouse location label",
                 "description": "Generates the warehouse location label",
                 "tags": [
