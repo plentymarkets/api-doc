@@ -14240,7 +14240,7 @@
         "\/rest\/feedbacks\/comment": {
             "post": {
                 "summary": "Create a feedback comment",
-                "description": "Creates a feedback comment.",
+                "description": "Creates a comment for a review.",
                 "tags": [
                     "Feedback"
                 ],
@@ -14372,7 +14372,7 @@
         "\/rest\/feedbacks\/comments": {
             "get": {
                 "summary": "List feedback comments",
-                "description": "Lists feedback comments.",
+                "description": "Lists all feedback comments.",
                 "tags": [
                     "Feedback"
                 ],
@@ -14698,7 +14698,7 @@
         "\/rest\/feedbacks\/migrate": {
             "post": {
                 "summary": "Migrate legacy feedbacks",
-                "description": " @return Feedback[]",
+                "description": " @return \\Plenty\\Modules\\Feedback\\Models\\Feedback[]",
                 "tags": [
                     "Feedback"
                 ],
@@ -23367,6 +23367,22 @@
                                     "type": "boolean",
                                     "description": "Display unit price in the online store optional"
                                 },
+                                "hasCalculatedBundleWeight": {
+                                    "type": "boolean",
+                                    "description": "Indicates if the gross bundle weight is calculated by its components. optional"
+                                },
+                                "hasCalculatedBundleNetWeight": {
+                                    "type": "boolean",
+                                    "description": "Indicates if the net bundle weight is calculated by its components. optional"
+                                },
+                                "hasCalculatedBundlePurchasePrice": {
+                                    "type": "boolean",
+                                    "description": "Indicates if the net purchase price is calculated by its components. optional"
+                                },
+                                "hasCalculatedBundleMovingAveragePrice": {
+                                    "type": "boolean",
+                                    "description": "Indicates if the moving average net purchase price is calculated by its components. optional"
+                                },
                                 "categoryVariationId": {
                                     "type": "integer",
                                     "description": "Either the ID of the variation or the ID of the item's main variation. No other values are permitted.ID of the variation = Categories are not inherited from the main variation.ID of the item's main variation = Inheritance of categories is active. optional"
@@ -31243,6 +31259,22 @@
                                     "type": "boolean",
                                     "description": "Display unit price in the online store optional"
                                 },
+                                "hasCalculatedBundleWeight": {
+                                    "type": "boolean",
+                                    "description": "Indicates if the gross bundle weight is calculated by its components. optional"
+                                },
+                                "hasCalculatedBundleNetWeight": {
+                                    "type": "boolean",
+                                    "description": "Indicates if the net bundle weight is calculated by its components. optional"
+                                },
+                                "hasCalculatedBundlePurchasePrice": {
+                                    "type": "boolean",
+                                    "description": "Indicates if the net purchase price is calculated by its components. optional"
+                                },
+                                "hasCalculatedBundleMovingAveragePrice": {
+                                    "type": "boolean",
+                                    "description": "Indicates if the moving average net purchase price is calculated by its components. optional"
+                                },
                                 "categoryVariationId": {
                                     "type": "integer",
                                     "description": "Either the ID of the variation or the ID of the item's main variation. No other values are permitted.ID of the variation = Categories are not inherited from the main variation.ID of the item's main variation = Inheritance of categories is active. optional"
@@ -31680,6 +31712,22 @@
                                 "mayShowUnitPrice": {
                                     "type": "boolean",
                                     "description": "Display unit price in the online store optional"
+                                },
+                                "hasCalculatedBundleWeight": {
+                                    "type": "boolean",
+                                    "description": "Indicates if the gross bundle weight is calculated by its components. optional"
+                                },
+                                "hasCalculatedBundleNetWeight": {
+                                    "type": "boolean",
+                                    "description": "Indicates if the net bundle weight is calculated by its components. optional"
+                                },
+                                "hasCalculatedBundlePurchasePrice": {
+                                    "type": "boolean",
+                                    "description": "Indicates if the net purchase price is calculated by its components. optional"
+                                },
+                                "hasCalculatedBundleMovingAveragePrice": {
+                                    "type": "boolean",
+                                    "description": "Indicates if the moving average net purchase price is calculated by its components. optional"
                                 },
                                 "categoryVariationId": {
                                     "type": "integer",
@@ -59047,7 +59095,7 @@
                                 },
                                 "tagType": {
                                     "type": "string",
-                                    "description": "The type of tag.  allowed values are category, ticket, variation, board, contact, order"
+                                    "description": "The type of tag.  allowed values are category, ticket, variation, board, contact, order, messenger"
                                 },
                                 "relationshipValue": {
                                     "type": "integer",
