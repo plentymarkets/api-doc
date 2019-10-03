@@ -11694,6 +11694,31 @@
                 }
             }
         },
+        "\/rest\/elastic-sync\/sync\/change-csv": {
+            "put": {
+                "summary": "Update the Csv of a Sync.",
+                "description": "Update the Csv of a Sync. The ID of the sync must be specified.",
+                "tags": [
+                    "ElasticSync"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Plenty\\Modules\\ElasticSync\\Models\\Core\\ElasticSyncSync"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                }
+            }
+        },
         "\/rest\/elastic-sync\/sync\/import": {
             "post": {
                 "summary": "Save the CSV on S3.",
@@ -30812,7 +30837,7 @@
                         "name": "itemId",
                         "type": "integer",
                         "required": true,
-                        "description": "",
+                        "description": "The unique ID of the item",
                         "format": "integer",
                         "in": "path"
                     },
@@ -30820,7 +30845,7 @@
                         "name": "id",
                         "type": "integer",
                         "required": true,
-                        "description": "",
+                        "description": "The unique ID of the link between item and shipping profile",
                         "format": "integer",
                         "in": "path"
                     }
@@ -59078,6 +59103,38 @@
                     }
                 },
                 "parameters": [
+                    {
+                        "name": "tagId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The ID of the tag.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "tagType",
+                        "type": "string",
+                        "required": false,
+                        "description": "The type of tag. Allowed values are category, ticket, variation, board, contact.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "relationshipValue",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The ID of the data record for which a tag relationship is created.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "relatonshipUUID5",
+                        "type": "string",
+                        "required": false,
+                        "description": "The ID of the data record for which a tag relationship is created. For models with uuid5 as primary key.",
+                        "format": "string",
+                        "in": "query"
+                    },
                     {
                         "in": "body",
                         "name": "\/rest\/tags\/relationships",
