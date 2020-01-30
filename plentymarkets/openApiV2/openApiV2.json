@@ -1533,6 +1533,87 @@
             }
         },
         "\/rest\/accounts\/addresses": {
+            "get": {
+                "summary": "Get all available addresses",
+                "description": "",
+                "tags": [
+                    "Account"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Address"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "updatedTo",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter that restricts the search result to addresses that were updated before a specific date. Possible formats: yyyy-mm-dd, mm\/dd\/yyyy.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "updatedFrom",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter that restricts the search result to addresses that were updated after a specific date. Possible formats: yyyy-mm-dd, mm\/dd\/yyyy.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "createdTo",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter that restricts the search result to addresses that were created before a specific date. Possible formats: yyyy-mm-dd, mm\/dd\/yyyy.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "createdFrom",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter that restricts the search result to addresses that were created after a specific date. Possible formats: yyyy-mm-dd, mm\/dd\/yyyy.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "with",
+                        "type": "string",
+                        "required": false,
+                        "description": "Includes the specified address information in the results. The following parameters are available: contactRelations, orderRelations. More than one parameter should be separated by commas.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "page",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The page of results to search for",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "itemsPerPage",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The number of items to list per page",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ]
+            },
             "post": {
                 "summary": "Create address",
                 "description": "Creates an address.",
@@ -40279,6 +40360,14 @@
                         "required": false,
                         "description": "Filter that restricts the search result to orders which have the given order ID as parent.",
                         "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "addOrderItems",
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Add the order items to the results. Default = true.",
+                        "format": "boolean",
                         "in": "query"
                     },
                     {
