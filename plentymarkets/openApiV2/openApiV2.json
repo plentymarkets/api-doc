@@ -55715,7 +55715,7 @@
                 ]
             }
         },
-        "\/rest\/reports\/key-figure\/classes": {
+        "\/rest\/reports\/key-figures": {
             "get": {
                 "summary": "Return list of key figure classes",
                 "description": "",
@@ -55743,9 +55743,9 @@
                 }
             }
         },
-        "\/rest\/reports\/key-figures": {
+        "\/rest\/reports\/key-figures\/config": {
             "get": {
-                "summary": "Get paginated result with all key figures",
+                "summary": "Returns all key figure configs",
                 "description": "",
                 "tags": [
                     "Report"
@@ -55759,49 +55759,14 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
-                            "properties": {
-                                "page": {
-                                    "type": "integer",
-                                    "description": "Current page of the response"
-                                },
-                                "totalsCount": {
-                                    "type": "integer",
-                                    "description": "The total number of entries in the response"
-                                },
-                                "isLastPage": {
-                                    "type": "boolean",
-                                    "description": "Flag that indicates if the page shown is the last page of the response"
-                                },
-                                "lastPageNumber": {
-                                    "type": "integer",
-                                    "description": "The last page number"
-                                },
-                                "firstOnPage": {
-                                    "type": "integer",
-                                    "description": "The index of the first item of the current page result"
-                                },
-                                "lastOnPage": {
-                                    "type": "integer",
-                                    "description": "The index of the last item of the current page result"
-                                },
-                                "itemsPerPage": {
-                                    "type": "integer",
-                                    "description": "The requested amount of items per result page"
-                                },
-                                "entries": {
-                                    "items": {}
-                                }
-                            }
+                            "$ref": "#\/definitions\/KeyFigureConfigSearchResult"
                         }
                     },
                     "401": {
                         "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 }
-            }
-        },
-        "\/rest\/reports\/key-figures\/config": {
+            },
             "post": {
                 "summary": "Add a key figure configuration",
                 "description": "",
@@ -55952,9 +55917,9 @@
                 }
             }
         },
-        "\/rest\/reports\/key-figures\/filters-by-class\/{keyFigureClassName}": {
+        "\/rest\/reports\/key-figures\/details\/{keyFigureName}": {
             "get": {
-                "summary": "",
+                "summary": "Return key figure calculation details",
                 "description": "",
                 "tags": [
                     "Report"
@@ -55968,10 +55933,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#\/definitions\/mixed"
-                            }
+                            "$ref": "#\/definitions\/KeyFigure"
                         }
                     },
                     "401": {
@@ -55980,7 +55942,7 @@
                 },
                 "parameters": [
                     {
-                        "name": "keyFigureClassName",
+                        "name": "keyFigureName",
                         "type": "integer",
                         "required": true,
                         "description": "",
@@ -72048,6 +72010,15 @@
                 }
             }
         },
+        "KeyFigureConfigSearchResult": {
+            "type": "object",
+            "properties": {
+                "after": {
+                    "type": "string",
+                    "description": "The last evaluated key as base64, provide that as the starting point for the next query (pagination)."
+                }
+            }
+        },
         "KeyFigureConfig": {
             "type": "object",
             "properties": {
@@ -72078,6 +72049,38 @@
                 "createdAt": {
                     "type": "string",
                     "description": "Time of creation"
+                }
+            }
+        },
+        "KeyFigure": {
+            "type": "object",
+            "properties": {
+                "keyFigure": {
+                    "type": "string",
+                    "description": ""
+                },
+                "dataSeries": {
+                    "type": "boolean",
+                    "description": ""
+                },
+                "dataGroup": {
+                    "type": "boolean",
+                    "description": ""
+                },
+                "resultFields": {
+                    "type": "array",
+                    "items": {},
+                    "description": ""
+                },
+                "calculations": {
+                    "type": "array",
+                    "items": {},
+                    "description": ""
+                },
+                "filters": {
+                    "type": "array",
+                    "items": {},
+                    "description": ""
                 }
             }
         },
