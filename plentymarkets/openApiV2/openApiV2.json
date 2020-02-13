@@ -16041,8 +16041,8 @@
                 ]
             },
             "post": {
-                "summary": "Create new item",
-                "description": "Create new item",
+                "summary": "Create new items",
+                "description": "Create new items",
                 "tags": [
                     "Item"
                 ],
@@ -45533,6 +45533,14 @@
                         "description": "Load additional relations for an order. The following relations are available:\n     * <ul>\n       <li>'addresses' = The address objects linked to the order.<\/li>\n       <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the reference type. The available reference types are parent and reorder. The ID of the reference and the relation itself are also available.<\/li>\n       <li>'comments' = The order comments.<\/li>\n       <li>'location' = The accounting location linked to the order.<\/li>\n       <li>'payments' = The payments linked to the order.<\/li>\n       <li>'documents' = The documents linked to the order.<\/li>\n       <li>'contactSender' = The contact belonging the contact-sender relation.<\/li>\n       <li>'contactReceiver' = The contact belonging to the contact-receiver relation.<\/li>\n       <li>'warehouseSender' = The warehouse belonging to the warehouse-sender relation.<\/li>\n       <li>'warehouseReceiver' = The warehouse belonging to the warehouse-receiver relation.<\/li>\n       <li>'orderItems.variation' = The variation data belonging to the order item.<\/li>\n       <li>'orderItems.giftCardCodes' = The gift card codes belonging to the order item.<\/li>\n       <li>'orderItems.transactions' = The transactions belonging to the order item.<\/li>\n       <li>'orderItems.serialNumbers' = The serial numbers belonging to the order item.<\/li>\n       <li>'orderItems.variationBarcodes' = The barcodes belonging to the order item.<\/li>\n       <li>'orderItems.comments' = The comments belonging to the order item.<\/li>\n       <li><b>deprecated<\/b> 'orderItems.warehouseLocations' = The warehouse locations linked to the order item.<\/li>\n     <\/ul>\n     Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
                         "format": "integer",
                         "in": "query"
+                    },
+                    {
+                        "name": "addOrderItems",
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Add the order items to the result. Default = true.",
+                        "format": "boolean",
+                        "in": "query"
                     }
                 ]
             },
@@ -72070,6 +72078,10 @@
                 "resultFields": {
                     "type": "array",
                     "items": {},
+                    "description": ""
+                },
+                "primaryResultField": {
+                    "type": "string",
                     "description": ""
                 },
                 "calculations": {
