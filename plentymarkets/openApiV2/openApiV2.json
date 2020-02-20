@@ -9640,7 +9640,7 @@
                                 },
                                 "type": {
                                     "type": "string",
-                                    "description": "The category type of the category  allowed values are container, content, item, blog"
+                                    "description": "The category type of the category  allowed values are blog, container, item, content"
                                 },
                                 "linklist": {
                                     "type": "string",
@@ -38862,6 +38862,52 @@
                 ]
             }
         },
+        "\/rest\/messages\/{uuid5}\/tags": {
+            "put": {
+                "summary": "Update tags of message",
+                "description": "Updates the tags of the message. The UUID must be specified.",
+                "tags": [
+                    "Messenger"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Message"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "tags",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The tags of the message",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "uuid5",
+                        "type": "string",
+                        "required": true,
+                        "description": "The UUID of the message",
+                        "format": "string",
+                        "in": "path"
+                    }
+                ]
+            }
+        },
         "\/rest\/messages\/{uuid5}\/visibility": {
             "put": {
                 "summary": "Update message visibility",
@@ -55982,27 +56028,7 @@
                     "401": {
                         "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
-                },
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "\/rest\/reports\/key-figures\/results",
-                        "schema": {
-                            "type": "object",
-                            "required": [
-                                "searchRequests"
-                            ],
-                            "properties": {
-                                "searchRequests": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#\/definitions\/KeyFigureSearchRequest"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                ]
+                }
             }
         },
         "\/rest\/reports\/order-types": {
@@ -56355,6 +56381,10 @@
                                 "language": {
                                     "type": "string",
                                     "description": "The language where the content is linked to. optional"
+                                },
+                                "inherit": {
+                                    "type": "boolean",
+                                    "description": "Indicates if this content should be inherited to child contents. optional"
                                 }
                             }
                         }
@@ -56483,6 +56513,10 @@
                                 "language": {
                                     "type": "string",
                                     "description": "The language where the content is linked to. optional"
+                                },
+                                "inherit": {
+                                    "type": "boolean",
+                                    "description": "Indicates if this content should be inherited to child contents. optional"
                                 }
                             }
                         }
@@ -59985,7 +60019,7 @@
                                 },
                                 "tagType": {
                                     "type": "string",
-                                    "description": "The type of the tag. The following types are available.\n\nblog\ncategory\ncontent_page\nvariation\nticket\nboard\norder\n  allowed values are category, ticket, variation, board, contact, order, messenger"
+                                    "description": "The type of the tag. The following types are available.\n\nblog\ncategory\ncontent_page\nvariation\nticket\nboard\norder\n  allowed values are category, ticket, variation, board, contact, order, messenger, messageBillable"
                                 },
                                 "names": {
                                     "type": "array",
@@ -60058,7 +60092,7 @@
                                 },
                                 "tagType": {
                                     "type": "string",
-                                    "description": "The type of the tag. The following types are available.\n\nblog\ncategory\ncontent_page\nvariation\nticket\nboard\norder\n  allowed values are category, ticket, variation, board, contact, order, messenger"
+                                    "description": "The type of the tag. The following types are available.\n\nblog\ncategory\ncontent_page\nvariation\nticket\nboard\norder\n  allowed values are category, ticket, variation, board, contact, order, messenger, messageBillable"
                                 },
                                 "names": {
                                     "type": "array",
@@ -60129,7 +60163,7 @@
                                 },
                                 "tagType": {
                                     "type": "string",
-                                    "description": "The type of the tag. The following types are available.\n\nblog\ncategory\ncontent_page\nvariation\nticket\nboard\norder\n  allowed values are category, ticket, variation, board, contact, order, messenger"
+                                    "description": "The type of the tag. The following types are available.\n\nblog\ncategory\ncontent_page\nvariation\nticket\nboard\norder\n  allowed values are category, ticket, variation, board, contact, order, messenger, messageBillable"
                                 },
                                 "names": {
                                     "type": "array",
@@ -60277,7 +60311,7 @@
                                 },
                                 "tagType": {
                                     "type": "string",
-                                    "description": "The type of tag.  allowed values are category, ticket, variation, board, contact, order, messenger"
+                                    "description": "The type of tag.  allowed values are category, ticket, variation, board, contact, order, messenger, messageBillable"
                                 },
                                 "relationshipValue": {
                                     "type": "integer",
@@ -60343,6 +60377,55 @@
                         "type": "integer",
                         "required": true,
                         "description": "The ID of the tag",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            },
+            "put": {
+                "summary": "Update tag relationship",
+                "description": "Updates a tag relationship.",
+                "tags": [
+                    "Tag"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/TagRelationship"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "relationshipValue",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "tagType",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
                         "format": "integer",
                         "in": "path"
                     }
@@ -60472,7 +60555,7 @@
                                 },
                                 "tagType": {
                                     "type": "string",
-                                    "description": "The type of the tag. The following types are available.\n\nblog\ncategory\ncontent_page\nvariation\nticket\nboard\norder\n  allowed values are category, ticket, variation, board, contact, order, messenger"
+                                    "description": "The type of the tag. The following types are available.\n\nblog\ncategory\ncontent_page\nvariation\nticket\nboard\norder\n  allowed values are category, ticket, variation, board, contact, order, messenger, messageBillable"
                                 },
                                 "names": {
                                     "type": "array",
@@ -71166,7 +71249,7 @@
                 },
                 "typeId": {
                     "type": "integer",
-                    "description": "The ID of the order item type\n<ul>\n<li>VARIATION\t\t\t=\t1<\/li>\n<li>ITEM_BUNDLE\t\t\t=\t2<\/li>\n<li>BUNDLE_COMPONENT\t\t=\t3<\/li>\n<li>PROMOTIONAL_COUPON\t=\t4<\/li>\n<li>GIFT_CARD\t\t\t=\t5<\/li>\n<li>SHIPPING_COSTS\t\t=\t6<\/li>\n<li>PAYMENT_SURCHARGE\t=\t7<\/li>\n<li>GIFT_WRAP\t\t\t=\t8<\/li>\n<li>UNASSIGEND_VARIATION\t=\t9<\/li>\n<li>DEPOSIT\t\t\t\t=\t10<\/li>\n<li>ORDER\t\t\t\t=\t11<\/li>\n<\/ul>"
+                    "description": "The ID of the order item type\n<ul>\n<li>VARIATION\t\t\t=\t1<\/li>\n<li>ITEM_BUNDLE\t\t\t=\t2<\/li>\n<li>BUNDLE_COMPONENT\t\t=\t3<\/li>\n<li>PROMOTIONAL_COUPON\t=\t4<\/li>\n<li>GIFT_CARD\t\t\t=\t5<\/li>\n<li>SHIPPING_COSTS\t\t=\t6<\/li>\n<li>PAYMENT_SURCHARGE\t=\t7<\/li>\n<li>GIFT_WRAP\t\t\t=\t8<\/li>\n<li>UNASSIGEND_VARIATION\t=\t9<\/li>\n<li>DEPOSIT\t\t\t\t=\t10<\/li>\n<li>ORDER\t\t\t\t=\t11<\/li>\n<li>DUNNING_CHARGE\t\t=   12<\/li>\n<\/ul>"
                 },
                 "referrerId": {
                     "type": "number",
@@ -72063,6 +72146,14 @@
         "KeyFigure": {
             "type": "object",
             "properties": {
+                "title": {
+                    "type": "string",
+                    "description": ""
+                },
+                "description": {
+                    "type": "string",
+                    "description": ""
+                },
                 "keyFigure": {
                     "type": "string",
                     "description": ""
@@ -72099,63 +72190,6 @@
         "KeyFigureResultSearchResponse": {
             "type": "object",
             "properties": {}
-        },
-        "KeyFigureSearchRequest": {
-            "type": "object",
-            "properties": {
-                "configId": {
-                    "type": "string",
-                    "description": "Filter that restricts the search result to key figure results of key figure configuration id. The id of the key figure configuration is mandatory and must be specified, if no value is passed for id."
-                },
-                "interval": {
-                    "type": "string",
-                    "description": "Time interval in which the result was calculated: day, week, month, quarter, year."
-                },
-                "dataGroup": {
-                    "type": "string",
-                    "description": "Filter that restricts the search result to key figure results of of one data group. The data group must be specified."
-                },
-                "scaleBasis": {
-                    "type": "string",
-                    "description": "Filter restricts the list of results to items with a scale base time during the specified period. For the time interval day, a date or comma separated two dates (format: YYYYMMDD) can be specified. For the time interval week, several comma-separated days (YYYYMMDD) of different weeks can be specified. For the interval month, a comma separated list of months is expected e.g. 2020-01, 2020-02."
-                },
-                "resultUnit": {
-                    "type": "boolean",
-                    "description": "Return unit of the primary result."
-                },
-                "target": {
-                    "type": "boolean",
-                    "description": "Return key figure target figure."
-                },
-                "groupByDataGroup": {
-                    "type": "boolean",
-                    "description": "Groups the results by dataGroup"
-                },
-                "aggregateFunction": {
-                    "type": "string",
-                    "description": "Define aggregate (group) function that will operate on key figure results. Default function: sum. Allowed values: sum, count"
-                },
-                "itemsPerPage": {
-                    "type": "integer",
-                    "description": "Limits the number of results listed per page to a specific number. The number of variations to be listed per page must be specified. The default number of results is 12 and the maximum is 100."
-                },
-                "page": {
-                    "type": "integer",
-                    "description": "Number of the requested page, default value: 1"
-                },
-                "scaleBasisSortOrder": {
-                    "type": "string",
-                    "description": "Sort the results using scaleBasis if a sort order has been defined, possible values are: asc, desc."
-                },
-                "primaryResultSortOrder": {
-                    "type": "string",
-                    "description": "Sort the results using primaryResult if a sort order has been defined, possible values are: asc, desc."
-                },
-                "searchId": {
-                    "type": "string",
-                    "description": "Identification string to assign the result"
-                }
-            }
         },
         "RawDataSearchResult": {
             "type": "object",
@@ -72209,6 +72243,10 @@
                 "relatedContainerName": {
                     "type": "string",
                     "description": "The container name the content is linked to"
+                },
+                "inherit": {
+                    "type": "boolean",
+                    "description": "Indicates if this content should be inherited to child contents."
                 }
             }
         },
