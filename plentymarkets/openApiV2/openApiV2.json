@@ -19400,6 +19400,95 @@
                 ]
             }
         },
+        "\/rest\/items\/packing_units": {
+            "get": {
+                "summary": "Get the item variation packing units",
+                "description": "Returns the packing units for the item variations based on the language wanted",
+                "tags": [
+                    "Item"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/PackingUnit"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "language",
+                        "type": "string",
+                        "required": false,
+                        "description": "The language to return the unit name for. If no language is provided, all the languages will be returned",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
+        "\/rest\/items\/packing_units\/{id}": {
+            "get": {
+                "summary": "Get the item variation packing unit for a specific given id",
+                "description": "Returns the packing unit for the item variations based on the given ID, the language wanted and the flag to say if the ID provided is the a unit ID",
+                "tags": [
+                    "Item"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/PackingUnit"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the packing unit",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "language",
+                        "type": "string",
+                        "required": false,
+                        "description": "The language to return the unit name for. If no language is provided, all the languages will be returned",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "isUnitId",
+                        "type": "boolean",
+                        "required": false,
+                        "description": "A flag to say if the ID provided is the unit ID or not. If true, the unit ID will be taken into account to get the result",
+                        "format": "boolean",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
         "\/rest\/items\/properties": {
             "get": {
                 "summary": "List properties",
@@ -55769,6 +55858,41 @@
                 ]
             }
         },
+        "\/rest\/reorders\/{orderId}\/delivery_dates": {
+            "put": {
+                "summary": "Calculate and save the delivery dates",
+                "description": "Calculates and saves the delivery dates for the reorder and the reorder items. The order ID must be specified.",
+                "tags": [
+                    "Order"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Order"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the order.",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            }
+        },
         "\/rest\/reports\/key-figures": {
             "get": {
                 "summary": "Return list of key figure classes",
@@ -67731,6 +67855,27 @@
                 }
             }
         },
+        "PackingUnit": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "The id of the packing unit entry. Primary key auto-increment"
+                },
+                "unitId": {
+                    "type": "integer",
+                    "description": "The id of the packing unit as it was until now (from 0 to 39 without 33)"
+                },
+                "unitNameEN": {
+                    "type": "string",
+                    "description": "The name of the packing unit in English"
+                },
+                "unitNameDE": {
+                    "type": "string",
+                    "description": "The name of the packing unit in German"
+                }
+            }
+        },
         "Property": {
             "type": "object",
             "properties": {
@@ -70784,6 +70929,10 @@
                 "id": {
                     "type": "integer",
                     "description": "The ID of the order shipping pallet"
+                },
+                "weight": {
+                    "type": "number",
+                    "description": "The weight of the order shipping pallet, including it's contents"
                 },
                 "individualWeight": {
                     "type": "number",
