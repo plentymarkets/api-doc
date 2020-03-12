@@ -295,6 +295,14 @@
             }
         },
         {
+            "name": "Pim",
+            "description": "Routes for Pim",
+            "externalDocs": {
+                "description": "For the old documentation click here",
+                "url": "https:\/\/developers.plentymarkets.com\/rest-doc\/pim"
+            }
+        },
+        {
             "name": "PluginMultilingualism",
             "description": "Routes for PluginMultilingualism",
             "externalDocs": {
@@ -40949,6 +40957,14 @@
                                 "value": {
                                     "type": "number",
                                     "description": "The value of the coupon if it differs from the campaign value. The value is null if the campaign value is used."
+                                },
+                                "usedCount": {
+                                    "type": "integer",
+                                    "description": "How many times a code has been redeemed"
+                                },
+                                "usedAmount": {
+                                    "type": "number",
+                                    "description": "The amount that is already redeemed. The total amount that can be redeemed is defined in the campaign as coupon value, because the value applies to all codes of a campaign."
                                 }
                             }
                         }
@@ -50651,6 +50667,468 @@
                         "description": "",
                         "format": "integer",
                         "in": "path"
+                    }
+                ]
+            }
+        },
+        "\/rest\/pim\/variations": {
+            "get": {
+                "summary": "Lists variations",
+                "description": "Lists variations with the specified data.",
+                "tags": [
+                    "Pim"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Variation"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "with",
+                        "type": "string",
+                        "required": false,
+                        "description": "Includes the specified information in the results. More than one parameter should be separated by commas. The following parameters are available:<ul><li>'additionalSkus' = The additional skus of the variation.<\/li><li>'attributeValues' = The attribute values of the variation.<\/li><li>'attributeValues.attribute'\/b> = Includes attributeValues. The attribute data to the related attribute ID.<\/li><li>'attributeValues.attributeValue' = Includes attributeValues. The attribute value data to the related attribute value ID.<\/li><li>'barcodes' = The barcodes of the variation.<\/li><li>'barcodes.barcode' = Includes barcodes. The barcode data to the related barcode ID.<\/li><li>'base' = The variation base.<\/li><li>'base.item' = Includes base. The item data of the variation.<\/li><li>'base.itemSerialNumber' = Includes base. The item serial numbers of the variation.<\/li><li>'base.feedback' = Includes base. The feedback of the variation.<\/li><li>'base.characteristics' = Includes base. The characteristics of the variation.<\/li><li>'base.crossSelling' = Includes base. The cross selling items of the variation.<\/li><li>'base.texts' = Includes base. The texts of the variation.<\/li><li>'base.availability' = Includes base. The availability data related to the variation's availability ID.<\/li><li>'base.image' = Includes base. The images linked to the item.<\/li><li>'base.stock' = Includes base. The stock of the variation.<\/li><li>'base.stockStorageLocation' = Includes base. The stock storage locations of the variation.<\/li><li>'bundleComponents' = The bundle components of the variation.<\/li><li>'categories' = The categories of the variation.<\/li><li>'categories.category' = Includes categories. The related category data for each category ID.<\/li><li>'categories.categoryBranch' = Includes categories. The related category branch data for each category ID.<\/li><li>'clients' = The clients of the variation.<\/li><li>'defaultCategories' = The default categories of the variation<\/li><li>'defaultCategories.category' = Includes defaultCategories. The category data to the related category ID.<\/li><li>'images' = The images of the variation<\/li><li>'images.image' = Includes images. The image data to the related image ID.<\/li><li>'markets' = The markets of the variation.<\/li><li>'marketIdentNumbers' = The market ident numbers of the variation<\/li><li>'salesPrices' = The sales prices of the variation.<\/li><li>'salesPrices.salesPrice' = Includes salesPrices. The sales price data to the related sales price ID.<\/li><li>'skus' = The skus of the variation.<\/li><li>'supplier' = The supplier of the variation.<\/li><li>'supplier.supplier' = Includes supplier. The contact data to the related supplier ID.<\/li><li>'timestamps' = The timetamps of the variation.<\/li><li>'warehouses' = The warehouses of the variation<\/li><li>'warehouses.warehouse' = Includes warehouses. The warehouse data to the related warehouse ID.<\/li><li>'unit' = The unit of the variation<\/li><li>'unit.unit' = Includes unit. The unit data of the related unit ID.<\/li><li>'tags' = The tags of the variation.<\/li><li>'tags.tag' = Includes tags. The tag data to the related tag ID.<\/li><li>'properties' = The properties of the variation.<\/li><li>'properties.property' = Includes properties. The property data to the related property ID.<\/li><\/ul>",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "sortBy",
+                        "type": "string",
+                        "required": false,
+                        "description": "Sorts the results. Append '_asc' or '_desc' to specify the sorting order. '_desc' is the default value if no other is specified. More than one parameter should be separated by commas. The following parameters are available:<ul><li>'id'<\/li><li>'itemId'<\/li><li>'isMain'<\/li><li>'position'<\/li><li>'availabilityId'<\/li><li>'createdAt'<\/li><li>'updatedAt'<\/li><li>'itemUpdatedAt'<\/li><li>'createdUpdatedAt'<\/li><li>'variationName'<\/li><li>'number'<\/li><\/ul>",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "groupBy",
+                        "type": "string",
+                        "required": false,
+                        "description": "Groups the result. The following parameters are available:<ul><li>'itemId' = Groups the result by the item ID.<\/li><li>'itemAttributeValue' = Groups the result by the attribute with the flag 'isGroupable'.<\/li><\/ul>",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "ids",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations with the specified IDs. More than one parameter should be separated by commas.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "itemId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations with the specified item ID.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "itemIds",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations with the specified item IDs. More than one parameter should be separated by commas.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "isActive",
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which are active\/inactive.",
+                        "format": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "name": "isMain",
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which are main\/not main.",
+                        "format": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "name": "isSalable",
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which are salable.",
+                        "format": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "name": "supplierId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which have the given supplier ID.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "availabilityIds",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations with the specified availability IDs. More than one parameter should be separated by commas.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "hasChildren",
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which have children.",
+                        "format": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "name": "hasActiveChildren",
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which have active children.",
+                        "format": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "name": "attributeId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which have the specified attribute ID.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "anyAttributeId",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which have any of the specified attribute IDs. More than one parameter should be separated by commas.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "allAttributeIds",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which have all specified attribute IDs. More than one parameter should be separated by commas.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "attributeValueId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which have the specified attribute value ID.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "anyAttributeValueId",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which have the any of the specified attribute value IDs. More than one parameter should be separated by commas.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "allAttributeValueIds",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which have all specified attribute value IDs. More than one parameter should be separated by commas.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "barcodeCode",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which have a barcode with the specified code.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "barcodeId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which have a barcode with the specified ID.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "bundleType",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations with the specified bundle type.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "categoryId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which have the specified category ID.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "anyCategoryId",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which have any of the specified category IDs. More than one parameter should be separated by commas.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "allCategoryIds",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which have all specified category IDs. More than one parameter should be separated by commas.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "anyCharacteristicId",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which have any of the specified characteristic IDs.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "allCharacteristicIds",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which have all specified characteristic IDs.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "clientId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which have the specified client ID.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "anyClientId",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which have any of the specified client IDs. More than one parameter should be separated by commas.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "allClientIds",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which have all specified client IDs. More than one parameter should be separated by commas.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "automaticClientVisibilities",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which have any of the specified automatic client visibilities. More than one parameter should be separated by commas.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "imageHasMarketId",
+                        "type": "number",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which have an image available for the specified market ID.",
+                        "format": "",
+                        "in": "query"
+                    },
+                    {
+                        "name": "flag1",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations with the specified flag one.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "flag2",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations with the specified flag two.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "manufacturerId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations with the specified manufacturer ID.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "anyManufacturerId",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations with any of the specified manufacturer IDs.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "itemType",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which have the specified item type.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "marketId",
+                        "type": "number",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which have the specified market ID.",
+                        "format": "",
+                        "in": "query"
+                    },
+                    {
+                        "name": "anyMarketId",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which have any of the specified market IDs.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "allMarketIds",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which have all specified market IDs.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "priceBetween",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which have a sales price between the specified minimum and maximum value. Minimum and maximum value should be separated by a comma.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "priceBetweenById",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations where the specified sales price is between the specified minimum and maximum value. Sales price ID, Minimum and maximum value should be separated by a comma.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "anySalesPriceId",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which have any of the specified sales price IDs. More than one parameter should be separated by commas.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "propertySelectionId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which have the specified property selection ID.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "anyPropertySelectionId",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which have any of the specified property selection IDs.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "allPropertySelectionIds",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which have all specified property selection IDs.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "hasNameInLanguage",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which have a name in the specified language.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "createdAt",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which have been created in the specified time frame. The from and to parameter should be separated by a comma. If there is no to value, the current time is used instead.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "updatedAt",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations which have been updated in the specified time frame. The from and to parameter should be separated by a comma. If there is no to value, the current time is used instead.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "itemCreatedAt",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations whose item has been created in the specified time frame. The from and to parameter should be separated by a comma. If there is no to value, the current time is used instead.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "itemUpdatedAt",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations whose item has been updated in the specified time frame. The from and to parameter should be separated by a comma. If there is no to value, the current time is used instead.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "availabilityUpdatedAt",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations whose availablity has been updated in the specified time frame. The from and to parameter should be separated by a comma. If there is no to value, the current time is used instead.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "page",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The requested page of results. Default value is 1.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "itemsPerPage",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The number of results per page. Maximum value is 250. Default value is 50.",
+                        "format": "integer",
+                        "in": "query"
                     }
                 ]
             }
@@ -71398,7 +71876,7 @@
                 },
                 "typeId": {
                     "type": "integer",
-                    "description": "The ID of the order item type\n<ul>\n<li>VARIATION\t\t\t=\t1<\/li>\n<li>ITEM_BUNDLE\t\t\t=\t2<\/li>\n<li>BUNDLE_COMPONENT\t\t=\t3<\/li>\n<li>PROMOTIONAL_COUPON\t=\t4<\/li>\n<li>GIFT_CARD\t\t\t=\t5<\/li>\n<li>SHIPPING_COSTS\t\t=\t6<\/li>\n<li>PAYMENT_SURCHARGE\t=\t7<\/li>\n<li>GIFT_WRAP\t\t\t=\t8<\/li>\n<li>UNASSIGEND_VARIATION\t=\t9<\/li>\n<li>DEPOSIT\t\t\t\t=\t10<\/li>\n<li>ORDER\t\t\t\t=\t11<\/li>\n<li>DUNNING_CHARGE\t\t=   12<\/li>\n<\/ul>"
+                    "description": "The ID of the order item type\n<ul>\n<li>VARIATION\t\t\t=\t1<\/li>\n<li>ITEM_BUNDLE\t\t\t=\t2<\/li>\n<li>BUNDLE_COMPONENT\t\t=\t3<\/li>\n<li>PROMOTIONAL_COUPON\t=\t4<\/li>\n<li>GIFT_CARD\t\t\t=\t5<\/li>\n<li>SHIPPING_COSTS\t\t=\t6<\/li>\n<li>PAYMENT_SURCHARGE\t=\t7<\/li>\n<li>GIFT_WRAP\t\t\t=\t8<\/li>\n<li>UNASSIGEND_VARIATION\t=\t9<\/li>\n<li>DEPOSIT\t\t\t\t=\t10<\/li>\n<li>ORDER\t\t\t\t=\t11<\/li>\n<li>DUNNING_CHARGE\t\t=   12<\/li>\n<li>ITEM_SET\t\t        =   13<\/li>\n<li>SET_COMPONENT\t\t=   14<\/li>\n<\/ul>"
                 },
                 "referrerId": {
                     "type": "number",
@@ -72277,10 +72755,6 @@
                 "keyFigureName": {
                     "type": "string",
                     "description": "User defined name"
-                },
-                "calculatedAt": {
-                    "type": "integer",
-                    "description": "Time of last calculation (Unixtime)"
                 },
                 "updatedAt": {
                     "type": "string",
