@@ -11485,6 +11485,99 @@
                 ]
             }
         },
+        "\/rest\/delivery_orders": {
+            "post": {
+                "summary": "Create a delivery order",
+                "description": "",
+                "tags": [
+                    "Order"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Order"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                }
+            }
+        },
+        "\/rest\/delivery_orders\/{orderId}": {
+            "delete": {
+                "summary": "Delete a delivery order",
+                "description": "Deletes a delivery order. The order ID must be specified.",
+                "tags": [
+                    "Order"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            },
+            "put": {
+                "summary": "Update a delivery order",
+                "description": "Updates a delivery order. The order ID must be specified.",
+                "tags": [
+                    "Order"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Order"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            }
+        },
         "\/rest\/documents\/{documentId}": {
             "get": {
                 "summary": "Download the content of a document",
@@ -23656,131 +23749,6 @@
                         "description": "Filter restricts the list of results to variations with the specified supplier ID.",
                         "format": "integer",
                         "in": "query"
-                    }
-                ]
-            },
-            "patch": {
-                "summary": "Bulk update Variations",
-                "description": "Update up to 1000 variations.",
-                "tags": [
-                    "Item"
-                ],
-                "security": [
-                    {
-                        "oAuth2": []
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#\/definitions\/Collection"
-                        }
-                    },
-                    "401": {
-                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-                    }
-                },
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "\/rest\/items\/variations",
-                        "schema": {
-                            "type": "object",
-                            "required": [
-                                "id"
-                            ],
-                            "properties": {
-                                "id": {
-                                    "type": "integer",
-                                    "description": "The ID of the variation. The ID must be unique."
-                                },
-                                "position": {
-                                    "type": "integer",
-                                    "description": "The position of the variation. Value is inherited from the item's main variation if inheritance is active. optional"
-                                },
-                                "isActive": {
-                                    "type": "boolean",
-                                    "description": "Flag that indicates if the variation is active. Only active variations can be offered in the online store and\/or on markets. optional allowed values are Y, N"
-                                },
-                                "model": {
-                                    "type": "string",
-                                    "description": "The model of the variation. Value is inherited from the item's main variation if inheritance is active. optional"
-                                },
-                                "externalId": {
-                                    "type": "string",
-                                    "description": "The external variation ID of this variation. The external variation number is optional and allows importing items and variations from external systems to plentymarkets. optional"
-                                },
-                                "availability": {
-                                    "type": "integer",
-                                    "description": "The availability of the variation. Possible values: 1 to 10, null = Variation inherits value of main variation. optional"
-                                },
-                                "availabilityUpdatedAt": {
-                                    "type": "string",
-                                    "description": "The time at which the availability of this variation was last updated. optional"
-                                },
-                                "estimatedAvailableAt": {
-                                    "type": "string",
-                                    "description": "The estimated delivery date of variations on reorder. optional"
-                                },
-                                "picking": {
-                                    "type": "string",
-                                    "description": "The order picking type of the variation. Possible values: single_picking, no_single_picking, exclude_from_picklist, null (no order picking type) optional allowed values are single_picking, no_single_picking, exclude_from_picklist"
-                                },
-                                "stockLimitation": {
-                                    "type": "integer",
-                                    "description": "The stock limitation for the variation. Possible values: 0 = No limitation, i.e. stock is not limited. The variations's availability is not checked automatically.1 = Stock is limited to net stock. The variation's availability is checked automatically.2 = Do not administer stock for this variation. optional allowed values are 0, 1, 2"
-                                },
-                                "mainWarehouseId": {
-                                    "type": "integer",
-                                    "description": "The ID of the main warehouse of the variation. optional"
-                                },
-                                "maximumOrderQuantity": {
-                                    "type": "number",
-                                    "description": "The maximum order quantity permitted per order. Decimal values are possible to allow orders by weight or length. Default value is 0. If value is 0, the maximum order quantity is unlimited. optional"
-                                },
-                                "minimumOrderQuantity": {
-                                    "type": "number",
-                                    "description": "The minimum order quantity. Decimal values are possible to allow orders by weight or length. optional"
-                                },
-                                "intervalOrderQuantity": {
-                                    "type": "number",
-                                    "description": "The quantity intervals the variation can be ordered in. Decimal values are possible to allow orders by weight or length. optional"
-                                },
-                                "availableUntil": {
-                                    "type": "string",
-                                    "description": "The last date the item will be available for sale. optional"
-                                },
-                                "releasedAt": {
-                                    "type": "string",
-                                    "description": "The release date of the variation. This is the date on which the variation will become available. The variation can be visible in the online store before this date, e.g. for preorders. optional"
-                                },
-                                "name": {
-                                    "type": "string",
-                                    "description": "The name of the variation optional"
-                                },
-                                "unitsContained": {
-                                    "type": "integer",
-                                    "description": "The number of sales units contained in one package. Default value is 1. optional"
-                                },
-                                "palletTypeId": {
-                                    "type": "integer",
-                                    "description": "The ID of the pallet type optional"
-                                },
-                                "packingUnits": {
-                                    "type": "integer",
-                                    "description": "The number of packing units if the item consists of multiple packages. Value is 0 if an item is sent as one package. All items of an order that have the value 0 will be packed into one package. optional"
-                                },
-                                "packingUnitTypeId": {
-                                    "type": "integer",
-                                    "description": "The ID of the packing unit type. optional"
-                                },
-                                "vatId": {
-                                    "type": "integer",
-                                    "description": "The ID of the VAT rate of the variation. VAT rates are created for each client (store) and linked to the variation. optional"
-                                }
-                            }
-                        }
                     }
                 ]
             },
@@ -46017,6 +45985,76 @@
                 ]
             }
         },
+        "\/rest\/orders\/{orderId}\/delivery_orders": {
+            "post": {
+                "summary": "Create a delivery order from a parent order",
+                "description": "Creates a delivery order from a parent order. The parent order ID and the quantities to use must be specified.\nStructure of the data array:\n[\n    'quantities' => [\n         [\n             [\"orderItemId\" => <orderItemId1>],\n             [\"quantity\" => <quantity1>]\n         ],\n    ]\n]",
+                "tags": [
+                    "Order"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Order"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the order.",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            }
+        },
+        "\/rest\/orders\/{orderId}\/delivery_orders\/automatic": {
+            "post": {
+                "summary": "Create delivery orders automatically for all order items",
+                "description": "Create delivery orders automatically for all order items. The order ID must be specified.",
+                "tags": [
+                    "Order"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Collection"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the order.",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            }
+        },
         "\/rest\/orders\/{orderId}\/documents\/correction_document\/generate": {
             "post": {
                 "summary": "Generate adjustment form of an order",
@@ -50687,9 +50725,43 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#\/definitions\/Variation"
+                            "type": "object",
+                            "properties": {
+                                "page": {
+                                    "type": "integer",
+                                    "description": "Current page of the response"
+                                },
+                                "totalsCount": {
+                                    "type": "integer",
+                                    "description": "The total number of entries in the response"
+                                },
+                                "isLastPage": {
+                                    "type": "boolean",
+                                    "description": "Flag that indicates if the page shown is the last page of the response"
+                                },
+                                "lastPageNumber": {
+                                    "type": "integer",
+                                    "description": "The last page number"
+                                },
+                                "firstOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the first item of the current page result"
+                                },
+                                "lastOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the last item of the current page result"
+                                },
+                                "itemsPerPage": {
+                                    "type": "integer",
+                                    "description": "The requested amount of items per result page"
+                                },
+                                "entries": {
+                                    "type": "array",
+                                    "description": "List of Variation",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Variation"
+                                    }
+                                }
                             }
                         }
                     },
@@ -66895,6 +66967,71 @@
                 }
             }
         },
+        "Order": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "The ID of the order"
+                },
+                "typeId": {
+                    "type": "integer",
+                    "description": "The ID of the order type\n                                                              It is possible to define individual order types. However,\n                                                              the following types are available by default:\n<ul>\n    <li>1 = Sales order<\/li>\n    <li>2 = Delivery<\/li>\n    <li>3 = Returns<\/li>\n    <li>4 = Credit note<\/li>\n    <li>5 = Warranty<\/li>\n    <li>6 = Repair<\/li>\n    <li>7 = Offer<\/li>\n    <li>8 = Advance order<\/li>\n    <li>9 = Multi-order<\/li>\n    <li>10 = Multi credit note<\/li>\n    <li>11 = Multi delivery<\/li>\n    <li>12 = Reorder<\/li>\n    <li>13 = Partial delivery<\/li>\n    <li>14 = Subscription<\/li>\n    <li>15 = Redistribution<\/li>\n<\/ul>"
+                },
+                "statusId": {
+                    "type": "number",
+                    "description": "The ID of the order status"
+                },
+                "statusName": {
+                    "type": "string",
+                    "description": "The name for the status ID (read only)"
+                },
+                "ownerId": {
+                    "type": "integer",
+                    "description": "The user ID of the order's owner"
+                },
+                "referrerId": {
+                    "type": "number",
+                    "description": "The referrer ID of the order"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "description": "The date that the order was created"
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "description": "The date that the order was updated last"
+                },
+                "plentyId": {
+                    "type": "integer",
+                    "description": "The plenty ID of the client that the order belongs to"
+                },
+                "locationId": {
+                    "type": "integer",
+                    "description": "The ID of the location that the order belongs to"
+                },
+                "roundTotalsOnly": {
+                    "type": "boolean",
+                    "description": "True means only the order's total amounts are rounded, false the order item price is rounded too. (read-only)"
+                },
+                "numberOfDecimals": {
+                    "type": "integer",
+                    "description": "The number of decimals this order was rounded with. (read-only)"
+                },
+                "lockStatus": {
+                    "type": "string",
+                    "description": "The lock status of the order. The following statuses are available:\n<ul>\n <li>unlocked<\/li>\n <li>permanentlyLocked<\/li>\n <li>reversibleLocked<\/li>\n<\/ul>"
+                },
+                "hasTaxRelevantDocuments": {
+                    "type": "boolean",
+                    "description": ""
+                },
+                "hasDeliveryOrders": {
+                    "type": "boolean",
+                    "description": "Has the order delivery orders?"
+                }
+            }
+        },
         "ElasticSyncSync": {
             "type": "object",
             "properties": {
@@ -70751,67 +70888,6 @@
                 "confirmationURL": {
                     "type": "string",
                     "description": "The url with which the customer has confirmed the newsletter"
-                }
-            }
-        },
-        "Order": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "description": "The ID of the order"
-                },
-                "typeId": {
-                    "type": "integer",
-                    "description": "The ID of the order type\n                                                              It is possible to define individual order types. However,\n                                                              the following types are available by default:\n<ul>\n    <li>1 = Sales order<\/li>\n    <li>2 = Delivery<\/li>\n    <li>3 = Returns<\/li>\n    <li>4 = Credit note<\/li>\n    <li>5 = Warranty<\/li>\n    <li>6 = Repair<\/li>\n    <li>7 = Offer<\/li>\n    <li>8 = Advance order<\/li>\n    <li>9 = Multi-order<\/li>\n    <li>10 = Multi credit note<\/li>\n    <li>11 = Multi delivery<\/li>\n    <li>12 = Reorder<\/li>\n    <li>13 = Partial delivery<\/li>\n    <li>14 = Subscription<\/li>\n    <li>15 = Redistribution<\/li>\n<\/ul>"
-                },
-                "statusId": {
-                    "type": "number",
-                    "description": "The ID of the order status"
-                },
-                "statusName": {
-                    "type": "string",
-                    "description": "The name for the status ID (read only)"
-                },
-                "ownerId": {
-                    "type": "integer",
-                    "description": "The user ID of the order's owner"
-                },
-                "referrerId": {
-                    "type": "number",
-                    "description": "The referrer ID of the order"
-                },
-                "createdAt": {
-                    "type": "string",
-                    "description": "The date that the order was created"
-                },
-                "updatedAt": {
-                    "type": "string",
-                    "description": "The date that the order was updated last"
-                },
-                "plentyId": {
-                    "type": "integer",
-                    "description": "The plenty ID of the client that the order belongs to"
-                },
-                "locationId": {
-                    "type": "integer",
-                    "description": "The ID of the location that the order belongs to"
-                },
-                "roundTotalsOnly": {
-                    "type": "boolean",
-                    "description": "True means only the order's total amounts are rounded, false the order item price is rounded too. (read-only)"
-                },
-                "numberOfDecimals": {
-                    "type": "integer",
-                    "description": "The number of decimals this order was rounded with. (read-only)"
-                },
-                "lockStatus": {
-                    "type": "string",
-                    "description": "The lock status of the order. The following statuses are available:\n<ul>\n <li>unlocked<\/li>\n <li>permanentlyLocked<\/li>\n <li>reversibleLocked<\/li>\n<\/ul>"
-                },
-                "hasDeliveryOrders": {
-                    "type": "boolean",
-                    "description": "Has the order delivery orders?"
                 }
             }
         },
