@@ -10085,7 +10085,7 @@
                                 },
                                 "type": {
                                     "type": "string",
-                                    "description": "The type of the document. The following types are available:\n                           \n    admin\n    blog\n category\n correction_document\n credit_note\n    credit_note_external\n       customer\n delivery_note\n    dunning_letter\n       ebics_hash\n    facet\n    invoice\n    invoice_external\n                               pos_invoice\n                               pos_invoice_cancellation\n item\n multi_credit_note\n    multi_invoice\n       offer\n    order_confirmation\n       pickup_delivery\n    receipt\n                               refund_reversal\n    reorder\n    repair_bill\n    return_note\n       reversal_document\n       settlement_report\n    success_confirmation\n    ticket\n    webshop\n  webshop_customer\n    z_report\n    shipping_label\n    shipping_export_label\n    returns_label\n  allowed values are receipt, z_report, invoice_external, invoice, pos_invoice, delivery_note, credit_note, order_confirmation, offer, reorder, dunning_letter, repair_bill, pickup_delivery, return_note, success_confirmation, multi_invoice, multi_credit_note, customer, ticket, item, webshop, pos_invoice_cancellation, webshop_customer, blog, admin, correction_document, ebics_hash, category, facet, settlement_report, reversal_document, reversal_refund, shipping_label, shipping_export_label, pro_forma_invoice, returns_label, po_delivery_note, credit_note_external"
+                                    "description": "The type of the document. The following types are available:\n                           \n    admin\n    blog\n category\n correction_document\n credit_note\n    credit_note_external\n       customer\n delivery_note\n    dunning_letter\n       ebics_hash\n    facet\n    invoice\n    invoice_external\n                               pos_invoice\n                               pos_invoice_cancellation\n item\n multi_credit_note\n    multi_invoice\n       offer\n    order_confirmation\n       pickup_delivery\n    receipt\n                               refund_reversal\n    reorder\n    repair_bill\n    return_note\n       reversal_document\n       settlement_report\n    success_confirmation\n    ticket\n    webshop\n  webshop_customer\n    z_report\n    shipping_label\n    shipping_export_label\n    returns_label\n                               reversal_dunning_letter\n  allowed values are receipt, z_report, invoice_external, invoice, pos_invoice, delivery_note, credit_note, order_confirmation, offer, reorder, dunning_letter, repair_bill, pickup_delivery, return_note, success_confirmation, multi_invoice, multi_credit_note, customer, ticket, item, webshop, pos_invoice_cancellation, webshop_customer, blog, admin, correction_document, ebics_hash, category, facet, settlement_report, reversal_document, reversal_dunning_letter, reversal_refund, shipping_label, shipping_export_label, pro_forma_invoice, returns_label, po_delivery_note, credit_note_external, uploaded"
                                 },
                                 "number": {
                                     "type": "integer",
@@ -41947,7 +41947,7 @@
                         "name": "type",
                         "type": "string",
                         "required": true,
-                        "description": "The type of the order document. The available types are receipt, zReport, tillCount, posCouponReceipt, posInvoice, posInvoiceCancellation, cancellation, invoiceExternal, invoice, deliveryNote, creditNote, creditNoteExternal, orderConfirmation, offer, dunningLetter, returnNote, successConfirmation, correction, reorder.",
+                        "description": "The type of the order document. The available types are receipt, zReport, tillCount, posCouponReceipt, posInvoice, posInvoiceCancellation, cancellation, invoiceExternal, invoice, deliveryNote, creditNote, creditNoteExternal, orderConfirmation, offer, dunningLetter, reversalDunningLetter, returnNote, successConfirmation, correction, reorder, uploaded.",
                         "format": "string",
                         "in": "path"
                     },
@@ -42099,7 +42099,7 @@
                         "name": "type",
                         "type": "string",
                         "required": true,
-                        "description": "The type of the order document. The available types are receipt, tillCount, posCouponReceipt, posInvoice, posInvoiceCancellation, cancellation, zReport, invoiceExternal, invoice, deliveryNote, poDeliveryNote, creditNote, creditNoteExternal, orderConfirmation, offer, dunningLetter, returnNote, successConfirmation, correction, reversal, reversalRefund, proFormaInvoice, reorder.",
+                        "description": "The type of the order document. The available types are receipt, tillCount, posCouponReceipt, posInvoice, posInvoiceCancellation, cancellation, zReport, invoiceExternal, invoice, deliveryNote, poDeliveryNote, creditNote, creditNoteExternal, orderConfirmation, offer, dunningLetter, reversalDunningLetter, returnNote, successConfirmation, correction, reversal, reversalRefund, proFormaInvoice, reorder, uploaded.",
                         "format": "string",
                         "in": "path"
                     },
@@ -46945,6 +46945,57 @@
                 ]
             }
         },
+        "\/rest\/orders\/{orderId}\/documents\/reversal_dunning_letter\/generate": {
+            "post": {
+                "summary": "Generate dunning letter reversal document of an order",
+                "description": "Generate dunning letter reversal document of an order. The ID of the order must be specified.\nThe document can only be generated for orders of the type 'order', 'repair' and 'warranty'. A valid dunning letter document must exist.",
+                "tags": [
+                    "Document"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The ID of the order",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "documentDate",
+                        "type": "string",
+                        "required": false,
+                        "description": "If not set, the current date will be used. The date has to be entered in W3C format, e.g. '2019-05-29T13:33:23+02:00'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "comment",
+                        "type": "string",
+                        "required": false,
+                        "description": "Comment that appears below the stock units.",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
         "\/rest\/orders\/{orderId}\/documents\/reversal_refund\/generate": {
             "post": {
                 "summary": "Generate refund reversal document of an order",
@@ -47129,7 +47180,7 @@
                         "name": "type",
                         "type": "string",
                         "required": true,
-                        "description": "The document type. Supported types are 'invoiceExternal', 'deliveryNote', 'poDeliveryNote', 'orderConfirmation', 'offer', 'dunningLetter', 'returnNote', 'successConfirmation', 'correction', 'creditNoteExternal', 'reorder'.",
+                        "description": "The document type. Supported types are 'invoiceExternal', 'deliveryNote', 'poDeliveryNote', 'orderConfirmation', 'offer', 'dunningLetter', 'reversalDunningLetter', 'returnNote', 'successConfirmation', 'correction', 'creditNoteExternal', 'reorder', 'uploaded'.",
                         "format": "string",
                         "in": "path"
                     },
@@ -47212,7 +47263,7 @@
                         "name": "type",
                         "type": "string",
                         "required": true,
-                        "description": "The type of the order document. The available types are invoice, creditNote",
+                        "description": "The type of the order document. The available types are invoice, creditNote, dunningLetter",
                         "format": "string",
                         "in": "path"
                     },
@@ -47306,7 +47357,7 @@
                         "name": "type",
                         "type": "string",
                         "required": true,
-                        "description": "The type of the order document. The available types are receipt, invoiceExternal, invoice, deliveryNote, poDeliveryNote, creditNote, creditNoteExternal, orderConfirmation, offer, dunningLetter, returnNote, successConfirmation, correction.",
+                        "description": "The type of the order document. The available types are receipt, invoiceExternal, invoice, deliveryNote, poDeliveryNote, creditNote, creditNoteExternal, orderConfirmation, offer, dunningLetter, reversalDunningLetter, returnNote, successConfirmation, correction, reversal, reversalRefund, .",
                         "format": "string",
                         "in": "path"
                     },
@@ -49869,6 +49920,148 @@
                         "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
                     }
                 }
+            }
+        },
+        "\/rest\/payments\/methods\/list": {
+            "get": {
+                "summary": "Returns all payment methods with id and name",
+                "description": "",
+                "tags": [
+                    "Payment"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                }
+            }
+        },
+        "\/rest\/payments\/methods\/list\/backend_active\/{language}": {
+            "get": {
+                "summary": "Returns all payment methods with id and name which are active for the backend",
+                "description": "",
+                "tags": [
+                    "Payment"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "language",
+                        "type": "string",
+                        "required": true,
+                        "description": "",
+                        "format": "string",
+                        "in": "path"
+                    }
+                ]
+            }
+        },
+        "\/rest\/payments\/methods\/list\/backend_searchable\/{language}": {
+            "get": {
+                "summary": "Returns all payment methods with id and name which are searchable for the backend",
+                "description": "",
+                "tags": [
+                    "Payment"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "language",
+                        "type": "string",
+                        "required": true,
+                        "description": "",
+                        "format": "string",
+                        "in": "path"
+                    }
+                ]
+            }
+        },
+        "\/rest\/payments\/methods\/list\/handle_subscription\/{language}": {
+            "get": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Payment"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "language",
+                        "type": "string",
+                        "required": true,
+                        "description": "",
+                        "format": "string",
+                        "in": "path"
+                    }
+                ]
             }
         },
         "\/rest\/payments\/methods\/plugins\/{pluginKey}": {
@@ -66769,7 +66962,7 @@
                 },
                 "type": {
                     "type": "string",
-                    "description": "The type of the document. The following types are available:\n                           <ul>\n    <li>admin<\/li>\n    <li>blog<\/li>\n <li>category<\/li>\n <li>correction_document<\/li>\n <li>credit_note<\/li>\n    <li>credit_note_external<\/li>\n       <li>customer<\/li>\n <li>delivery_note<\/li>\n    <li>dunning_letter<\/li>\n       <li>ebics_hash<\/li>\n    <li>facet<\/li>\n    <li>invoice<\/li>\n    <li>invoice_external<\/li>\n                               <li>pos_invoice<\/li>\n                               <li>pos_invoice_cancellation<\/li>\n <li>item<\/li>\n <li>multi_credit_note<\/li>\n    <li>multi_invoice<\/li>\n       <li>offer<\/li>\n    <li>order_confirmation<\/li>\n       <li>pickup_delivery<\/li>\n    <li>receipt<\/li>\n                               <li>refund_reversal<\/li>\n    <li>reorder<\/li>\n    <li>repair_bill<\/li>\n    <li>return_note<\/li>\n       <li>reversal_document<\/li>\n       <li>settlement_report<\/li>\n    <li>success_confirmation<\/li>\n    <li>ticket<\/li>\n    <li>webshop<\/li>\n  <li>webshop_customer<\/li>\n    <li>z_report<\/li>\n    <li>shipping_label<\/li>\n    <li>shipping_export_label<\/li>\n    <li>returns_label<\/li>\n<\/ul>"
+                    "description": "The type of the document. The following types are available:\n                           <ul>\n    <li>admin<\/li>\n    <li>blog<\/li>\n <li>category<\/li>\n <li>correction_document<\/li>\n <li>credit_note<\/li>\n    <li>credit_note_external<\/li>\n       <li>customer<\/li>\n <li>delivery_note<\/li>\n    <li>dunning_letter<\/li>\n       <li>ebics_hash<\/li>\n    <li>facet<\/li>\n    <li>invoice<\/li>\n    <li>invoice_external<\/li>\n                               <li>pos_invoice<\/li>\n                               <li>pos_invoice_cancellation<\/li>\n <li>item<\/li>\n <li>multi_credit_note<\/li>\n    <li>multi_invoice<\/li>\n       <li>offer<\/li>\n    <li>order_confirmation<\/li>\n       <li>pickup_delivery<\/li>\n    <li>receipt<\/li>\n                               <li>refund_reversal<\/li>\n    <li>reorder<\/li>\n    <li>repair_bill<\/li>\n    <li>return_note<\/li>\n       <li>reversal_document<\/li>\n       <li>settlement_report<\/li>\n    <li>success_confirmation<\/li>\n    <li>ticket<\/li>\n    <li>webshop<\/li>\n  <li>webshop_customer<\/li>\n    <li>z_report<\/li>\n    <li>shipping_label<\/li>\n    <li>shipping_export_label<\/li>\n    <li>returns_label<\/li>\n                               <li>reversal_dunning_letter<\/l>\n<\/ul>"
                 },
                 "number": {
                     "type": "integer",
