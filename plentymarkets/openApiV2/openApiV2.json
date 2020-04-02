@@ -3320,7 +3320,7 @@
                         "name": "with",
                         "type": "string",
                         "required": false,
-                        "description": "Includes the specified contact information in the results. The following parameters are available: addresses, accounts, options, orderSummary, primaryBillingAddress. More than one parameter should be separated by commas.",
+                        "description": "Includes the specified contact information in the results. The following parameters are available: addresses, accounts, options, orderSummary, primaryBillingAddress, contactOrders. More than one parameter should be separated by commas.",
                         "format": "string",
                         "in": "query"
                     },
@@ -52339,6 +52339,90 @@
                 ]
             }
         },
+        "\/rest\/plugin_sets_new\/git_plugin_details\/{pluginName}": {
+            "get": {
+                "summary": "get git plugin description data",
+                "description": "",
+                "tags": [
+                    "PluginSet"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "pluginName",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            }
+        },
+        "\/rest\/plugin_sets_new\/plugin_details\/{pluginName}\/{variationId}": {
+            "get": {
+                "summary": "get plugin description data",
+                "description": "",
+                "tags": [
+                    "PluginSet"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "pluginName",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "variationId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            }
+        },
         "\/rest\/plugins": {
             "get": {
                 "summary": "List plugins",
@@ -67664,13 +67748,17 @@
                     "type": "integer",
                     "description": "The item ID of the set component"
                 },
-                "quantity": {
-                    "type": "integer",
-                    "description": "The number of copies of the component that are part of the set. Default quantity is 1."
+                "minimalOrderQuantity": {
+                    "type": "number",
+                    "description": "Minimum order quantity."
                 },
-                "isPurchasable": {
+                "maximumOrderQuantity": {
+                    "type": "number",
+                    "description": "Maximum order quantity."
+                },
+                "orderQuantityPossible": {
                     "type": "boolean",
-                    "description": "Flag that indicates if enough stock is available for at least one variation of the component to cover the specified quantity."
+                    "description": "Order quantities possible."
                 }
             }
         },
@@ -67684,18 +67772,6 @@
                 "rebate": {
                     "type": "number",
                     "description": "The discount in percent to be subtracted from the sum of the prices of the selected set components."
-                },
-                "minPrice": {
-                    "type": "number",
-                    "description": "The minimum price of the sum of all components; read only"
-                },
-                "maxPrice": {
-                    "type": "number",
-                    "description": "the maximum price of the sum of all components; read only"
-                },
-                "isPurchasable": {
-                    "type": "integer",
-                    "description": "Flag that indicates if all components of the set have sufficient stock. Purchasability of a set depends on the component with the lowest stock."
                 }
             }
         },
