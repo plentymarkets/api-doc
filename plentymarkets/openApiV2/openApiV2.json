@@ -9595,6 +9595,14 @@
                         "description": "Filter restricts the list of results to items with a specific tag",
                         "format": "integer",
                         "in": "query"
+                    },
+                    {
+                        "name": "metaKeywords",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to items with a specific meta keyword. Possible search operators are 'like' and 'eq'.",
+                        "format": "string",
+                        "in": "query"
                     }
                 ]
             },
@@ -32241,9 +32249,7 @@
                                 "lang",
                                 "componentVariationId",
                                 "componentQuantity",
-                                "accountId",
                                 "sku",
-                                "marketAccountId",
                                 "propertyId",
                                 "text",
                                 "isVisibleForContact"
@@ -32549,7 +32555,7 @@
                                 },
                                 "marketId": {
                                     "type": "number",
-                                    "description": "The ID of the market reference.  with marketAccountId"
+                                    "description": "The ID of the market reference."
                                 },
                                 "variationDefaultCategory": {
                                     "type": "array",
@@ -32781,7 +32787,7 @@
                                 },
                                 "accountId": {
                                     "type": "integer",
-                                    "description": "The ID of the market account  with marketId"
+                                    "description": "The ID of the market account"
                                 },
                                 "sku": {
                                     "type": "string",
@@ -32811,7 +32817,7 @@
                                 },
                                 "marketAccountId": {
                                     "type": "integer",
-                                    "description": "The ID of the market account.  with marketId"
+                                    "description": "The ID of the market account."
                                 },
                                 "properties": {
                                     "type": "array",
@@ -43472,6 +43478,10 @@
                                 "quantity": {
                                     "type": "number",
                                     "description": "The quantity"
+                                },
+                                "userId": {
+                                    "type": "integer",
+                                    "description": "The ID of the user"
                                 },
                                 "identification": {
                                     "type": "string",
@@ -70995,6 +71005,10 @@
                     "type": "array",
                     "items": {},
                     "description": "The array of users"
+                },
+                "plentyId": {
+                    "type": "integer",
+                    "description": "the plenty id of the related contact"
                 }
             }
         },
