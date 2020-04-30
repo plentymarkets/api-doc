@@ -16211,7 +16211,7 @@
                                 },
                                 "customsTariffNumber": {
                                     "type": "string",
-                                    "description": "The customs tariff number of the item; usually a 11 digit code number based on the Harmonised System optional"
+                                    "description": "Deprecated: The customs tariff number of the item; usually a 11 digit code number based on the Harmonised System optional"
                                 },
                                 "revenueAccount": {
                                     "type": "integer",
@@ -16408,7 +16408,7 @@
                                 },
                                 "customsTariffNumber": {
                                     "type": "string",
-                                    "description": "The customs tariff number of the item; usually a 11 digit code number based on the Harmonised System optional"
+                                    "description": "Deprecated: The customs tariff number of the item; usually a 11 digit code number based on the Harmonised System optional"
                                 },
                                 "revenueAccount": {
                                     "type": "integer",
@@ -24010,6 +24010,10 @@
                                     "type": "boolean",
                                     "description": "Indicates if the moving average net purchase price is calculated by its components. optional"
                                 },
+                                "customsTariffNumber": {
+                                    "type": "string",
+                                    "description": "The customs tariff number of the variation; usually a 11 digit code number based on the Harmonised System optional"
+                                },
                                 "categoryVariationId": {
                                     "type": "integer",
                                     "description": "Either the ID of the variation or the ID of the item's main variation. No other values are permitted.ID of the variation = Categories are not inherited from the main variation.ID of the item's main variation = Inheritance of categories is active. optional"
@@ -31245,7 +31249,7 @@
                                 },
                                 "customsTariffNumber": {
                                     "type": "string",
-                                    "description": "The customs tariff number of the item; usually a 11 digit code number based on the Harmonised System optional"
+                                    "description": "Deprecated: The customs tariff number of the item; usually a 11 digit code number based on the Harmonised System optional"
                                 },
                                 "revenueAccount": {
                                     "type": "integer",
@@ -31992,6 +31996,10 @@
                                     "type": "boolean",
                                     "description": "Indicates if the moving average net purchase price is calculated by its components. optional"
                                 },
+                                "customsTariffNumber": {
+                                    "type": "string",
+                                    "description": "The customs tariff number of the variation; usually a 11 digit code number based on the Harmonised System optional"
+                                },
                                 "categoryVariationId": {
                                     "type": "integer",
                                     "description": "Either the ID of the variation or the ID of the item's main variation. No other values are permitted.ID of the variation = Categories are not inherited from the main variation.ID of the item's main variation = Inheritance of categories is active. optional"
@@ -32470,6 +32478,10 @@
                                 "hasCalculatedBundleMovingAveragePrice": {
                                     "type": "boolean",
                                     "description": "Indicates if the moving average net purchase price is calculated by its components. optional"
+                                },
+                                "customsTariffNumber": {
+                                    "type": "string",
+                                    "description": "The customs tariff number of the variation; usually a 11 digit code number based on the Harmonised System optional"
                                 },
                                 "categoryVariationId": {
                                     "type": "integer",
@@ -60863,6 +60875,341 @@
                 ]
             }
         },
+        "\/rest\/system\/settings\/taric_vat_assignment": {
+            "get": {
+                "summary": "List taric vat assignments",
+                "description": "",
+                "tags": [
+                    "Order"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "page": {
+                                    "type": "integer",
+                                    "description": "Current page of the response"
+                                },
+                                "totalsCount": {
+                                    "type": "integer",
+                                    "description": "The total number of entries in the response"
+                                },
+                                "isLastPage": {
+                                    "type": "boolean",
+                                    "description": "Flag that indicates if the page shown is the last page of the response"
+                                },
+                                "lastPageNumber": {
+                                    "type": "integer",
+                                    "description": "The last page number"
+                                },
+                                "firstOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the first item of the current page result"
+                                },
+                                "lastOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the last item of the current page result"
+                                },
+                                "itemsPerPage": {
+                                    "type": "integer",
+                                    "description": "The requested amount of items per result page"
+                                },
+                                "entries": {
+                                    "type": "array",
+                                    "description": "List of TaricVatAssignment",
+                                    "items": {
+                                        "$ref": "#\/definitions\/TaricVatAssignment"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "page",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The requested page of results",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "itemsPerPage",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The number of results per page",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "countryId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The country ID of the taric vat assignments",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "taricCode",
+                        "type": "integer",
+                        "required": false,
+                        "description": "The taric code of the taric vat assignments",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
+        "\/rest\/system\/settings\/taric_vat_assignment\/{taricCode}\/{countryId}": {
+            "delete": {
+                "summary": "Delete taric vat assignment",
+                "description": "Deletes a taric code. The taric code and the country ID must be specified.",
+                "tags": [
+                    "Order"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/SimpleRestResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "taricCode",
+                        "type": "string",
+                        "required": true,
+                        "description": "The taric code.",
+                        "format": "string",
+                        "in": "path"
+                    },
+                    {
+                        "name": "countryId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The country id.",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "in": "body",
+                        "name": "\/rest\/system\/settings\/taric_vat_assignment\/{taricCode}\/{countryId}",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "taricCode",
+                                "countryId"
+                            ],
+                            "properties": {
+                                "taricCode": {
+                                    "type": "integer",
+                                    "description": "The taric code  matching to \/^[0-9a-z]{1,12}$\/"
+                                },
+                                "countryId": {
+                                    "type": "integer",
+                                    "description": "The ID of the country that the taric code configuration belongs to"
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            "get": {
+                "summary": "Get taric vat assignment",
+                "description": "Gets a taric vat assignment. The taric code and the country ID must be specified.",
+                "tags": [
+                    "Order"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/TaricVatAssignment"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "taricCode",
+                        "type": "string",
+                        "required": true,
+                        "description": "The taric code.",
+                        "format": "string",
+                        "in": "path"
+                    },
+                    {
+                        "name": "countryId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The country id.",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            },
+            "post": {
+                "summary": "Create taric vat assignment",
+                "description": "Creates a taric vat assignment. The taric code and the country ID must be specified.",
+                "tags": [
+                    "Order"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/TaricVatAssignment"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "taricCode",
+                        "type": "string",
+                        "required": true,
+                        "description": "The taric code.",
+                        "format": "string",
+                        "in": "path"
+                    },
+                    {
+                        "name": "countryId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The country id.",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "in": "body",
+                        "name": "\/rest\/system\/settings\/taric_vat_assignment\/{taricCode}\/{countryId}",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "taricCode",
+                                "countryId",
+                                "vatField"
+                            ],
+                            "properties": {
+                                "taricCode": {
+                                    "type": "integer",
+                                    "description": "The taric code  matching to \/^[0-9a-z]{1,12}$\/"
+                                },
+                                "countryId": {
+                                    "type": "integer",
+                                    "description": "The ID of the country that the taric code configuration belongs to"
+                                },
+                                "vatField": {
+                                    "type": "string",
+                                    "description": "The ID of the VAT rate of the taric code \/ country id combination.  allowed values are 0, 1, 2, 3"
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            "put": {
+                "summary": "Update taric vat assignment",
+                "description": "Updates a taric vat assignment. The taric code and the country ID must be specified.",
+                "tags": [
+                    "Order"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/TaricVatAssignment"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "taricCode",
+                        "type": "string",
+                        "required": true,
+                        "description": "The taric code.",
+                        "format": "string",
+                        "in": "path"
+                    },
+                    {
+                        "name": "countryId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "The country id.",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "in": "body",
+                        "name": "\/rest\/system\/settings\/taric_vat_assignment\/{taricCode}\/{countryId}",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "taricCode",
+                                "countryId",
+                                "vatField"
+                            ],
+                            "properties": {
+                                "taricCode": {
+                                    "type": "integer",
+                                    "description": "The taric code  matching to \/^[0-9a-z]{1,12}$\/"
+                                },
+                                "countryId": {
+                                    "type": "integer",
+                                    "description": "The ID of the country that the taric code configuration belongs to"
+                                },
+                                "vatField": {
+                                    "type": "string",
+                                    "description": "The ID of the VAT rate of the taric code \/ country id combination.  allowed values are 0, 1, 2, 3"
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        },
         "\/rest\/tags": {
             "get": {
                 "summary": "List tags",
@@ -67824,10 +68171,6 @@
                     "type": "integer",
                     "description": "The ID of the main variation of the item. The ID must be unique."
                 },
-                "customsTariffNumber": {
-                    "type": "string",
-                    "description": "The customs tariff number of the item; usually a 11 digit code number based on the Harmonised System"
-                },
                 "revenueAccount": {
                     "type": "integer",
                     "description": "The revenue account the item is linked to. An individual revenue account can be saved for each item in plentymarkets. If this is not done, plentymarkets automatically determines a revenue account based on the VAT rate."
@@ -68003,6 +68346,10 @@
                 "maximumOrderQuantity": {
                     "type": "number",
                     "description": "The maximum order quantity of an item permitted per order. If a maximum order quantity is specified, no more than this quantity of any combination of the variations of the item can be ordered. Decimal values are possible to allow orders by weight or length. Default value is 0. If value is 0, the maximum order quantity is unlimited."
+                },
+                "customsTariffNumber": {
+                    "type": "string",
+                    "description": "Deprecated: The customs tariff number of the item; usually a 11 digit code number based on the Harmonised System"
                 }
             }
         },
@@ -68319,6 +68666,10 @@
                 "singleItemCount": {
                     "type": "integer",
                     "description": ""
+                },
+                "customsTariffNumber": {
+                    "type": "string",
+                    "description": "The customs tariff number of the variation; usually a 11 digit code number based on the Harmonised System"
                 },
                 "categoryVariationId": {
                     "type": "integer",
@@ -73109,7 +73460,7 @@
                 },
                 "keyFigure": {
                     "type": "string",
-                    "description": "Key figure name"
+                    "description": "Key figure identifier"
                 },
                 "keyFigureName": {
                     "type": "string",
@@ -73157,12 +73508,12 @@
                     "type": "string",
                     "description": ""
                 },
-                "calculations": {
+                "calculation": {
                     "type": "array",
                     "items": {},
                     "description": ""
                 },
-                "filters": {
+                "dataFilters": {
                     "type": "array",
                     "items": {},
                     "description": ""
@@ -73675,6 +74026,27 @@
                 "isLastPage": {
                     "type": "boolean",
                     "description": ""
+                }
+            }
+        },
+        "TaricVatAssignment": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "The ID of the taric vat assignment"
+                },
+                "taricCode": {
+                    "type": "integer",
+                    "description": "The taric code"
+                },
+                "countryId": {
+                    "type": "integer",
+                    "description": "The ID of the country that the taric code configuration belongs to"
+                },
+                "vatField": {
+                    "type": "string",
+                    "description": "The ID of the VAT rate of the taric code \/ country id combination."
                 }
             }
         },
