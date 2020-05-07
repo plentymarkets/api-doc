@@ -51952,6 +51952,54 @@
                 ]
             }
         },
+        "\/rest\/plugin_sets\/{setId}\/plugins\/get_compatibility\/{pluginName}\/{variationId}": {
+            "get": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "PluginSet"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "setId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "pluginName",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "variationId",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            }
+        },
         "\/rest\/plugin_sets\/{setId}\/plugins\/search": {
             "get": {
                 "summary": "Search plugins",
