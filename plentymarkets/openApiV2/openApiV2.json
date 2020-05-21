@@ -41378,6 +41378,82 @@
                 ]
             }
         },
+        "\/rest\/orders\/currencies\/exchange_rates\/from\/{currencyIso}": {
+            "get": {
+                "summary": "Get the exchange rates from a currency",
+                "description": "Gets the exchange rates from a currency. The ISO 4271 code of the currency must be specified.",
+                "tags": [
+                    "Order"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "currencyIso",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            }
+        },
+        "\/rest\/orders\/currencies\/exchange_rates\/to\/{currencyIso}": {
+            "get": {
+                "summary": "Get the exchange rates to a currency",
+                "description": "Gets the exchange rates to a currency. The ISO 4271 code of the currency must be specified.",
+                "tags": [
+                    "Order"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "currencyIso",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            }
+        },
         "\/rest\/orders\/currencies\/{currencyIso}": {
             "get": {
                 "summary": "Get a currency",
