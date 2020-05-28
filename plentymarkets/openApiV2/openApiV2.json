@@ -14398,7 +14398,7 @@
                                 },
                                 "type": {
                                     "type": "string",
-                                    "description": "export type  allowed values are item, order, order_item, contact, contactNewsletter, warehouse, attribute, category, property, item_image, manufacturer, stock_movement, stock, facet, facetValue, facetValueReference"
+                                    "description": "export type  allowed values are item, order, order_item, contact, contactNewsletter, warehouse, attribute, category, property, item_image, manufacturer, stock_movement, stock, facet, facetValue, facetValueReference, listing, listingMarketHistory"
                                 },
                                 "outputType": {
                                     "type": "string",
@@ -14654,7 +14654,7 @@
                                 },
                                 "type": {
                                     "type": "string",
-                                    "description": "export type  allowed values are item, order, order_item, contact, contactNewsletter, warehouse, attribute, category, property, item_image, manufacturer, stock_movement, stock, facet, facetValue, facetValueReference"
+                                    "description": "export type  allowed values are item, order, order_item, contact, contactNewsletter, warehouse, attribute, category, property, item_image, manufacturer, stock_movement, stock, facet, facetValue, facetValueReference, listing, listingMarketHistory"
                                 },
                                 "outputType": {
                                     "type": "string",
@@ -34236,7 +34236,7 @@
                                 "listing": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#\/definitions\/ListingMarketInfo"
+                                        "$ref": "#\/definitions\/ListingMarketHistory"
                                     }
                                 },
                                 "properties": {
@@ -35854,7 +35854,7 @@
                                 "listing": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#\/definitions\/ListingMarketInfo"
+                                        "$ref": "#\/definitions\/ListingMarketHistory"
                                     }
                                 },
                                 "properties": {
@@ -38179,6 +38179,68 @@
                 ]
             }
         },
+        "\/rest\/markets\/listings\/marketplaces": {
+            "get": {
+                "summary": "Get all listing marketplaces.",
+                "description": "List listing marketplaces. Use filters to find specific ones.",
+                "tags": [
+                    "Market"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Marketplace"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "referrerId",
+                        "type": "number",
+                        "required": false,
+                        "description": "Get only marketplaces that match the given referrer ID",
+                        "format": "",
+                        "in": "query"
+                    },
+                    {
+                        "name": "marketplaceId",
+                        "type": "string",
+                        "required": false,
+                        "description": "Get only marketplaces that match the given marketplace ID",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "marketId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Get only marketplaces that match the given market ID",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "siteId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Get only marketplaces that match the given site ID",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
         "\/rest\/markets\/settings": {
             "get": {
                 "summary": "List market settings",
@@ -40260,6 +40322,14 @@
                         "in": "query"
                     },
                     {
+                        "name": "shippingServiceProviderId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter that restricts the search result to orders with a specific shipping service provider (like DHL, UPS, etc.). The ID of shipping service provider must be specified.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
                         "name": "ownerUserId",
                         "type": "integer",
                         "required": false,
@@ -40519,7 +40589,7 @@
                         "name": "with",
                         "type": "integer",
                         "required": false,
-                        "description": "Load additional relations for an order. Currently possible are:\n    <ul>\n    <li>'addresses' = The address objects that are associated with the order.<\/li>\n    <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the the reference type, the ID of the reference and the relation itself.<\/li>\n    <li>'comments' = The order comments.<\/li>\n    <li>'location' = The accounting location of the order.<\/li>\n    <li>'payments' = The payments that are associated with the order.<\/li>\n    <li>'documents' = The documents that are associated with the order.<\/li>\n    <li>'contactSender' = The associated contact for the contact-sender relation.<\/li>\n    <li>'contactReceiver' = The associated contact for the contact-receiver relation.<\/li>\n    <li>'warehouseSender' = The associated warehouse for the warehouse-sender relation.<\/li>\n    <li>'warehouseReceiver' = The associated warehouse for the warehouse-receiver relation.<\/li>\n    <li>'orderItems.variation' = The variation that is associated with the order item.<\/li>\n    <li>'orderItems.giftCardCodes' = The gift card codes that are associated with the order item.<\/li>\n    <li>'orderItems.transactions' = The transactions that are associated with the order item.<\/li>\n    <li>'orderItems.serialNumbers' = The serial numbers that are associated with the order item.<\/li>\n    <li>'orderItems.variationBarcodes' = The barcodes that are associated with variation of the order item.<\/li>\n    <li>'orderItems.comments' = The comments that are associated with the order item.<\/li>\n    <li>'originOrderReferences' = The references to other orders, e.g. returns or credit notes, associated with this order.<\/li>\n    <li><b>deprecated<\/b> 'orderItems.warehouseLocations' = The warehouse locations that are associated with the order item.<\/li>\n    <\/ul>\n    Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
+                        "description": "Load additional relations for an order. Currently possible are:\n    <ul>\n    <li>'addresses' = The address objects that are associated with the order.<\/li>\n    <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the the reference type, the ID of the reference and the relation itself.<\/li>\n    <li>'comments' = The order comments.<\/li>\n    <li>'location' = The accounting location of the order.<\/li>\n    <li>'payments' = The payments that are associated with the order.<\/li>\n    <li>'documents' = The documents that are associated with the order.<\/li>\n    <li>'contactSender' = The associated contact for the contact-sender relation.<\/li>\n    <li>'contactReceiver' = The associated contact for the contact-receiver relation.<\/li>\n    <li>'warehouseSender' = The associated warehouse for the warehouse-sender relation.<\/li>\n    <li>'warehouseReceiver' = The associated warehouse for the warehouse-receiver relation.<\/li>\n    <li>'orderItems.variation' = The variation that is associated with the order item.<\/li>\n    <li>'orderItems.giftCardCodes' = The gift card codes that are associated with the order item.<\/li>\n    <li>'orderItems.transactions' = The transactions that are associated with the order item.<\/li>\n    <li>'orderItems.serialNumbers' = The serial numbers that are associated with the order item.<\/li>\n    <li>'orderItems.variationBarcodes' = The barcodes that are associated with variation of the order item.<\/li>\n    <li>'orderItems.comments' = The comments that are associated with the order item.<\/li>\n    <li>'originOrderReferences' = The references to other orders, e.g. returns or credit notes, associated with this order.<\/li>\n    <li>'shippingPackages' = The shipping packages that are associated with the order.<\/li>\n    <li><b>deprecated<\/b> 'orderItems.warehouseLocations' = The warehouse locations that are associated with the order item.<\/li>\n    <\/ul>\n    Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
                         "format": "integer",
                         "in": "query"
                     }
@@ -40722,7 +40792,7 @@
                         "name": "with",
                         "type": "integer",
                         "required": false,
-                        "description": "Load additional relations for an order. The following relations are available:\n     * <ul>\n       <li>'addresses' = The address objects linked to the order.<\/li>\n       <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the reference type. The available reference types are parent and reorder. The ID of the reference and the relation itself are also available.<\/li>\n       <li>'comments' = The order comments.<\/li>\n       <li>'location' = The accounting location linked to the order.<\/li>\n       <li>'payments' = The payments linked to the order.<\/li>\n       <li>'documents' = The documents linked to the order.<\/li>\n       <li>'contactSender' = The contact belonging the contact-sender relation.<\/li>\n       <li>'contactReceiver' = The contact belonging to the contact-receiver relation.<\/li>\n       <li>'warehouseSender' = The warehouse belonging to the warehouse-sender relation.<\/li>\n       <li>'warehouseReceiver' = The warehouse belonging to the warehouse-receiver relation.<\/li>\n       <li>'orderItems.variation' = The variation data belonging to the order item.<\/li>\n       <li>'orderItems.giftCardCodes' = The gift card codes belonging to the order item.<\/li>\n       <li>'orderItems.transactions' = The transactions belonging to the order item.<\/li>\n       <li>'orderItems.serialNumbers' = The serial numbers belonging to the order item.<\/li>\n       <li>'orderItems.variationBarcodes' = The barcodes belonging to the order item.<\/li>\n       <li>'orderItems.comments' = The comments belonging to the order item.<\/li>\n       <li><b>deprecated<\/b> 'orderItems.warehouseLocations' = The warehouse locations linked to the order item.<\/li>\n     <\/ul>\n    Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
+                        "description": "Load additional relations for an order. The following relations are available:\n     * <ul>\n       <li>'addresses' = The address objects linked to the order.<\/li>\n       <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the reference type. The available reference types are parent and reorder. The ID of the reference and the relation itself are also available.<\/li>\n       <li>'comments' = The order comments.<\/li>\n       <li>'location' = The accounting location linked to the order.<\/li>\n       <li>'payments' = The payments linked to the order.<\/li>\n       <li>'documents' = The documents linked to the order.<\/li>\n       <li>'contactSender' = The contact belonging the contact-sender relation.<\/li>\n       <li>'contactReceiver' = The contact belonging to the contact-receiver relation.<\/li>\n       <li>'warehouseSender' = The warehouse belonging to the warehouse-sender relation.<\/li>\n       <li>'warehouseReceiver' = The warehouse belonging to the warehouse-receiver relation.<\/li>\n       <li>'orderItems.variation' = The variation data belonging to the order item.<\/li>\n       <li>'orderItems.giftCardCodes' = The gift card codes belonging to the order item.<\/li>\n       <li>'orderItems.transactions' = The transactions belonging to the order item.<\/li>\n       <li>'orderItems.serialNumbers' = The serial numbers belonging to the order item.<\/li>\n       <li>'orderItems.variationBarcodes' = The barcodes belonging to the order item.<\/li>\n       <li>'orderItems.comments' = The comments belonging to the order item.<\/li>\n       <li>'shippingPackages' = The shipping packages that are associated with the order.<\/li>\n       <li><b>deprecated<\/b> 'orderItems.warehouseLocations' = The warehouse locations linked to the order item.<\/li>\n     <\/ul>\n    Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
                         "format": "integer",
                         "in": "query"
                     }
@@ -45747,7 +45817,7 @@
                         "name": "with",
                         "type": "integer",
                         "required": false,
-                        "description": "Load additional relations for an order. The following relations are available:\n     * <ul>\n       <li>'addresses' = The address objects linked to the order.<\/li>\n       <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the reference type. The available reference types are parent and reorder. The ID of the reference and the relation itself are also available.<\/li>\n       <li>'comments' = The order comments.<\/li>\n       <li>'location' = The accounting location linked to the order.<\/li>\n       <li>'payments' = The payments linked to the order.<\/li>\n       <li>'documents' = The documents linked to the order.<\/li>\n       <li>'contactSender' = The contact belonging the contact-sender relation.<\/li>\n       <li>'contactReceiver' = The contact belonging to the contact-receiver relation.<\/li>\n       <li>'warehouseSender' = The warehouse belonging to the warehouse-sender relation.<\/li>\n       <li>'warehouseReceiver' = The warehouse belonging to the warehouse-receiver relation.<\/li>\n       <li>'orderItems.variation' = The variation data belonging to the order item.<\/li>\n       <li>'orderItems.giftCardCodes' = The gift card codes belonging to the order item.<\/li>\n       <li>'orderItems.transactions' = The transactions belonging to the order item.<\/li>\n       <li>'orderItems.serialNumbers' = The serial numbers belonging to the order item.<\/li>\n       <li>'orderItems.variationBarcodes' = The barcodes belonging to the order item.<\/li>\n       <li>'orderItems.comments' = The comments belonging to the order item.<\/li>\n       <li><b>deprecated<\/b> 'orderItems.warehouseLocations' = The warehouse locations linked to the order item.<\/li>\n     <\/ul>\n     Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
+                        "description": "Load additional relations for an order. The following relations are available:\n     * <ul>\n       <li>'addresses' = The address objects linked to the order.<\/li>\n       <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the reference type. The available reference types are parent and reorder. The ID of the reference and the relation itself are also available.<\/li>\n       <li>'comments' = The order comments.<\/li>\n       <li>'location' = The accounting location linked to the order.<\/li>\n       <li>'payments' = The payments linked to the order.<\/li>\n       <li>'documents' = The documents linked to the order.<\/li>\n       <li>'contactSender' = The contact belonging the contact-sender relation.<\/li>\n       <li>'contactReceiver' = The contact belonging to the contact-receiver relation.<\/li>\n       <li>'warehouseSender' = The warehouse belonging to the warehouse-sender relation.<\/li>\n       <li>'warehouseReceiver' = The warehouse belonging to the warehouse-receiver relation.<\/li>\n       <li>'orderItems.variation' = The variation data belonging to the order item.<\/li>\n       <li>'orderItems.giftCardCodes' = The gift card codes belonging to the order item.<\/li>\n       <li>'orderItems.transactions' = The transactions belonging to the order item.<\/li>\n       <li>'orderItems.serialNumbers' = The serial numbers belonging to the order item.<\/li>\n       <li>'orderItems.variationBarcodes' = The barcodes belonging to the order item.<\/li>\n       <li>'orderItems.comments' = The comments belonging to the order item.<\/li>\n       <li>'shippingPackages' = The shipping packages that are associated with the order.<\/li>\n       <li><b>deprecated<\/b> 'orderItems.warehouseLocations' = The warehouse locations linked to the order item.<\/li>\n     <\/ul>\n     Example: <code>?with[]=addresses&with[]=orderItems.variation<\/code>",
                         "format": "integer",
                         "in": "query"
                     },
@@ -50086,6 +50156,34 @@
                 ]
             }
         },
+        "\/rest\/payments\/methods\/list\/backend_icon": {
+            "get": {
+                "summary": "Returns all payment methods with id and backend icon url",
+                "description": "",
+                "tags": [
+                    "Payment"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/mixed"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                }
+            }
+        },
         "\/rest\/payments\/methods\/list\/backend_searchable\/{language}": {
             "get": {
                 "summary": "Returns all payment methods with id and name which are searchable for the backend",
@@ -51000,6 +51098,1331 @@
                 ]
             }
         },
+        "\/rest\/pim\/attributes": {
+            "delete": {
+                "summary": "Delete attributes",
+                "description": "Deletes attributes.",
+                "tags": [
+                    "Pim"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Collection"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                }
+            },
+            "get": {
+                "summary": "Search attributes",
+                "description": "Searches attributes.",
+                "tags": [
+                    "Pim"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "page": {
+                                    "type": "integer",
+                                    "description": "Current page of the response"
+                                },
+                                "totalsCount": {
+                                    "type": "integer",
+                                    "description": "The total number of entries in the response"
+                                },
+                                "isLastPage": {
+                                    "type": "boolean",
+                                    "description": "Flag that indicates if the page shown is the last page of the response"
+                                },
+                                "lastPageNumber": {
+                                    "type": "integer",
+                                    "description": "The last page number"
+                                },
+                                "firstOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the first item of the current page result"
+                                },
+                                "lastOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the last item of the current page result"
+                                },
+                                "itemsPerPage": {
+                                    "type": "integer",
+                                    "description": "The requested amount of items per result page"
+                                },
+                                "entries": {
+                                    "type": "array",
+                                    "description": "List of Attribute",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Attribute"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "with",
+                        "type": "string",
+                        "required": false,
+                        "description": "Includes the specified information in the results. More than one parameter should be separated by commas. The following parameters are available:<ul><li> 'attributeNames' = The attribute names of the attribute.<\/li><li> 'values' = The attribute values of the attribute.<\/li><li> 'maps' = The attribute maps of the attribute.<\/li><\/ub>",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "ids",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the result to attributes with the specified IDs. More than one parameter should be separated by commas. Allowed comparators: 'eq', 'in', 'between', 'gte', 'lte', 'gt' and 'lt'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "backendName",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the result to attributes with the specified backend name. Allowed comparators: 'eq' and 'in'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "name",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the result to attributes with the specified name. Allowed comparators: 'eq'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "position",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter restricts the result to attributes with the specified position. Allowed comparator: 'eq', 'between', 'gte', 'lte', 'gt' and 'lt'.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "updatedAt",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the result to attributes which have been updated in the specified time frame. The from and to parameter should be separated by a comma. If there is no to value, the current time is used instead. Allowed comparator: 'eq'', 'gte', 'lte', 'gt' and 'lt'.",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ]
+            },
+            "post": {
+                "summary": "Create attributes",
+                "description": "Creates attributes.",
+                "tags": [
+                    "Pim"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Collection"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update attributes",
+                "description": "Updates attributes.",
+                "tags": [
+                    "Pim"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Collection"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                }
+            }
+        },
+        "\/rest\/pim\/attributes\/names": {
+            "delete": {
+                "summary": "Delete attribute names",
+                "description": "Deletes attribute names.",
+                "tags": [
+                    "Pim"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Collection"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                }
+            },
+            "get": {
+                "summary": "Search attribute names",
+                "description": "Searches attribute names.",
+                "tags": [
+                    "Pim"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "page": {
+                                    "type": "integer",
+                                    "description": "Current page of the response"
+                                },
+                                "totalsCount": {
+                                    "type": "integer",
+                                    "description": "The total number of entries in the response"
+                                },
+                                "isLastPage": {
+                                    "type": "boolean",
+                                    "description": "Flag that indicates if the page shown is the last page of the response"
+                                },
+                                "lastPageNumber": {
+                                    "type": "integer",
+                                    "description": "The last page number"
+                                },
+                                "firstOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the first item of the current page result"
+                                },
+                                "lastOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the last item of the current page result"
+                                },
+                                "itemsPerPage": {
+                                    "type": "integer",
+                                    "description": "The requested amount of items per result page"
+                                },
+                                "entries": {
+                                    "type": "array",
+                                    "description": "List of AttributeName",
+                                    "items": {
+                                        "$ref": "#\/definitions\/AttributeName"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "with",
+                        "type": "string",
+                        "required": false,
+                        "description": "Includes the specified information in the results. More than one parameter should be separated by commas. The following parameters are available:<ul><li> 'attribute' = The attribute to the attribute name.<\/li><\/ub>",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "attributeId",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the result to attributes with the specified attribute ID. More than one parameter should be separated by commas. Allowed comparators: 'eq', 'in', 'between', 'gte', 'lte', 'gt' and 'lt'",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "lang",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the result to attributes with the specified language. More than one parameter should be separated by commas. Allowed comparators: 'eq' and 'in'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "name",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the result to attributes with the specified name. More than one parameter should be separated by commas. Allowed comparators: 'eq'.",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ]
+            },
+            "post": {
+                "summary": "Create attribute names",
+                "description": "Creates attribute names.",
+                "tags": [
+                    "Pim"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Collection"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update attribute names",
+                "description": "Updates attribute names.",
+                "tags": [
+                    "Pim"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Collection"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                }
+            }
+        },
+        "\/rest\/pim\/attributes\/values": {
+            "delete": {
+                "summary": "Delete attribute values",
+                "description": "Deletes attribute values.",
+                "tags": [
+                    "Pim"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Collection"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                }
+            },
+            "get": {
+                "summary": "Search attribute values",
+                "description": "Searches attribute values.",
+                "tags": [
+                    "Pim"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "page": {
+                                    "type": "integer",
+                                    "description": "Current page of the response"
+                                },
+                                "totalsCount": {
+                                    "type": "integer",
+                                    "description": "The total number of entries in the response"
+                                },
+                                "isLastPage": {
+                                    "type": "boolean",
+                                    "description": "Flag that indicates if the page shown is the last page of the response"
+                                },
+                                "lastPageNumber": {
+                                    "type": "integer",
+                                    "description": "The last page number"
+                                },
+                                "firstOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the first item of the current page result"
+                                },
+                                "lastOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the last item of the current page result"
+                                },
+                                "itemsPerPage": {
+                                    "type": "integer",
+                                    "description": "The requested amount of items per result page"
+                                },
+                                "entries": {
+                                    "type": "array",
+                                    "description": "List of AttributeValue",
+                                    "items": {
+                                        "$ref": "#\/definitions\/AttributeValue"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "with",
+                        "type": "string",
+                        "required": false,
+                        "description": "Includes the specified information in the results. More than one parameter should be separated by commas. The following parameters are available:<ul><li> 'valueNames' = The names of the attribute value.<\/li><li> 'attribute' = The attribute of the attribute value.<\/li><li> 'valueMaps' = The maps of the attribute value.<\/li><li> 'valueMarketNames' = The value market names of the attribute value.<\/li><\/ub>",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "ids",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the result to attribute values with the specified IDs. More than one parameter should be separated by commas. Allowed comparators: 'eq', 'in', 'between', 'gte', 'lte', 'gt' and 'lt'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "attributeId",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the result to attribute values with the specified attribute ID. More than one parameter should be separated by commas. Allowed comparators: 'eq', 'in', 'between', 'gte', 'lte', 'gt' and 'lt'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "backendName",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the result to attribute values with the specified backend name. More than one parameter should be separated by commas. Allowed comparators: 'eq' and 'in'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "name",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the result to attribute values with the specified name. More than one parameter should be separated by commas. Allowed comparators: 'eq'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "position",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the result to attribute values with the specified IDs. More than one parameter should be separated by commas. Allowed comparators: 'eq', 'between', 'gte', 'lte', 'gt' and 'lt'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "updatedAt",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the result to attribute values which have been updated in the specified time frame. The from and to parameter should be separated by a comma. If there is no to value, the current time is used instead. Allowed comparator: 'eq'', 'gte', 'lte', 'gt' and 'lt'.",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ]
+            },
+            "post": {
+                "summary": "Create attribute values",
+                "description": "Creates attribute values.",
+                "tags": [
+                    "Pim"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Collection"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update attribute values",
+                "description": "Updates attribute values.",
+                "tags": [
+                    "Pim"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Collection"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                }
+            }
+        },
+        "\/rest\/pim\/attributes\/values\/names": {
+            "delete": {
+                "summary": "Delete attribute value names",
+                "description": "Deletes attribute value names.",
+                "tags": [
+                    "Pim"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Collection"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                }
+            },
+            "get": {
+                "summary": "Search attribute value names",
+                "description": "Searches attribute value names.",
+                "tags": [
+                    "Pim"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "page": {
+                                    "type": "integer",
+                                    "description": "Current page of the response"
+                                },
+                                "totalsCount": {
+                                    "type": "integer",
+                                    "description": "The total number of entries in the response"
+                                },
+                                "isLastPage": {
+                                    "type": "boolean",
+                                    "description": "Flag that indicates if the page shown is the last page of the response"
+                                },
+                                "lastPageNumber": {
+                                    "type": "integer",
+                                    "description": "The last page number"
+                                },
+                                "firstOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the first item of the current page result"
+                                },
+                                "lastOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the last item of the current page result"
+                                },
+                                "itemsPerPage": {
+                                    "type": "integer",
+                                    "description": "The requested amount of items per result page"
+                                },
+                                "entries": {
+                                    "type": "array",
+                                    "description": "List of AttributeValueName",
+                                    "items": {
+                                        "$ref": "#\/definitions\/AttributeValueName"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "with",
+                        "type": "string",
+                        "required": false,
+                        "description": "Includes the specified information in the results. More than one parameter should be separated by commas. The following parameters are available:<ul><li> 'attributeValue' = The attribute value to the attribute value name.<\/li><\/ub>",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "valueId",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the result to attribute value names with the specified value ID. More than one parameter should be separated by commas. Allowed comparators: 'eq', 'in', 'between', 'gte', 'lte', 'gt' and 'lt'",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "lang",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the result to attribute value names with the specified language. More than one parameter should be separated by commas. Allowed comparators: 'eq' and 'in'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "name",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the result to attribute value names with the specified name. More than one parameter should be separated by commas. Allowed comparators: 'eq'.",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ]
+            },
+            "post": {
+                "summary": "Create attribute value names",
+                "description": "Creates attribute value names.",
+                "tags": [
+                    "Pim"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Collection"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update attribute value names",
+                "description": "Updates attribute value names.",
+                "tags": [
+                    "Pim"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Collection"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                }
+            }
+        },
+        "\/rest\/pim\/attributes\/values\/{id}": {
+            "get": {
+                "summary": "Get one attribute value",
+                "description": "Gets one attribute value. The ID must be specified.",
+                "tags": [
+                    "Pim"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/AttributeValue"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            }
+        },
+        "\/rest\/pim\/attributes\/{id}": {
+            "get": {
+                "summary": "Get one attribute",
+                "description": "Gets one attribute. The ID must be specified.",
+                "tags": [
+                    "Pim"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Attribute"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            }
+        },
+        "\/rest\/pim\/categories": {
+            "get": {
+                "summary": "Search categories",
+                "description": "Searches categories.",
+                "tags": [
+                    "Pim"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "page": {
+                                    "type": "integer",
+                                    "description": "Current page of the response"
+                                },
+                                "totalsCount": {
+                                    "type": "integer",
+                                    "description": "The total number of entries in the response"
+                                },
+                                "isLastPage": {
+                                    "type": "boolean",
+                                    "description": "Flag that indicates if the page shown is the last page of the response"
+                                },
+                                "lastPageNumber": {
+                                    "type": "integer",
+                                    "description": "The last page number"
+                                },
+                                "firstOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the first item of the current page result"
+                                },
+                                "lastOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the last item of the current page result"
+                                },
+                                "itemsPerPage": {
+                                    "type": "integer",
+                                    "description": "The requested amount of items per result page"
+                                },
+                                "entries": {
+                                    "type": "array",
+                                    "description": "List of Category",
+                                    "items": {
+                                        "$ref": "#\/definitions\/Category"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "with",
+                        "type": "string",
+                        "required": false,
+                        "description": "Includes the specified information in the results. More than one parameter should be separated by commas. The following parameters are available:<ul><li> 'details' = The names of the category.<\/li><li> 'clients' = The clients of the category.<\/li><li> 'branch' = The branch of the category.<\/li><li> 'tagRelationship' = The tags linked with the category and their data.<\/li><li> 'elmarCategories' = The elmar categories of the category.<\/li><\/ub>",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "ids",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the result to categories with the specified IDs. More than one parameter should be separated by commas. Allowed comparators: 'eq', 'in', 'between', 'gte', 'lte', 'gt' and 'lt'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "type",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the result to categories with the specified type. Allowed comparators: 'eq', 'in' and 'not'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "level",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter restricts the result to categories with the specified level. Allowed comparators: 'eq', 'not', 'gte', 'lte', 'gt' and 'lt'.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "name",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the result to categories with a category detail in the specified name. Allowed comparators: 'eq'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "lang",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the result to categories with a category detail in the specified lang. Allowed comparators: 'eq' and 'not'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "parentId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter restricts the result to categories with the specified parent ID. Allowed comparator: 'eq'.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "plentyId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter restricts the result to categories with the specified plenty ID. Allowed comparator: 'eq'.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "linklist",
+                        "type": "boolean",
+                        "required": false,
+                        "description": "Filter restricts the result to categories with the specified linklist value. Allowed comparator: 'eq'.",
+                        "format": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "name": "tagId",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the result to categories with the specified tag id. Allowed comparator: 'eq', 'in' and 'not'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "updatedAt",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the result to categories which have been updated in the specified time frame. The from and to parameter should be separated by a comma. If there is no to value, the current time is used instead. Allowed comparator: 'eq'', 'gte', 'lte', 'gt' and 'lt'.",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
+        "\/rest\/pim\/categories\/branches": {
+            "get": {
+                "summary": "Search category branches",
+                "description": "Searches category branches.",
+                "tags": [
+                    "Pim"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "page": {
+                                    "type": "integer",
+                                    "description": "Current page of the response"
+                                },
+                                "totalsCount": {
+                                    "type": "integer",
+                                    "description": "The total number of entries in the response"
+                                },
+                                "isLastPage": {
+                                    "type": "boolean",
+                                    "description": "Flag that indicates if the page shown is the last page of the response"
+                                },
+                                "lastPageNumber": {
+                                    "type": "integer",
+                                    "description": "The last page number"
+                                },
+                                "firstOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the first item of the current page result"
+                                },
+                                "lastOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the last item of the current page result"
+                                },
+                                "itemsPerPage": {
+                                    "type": "integer",
+                                    "description": "The requested amount of items per result page"
+                                },
+                                "entries": {
+                                    "type": "array",
+                                    "description": "List of CategoryBranch",
+                                    "items": {
+                                        "$ref": "#\/definitions\/CategoryBranch"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "with",
+                        "type": "string",
+                        "required": false,
+                        "description": "Includes the specified information in the results. More than one parameter should be separated by commas. The following parameters are available:<ul><li> 'category' = The category of the category branch.<\/li><\/ub>",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
+        "\/rest\/pim\/categories\/clients": {
+            "get": {
+                "summary": "Search category clients",
+                "description": "Searches category clients.",
+                "tags": [
+                    "Pim"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "page": {
+                                    "type": "integer",
+                                    "description": "Current page of the response"
+                                },
+                                "totalsCount": {
+                                    "type": "integer",
+                                    "description": "The total number of entries in the response"
+                                },
+                                "isLastPage": {
+                                    "type": "boolean",
+                                    "description": "Flag that indicates if the page shown is the last page of the response"
+                                },
+                                "lastPageNumber": {
+                                    "type": "integer",
+                                    "description": "The last page number"
+                                },
+                                "firstOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the first item of the current page result"
+                                },
+                                "lastOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the last item of the current page result"
+                                },
+                                "itemsPerPage": {
+                                    "type": "integer",
+                                    "description": "The requested amount of items per result page"
+                                },
+                                "entries": {
+                                    "type": "array",
+                                    "description": "List of CategoryClient",
+                                    "items": {
+                                        "$ref": "#\/definitions\/CategoryClient"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "with",
+                        "type": "string",
+                        "required": false,
+                        "description": "Includes the specified information in the results. More than one parameter should be separated by commas. The following parameters are available:<ul><li> 'category' = The category of the category client.<\/li><\/ub>",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "categoryId",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the result to category clients with the specified category ID. More than one parameter should be separated by commas. Allowed comparators: 'eq', 'in', 'between', 'gte', 'lte', 'gt' and 'lt'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "plentyId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter restricts the result to category clients with the specified plenty ID. More than one parameter should be separated by commas. Allowed comparators: 'eq'.",
+                        "format": "integer",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
+        "\/rest\/pim\/categories\/details": {
+            "get": {
+                "summary": "Search category details",
+                "description": "Searches category details.",
+                "tags": [
+                    "Pim"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "page": {
+                                    "type": "integer",
+                                    "description": "Current page of the response"
+                                },
+                                "totalsCount": {
+                                    "type": "integer",
+                                    "description": "The total number of entries in the response"
+                                },
+                                "isLastPage": {
+                                    "type": "boolean",
+                                    "description": "Flag that indicates if the page shown is the last page of the response"
+                                },
+                                "lastPageNumber": {
+                                    "type": "integer",
+                                    "description": "The last page number"
+                                },
+                                "firstOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the first item of the current page result"
+                                },
+                                "lastOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the last item of the current page result"
+                                },
+                                "itemsPerPage": {
+                                    "type": "integer",
+                                    "description": "The requested amount of items per result page"
+                                },
+                                "entries": {
+                                    "type": "array",
+                                    "description": "List of CategoryDetails",
+                                    "items": {
+                                        "$ref": "#\/definitions\/CategoryDetails"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "with",
+                        "type": "string",
+                        "required": false,
+                        "description": "Includes the specified information in the results. More than one parameter should be separated by commas. The following parameters are available:<ul><li> 'category' = The category of the category detail.<\/li><\/ub>",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "categoryId",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the result to category details with the specified category ID. More than one parameter should be separated by commas. Allowed comparators: 'eq', 'in', 'between', 'gte', 'lte', 'gt' and 'lt'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "plentyId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter restricts the result to category details with the specified plenty ID. More than one parameter should be separated by commas. Allowed comparators: 'eq'.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "lang",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the result to category details with the specified plenty ID. More than one parameter should be separated by commas. Allowed comparators: 'eq', 'in' and 'not'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "name",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the result to category details with the specified plenty ID. More than one parameter should be separated by commas. Allowed comparators: 'eq' and 'like'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "position",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the result to category details with the specified plenty ID. More than one parameter should be separated by commas. Allowed comparators: 'eq', 'in', 'gte', 'lte', 'gt' and 'lt'.",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
+        "\/rest\/pim\/categories\/properties": {
+            "get": {
+                "summary": "Search category properties",
+                "description": "Searches category properties.",
+                "tags": [
+                    "Pim"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "page": {
+                                    "type": "integer",
+                                    "description": "Current page of the response"
+                                },
+                                "totalsCount": {
+                                    "type": "integer",
+                                    "description": "The total number of entries in the response"
+                                },
+                                "isLastPage": {
+                                    "type": "boolean",
+                                    "description": "Flag that indicates if the page shown is the last page of the response"
+                                },
+                                "lastPageNumber": {
+                                    "type": "integer",
+                                    "description": "The last page number"
+                                },
+                                "firstOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the first item of the current page result"
+                                },
+                                "lastOnPage": {
+                                    "type": "integer",
+                                    "description": "The index of the last item of the current page result"
+                                },
+                                "itemsPerPage": {
+                                    "type": "integer",
+                                    "description": "The requested amount of items per result page"
+                                },
+                                "entries": {
+                                    "type": "array",
+                                    "description": "List of CategoryProperty",
+                                    "items": {
+                                        "$ref": "#\/definitions\/CategoryProperty"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "with",
+                        "type": "string",
+                        "required": false,
+                        "description": "Includes the specified information in the results. More than one parameter should be separated by commas. The following parameters are available:<ul><li> 'category' = The category of the property.<\/li><\/ub>",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "categoryId",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the result to category properties with the specified category ID. More than one parameter should be separated by commas. Allowed comparators: 'eq', 'in', 'between', 'gte', 'lte', 'gt' and 'lt'.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "plentyId",
+                        "type": "integer",
+                        "required": false,
+                        "description": "Filter restricts the result to category properties with the specified plenty ID. More than one parameter should be separated by commas. Allowed comparators: 'eq'.",
+                        "format": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "name": "value",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the result to category properties with the specified value. More than one parameter should be separated by commas. Allowed comparators: 'eq'.",
+                        "format": "string",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
+        "\/rest\/pim\/categories\/{id}": {
+            "get": {
+                "summary": "Get one category",
+                "description": "Gets one category. The ID must be specified.",
+                "tags": [
+                    "Pim"
+                ],
+                "security": [
+                    {
+                        "oAuth2": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#\/definitions\/Category"
+                        }
+                    },
+                    "401": {
+                        "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "description": "",
+                        "format": "integer",
+                        "in": "path"
+                    }
+                ]
+            }
+        },
         "\/rest\/pim\/variations": {
             "get": {
                 "summary": "Lists variations",
@@ -51073,7 +52496,7 @@
                         "name": "sortBy",
                         "type": "string",
                         "required": false,
-                        "description": "Sorts the results. Append '_asc' or '_desc' to specify the sorting order. '_desc' is the default value if no other is specified. More than one parameter should be separated by commas. The following parameters are available:<ul><li>'id'<\/li><li>'itemId'<\/li><li>'isMain'<\/li><li>'position'<\/li><li>'availabilityId'<\/li><li>'createdAt'<\/li><li>'updatedAt'<\/li><li>'itemUpdatedAt'<\/li><li>'createdUpdatedAt'<\/li><li>'variationName'<\/li><li>'number'<\/li><\/ul>",
+                        "description": "Sorts the results. Append '_asc' or '_desc' to specify the sorting order. '_desc' is the default value if no other is specified. More than one parameter should be separated by commas. The following parameters are available:<ul><li>'id'<\/li><li>'itemId'<\/li><li>'isMain'<\/li><li>'position'<\/li><li>'availabilityId'<\/li><li>'createdAt'<\/li><li>'updatedAt'<\/li><li>'itemUpdatedAt'<\/li><li>'relatedUpdatedAt'<\/li><li>'variationName'<\/li><li>'number'<\/li><\/ul>",
                         "format": "string",
                         "in": "query"
                     },
@@ -51474,6 +52897,14 @@
                         "type": "string",
                         "required": false,
                         "description": "Filter restricts the list of results to variations whose availablity has been updated in the specified time frame. The from and to parameter should be separated by a comma. If there is no to value, the current time is used instead.",
+                        "format": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "stockUpdatedAt",
+                        "type": "string",
+                        "required": false,
+                        "description": "Filter restricts the list of results to variations whose stock has been updated in the specified time frame. The from and to parameter should be separated by a comma. If there is no to value, the current time is used instead.",
                         "format": "string",
                         "in": "query"
                     },
@@ -70771,56 +72202,6 @@
                 }
             }
         },
-        "ListingMarketInfo": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "description": "The listing market info ID."
-                },
-                "listingMarketId": {
-                    "type": "integer",
-                    "description": "The listing market ID that the current information belongs to."
-                },
-                "type": {
-                    "type": "string",
-                    "description": "The information type. Possible values: 'warning', 'error', 'info'."
-                },
-                "code": {
-                    "type": "integer",
-                    "description": "The information code."
-                },
-                "message": {
-                    "type": "string",
-                    "description": "The information message."
-                },
-                "createdAt": {
-                    "type": "string",
-                    "description": "The date that the listing market info was created."
-                }
-            }
-        },
-        "ListingMarketDirectory": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "description": "The ID of the listing market directory."
-                },
-                "name": {
-                    "type": "string",
-                    "description": "The name of the listing market directory."
-                },
-                "parentId": {
-                    "type": "integer",
-                    "description": "The parent ID of the listing market directory."
-                },
-                "level": {
-                    "type": "integer",
-                    "description": "The level of the directory."
-                }
-            }
-        },
         "ListingMarketHistory": {
             "type": "object",
             "properties": {
@@ -70879,6 +72260,56 @@
                 "updatedAt": {
                     "type": "string",
                     "description": "The date that the entry was updated last."
+                }
+            }
+        },
+        "ListingMarketDirectory": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "The ID of the listing market directory."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the listing market directory."
+                },
+                "parentId": {
+                    "type": "integer",
+                    "description": "The parent ID of the listing market directory."
+                },
+                "level": {
+                    "type": "integer",
+                    "description": "The level of the directory."
+                }
+            }
+        },
+        "ListingMarketInfo": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "The listing market info ID."
+                },
+                "listingMarketId": {
+                    "type": "integer",
+                    "description": "The listing market ID that the current information belongs to."
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The information type. Possible values: 'warning', 'error', 'info'."
+                },
+                "code": {
+                    "type": "integer",
+                    "description": "The information code."
+                },
+                "message": {
+                    "type": "string",
+                    "description": "The information message."
+                },
+                "createdAt": {
+                    "type": "string",
+                    "description": "The date that the listing market info was created."
                 }
             }
         },
