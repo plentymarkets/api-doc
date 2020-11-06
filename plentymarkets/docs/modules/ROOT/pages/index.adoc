@@ -1,0 +1,3 @@
+= REST API
+:page-layout: redoc
+:page-specurl: https://raw.githubusercontent.com/plentymarkets/api-doc/master/plentymarkets/openApiV3/openApiV3WithExamples.min.json
