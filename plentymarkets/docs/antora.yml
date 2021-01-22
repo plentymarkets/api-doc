@@ -1,5 +1,5 @@
-name: rest-api
-title: REST API
+name: plentymarkets-rest-api
+title: plentymarkets REST API
 version: master
 nav:
 - modules/ROOT/nav.adoc
