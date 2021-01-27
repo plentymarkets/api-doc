@@ -1,0 +1,3 @@
+= REST API
+:page-layout: redoc
+:page-specurl: ../../rest-api/openApiV2.json
