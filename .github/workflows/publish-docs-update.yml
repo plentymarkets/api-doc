@@ -13,9 +13,9 @@ jobs:
       - uses: actions/checkout@v2
             
       - name: Rebuild site
-        uses: peter-evans/repository-dispatch@v1
+        uses: peter-evans/repository-dispatch@ce5485de42c9b2622d2ed064be479e8ed65e76f4
         with:
           token: ${{ secrets.PUBLIC_PAT_CICD4_PUBLIC }}
-          repository: plenty-developers-docs
+          repository: plentymarkets/plenty-developers-docs
           event-type: ContentSourceUpdate
           client-payload: '{ "repository": "${{github.repository}}" }'
