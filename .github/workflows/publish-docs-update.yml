@@ -16,5 +16,5 @@ jobs:
         run: |
           curl -X POST https://api.github.com/repos/plentymarkets/plenty-developers-docs/dispatches \
           -H 'Accept: application/vnd.github.v3+json' \
-          -u 'plentymonkey:'${{ secrets.PUBLIC_PLENTY_ACTION_TOKEN }} \
+          -u 'plentymonkey:'${{ secrets.PUBLIC_PAT_CICD4_PUBLIC }} \
           --data '{"event_type": "ContentSourceUpdate", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'" }}'
