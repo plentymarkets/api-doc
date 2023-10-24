@@ -1,0 +1,1902 @@
+= Item data: tutorial road map
+
+In this tutorial, you will learn how to create a basic item with variations. In the plentymarkets back end, you will find this data in the *Item » Edit item* menu. You will also learn how to retrieve this data. Open the https://developers.plentymarkets.com/rest-doc/item[REST Item] page for reference where you will find the calls required for item and variation data.
+
+You can expect to create the following data in this tutorial:
+
+* A category and a subcategory
+* An item
+* Attributes and attribute values
+* Variations
+* Item texts
+* A sales price that you will link to variations.
+* A barcode that you will link to a variation.
+
+You will also link an existing shipping profile to an item.
+
+We will also show you how to manage item data and streamline data exchange with external applications using filters and `with` parameters.
+
+== What is an item?
+
+In the plentymarkets item structure, an item is a data container that is composed of global data and at least one main variation. The global data applies to all variations and is referred to as item data. We also talk about data that is saved and managed "at the item level".
+
+Item data:
+
+* Global settings (condition, manufacturer, age rating, etc.)
+* Texts (names, descriptions, technical data, etc.)
+* Properties
+* Cross-selling settings
+
+Every item has a main variation that cannot be deleted. Each item can also have any number of additional variations. Data that applies to variations is referred to as variation data. Variation data is managed separately for each variation, i.e. "at the variation level". Note that some of this data is managed centrally and linked to variations.
+
+Variation data:
+
+* Images
+* Market visibility
+* Sales prices
+* Barcodes
+* Units
+* Warehouse
+* Stock
+* Categories
+* Suppliers
+
+To make plentymarkets even more flexible, some data configurations are managed centrally in the plentymarkets settings and then linked to items or variations. The following data is managed centrally:
+
+* Units
+* Barcodes
+* Sales prices
+* Categories
+* Suppliers
+* Attributes
+* Properties
+
+We will illustrate this later by linking categories, sales prices, attributes and barcodes to the item we create.
+
+image::itemstructure.png[widht=640, height=360]
+
+== What is a variation?
+
+As the name suggests, variations are different versions of an item. Whereas an item serves as a data container, an item's variations are the actual products that customers can purchase in a store and/or on markets. The item allows you to group different variations that share similar characteristics. In plentymarkets, you can create variations of an item either by specifying different unit/content variations or by using attributes:
+
+[cols="1,3"]
+|===
+|Variation |Example
+|Unit/content combinations
+a|
+Variations differ in quantity only, e.g.:
+
+* Soap: 100ml, 250ml, 500ml
+* Wine: 1 bottle or 1 dozen bottles
+
+|Attribute value combinations
+a|
+Variations differ in terms of other attribute values, e.g.:
+
+* Sofa: colour (red, black or brown) = one attribute
+* Bed spread: colour (yellow, green); size (single, queen and king) = two attributes
+* Shoes: colour (black, brown); size (5, 6 and 7); width (normal, wide) = three attributes
+
+|===
+
+If your product portfolio does not contain products with similar characteristics, you do not need to create variations. However, remember that in plentymarkets, items are not sellable products. Instead, your product will be equivalent to the item's main variation.
+
+[TIP]
+====
+If you work with variations, an item's main variation can either be a sellable product of your portfolio or it can be virtual. A virtual main variation is used to pass on settings to other variations of the item.
+====
+
+== What is inheritance?
+
+The main variation of an item differs from the item's other variations in that some of its characteristics can be passed on to the other variations of the item. As such, you can think of the main variation as a parent variation. Inheritance is activated by default, i.e. when you create a new variation, it inherits settings from the main variation unless you pass data that differs from that saved for the main variation. There are two kinds of inheritance in plentymarkets: some settings are passed on individually, others are passed on collectively, i.e. on a 1:n basis.
+
+=== Individual inheritance
+
+Individual inheritance means that one setting is passed from the main variation to the variation.
+
+The following data is inherited individually:
+
+* Availability settings
+* Dimensions
+* Costs
+* Shipping information
+
+=== 1:n inheritance
+
+1:n inheritance means that a variation inherits either all or none of the main variation's data set. Before we dive into the rules of 1:n inheritance, let's look at the data sets this kind of inheritance applies to.
+
+The following data is inherited as a complete data set, i.e. 1:n:
+
+* Sales prices
+* Categories
+* Suppliers
+* Warehouse
+* Markets
+* Client availability
+
+The most important point to remember about 1:n inheritance is that inheritance is deactivated automatically if one or more of the values inherited from the main variation is changed or if a value is added to the variation.
+
+Let's illustrate this with the 1:n inheritance of sales prices. Let's assume our main variation has 5 sales prices. Because inheritance is 1:n, either all or none of the prices are passed to a variation. This means:
+
+* If you save a price for one sales price, inheritance is deactivated for all sales prices. The main variation's other prices are saved for the variation but no longer updated if the main variation's prices change.
+* If you activate inheritance for a variation, any prices saved for the variation are deleted and replaced by the sales prices and prices of the main variation.
+
+== Creating an item record
+
+This tutorial describes how to create an item in plentymarkets using the REST API. To get started, let's define the item we want to create:
+
+* Item = plentymarkets unisex t-shirt
+** Variation 1 = Colour: red; Size: Unisex M; Price: 19.00 Euro; Barcode: 11111111
+** Variation 2 = Colour: red; Size: Unisex L; Price: 19.00 Euro; Barcode: 11111112
+** Variation 3 = Colour: black; Size: Unisex M; Price: 19.00 Euro; Barcode: 11111113
+** Variation 4 = Colour: black; Size: Unisex L; Price: 21.00 Euro; Barcode: 11111114
+* Category tree = Unisex > T-shirts
+* Referrer = Default online store (plentyID 12345)
+
+Note that the aim of this tutorial is to teach you how to create items and variations in plentymarkets. This means that we will create this item with the minimum data required to get us started. As such, the item we create will not be ready for market.
+
+=== Step 1: Categories
+
+Every variation in plentymarkets must be linked to a category of the type *Item*. As such, when you create an item, you also need to specify the category to link to it. If no categories exist in the system, you need to create a category before creating the item. When you link an item to a category, this link is passed on to all variations. Inheritance of category links is 1:n, i.e. either all or none of the category links are passed on from the main variation to the other variations of the item. Because every variation must be linked to a category, you need to make sure a category exists in the system and if no category exists, create a category.
+
+==== Listing categories
+
+You can list all categories in the system using the call `rest/categories`. However, because we are only interested in categories of the Item type, we can filter the results of our request using the parameter `type`:
+
+`/rest/categories?type=item`
+
+If you find a suitable category for the item you want to create, take note of the category ID. You will need this to create the item. In this tutorial, we will assume that no suitable category exists in the system so we can create one from scratch.
+
+==== Creating a category of the type Item
+
+If no suitable category exists, create a category. In this example, we will create a first level category *Unisex* and a subcategory *T-shirts* so that our variations can be found under *Unisex > T-shirts* in the online store. Categories are created using the following call:
+
+`/rest/categories`
+
+We will send the following parameters to create the first level category *Unisex*:
+
+* The type of the category = item
+* The plentyID of the client (store) = 12345
+* A name for the category = Unisex
+* The language for which the name is saved = en
+
+With this in mind, this is what our request should look like:
+
+===== Request
+
+./rest/categories
+[source,json]
+----
+    [
+        {
+            "parentCategoryId": null,
+            "type": "item",
+            "right": "all",
+            "details": [
+                {
+                    "plentyId": 12345,
+                    "lang": "en",
+                    "name": "Unisex"
+                }
+            ],
+            "clients": [
+                {
+                    "plentyId": 12345
+                }
+            ]
+        }
+    ]
+----
+
+The following response is expected. Note down the ID of this category. We will need it shortly to create a subcategory.
+
+===== Expected response
+
+[source,json]
+----
+[
+    {
+        "id": 399,
+        "parentCategoryId": null,
+        "level": 1,
+        "type": "item",
+        "linklist": "N",
+        "right": "all",
+        "sitemap": "N",
+        "details": [
+            {
+                "categoryId": 399,
+                "plentyId": 12345,
+                "lang": "en",
+                "name": "Unisex",
+                "description": "",
+                "description2": "",
+                "shortDescription": "",
+                "metaKeywords": "",
+                "metaDescription": "",
+                "nameUrl": "",
+                "metaTitle": "",
+                "plenty_category_details_image": null,
+                "plenty_category_details_image2": null,
+                "position": 0,
+                "plenty_category_details_last_update_timestamp": "2017-01-27T15:03:54+01:00",
+                "plenty_category_details_last_update_user": " ",
+                "itemListView": "ItemViewCategoriesList",
+                "singleItemView": "ItemViewSingleItem",
+                "pageView": "PageDesignContent",
+                "fulltext": "N",
+                "placeholderTranslation": "Y",
+                "webTemplateExists": "N",
+                "metaRobots": "ALL",
+                "canonicalLink": "",
+                "image": null,
+                "image2": null,
+                "imageDocument": null,
+                "image2Document": null
+            }
+        ],
+        "clients": [
+            {
+                "plentyId": 12345
+            }
+        ]
+    }
+]
+----
+
+==== Creating a subcategory of the type Item
+
+Now, we will create a subcategory of the category we just created. By specifying the parameter `parentCategoryID`, the category will be created as a sub-category to the category with the ID we specify.
+
+`/rest/categories`
+
+We will send the following parameters to create the second level category *Unisex*:
+
+* The type of the category = item
+* The plentyID of the client (store) = 12345
+* A name for the category = T-shirts
+* The language for which the name is saved = en
+* The ID of the parent category = 399
+
+So our request should look like this:
+
+===== Request
+
+./rest/categories
+[source,json]
+----
+{
+  [
+    {
+        "parentCategoryId": 399,
+        "type": "item",
+        "right": "all",
+        "details": [
+            {
+                "plentyId": 12345,
+                "lang": "en",
+                "name": "T-shirts"
+            }
+        ],
+        "clients": [
+            {
+                "plentyId": 12345
+            }
+        ]
+    }
+  ]
+}
+----
+
+===== Expected response
+
+[source,json]
+----
+{
+  [
+    {
+        "id": 400,
+        "parentCategoryId": 399,
+        "level": 2,
+        "type": "item",
+        "linklist": "N",
+        "right": "all",
+        "sitemap": "N",
+        "details": [
+            {
+                "categoryId": 400,
+                "plentyId": 12345,
+                "lang": "en",
+                "name": "T-shirts",
+                "description": "",
+                "description2": "",
+                "shortDescription": "",
+                "metaKeywords": "",
+                "metaDescription": "",
+                "nameUrl": "",
+                "metaTitle": "",
+                "plenty_category_details_image": null,
+                "plenty_category_details_image2": null,
+                "position": 0,
+                "plenty_category_details_last_update_timestamp": "2017-01-27T15:08:23+01:00",
+                "plenty_category_details_last_update_user": " ",
+                "itemListView": "ItemViewCategoriesList",
+                "singleItemView": "ItemViewSingleItem",
+                "pageView": "PageDesignContent",
+                "fulltext": "N",
+                "placeholderTranslation": "Y",
+                "webTemplateExists": "N",
+                "metaRobots": "ALL",
+                "canonicalLink": "",
+                "image": null,
+                "image2": null,
+                "imageDocument": null,
+                "image2Document": null
+            }
+        ],
+        "clients": [
+            {
+                "plentyId": 12345
+            }
+        ]
+    }
+  ]
+}
+----
+
+=== Step 2: Item
+
+Now that you have created a category, you are all set for creating your first item. Remember that an item is a data container that in itself does not correspond to a physical product. The item level merely allows you to group different variations with similar characteristics. Use the following call to create an item:
+
+==== Listing items
+
+We start by checking if there are any items in the system:
+
+`/rest/items`
+
+The expected result is a list of all items saved in the system.
+
+==== Creating an item
+
+Now, let's start and create our first item already! To do so, we need the following call:
+
+`/rest/items`
+
+As a minimum, we need to supply the following parameters to create an item:
+
+* A category = ID 400
+* A https://developers.plentymarkets.com/rest-doc/introduction#units[unit] to be saved for the main variation = ID 1
+* Content to be saved for the main variation = 1
+
+With this in mind, this is what our request should look like:
+
+===== Request
+
+./rest/items
+[source,json]
+----
+{
+    "variations": [
+        {
+            "variationCategories": [
+                {
+                    "categoryId": 400
+                }
+            ],
+            "unit": {
+                "unitId": 1,
+                "content": 1
+            }
+        }
+    ]
+}
+----
+
+===== Expected response
+
+[source,json]
+----
+{
+    "id": 5840127,
+    "position": 0,
+    "manufacturerId": 0,
+    "stockType": 0,
+    "storeSpecial": 0,
+    "condition": 0,
+    "amazonFedas": "",
+    "updatedAt": "2017-01-27 15:42:36",
+    "free1": null,
+    "free2": null,
+    "free3": null,
+    "free4": null,
+    "free5": null,
+    "free6": null,
+    "free7": 0,
+    "free8": 0,
+    "free9": 0,
+    "free10": 0,
+    "free11": 0,
+    "free12": 0,
+    "free13": 0,
+    "free14": 0,
+    "free15": 0,
+    "free16": 0,
+    "free17": 0,
+    "free18": 0,
+    "free19": 0,
+    "free20": 0,
+    "customsTariffNumber": "",
+    "producingCountryId": 1,
+    "revenueAccount": 0,
+    "couponRestriction": 0,
+    "flagOne": 0,
+    "flagTwo": 0,
+    "ageRestriction": 0,
+    "createdAt": "2017-01-27 15:42:36",
+    "amazonProductType": 0,
+    "ebayPresetId": null,
+    "ebayCategory": null,
+    "ebayCategory2": null,
+    "ebayStoreCategory": null,
+    "ebayStoreCategory2": null,
+    "amazonFbaPlatform": 0,
+    "feedback": 0,
+    "isSubscribable": false,
+    "rakutenCategoryId": null,
+    "isShippingPackage": false,
+    "conditionApi": 0,
+    "isSerialNumber": false,
+    "isShippableByAmazon": false,
+    "ownerId": null,
+    "itemType": "default",
+    "mainVariationId": 1136,
+    "variations": [
+        {
+            "id": 1136,
+            "isMain": true,
+            "mainVariationId": null,
+            "itemId": 5840127,
+            "categoryVariationId": 1136,
+            "marketVariationId": 1136,
+            "clientVariationId": 1136,
+            "salesPriceVariationId": 1136,
+            "supplierVariationId": 1136,
+            "warehouseVariationId": 1136,
+            "position": null,
+            "isActive": false,
+            "number": "NEW-168",
+            "model": null,
+            "externalId": null,
+            "availability": 1,
+            "estimatedAvailableAt": null,
+            "purchasePrice": 0,
+            "createdAt": "2017-01-27 15:42:36",
+            "updatedAt": "2017-01-27 15:42:36",
+            "relatedUpdatedAt": "2017-01-27 15:42:36",
+            "priceCalculationId": null,
+            "picking": "no_single_picking",
+            "stockLimitation": 1,
+            "isVisibleIfNetStockIsPositive": false,
+            "isInvisibleIfNetStockIsNotPositive": false,
+            "isAvailableIfNetStockIsPositive": false,
+            "isUnavailableIfNetStockIsNotPositive": false,
+            "mainWarehouseId": null,
+            "maximumOrderQuantity": null,
+            "minimumOrderQuantity": null,
+            "intervalOrderQuantity": null,
+            "availableUntil": null,
+            "releasedAt": null,
+            "name": "",
+            "weightG": 0,
+            "weightNetG": 0,
+            "widthMM": 0,
+            "lengthMM": 0,
+            "heightMM": 0,
+            "extraShippingCharge1": null,
+            "extraShippingCharge2": null,
+            "unitsContained": 1,
+            "palletTypeId": null,
+            "packingUnits": null,
+            "packingUnitTypeId": null,
+            "transportationCosts": 0,
+            "storageCosts": 0,
+            "customs": null,
+            "operatingCosts": null,
+            "vatId": 0,
+            "bundleType": null,
+            "automaticClientVisibility": 0,
+            "isHiddenInCategoryList": false,
+            "defaultShippingCosts": null,
+            "mayShowUnitPrice": null
+        }
+    ],
+    "texts": []
+}
+----
+
+==== Getting item data
+
+Use the following route to retrieve the data of an individual item:
+
+`/rest/items/{itemId}`
+
+===== Expected response
+
+./rest/items/154332
+[source,json]
+----
+ {
+     "id": 154332,
+     "position": 0,
+     "manufacturerId": 0,
+     "stockType": 0,
+     "storeSpecial": 0,
+     "condition": 0,
+     "amazonFedas": "",
+     "updatedAt": "2017-01-27T16:53:34+01:00",
+     "free1": 0,
+     "free2": null,
+     "free3": null,
+     "free4": null,
+     "free5": null,
+     "free6": null,
+     "free7": 0,
+     "free8": 0,
+     "free9": 0,
+     "free10": 0,
+     "free11": 0,
+     "free12": 0,
+     "free13": 0,
+     "free14": 0,
+     "free15": 0,
+     "free16": 0,
+     "free17": 0,
+     "free18": 0,
+     "free19": 0,
+     "free20": 0,
+     "customsTariffNumber": "",
+     "producingCountryId": 1,
+     "revenueAccount": 0,
+     "couponRestriction": 0,
+     "flagOne": 0,
+     "flagTwo": 0,
+     "ageRestriction": 0,
+     "createdAt": "2017-02-14T00:00:00+01:00",
+     "amazonProductType": 0,
+     "ebayPresetId": null,
+     "ebayCategory": null,
+     "ebayCategory2": null,
+     "ebayStoreCategory": null,
+     "ebayStoreCategory2": null,
+     "amazonFbaPlatform": 0,
+     "feedback": 0,
+     "isSubscribable": false,
+     "rakutenCategoryId": null,
+     "conditionApi": 0,
+     "isActive": true,
+     "isShippableByAmazon": false,
+     "ownerId": null,
+     "type": "default",
+     "mainVariationId": 1136,
+     "texts": []
+ }
+----
+
+=== Step 3: Attributes
+
+We need to create the following attributes and attribute values to sell our tee in different colours and sizes:
+
+* Colour
+** red
+** black
+* Size
+** Unisex M
+** Unisex L
+
+Attributes and their attribute values are managed centrally. This allows you to use the same attributes for more than one item.
+
+==== Listing attributes
+
+As a first step, let's check if any attributes exist in the system already that might match our requirements. Use the following call to list all attributes:
+
+`/rest/items/attributes`
+
+The expected response is a list of all attributes saved in the system.
+
+==== Creating attributes
+
+If no suitable attributes exist, you need to create them before you can start creating variations. In this tutorial, we will create the attributes *Colour* and *Size*.
+
+`/rest/items/attributes`
+
+As a minimum, we need to supply the following parameters to create an attribute:
+
+* A back end name = Colour
+
+With this in mind, this is what our request should look like:
+
+===== Request
+
+./rest/items/attributes
+[source,json]
+----
+{
+    "backendName": "Colour"
+}
+----
+
+===== Expected response
+
+[source,json]
+----
+  {
+      "id": 13,
+      "backendName": "Colour",
+      "position": 0,
+      "isSurchargePercental": false,
+      "isLinkableToImage": false,
+      "amazonAttribute": "",
+      "fruugoAttribute": "null",
+      "pixmaniaAttribute": 0,
+      "ottoAttribute": "none",
+      "googleShoppingAttribute": "none",
+      "neckermannAtEpAttribute": 0,
+      "typeOfSelectionInOnlineStore": "dropdown",
+      "laRedouteAttribute": 0,
+      "isGroupable": false,
+      "updatedAt": "2017-01-27T15:48:39+01:00"
+  }
+----
+
+Now, let's create the attribute *Size*:
+
+===== Request
+
+./rest/items/attributes
+[source,json]
+----
+{
+    "backendName": "Size"
+}
+----
+
+===== Expected response
+
+[source,json]
+----
+{
+    "id": 15,
+    "backendName": "Size",
+    "position": 0,
+    "isSurchargePercental": false,
+    "isLinkableToImage": false,
+    "amazonAttribute": "",
+    "fruugoAttribute": "null",
+    "pixmaniaAttribute": 0,
+    "ottoAttribute": "none",
+    "googleShoppingAttribute": "none",
+    "neckermannAtEpAttribute": 0,
+    "typeOfSelectionInOnlineStore": "dropdown",
+    "laRedouteAttribute": 0,
+    "isGroupable": false,
+    "updatedAt": "2017-01-27T15:50:29+01:00"
+}
+----
+
+==== Creating attribute names
+
+We have now created two attributes. However, we also need to save names for these attributes in order to display them in the online store. Use the following call to create an attribute name for the attribute *Colour*.
+
+`/rest/items/attributes/{attributeId}/names`
+
+As a minimum, we need to supply the following parameters to create an attribute name:
+
+* The name we want to save for the attribute = Colour
+* The language we want to save the attribute for = en
+
+With this in mind, this is what our request should look like:
+
+===== Request
+
+./rest/items/attributes/13/names
+[source,json]
+----
+{
+    "lang": "en",
+    "name": "Colour"
+}
+----
+
+===== Expected response
+
+[source,json]
+----
+{
+    "attributeId": 13,
+    "lang": "en",
+    "name": "Colour"
+}
+----
+
+Now, create an attribute name for the attribute *Size*:
+
+`/rest/items/attributes/{attributeId}/names`
+
+===== Request
+
+./rest/items/attributes/15/names
+[source,json]
+----
+{
+    "lang": "en",
+    "name": "Size"
+}
+----
+
+===== Expected response
+
+[source,json]
+----
+{
+    "attributeId": 15,
+    "lang": "en",
+    "name": "Size"
+}
+----
+
+==== Creating attribute values
+
+You have created the attributes *Colour* and *Size* and saved names for these attributes. Now, create attribute values for these attributes.
+
+`/rest/items/attributes/{attributeId}/values`
+
+As a minimum, we need to supply the following parameters to create an attribute value:
+
+* The ID of the attribute for which we are creating attribute values = 13 (ID of attribute "Colour")
+* A back end name for the attribute value = Black
+
+With this in mind, this is what our request should look like:
+
+===== Request
+
+./rest/items/attributes/13/values
+[source,json]
+----
+{
+    "attributeId": 13,
+    "backendName": "Black"
+}
+----
+
+===== Expected response
+
+[source,json]
+----
+{
+    "id": 14,
+    "attributeId": 13,
+    "backendName": "Black",
+    "position": 0,
+    "image": "",
+    "comment": "",
+    "amazonValue": "",
+    "ottoValue": "",
+    "neckermannAtEpValue": "",
+    "laRedouteValue": "none",
+    "tracdelightValue": "",
+    "percentageDistribution": 0,
+    "updatedAt": "2017-01-27T11:14:42+01:00"
+}
+----
+
+Now, create the attribute value *Red*:
+
+`/rest/items/attributes/{attributeId}/values`
+
+===== Request
+
+./rest/items/attributes/13/values
+[source,json]
+----
+{
+    "attributeId": 13,
+    "backendName": "Red"
+}
+----
+
+===== Expected response
+
+[source,json]
+----
+{
+    "id": 16,
+    "attributeId": 13,
+    "backendName": "Red",
+    "position": 0,
+    "image": "",
+    "comment": "",
+    "amazonValue": "",
+    "ottoValue": "",
+    "neckermannAtEpValue": "",
+    "laRedouteValue": "none",
+    "tracdelightValue": "",
+    "percentageDistribution": 0,
+    "updatedAt": "2017-01-27T11:14:42+01:00"
+}
+----
+
+Go ahead and create the attribute values *Unisex M* and *Unisex L* for the attribute *Size* by following the examples supplied above.
+
+==== Creating attribute value names
+
+Next, let's give our attribute values some names for the online store. First, save a name for the attribute value with the back end name *Red*.
+
+`/rest/items/attribute_values/{valueId}/names`
+
+As a minimum, we need to supply the following parameters to create an attribute value name:
+
+* The name we want to save for the attribute value = Red
+* The language we want to save the attribute value for = en
+
+With this in mind, this is what our request should look like:
+
+===== Request
+
+./rest/items/attribute_values/16/names
+[source,json]
+----
+{
+    "valueId": 16,
+    "lang": "en",
+    "name": "Red"
+}
+----
+
+===== Expected response
+
+[source,json]
+----
+{
+    "lang": "en",
+    "valueId": 16,
+    "name": "Red"
+}
+----
+
+Now, save a name for the attribute value with the back end name *Black*.
+
+===== Request
+
+./rest/items/attribute_values/14/names
+[source,json]
+----
+{
+    "valueId": 14,
+    "lang": "en",
+    "name": "Black"
+}
+----
+
+===== Expected response
+
+[source,json]
+----
+{
+    "lang": "en",
+    "valueId": 14,
+    "name": "Black"
+}
+----
+
+Go ahead and also save names for the attribute values *Unisex M* and *Unisex L*.
+
+==== Getting attribute data
+
+We have created two attributes and four attribute values. To illustrate what happens in the system, let's get the data saved for our attribute *Colour* (attributeId = 13).
+
+===== Expected response
+
+`/rest/items/attributes/13/values`
+
+[source,json]
+----
+{
+    "page": 1,
+    "totalsCount": 2,
+    "isLastPage": true,
+    "entries": [
+        {
+            "id": 14,
+            "attributeId": 13,
+            "backendName": "Black",
+            "position": 0,
+            "image": "",
+            "comment": "",
+            "amazonValue": "",
+            "ottoValue": "",
+            "neckermannAtEpValue": "",
+            "laRedouteValue": "",
+            "tracdelightValue": "",
+            "percentageDistribution": 0,
+            "updatedAt": "2017-01-27T16:50:22+01:00"
+        },
+        {
+            "id": 16,
+            "attributeId": 13,
+            "backendName": "Red",
+            "position": 0,
+            "image": "",
+            "comment": "",
+            "amazonValue": "",
+            "ottoValue": "",
+            "neckermannAtEpValue": "",
+            "laRedouteValue": "",
+            "tracdelightValue": "",
+            "percentageDistribution": 0,
+            "updatedAt": "2017-01-27T16:54:35+01:00"
+        }
+    ]
+}
+----
+
+=== Step 4: Variations
+
+You now have saved all the data you need to create one or several variations for our item. Mathematically, the combination of 2 sizes and 2 colours results in a total of 4 possible variations. Because the main variation can either be virtual or one of these possible combinations, our item can either have 5 or 4 variations in total. In this example, we will treat the main variation as virtual. This means that the main variation itself cannot be purchased. As such, we need to create 4 variations by combining the attributes we created:
+
+* red/Unisex M
+* red/Unisex L
+* black/Unisex M
+* black/Unisex L
+
+==== Listing variations
+
+`/rest/items/{itemId}/variations`
+
+The item we created already has a main variation. So take a minute to list the main variation data saved for our item.
+
+===== Expected response
+
+./rest/items/154332/variations
+[source,json]
+----
+{
+    "page": 1,
+    "totalsCount": 1,
+    "isLastPage": true,
+    "entries": [
+        {
+            "id": 1136,
+            "isMain": true,
+            "mainVariationId": null,
+            "itemId": 154332,
+            "categoryVariationId": 1136,
+            "marketVariationId": 1136,
+            "clientVariationId": 1136,
+            "salesPriceVariationId": 1136,
+            "supplierVariationId": 1136,
+            "warehouseVariationId": 1136,
+            "position": null,
+            "isActive": false,
+            "number": "NEW-168",
+            "model": "",
+            "externalId": "",
+            "availability": 1,
+            "estimatedAvailableAt": null,
+            "purchasePrice": 0,
+            "createdAt": "2017-01-27T15:42:36+01:00",
+            "updatedAt": "2017-01-27T14:15:42+01:00",
+            "relatedUpdatedAt": "2017-01-27T14:18:24+01:00",
+            "priceCalculationId": null,
+            "picking": "no_single_picking",
+            "stockLimitation": 1,
+            "isVisibleIfNetStockIsPositive": false,
+            "isInvisibleIfNetStockIsNotPositive": false,
+            "isAvailableIfNetStockIsPositive": false,
+            "isUnavailableIfNetStockIsNotPositive": false,
+            "mainWarehouseId": 1,
+            "maximumOrderQuantity": null,
+            "minimumOrderQuantity": null,
+            "intervalOrderQuantity": null,
+            "availableUntil": null,
+            "releasedAt": null,
+            "name": "",
+            "weightG": 0,
+            "weightNetG": 0,
+            "widthMM": 0,
+            "lengthMM": 0,
+            "heightMM": 0,
+            "extraShippingCharge1": null,
+            "extraShippingCharge2": null,
+            "unitsContained": 1,
+            "palletTypeId": null,
+            "packingUnits": null,
+            "packingUnitTypeId": null,
+            "transportationCosts": 0,
+            "storageCosts": 0,
+            "customs": null,
+            "operatingCosts": null,
+            "vatId": 0,
+            "bundleType": null,
+            "automaticClientVisibility": 0,
+            "isHiddenInCategoryList": false,
+            "plenty_item_variation_base_default_shipping_costs": null
+        }
+    ]
+}
+----
+
+==== Creating a variation
+
+Now, let's create our first variation: A *red* tee in size *Unisex M* to be sold in the default store (plentyID 12345).
+
+`/rest/items/{itemId}/variations`
+
+We need to supply the following parameters:
+
+* The ID of the item = 154332
+* The ID of a unit = 1
+* A content = 1
+* One or more attribute values = 15, 14
+* The plentyID of the client (store) = 12345
+
+As such, this is what our request should look like:
+
+===== Request
+
+./rest/items/154332/variations
+[source,json]
+----
+{
+    "itemId": 154332,
+    "unit": {
+        "unitId": 1,
+        "content": 1
+    },
+    "variationAttributeValues": [
+        {
+            "valueId": 15
+        },
+        {
+            "valueId": 14
+        }
+    ],
+    "variationClients": [
+        {
+            "plentyId": 12345
+        }
+    ]
+}
+----
+
+===== Expected response
+
+[source,json]
+----
+{
+    "itemId": "154332",
+    "variationAttributeValues": [
+        {
+            "valueId": 15
+        },
+        {
+            "valueId": 14
+        }
+    ],
+    "plentyMarkets": "rest/items/154332/variations",
+    "unitId": 1,
+    "content": 1,
+    "attributeValueSetId": 25,
+    "createdTimestamp": "2017-01-27 09:24:29",
+    "primaryVariationId": 1136,
+    "customNumber": "NEW-169",
+    "unitCombinationId": 12,
+    "id": 1137
+}
+----
+
+Now, create the other three variations you need. Remember, in addition to the variation you just created, you also need the following attribute value combinations:
+
+* red/Unisex L
+* black/Unisex M
+* black/Unisex L
+
+=== Step 5: Item texts
+
+You have now created an item and added variations. To offer it in your online store, you should also save a name and a description for your variations. The route structure suggests that item texts are saved for individual variations. However, at the moment, item texts are still managed at the item level. This means that the texts you post will be saved for all variations of the item.
+
+==== Creating item texts
+
+`/rest/items/{id}/variations/{variationId}/descriptions`
+
+The following parameters are required to create item texts:
+
+* The ID of the item = 154332
+* A name = Unisex plentymarkets tee
+* A description = This casual statement tee will help you rock your e-commerce. Eat, sleep, plentymarkets!
+* The language for which name and descriptions are to be saved = en
+
+So, let's see what our request should look like:
+
+===== Request
+
+./rest/items/154332/variations/1136/descriptions
+[source,json]
+----
+{
+    "lang": "en",
+    "name": "Unisex plentymarkets tee",
+    "description": "This casual statement tee will help you rock your e-commerce. Eat, sleep, plentymarkets!"
+}
+----
+
+===== Expected response
+
+[source,json]
+----
+{
+    "id": 155,
+    "itemId": 154328,
+    "lang": "en",
+    "name": "Unisex plentymarkets tee",
+    "name2": "",
+    "name3": "",
+    "previewDescription": "",
+    "metaDescription": "",
+    "description": "This casual statement tee will help you rock your e-commerce. Eat, sleep, plentymarkets!",
+    "technicalData": "",
+    "urlPath": "Unisex-plentymarkets-tee",
+    "character_cache": "",
+    "character_update": 0,
+    "character_cache_xml": "",
+    "metaKeywords": ""
+}
+----
+
+==== Getting item texts
+
+You can retrieve the texts saved for an item texts with the following REST call:
+
+`/rest/items/{id}/variations/{variationId}/descriptions`
+
+Now, check out our awesome item texts with the following route:
+
+`/rest/items/154332/variations/1136/descriptions`
+
+=== Step 6: Item images
+
+Item images are not mandatory, but of course your customers will want to see your wares before ordering. Item images are uploaded to the item level and then linked to one or more variations of the item. In this tutorial, we will upload one image of our tee in red and then link it to the variation.
+
+==== Uploading an item image
+
+To upload an item image, you can either specify a URL at which the image can be accessed for uploading or a combination of the file name and the base64 encoded image data of the image. In this tutorial, we will assume that the image we want to use is already online.
+
+`/rest/items/{id}/images/upload`
+
+Some parameters are required to upload an item image:
+
+* Either the URL or the item data = http://your_store.com/item/images/plenty-tee-red.jpg
+* A name = Red plentymarkets tee
+* The language in which the name is to be saved = en
+* The plentyID of the client (store) = 12345
+
+So we will post this request:
+
+===== Request
+
+./rest/items/154332/images/upload
+[source,json]
+----
+{
+    "uploadUrl": "http://your_store.com/item/images/plenty-tee-red.jpg",
+    "names": [
+        {
+            "lang": "en",
+            "name": "Red plentymarkets tee"
+        }
+    ],
+    "availabilities": [
+        {
+            "type": "mandant",
+            "value": 12345
+        }
+    ]
+}
+----
+
+===== Expected response
+
+[source,json]
+----
+{
+    "id": 67,
+    "itemId": 154328,
+    "type": "internal",
+    "fileType": "jpeg",
+    "path": "S3:154328:plenty-tee-red.jpg",
+    "position": 0,
+    "lastUpdate": "2017-01-27 17:08:03",
+    "insert": "2017-01-27 17:08:01",
+    "md5Checksum": "075691560e5780367e4e73198a4332c4",
+    "width": 590,
+    "height": 459,
+    "size": 36781,
+    "storageProviderId": "2",
+    "cleanImageName": "http-www-plenty-tee-red.jpg",
+    "url": "http://your_store.com/item/images/154328/3000x3000/plenty-tee-red.jpg",
+    "urlMiddle": "http://your_store.com/item/images/154328/370x450/plenty-tee-red.jpg",
+    "urlPreview": "http://your_store.com/item/images/154328/150x150/plenty-tee-red.jpg",
+    "urlSecondPreview": "http://your_store.com/item/images/154328/10x10/plenty-tee-red.jpg",
+    "documentUploadPath": "item/images/154328/3000x3000/plenty-tee-red.jpg",
+    "documentUploadPathPreview": "item/images/154328/150x150/plenty-tee-red.jpg",
+    "documentUploadPreviewWidth": 150,
+    "documentUploadPreviewHeight": 150,
+    "availabilities": [
+        {
+            "imageId": 67,
+            "type": "mandant",
+            "value": 12345
+        }
+    ],
+    "names": [
+        {
+            "lang": "en",
+            "name": "Red plentymarkets tee"
+        }
+    ]
+}
+----
+
+Jot down the image ID. You will need this image ID in the next step when you link the image to a variation.
+
+[[post-image-link]]
+==== Linking item image to a variation
+
+Once you have uploaded the item image, you link it to one or more variations to be visible in the online store. In this case, we will link the image to the variation with the attribute value combination *red/Unisex M*.
+
+`/rest/items/{id}/variations/{variationId}/variation_images`
+
+We need to specify at least the following parameters:
+
+* The ID of the item = 154332
+* The ID of the variation = 1137
+* The ID of the image = 67
+
+We should post this request:
+
+===== Request
+
+./rest/items/154332/variations/1137/variation_images
+[source,json]
+----
+{
+    "imageId": 67
+}
+----
+
+===== Expected response
+
+[source,json]
+----
+{
+    "id": 21,
+    "itemId": 154332,
+    "variationId": 1131,
+    "imageId": 67,
+    "createdAt": "2017-01-27T09:25:27+01:00",
+    "updatedAt": "2017-01-27T09:25:27+01:00"
+}
+----
+
+The image is now activated for the variation and will be used to illustrate this variation in the online store.
+
+=== Step 7: Related data
+
+We have now created an item and added several variations. However, to sell these variations in the online store, we need to save additional data. As specified earlier, some data in plentymarkets is managed centrally and linked to individual items or variations. In this part of the tutorial, we will link the following data to our variations:
+
+* Shipping profile
+* Sales price
+* Barcode
+
+==== Shipping profiles
+
+To make sure shipping costs are calculated correctly, you need to link at least one shipping profile to every item. To find out more about shipping profiles, check the plentymarkets link:https://knowledge.plentymarkets.com/en/fulfilment/preparing-the-shipment[manual^].
+
+===== Listing shipping profiles
+
+First, get a list of all shipping profiles:
+
+`/rest/orders/shipping/presets`
+
+The expected response is a list of all shipping profiles saved in the system.
+
+===== Linking a shipping profile to the item
+
+`/rest/items/{id}/item_shipping_profiles`
+
+Instead of creating a shipping profile, we will assume that a suitable profile already exists. Let's say it has the ID 6. So we need to specify the ID of the item and the ID of the shipping profile:
+
+===== Request
+
+./rest/items/154332/item_shipping_profiles
+[source,json]
+----
+{
+    "profileId": 6
+}
+----
+
+===== Expected response
+
+[source,json]
+----
+            {
+                "itemId": 154332,
+                "profileId": 8,
+                "id": 39
+            }
+            
+----
+
+The shipping profile is now linked to the item. Because the shipping profile is linked at the item level, it is applied to all variations of the item.
+
+==== Sales prices
+
+We are getting closer to actually selling our tees in our store. But so far, our variations do not have a price. Sales prices are defined centrally and linked to variations. The actual price is saved on the variation level. This allows you to manage recurring settings centrally, e.g. referrers, countries, clients, etc. As such, a sales price can be described as a combination of settings and conditions under which a variation is sold at a particular price. By contrast, the price is the actual amount of money at which the variation is sold at when the conditions of the sales price are met.
+
+===== Listing sales prices
+
+Start off by checking if any of the existing sales prices fit your needs. Use the following call to list all sales prices in the system.
+
+`/rest/items/sales_prices`
+
+===== Creating a sales price
+
+`/rest/items/sales_prices`
+
+Now, we will create a sales price. Note that because we pass the plentyID *-1*, the sales price will be activated for all clients.
+
+===== Request
+
+`/rest/items/sales_prices`
+
+[source,json]
+----
+    {
+        "position": 6,
+        "minimumOrderQuantity": 1,
+        "type": "default",
+        "isCustomerPrice": false,
+        "isDisplayedByDefault": true,
+        "isLiveConversion": false,
+        "names": [
+            {
+                "lang": "en",
+                "nameInternal": "Default store",
+                "nameExternal": "Our price"
+            }
+        ],
+        "countries": [
+            {
+                "countryId": 12
+            }
+        ],
+        "currencies": [
+            {
+                "currency": "EUR"
+            }
+        ],
+        "customerClasses": [
+            {
+                "customerClassId": -1
+            }
+        ],
+        "referrers": [
+            {
+                "referrerId": 0
+            },
+            {
+                "referrerId": 1
+            }
+        ],
+        "clients": [
+            {
+                "plentyId": -1
+            }
+        ]
+    }
+----
+
+===== Expected response
+
+[source,json]
+----
+{
+    "id": 9,
+    "position": 6,
+    "minimumOrderQuantity": 1,
+    "type": "default",
+    "isCustomerPrice": false,
+    "isDisplayedByDefault": true,
+    "isLiveConversion": false,
+    "createdAt": "0000-00-00 00:00:00",
+    "updatedAt": "2017-01-27 16:57:27",
+    "names": [
+        {
+            "priceId": 9,
+            "lang": "en",
+            "nameInternal": "Default store",
+            "nameExternal": "Our price",
+            "createdAt": null,
+            "updatedAt": "2017-01-27T16:57:27+01:00"
+        }
+    ],
+    "accounts": [],
+    "countries": [
+        {
+            "priceId": 9,
+            "countryId": 12,
+            "createdAt": "2017-01-27T16:57:27+01:00",
+            "updatedAt": "2017-01-27T16:57:27+01:00"
+        }
+    ],
+    "currencies": [
+        {
+            "priceId": 9,
+            "currency": "EUR",
+            "createdAt": "2017-01-27T16:57:27+01:00",
+            "updatedAt": "2017-01-27T16:57:27+01:00"
+        }
+    ],
+    "customerClasses": [
+        {
+            "priceId": 9,
+            "customerClassId": -1,
+            "createdAt": "2017-01-27T16:57:27+01:00",
+            "updatedAt": "2017-01-27T16:57:27+01:00"
+        }
+    ],
+    "referrers": [
+        {
+            "priceId": 9,
+            "referrerId": 0,
+            "createdAt": "2017-01-27T16:57:27+01:00",
+            "updatedAt": "2017-01-27T16:57:27+01:00"
+        },
+        {
+            "priceId": 9,
+            "referrerId": 1,
+            "createdAt": "2017-01-27T16:57:27+01:00",
+            "updatedAt": "2017-01-27T16:57:27+01:00"
+        }
+    ],
+    "clients": [
+        {
+            "priceId": 9,
+            "plentyId": -1,
+            "createdAt": "2017-01-27T16:57:27+01:00",
+            "updatedAt": "2017-01-27T16:57:27+01:00"
+        }
+    ]
+}
+----
+
+The sales price is now saved in the system and you can link it to the item. To do so, first write down the sales price ID (in our case, this is ID 9).
+
+===== Linking sales price and save a price
+
+`/rest/items/{id}/variations/{variationId}/variation_sales_prices`
+
+As stated, sales prices are linked to an item at the variation level. As such, you can assign different sales prices to different variations of an item. If you want to work with the inheritance feature for this data, note that inheritance is 1:n. This means that you can only pass either all or no sales prices from the main variation to another variation of the item.
+
+We want to link this sales price to our main variation so that the price is passed on to all the item's variation for which inheritance is active. We will need to post the following parameters:
+
+* The ID of the variation = 1136
+* The ID of the sales price = 9
+* The price = 19.00
+
+So our request should look like this:
+
+===== Request
+
+./rest/items/154332/variations/1136/variation_sales_prices
+[source,json]
+----
+{
+    "variationId": 1136,
+    "salesPriceId": 9,
+    "price": "19.00"
+}
+----
+
+===== Expected response
+
+[source,json]
+----
+{
+    "variationId": 1136,
+    "salesPriceId": 9,
+    "price": 19,
+    "updatedAt": "2017-01-27T16:59:46+01:00",
+    "createdAt": "2017-01-27T16:59:46+01:00"
+}
+----
+
+Note that at this stage inheritance is active for all our variations. As such, the combination of sales price and price is passed on to all variations of the item.
+
+===== Posting a price for another variation
+
+`/rest/items/{id}/variations/{variationId}/variation_sales_prices`
+
+We specified earlier that we want variation 4 with the attribute combination black/Unisex L to be more expensive that the other variations of the item. To take account of this fact, we need to save a different price for this variation.
+
+Assuming that this variation has the ID 1140, our request should look like shown below. Remember that because inheritance currently is active, no price data is saved for the variation. As such, we need to POST the price data.
+
+===== Request
+
+./rest/items/154332/variations/1140/variation_sales_prices
+[source,json]
+----
+{
+    "variationId": 1140,
+    "salesPriceId": 9,
+    "price": "21.00"
+}
+----
+
+===== Expected response
+
+[source,json]
+----
+{
+    "variationId": 1140,
+    "salesPriceId": 9,
+    "price": 21,
+    "updatedAt": "2017-01-27T16:59:46+01:00",
+    "createdAt": "2017-01-27T16:59:46+01:00"
+}
+----
+
+By posting a different price for the variation, inheritance of all sales prices is deactivated for this variation. If other sales prices are linked to the variation, the main variation's prices are copied for this variation.
+
+[[get-sales-price-data]]
+===== Getting variation sales price data
+
+Now, retrieve the sales price data linked to our main variation. You can do this either with the route 'Variation SalesPrices' or with the route 'Item variation' combined with the parameter `salesPrices`:
+
+`/rest/items/154332/variations/1136/variation_sales_prices`
+
+`/rest/items/154332/variations/1136?with=variationSalesPrices`
+
+You can also list the variation sales price data for all variations of the item:
+
+`/rest/items/154332/variations?with=variationSalesPrices`
+
+==== Barcodes
+
+Barcodes such as GTIN, ISBN, UPC and QR are used to identify items in plentymarkets and on markets. Barcodes are created centrally and then linked to a variation to save the code.
+
+The following barcode types are supported in plentymarkets:
+
+* GTIN 8; GTIN 13; GTIN 14; GTIN 128 = The Global Trade Item Number (formerly European Article Number, EAN) is a product barcode for items. The GTIN consists of 8, 13, 14 or 128 characters and is administered centrally and issued for manufacturers upon request.
+* ISBN = The International Standard Book Number is a unique number of 10 or 13 characters to register books and other independent, discontinuous publications like multimedia products or software.
+* QR = Quick Response Code. The code contains data such as the version, the data format and other information.
+* CODE 128 = Alphanumeric barcode. The Code128 consists of start character, encoded data, check character and stop character.
+* UPC = The Universal Product Code is a product barcode for items. The UPC is a 12-digit number. By adding a leading *0*, this barcode can be used as a 13-digit GTIN.
+
+For this tutorial, we will create an 8-digit GTIN barcode and link it to our variations to save GTIN-Codes for our variations.
+
+===== Listing barcodes
+
+First, check for barcodes already in the system:
+
+`/rest/items/barcodes`
+
+The expected response is a list of all barcodes saved in the system.
+
+===== Creating a barcode
+
+`/rest/items/barcodes`
+
+Now, we will create an 8-digit GTIN for the default store. We need to post the following parameters:
+
+* A name for the barcode = GTIN8 store
+* The type of barcode to be created = GTIN_8
+* The ID of the client (store)/referrer = 0
+
+So this is what our request should look like:
+
+===== Request
+
+./rest/items/barcodes
+[source,json]
+----
+{
+    "name": "GTIN8 store",
+    "type": "GTIN_8",
+    "referrers": [
+        {
+            "referrerId": 0
+        }
+    ]
+}
+----
+
+===== Expected response
+
+[source,json]
+----
+{
+    "id": 25,
+    "name": "GTIN8 store",
+    "type": "GTIN_8",
+    "referrers": [
+        {
+            "barcodeId": 25,
+            "referrerId": 0,
+            "createdAt": "2017-01-27T12:52:45+01:00",
+            "updatedAt": "2017-01-27T12:52:45+01:00"
+        }
+    ]
+}
+----
+
+The barcode has now been created and is ready to be linked to our variations. Jot down the barcode ID to get ready for the next step.
+
+===== Linking barcode to variation and saving a code
+
+`/rest/items/{id}/variations/{variationId}/variation_barcodes`
+
+Now you have created the barcode, you can link this barcode to a variation and save a code. All you need is the barcode ID and the barcode code:
+
+===== Request
+
+./rest/items/154328/variations/1130/variation_barcodes
+[source,json]
+----
+{
+    "barcodeId": 25,
+    "code": 11111111
+}
+----
+
+===== Expected response
+
+[source,json]
+----
+{
+    "barcodeId": 25,
+    "variationId": 1130,
+    "code": "11111111",
+    "createdAt": "2017-01-27T16:38:15+01:00"
+}
+----
+
+== Managing item data
+
+Congratulations! You have now created your first item in plentymarkets. If you want, you can open the *Item » Edit item* of your plentymarkets back end and look at it in all its glory. But you can also update, search and filter the item data using the plentymarkets REST API. You will find details on the different methods and parameters in the REST documentation, but we will give you a quick tour to get you started here.
+
+=== Updating item data
+
+As we said earlier, our variations are not ready for market. As such, you still need to add more information. For that, you use the PUT methods of the item and variation routes. To illustrate, let's assume for a moment that you have saved all the data you need to publish the variations in your online store. If you want to start selling your variations, you need to change the `isActive` parameter value from `false` to `true`:
+
+===== Request
+
+./rest/items/154332/variations/1137
+[source,json]
+----
+{
+    "isActive": "true"
+}
+----
+
+[NOTE]
+====
+Remember that the main variation we created is not a sellable product. As such, make sure you only activate those variations of the item that you want to sell.
+====
+
+[[list-related]]
+=== Listing related data
+
+As we have seen, related data is linked to variations using separate variation routes. However, instead of listing this data using these separate routes, you can also use the parameter `with` to retrieve related data linked to a variation:
+
+`/rest/items/{id}/variations/{variationId}?with=`
+
+This call will include the related data for a specific variation of an item in the search results. Separate more than one parameter by commas.
+
+`/rest/items/{id}/variations?with=`
+
+This call will include the related data for all variations of an item in the search results. Separate more than one parameter by commas.
+
+The following `with` parameters are available - but also check the item documentation because new `with` parameters are implemented:
+
+* `variationWarehouses` = Lists the warehouse data of the item's variations.
+* `variationSuppliers` = Lists the supplier data of the item's variations.
+* `variationDefaultCategory` = Lists the default categories of the item's variations.
+* `variationMarkets` = Lists the markets linked to the item's variations.
+* `variationClients` = Lists the clients (stores) linked to the item's variations.
+* `variationSalesPrices` = Lists the sales prices linked to and the prices saved for the item's variations.
+* `variationBarcodes` = Lists the barcodes linked to the item's variations.
+* `variationCategories` = Lists the categories linked to the item's variations.
+* `variationAttributeValues` = Lists the attribute values of the item's variations.
+* `unit` = Lists the units of the item's variations.
+* `parent` = Lists the ID of the main variation of the item's variations.
+* `marketItemNumbers` = Lists the market item numbers of the item's variations.
+* `item` = Lists the item data of the item's variations.
+* `images` = Lists the images linked to the item's variations.
+* `stock` = Lists the stock data of the item's variations.
+
+===== Example request
+
+`/rest/items/154332/variations?with=variationSalesPrices`
+
+This call will list the sales prices and prices of our item's variations.
+
+=== Filtering results
+
+You can limit the number of results of GET methods by applying filter parameters. Check the documentation of the individual routes to see which filter parameters are available. To get you started, try the following REST call:
+
+`/rest/items/variations?isMain=true`
+
+This call uses the filter parameter `isMain` to list only main variations in the system.
+
+== Streamlining data exchange with external applications
+
+As we have seen, filters and `with` parameters allow you to filter results and include relevant related data in the search results. However, filters and parameters also help you to streamline the exchange of item data between plentymarkets and external applications via REST. In other words, you can use filters to set up workflows that allow you to persistently save related data and only get new or updated data before executing processes. To get you started, we will show you how to do this and also provide a list of the calls and filters you need to streamline item data exchange via REST.
+
+=== Resource efficient data exchange workflow
+
+We have already seen that related data is managed centrally, i.e. independently of items and variations. In other words, related data cannot be retrieved using the item and variation routes. This is because item and variation routes only return information on which configurations are linked to the item or variation and the values saved at the item or variation level. As such, you need to use related data routes to retrieve the configurations that are linked to variations and/or items. This means that to interpret variation data, you also need to access the configurations saved centrally. The workflow described below shows you how to do this by persistently storing and updating related data efficiently.
+
+. Create a database or JSON files in the external application for persistently storing data.
+. GET all related data using the collection routes.
+. Save this data persistently in the local application.
+. GET all variation data using the collection routes.
+. Save this data persistently in the local application.
+. GET all item data using the collection route.
+. Save this data persistently in the local application.
+. Before executing a process in the local application, GET related data filtered with `updatedAt` filters to persistently store related data updated since last GET calls.
+. GET variation data updated since last GET call.
+. GET item data updated since last GET call.
+. Match the related data to the data stored in the application.
+. GET data for IDs that cannot be resolved via the appropriate member routes.
+
+We recommend that you persistently store the following related data in the external application to exchange item data efficiently:
+
+* Barcode configurations
+* Categories
+* Sales price configurations
+* Properties incl. names
+* Properties with value type *Selection*
+* Attributes incl. names
+* Attribute values incl. names
+* Suppliers
+* Warehouses
+* Manufacturers
+* Images
+* Units
+
+We also recommend that you get and save variation and item data persistently and only retrieve updated item and variation data before an application process is started.
+
+=== Example workflow: variation sales prices
+
+To illustrate the workflow described above, let's assume we want to exchange sales price data with an external application. The following steps describe the sequence in which data is exchanged.
+
+==== Step 1: Initial data retrieval
+
+`/rest/items/sales_prices`
+
+GET and persistently store all sales price configuration data in the application.
+
+`/rest/items/variations?with=variationSalesPrices`
+
+GET and persistently store all variation data including links to sales price configurations in the application.
+
+`/rest/items`
+
+GET and persistently store all item data in the application.
+
+==== Step 2: Before executing an application process
+
+`/rest/items/sales_prices?updatedAt=[timestamp]`
+
+GET and persistently save sales price configuration data that was added or updated since last GET method.
+
+`/rest/items/variations?with=variationSalesPrices&updatedAt=[timestamp]`
+
+GET all variations including links to sales price configurations that were updated on or after the time specified.
+
+==== Step 3: Iterating variation data
+
+The variation data includes the following information about linked sales prices:
+
+* variationId
+* salesPriceId
+* price
+* updatedAt
+* createdAt
+
+When iterating the variation data, the data stored in the application is accessed to retrieve the sales price configuration data.
+
+==== Step 4: Ad hoc retrieval of unknown member resources
+
+`/rest/items/sales_prices/{id}`
+
+If variations are linked to a sales price ID that is not stored in the external application, use the member route to get this data and persistently save it in the application.
+
+=== List of resource efficient REST calls
+
+The following table lists the GET methods that allow you to filter results using `updatedAt` filters. To help you streamline your workflow even more, the table also provides additional filters and/or `with` parameters you can use to get collections efficiently. We recommend that you also check the documentation for additional filters that can help you to retrieve only the data you need for your specific use cases.
+
+To use the GET calls listed, you initially need to GET all the data listed and persistently store it in your application. Otherwise, the data created before the `updatedAt` time specified will be ignored.
+
+Note that the timestamps for `updatedAt` filters can be specified in the following formats:
+
+* ISO 8601 date and time format, i.e. yyyy-mm-ddThh:mm:ssTZD (e.g. 2017-01-27T16:59:46+01:00)
+* Unix timestamp
+* PHP function `strtotime`
+
+*Related data*
+
+[cols="1,3,2"]
+|===
+|Data |GET method |Description
+
+|Categories
+|`/rest/categories?type=item&updatedAt=[timestamp]`
+|Gets all categories of the type *Item* that were updated on or after the time specified.
+
+|Manufacturers
+|`/rest/items/manufacturers?updatedAt=[timestamp]&with=commissions`
+|Gets all manufacturers including manufacturer commission data that were updated on or after the time specified.
+
+|Properties
+|`/rest/items/properties?updatedAt=[timestamp]&with=names`
+|Gets all properties including property names that were updated on or after the time specified.
+
+|Properties with value type *selection*
+|`/rest/items/properties/{id}/selections?updatedAt=[timestamp]`
+|Gets all properties with value type *selection* that were updated on or after the time specified.
+
+|Attributes
+|`/rest/items/attributes?updatedAt=[timestamp]&with=names`
+|Gets all attributes including attribute names that were updated on or after the time specified.
+
+|Attribute values
+|`/rest/items/attributes/{attributeId}/values?updatedAt=[timestamp]&with=names`
+|Gets all attribute values including attribute value names that were updated on or after the time specified.
+
+|Barcodes
+|`/rest/items/barcodes?updatedAt=[timestamp]`
+|Gets all barcodes that were updated on or after the time specified.
+
+|Sales prices
+|`/rest/items/sales_prices?updatedAt=[timestamp]`
+|Gets all sales prices that were updated on or after the time specified.
+
+|Supplier
+|`/rest/accounts/contacts?typeId=4&updatedAtAfter=[timestamp]`
+|Gets all contact types with the ID 4, i.e. suppliers, that were updated on or after the time specified.
+
+|Units
+|`/rest/items/units?updatedAt=[timestamp]`
+|Gets all units that were updated on or after the time specified.
+
+|Images
+|`/rest/items/{id}/images?updatedAt=[timestamp]`
+|Gets all images saved for an item that were updated on or after the time specified.
+
+|Warehouses
+|`/rest/stockmanagement/warehouses?updatedAtFrom=[timestamp]`
+|Gets all warehouses that were updated on or after the time specified.
+|===
+
+*Items*
+
+[cols="1,3,2"]
+|===
+|Data |GET method |Description
+
+|Items
+|`/rest/items?with=variations&updatedBetween=[timestamp]`
+|Gets items that were updated on or after the time specified including variation data.
+|===

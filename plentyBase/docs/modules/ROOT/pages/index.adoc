@@ -1,3 +1,0 @@
-= REST API
-:page-layout: swagger
-:page-specurl: ../../rest-api/openApiV2.json

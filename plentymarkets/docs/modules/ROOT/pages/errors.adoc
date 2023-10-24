@@ -1,0 +1,83 @@
+= Errors
+
+== Error format
+
+If an error occur, the httpo response
+
+[source,json]
+----
+{
+  "error": {
+    "message": "short error description",
+    "code": 0
+  }
+}
+----
+
+== General http response codes
+
+In a REST API, there are several common HTTP status codes that are used to indicate different types of failures or errors when a request to the API fails.
+Here are some of the most common HTTP status codes for failed REST API calls:
+
+- *400 Bad Request*: This status code indicates that the client's request was malformed or contains invalid parameters.
+It's often used when the API cannot process the request due to client-side errors.
+
+- *401 Unauthorized*: This status code indicates that the request lacks proper authentication credentials or the provided credentials are invalid.
+It means the client is not authenticated and should provide valid credentials.
+
+- *403 Forbidden*: This status code indicates that the client's request is understood, but the server refuses to fulfill it.
+This typically occurs when the client lacks the necessary permissions to access the requested resource.
+The error repsonse will contain the missing permissions.
+
+[source,json]
+----
+{
+  "error": {
+    "message": "This action is unauthorized.",
+    "missing_permissions": [
+      "permission.write",
+      "permission.read"
+    ]
+  }
+}
+----
+
+- *404 Not Found*: This status code indicates that the requested resource could not be found on the server.It's often used when a client tries to access a resource that doesn't exist.
+
+- *405 Method Not Allowed*: This status code indicates that the HTTP method (GET, POST, PUT, etc.) used in the request is not allowed for the specified resource.
+It's essential to use the correct HTTP method.
+
+- *422 Unprocessable Entity*: This status code is often used to indicate that the server understands the request, but it cannot process it due to semantic errors or invalid data in the request payload.
+It's commonly used for input validation errors.
+In the case of a validation error, the response will contain the validation result.
+
+[source,json]
+----
+{
+  "error": {
+    "message": "validation error found"
+  },
+  "validation_errors": {
+    "field_a": [
+        "field_a must not be empty."
+    ],
+    "field_b": [
+        "field_b must be of type integer."
+    ]
+  }
+}
+----
+
+- *429 Too Many Requests*: This status code indicates that the client has exceeded the rate limit for accessing the API.
+It's often used to prevent abuse or overuse of the API.
+
+- *500 Internal Server Error*: This status code indicates a generic server error.
+It's used when an unexpected error occurs on the server, and the server is unable to provide more specific information about the nature of the problem.
+
+- *502 Bad Gateway*: This status code is typically used when a server acting as a gateway or proxy encounters an error while trying to fulfill the client request.
+
+- *503 Service Unavailable*: This status code indicates that the server is temporarily unable to handle the request.
+It's often used when the server is undergoing maintenance or experiencing temporary overloads.
+
+These are some of the most common HTTP status codes for API errors, but there are many more status codes in the HTTP specification that can be used for specific situations.
+Choosing the appropriate status code for an API error is important for providing clear and meaningful information to clients about what went wrong.

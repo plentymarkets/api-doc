@@ -1,0 +1,78 @@
+= Authentication
+
+plentysystems REST API uses *OAuth 2.0*.
+
+With *OAuth 2.0*, in simple terms, you will get a token that allows you to share certain information or access with another
+app or service without giving them your actual password. It's a way for you to grant limited access to your plentysystems
+resources in a secure and controlled manner.
+
+The token which will be created at the authentication is a *JWT*.
+JWT, or JSON Web Token, is a compact and self-contained way to represent and transmit information between two parties
+securely as a JSON object. In simpler terms, it's a token format used for securely sharing information between different
+systems or parties, typically in the context of authentication and authorization.
+
+JWTs are commonly used in authentication and authorization processes, especially in web applications.
+When a user logs in, they receive a JWT, which they can present for authentication with each subsequent request.
+The server can then verify the JWT's signature to ensure the user's authenticity.
+
+One of the significant advantages of JWTs is that they are stateless, meaning the server doesn't need to store session
+data for each user. This makes them efficient for use in distributed and microservices-based applications. However,
+it's crucial to store JWTs securely and protect them from tampering, as anyone with a valid JWT can access the
+associated resources.
+
+== How to get a JWT
+
+The API endpoint for reciving a JWT is `/rest/login`
+
+Currently we only support the `password grant flow`, without the need to append client credentials.
+The Password Grant Flow, also known as the Resource Owner Password Credentials Grant, is one of the OAuth 2.0 grant
+types. It allows a user to provide their username and password directly to the client application (such as a mobile
+app or a desktop application), and the client uses this information to obtain an access token from the authorization server.
+
+The API uses the "Bearer" authentication scheme to transmit the access token. To get the token for authentication,
+use the xref:plentymarkets-rest-api:ROOT:index.adoc##tag/Authentication/paths/~1rest~1check_pin/post[Login] call.
+By executing this POST method with a valid body, it will return a JSON object with the necessary data.
+
+=== Request:
+[source,httprequest]
+----
+POST /rest/login HTTP/1.1
+HOST: https://myplentyshop.com
+Content-Type: application/json
+Accept: application/json
+----
+[source,json]
+----
+{
+    "username": "myUsername",
+    "password": "myPassword"
+}
+----
+
+=== Response:
+[source,json]
+----
+{
+    "token_type": "Bearer",
+    "expires_in": 86400,
+    "access_token": "eyJ0eXAiO....iQ40",
+    "refresh_token": "def502003d7....de8c113562efc"
+}
+----
+
+Enter the `Authorization` key together with the token as the value in the HTTP header:
+
+`Authorization: Bearer TOKEN`
+
+== Simultaneously active users
+
+The plentysystems REST API supports a maximum amount of simultaneously active users (the default number is 3, but it is dependent on your contract). If you try to access the API with more than the maximum number of users, you will receive the following a response with a `429` status code and the following content:
+
+[source,json]
+----
+{
+    "error": "too_many_concurrent_sessions",
+    "max_current_sessions": 3,
+    "message": "Too many users. Only 3 users can be logged in simultaneously in the back end. Try again soon or upgrade your contract (https://www.plentymarkets.eu/preise/)"
+}
+----

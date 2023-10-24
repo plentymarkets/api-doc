@@ -1,0 +1,526 @@
+= Contact data
+
+In this tutorial, you will learn how to create, update and list customer-specific data. This includes contacts and accounts (companies) as well as addresses, contact options and address options. A contact is equivalent to a person; an account is equivalent to a company. In your plentymarkets system, you will then find this data in the contact data record in the *CRM » Contacts* menu. The contact's addresses are also saved in the contact data record and can be an invoice address and/or a delivery address. Contact options are for example the business telephone number, the private telephone number and the email address. Address options are for example the date of birth and the contact person.
+
+You will also learn how to retrieve this data. Open the https://developers.plentymarkets.com/rest-doc#/Account[Account section of the plentymarkets REST documentation] where you find - besides many other calls - all calls that are needed for this tutorial. For example, it is possible to retrieve the data of all contacts at the same time by using the GET call `/rest/accounts/contacts`. If you want to retrieve data of just one specific contact, use the GET call `/rest/accounts/contacts/{contactId}`.
+
+Let's assume you use a marketing software and you would like to import the data contained in this software into your plentymarkets system. After you have retrieved some basic information such as the contact class and type, you need to create a contact. If needed, you can also assign an account to that contact data record and add an address. It is possible to assign multiple contacts to one account and to add as many addresses as you like.
+
+== Retrieve basic information
+
+Before you create a contact and the corresponding account, it is useful to retrieve some general information: for example, the contact classes and the contact types that exist in plentymarkets. There are 6 contact types available by default in plentymarkets, but no default contact classes.
+
+=== Retrieve contact classes
+
+You can use contact classes to categorise your customer base according to specific criteria. It is most likely that the IDs and names of the contact classes that you use in the external tool deviate from the IDs and names of those in plentymarkets. Therefore, retrieve the contact class data with the GET call `/rest/accounts/contacts/classes`. This will list the names and IDs of all contact classes that are saved in your plentymarkets system. Use the GET call `/rest​/accounts​/contacts​/classes​/{contactClassId}` to get the data saved for a certain contact class.
+
+=== Retrieve contact types
+
+Types are used to classify contacts and differentiate between them. Now you retrieve all contact types that are saved in plentymarkets. To do so, use the GET call `/rest/accounts/contacts/types`. Note that there are 6 contact types available by default that cannot be deleted. All other contact types that you created are subsequently given an ID and added to the end of the list of the default contact types.
+
+The following contact types are available by default and cannot be deleted:
+
+* ID 1 = Customer
+* ID 2 = Interested party
+* ID 3 = Sales representative
+* ID 4 = Supplier
+* ID 5 = Manufacturer
+* ID 6 = Partner
+
+You can add further types by using the POST call `/rest/accounts/contacts/types`.
+
+== Create a new contact
+
+After you retrieved the data as described in <<#_retrieve_basic_information, Retrieve basic information>>, you can create a new contact. To put it simply, a contact is nothing else than a natural person. Use the following REST call to create a contact.
+
+`/rest/accounts/contacts`
+
+== Create a new account
+
+Use the following REST call to create a new account. An account contains company-related data such as the company name and the tax number. As already mentioned above, it is possible to assign multiple contacts to one account (company).
+
+./rest/accounts
+[source,json]
+----
+{
+  "companyName": "New Company",
+  "taxIdNumber": "123456789",
+  "valuta": 60,
+  "discountDays": 15,
+  "discountPercent": 2.00,
+  "timeForPaymentAllowedDays": 30,
+  "salesRepresentativeContactId": null,
+  "userId": null
+}
+----
+
+== List all contacts
+
+Use the following REST call to list all contacts that are saved in your
+plentymarkets system.
+
+[NOTE]
+====
+If you would like to get the data of a specific contact only, use the GET call `/rest/accounts/contacts/{contactId}` and replace *\{contactId}* with the ID of the contact.
+====
+
+./rest/accounts/contacts
+[source,json]
+----
+{
+    "number": "12XA44BC",
+    "externalId": "102030",
+    "typeId": 4,
+    "firstName": "John",
+    "lastName": "Doe",
+    "gender": "male",
+    "formOfAddress": "",
+    "newsletterAllowanceAt": "2014-04-09 23:18:24",
+    "classId": 1,
+    "blocked": 0,
+    "rating": 3,
+    "bookAccount": "",
+    "lang": "de",
+    "referrerId": 1,
+    "plentyId": 0,
+    "userId": 1,
+    "birthdayAt": "1984-03-19 00:00:00",
+    "lastLoginAt": "2014-04-09 23:18:24",
+    "lastOrderAt": "2014-04-09 23:18:24",
+    "createdAt": "2014-04-09 23:18:24",
+    "updatedAt": "2016-07-22 23:12:15",
+    "options": [
+        {
+            "typeId": 1,
+            "subTypeId": 4,
+            "value": "030 12312234",
+            "priority": 0
+        },
+        {
+            "typeId": 1,
+            "subTypeId": 3,
+            "value": "030 98898",
+            "priority": 0
+        },
+        {
+            "typeId": 2,
+            "subTypeId": 4,
+            "value": "John@account.com",
+            "priority": 0
+        }
+    ]
+}
+----
+
+== List all accounts
+
+Use the following REST call to list all accounts (companies) that are saved in your plentymarkets system.
+
+`/rest/accounts`
+
+[NOTE]
+====
+If you would like to get the data of a specific account only, use the GET call `/rest/accounts/{accountId}` and replace \{accountId} with the ID of the account.
+====
+
+== List all contacts of an account
+
+Use the following REST call to list all contacts of an account (company). The ID of the account must be specified here.
+
+./rest/accounts/{accountId}/contacts
+[source,json]
+----
+[
+  {
+    "id": 243,
+    "number": "12XA44BC",
+    "externalId": "102030",
+    "typeId": 4,
+    "firstName": "John",
+    "lastName": "Doe",
+    "gender": "male",
+    "title": "",
+    "formOfAddress": "",
+    "newsletterAllowanceAt": "2014-04-09T23:18:24+02:00",
+    "classId": 1,
+    "blocked": 0,
+    "rating": 3,
+    "bookAccount": "",
+    "lang": "de",
+    "referrerId": 1,
+    "userId": 1,
+    "birthdayAt": "1984-03-19T00:00:00+01:00",
+    "lastLoginAt": "2014-04-09T23:18:24+02:00",
+    "lastOrderAt": "2014-04-09T23:18:24+02:00",
+    "createdAt": "2019-12-18T08:13:45+01:00",
+    "updatedAt": "2019-12-18T08:26:55+01:00",
+    "valuta": null,
+    "discountDays": null,
+    "discountPercent": null,
+    "timeForPaymentAllowedDays": null,
+    "salesRepresentativeContactId": null,
+    "plentyId": 15,
+    "email": "John@account.com",
+    "ebayName": "",
+    "privatePhone": "030 12312234",
+    "privateFax": "",
+    "privateMobile": "",
+    "paypalEmail": "",
+    "paypalPayerId": "",
+    "klarnaPersonalId": "",
+    "dhlPostIdent": "",
+    "singleAccess": "",
+    "contactPerson": "",
+    "marketplacePartner": "",
+    "fullName": "John Doe",
+    "pivot": {
+      "accountId": "46",
+      "contactId": "243"
+    },
+    "options": [
+      {
+        "id": 115,
+        "contactId": 243,
+        "typeId": 1,
+        "subTypeId": 3,
+        "value": "030 98898",
+        "priority": 0,
+        "createdAt": "2019-12-18T08:13:45+01:00",
+        "updatedAt": "2019-12-18T08:13:45+01:00"
+      },
+      {
+        "id": 114,
+        "contactId": 243,
+        "typeId": 1,
+        "subTypeId": 4,
+        "value": "030 12312234",
+        "priority": 0,
+        "createdAt": "2019-12-18T08:13:45+01:00",
+        "updatedAt": "2019-12-18T08:13:45+01:00"
+      },
+      {
+        "id": 116,
+        "contactId": 243,
+        "typeId": 2,
+        "subTypeId": 4,
+        "value": "John@account.com",
+        "priority": 0,
+        "createdAt": "2019-12-18T08:13:45+01:00",
+        "updatedAt": "2019-12-18T08:13:45+01:00"
+      }
+    ],
+    "accounts": [
+      {
+        "id": 46,
+        "number": null,
+        "companyName": "New Company",
+        "taxIdNumber": "123456789",
+        "valuta": "60",
+        "discountDays": "15",
+        "discountPercent": "2.00",
+        "timeForPaymentAllowedDays": "30",
+        "salesRepresentativeContactId": null,
+        "userId": null,
+        "deliveryTime": "0",
+        "dealerMinOrderValue": "0.00",
+        "createdAt": "2019-12-18T14:17:15+01:00",
+        "updatedAt": "2019-12-18T14:17:15+01:00",
+        "supplierCurrency": null,
+        "pivot": {
+          "contactId": "243",
+          "accountId": "46",
+          "id": 23
+        }
+      }
+    ]
+  },
+  {
+    "id": 244,
+    "number": "12XA44BC",
+    "externalId": "102030",
+    "typeId": 4,
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "gender": "female",
+    "title": "",
+    "formOfAddress": "",
+    "newsletterAllowanceAt": "2014-04-09T23:18:24+02:00",
+    "classId": 1,
+    "blocked": 0,
+    "rating": 3,
+    "bookAccount": "",
+    "lang": "de",
+    "referrerId": 1,
+    "userId": 1,
+    "birthdayAt": "1984-03-19T00:00:00+01:00",
+    "lastLoginAt": "2014-04-09T23:18:24+02:00",
+    "lastOrderAt": "2014-04-09T23:18:24+02:00",
+    "createdAt": "2019-12-18T14:26:03+01:00",
+    "updatedAt": "2019-12-18T14:26:03+01:00",
+    "valuta": null,
+    "discountDays": null,
+    "discountPercent": null,
+    "timeForPaymentAllowedDays": null,
+    "salesRepresentativeContactId": null,
+    "plentyId": 15,
+    "email": "Jane@account.com",
+    "ebayName": "",
+    "privatePhone": "030 12312234",
+    "privateFax": "",
+    "privateMobile": "",
+    "paypalEmail": "",
+    "paypalPayerId": "",
+    "klarnaPersonalId": "",
+    "dhlPostIdent": "",
+    "singleAccess": "",
+    "contactPerson": "",
+    "marketplacePartner": "",
+    "fullName": "Jane Doe",
+    "pivot": {
+      "accountId": "46",
+      "contactId": "244"
+    },
+    "options": [
+      {
+        "id": 118,
+        "contactId": 244,
+        "typeId": 1,
+        "subTypeId": 3,
+        "value": "030 98898",
+        "priority": 0,
+        "createdAt": "2019-12-18T14:26:03+01:00",
+        "updatedAt": "2019-12-18T14:26:03+01:00"
+      },
+      {
+        "id": 117,
+        "contactId": 244,
+        "typeId": 1,
+        "subTypeId": 4,
+        "value": "030 12312234",
+        "priority": 0,
+        "createdAt": "2019-12-18T14:26:03+01:00",
+        "updatedAt": "2019-12-18T14:26:03+01:00"
+      },
+      {
+        "id": 119,
+        "contactId": 244,
+        "typeId": 2,
+        "subTypeId": 4,
+        "value": "Jane@account.com",
+        "priority": 0,
+        "createdAt": "2019-12-18T14:26:03+01:00",
+        "updatedAt": "2019-12-18T14:26:03+01:00"
+      }
+    ],
+    "accounts": [
+      {
+        "id": 46,
+        "number": null,
+        "companyName": "New Company",
+        "taxIdNumber": "123456789",
+        "valuta": "60",
+        "discountDays": "15",
+        "discountPercent": "2.00",
+        "timeForPaymentAllowedDays": "30",
+        "salesRepresentativeContactId": null,
+        "userId": null,
+        "deliveryTime": "0",
+        "dealerMinOrderValue": "0.00",
+        "createdAt": "2019-12-18T14:17:15+01:00",
+        "updatedAt": "2019-12-18T14:17:15+01:00",
+        "supplierCurrency": null,
+        "pivot": {
+          "contactId": "244",
+          "accountId": "46",
+          "id": 27
+        }
+      }
+    ]
+  },
+  {
+    "id": 245,
+    "number": "12XA44BC",
+    "externalId": "102030",
+    "typeId": 4,
+    "firstName": "Joe",
+    "lastName": "Bloggs",
+    "gender": "diverse",
+    "title": "",
+    "formOfAddress": "",
+    "newsletterAllowanceAt": "2014-04-09T23:18:24+02:00",
+    "classId": 1,
+    "blocked": 0,
+    "rating": 3,
+    "bookAccount": "",
+    "lang": "de",
+    "referrerId": 1,
+    "userId": 1,
+    "birthdayAt": "1974-03-19T00:00:00+01:00",
+    "lastLoginAt": null,
+    "lastOrderAt": null,
+    "createdAt": "2019-12-18T14:28:02+01:00",
+    "updatedAt": "2019-12-18T14:28:02+01:00",
+    "valuta": null,
+    "discountDays": null,
+    "discountPercent": null,
+    "timeForPaymentAllowedDays": null,
+    "salesRepresentativeContactId": null,
+    "plentyId": 15,
+    "email": "Joe@account.com",
+    "ebayName": "",
+    "privatePhone": "030 12312234",
+    "privateFax": "",
+    "privateMobile": "",
+    "paypalEmail": "",
+    "paypalPayerId": "",
+    "klarnaPersonalId": "",
+    "dhlPostIdent": "",
+    "singleAccess": "",
+    "contactPerson": "",
+    "marketplacePartner": "",
+    "fullName": "Joe Bloggs",
+    "pivot": {
+      "accountId": "46",
+      "contactId": "245"
+    },
+    "options": [
+      {
+        "id": 121,
+        "contactId": 245,
+        "typeId": 1,
+        "subTypeId": 3,
+        "value": "030 98898",
+        "priority": 0,
+        "createdAt": "2019-12-18T14:28:02+01:00",
+        "updatedAt": "2019-12-18T14:28:02+01:00"
+      },
+      {
+        "id": 120,
+        "contactId": 245,
+        "typeId": 1,
+        "subTypeId": 4,
+        "value": "030 12312234",
+        "priority": 0,
+        "createdAt": "2019-12-18T14:28:02+01:00",
+        "updatedAt": "2019-12-18T14:28:02+01:00"
+      },
+      {
+        "id": 122,
+        "contactId": 245,
+        "typeId": 2,
+        "subTypeId": 4,
+        "value": "Joe@account.com",
+        "priority": 0,
+        "createdAt": "2019-12-18T14:28:02+01:00",
+        "updatedAt": "2019-12-18T14:28:02+01:00"
+      }
+    ],
+    "accounts": [
+      {
+        "id": 46,
+        "number": null,
+        "companyName": "New Company",
+        "taxIdNumber": "123456789",
+        "valuta": "60",
+        "discountDays": "15",
+        "discountPercent": "2.00",
+        "timeForPaymentAllowedDays": "30",
+        "salesRepresentativeContactId": null,
+        "userId": null,
+        "deliveryTime": "0",
+        "dealerMinOrderValue": "0.00",
+        "createdAt": "2019-12-18T14:17:15+01:00",
+        "updatedAt": "2019-12-18T14:17:15+01:00",
+        "supplierCurrency": null,
+        "pivot": {
+          "contactId": "245",
+          "accountId": "46",
+          "id": 28
+        }
+      }
+    ]
+  }
+]
+----
+
+== Update the address of the contact
+
+Once your contact informs you that their address data has changed, e.g. that they want to have the ordered items shipped to another delivery address, use the following REST call to update the address. The ID of the contact and the ID of the address must be specified here.
+
+[NOTE]
+====
+If you don't know the address ID, use the GET call `/rest/accounts/contacts/{contactId}/addresses` before. Besides the address ID, this call will also return the type ID of the address, i.e. the invoice address or delivery address, for example. You can also use a filter directly when sending the call to only display the delivery address of the contact (in this case, this would be address type ID 2).
+====
+
+./rest/accounts/contacts/{contactId}/addresses/{addressId}
+[source,json]
+----
+{
+  "isPrimary": 1,
+  "gender": "male",
+  "name1": "",
+  "name2": "John",
+  "name3": "Doe",
+  "address1": "Bürgermeister-Brunner-Straße",
+  "address2": "15",
+  "address3": "third floor, left side",
+  "postalCode": "34117",
+  "town": "Kassel",
+  "countryId": 1,
+  "options": [
+    {
+      "typeId": 5,
+      "value": "john@account.com"
+    },
+    {
+      "typeId": 4,
+      "value": "05683 1233456"
+    }
+  ]
+}
+----
+
+[[list-contact-options]]
+=== List all contact options
+
+A contact option is composed of the contact ID, the type ID, the sub-type ID and the actual value. There are some types and sub-types available by default that cannot be deleted. Each type and sub-type is assigned an ID. You can also add new types and sub-types. They will be subsequently given an ID and added to the end of the list of the  default types and default sub-types.
+
+Let's illustrate this with 2 examples:
+
+*Example 1:* Type ID 2 is the "email address", sub-type ID 4 is "private". Thus, the actual value is the combination of both types ("email address" and "private"), e.g. John@account.com.
+
+*Example 2:* Type ID 1 is the "telephone number", sub-type ID 1 is "work". Thus, the corresponding value is the business phone number of the contact, e.g. 123-456-7890.
+
+Of course, a contact may have various contact options as long as the type ID and the sub-type ID are unique. That means that the same combination of IDs cannot be used twice. Thus, a contact may have one private email address, one business email address, one private phone number, one business phone number and so on.
+
+Use the following REST call to list the contact options of a contact. The ID of the contact must be specified here.
+
+`/rest/accounts/contacts/{contactId}/options`
+
+[NOTE]
+====
+If you know the ID of the contact option, you can also use the GET call `/rest/accounts/contacts/options/{optionId}` and enter the ID of the contact option instead of the contact ID. This call will return the information for this single contact option only together with the value and the linked contact ID.
+====
+
+=== List address options
+
+There are multiple address options available in plentymarkets:
+
+* Email address
+* Telephone number
+* VAT number
+* External address ID
+* Entry certificate
+* Post number
+* Personal ID
+* Age rating
+* Birthday
+* Title
+* Contact person
+
+Use the GET call `/rest/accounts/addresses/{addressId}/options` to
+list the address options of a specific address and their saved values.
+
+=== List address contact relations
+
+Use the GET call `/rest/accounts/addresses/contact_relations` to list the address contact relations that are saved in your plentymarkets system.

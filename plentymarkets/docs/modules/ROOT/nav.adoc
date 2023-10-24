@@ -1,0 +1,18 @@
+.Introduction
+* xref:getting-started.adoc[Getting started]
+* xref:structure.adoc[Structure]
+* xref:authentication.adoc[Authentication]
+* xref:errors.adoc[Errors]
+* xref:limits.adoc[Limits and Throttling]
+
+.Guides
+* xref:rest-api-guides:item-data.adoc[Item creation]
+* xref:rest-api-guides:contact-data.adoc[Contact management]
+* xref:rest-api-guides:order-data.adoc[Fetching orders]
+* xref:rest-api-guides:order-search.adoc[Using the order search]
+* xref:rest-api-guides:purchase-orders.adoc[Managing reorders]
+
+.References
+* xref:reference:data-maps.adoc[Data maps]
+* xref:reference:simple-api.adoc[API Reference]
+* xref:plenty-base:index.adoc[plentyBase tool API]

@@ -1,0 +1,1779 @@
+= Data maps
+
+The resources of the plentysystems REST Api often contain keys or ids representing specific types of values.
+
+== Language codes
+
+The following language codes are used in the plentysystems REST API.
+
+[cols="1,3"]
+|===
+|Code |Description
+
+|*bg*
+|Bulgarian
+
+|*cn*
+|Chinese
+
+|*cz*
+|Czech
+
+|*da*
+|Danish
+
+|*de*
+|German
+
+|*en*
+|English
+
+|*es*
+|Spanish
+
+|*fr*
+|French
+
+|*it*
+|Italian
+
+|*nl*
+|Dutch
+
+|*nn*
+|Norwegian
+
+|*pl*
+|Polish
+
+|*pt*
+|Portuguese
+
+|*ro*
+|Romanian
+
+|*ru*
+|Russian
+
+|*se*
+|Swedish
+
+|*sk*
+|Slovak
+
+|*tr*
+|Turkish
+
+|*vn*
+|Vietnamese
+|===
+
+== Country IDs
+
+The following country IDs are used in the plentysystems REST API.
+
+[cols="3,1,1"]
+|===
+|Country |ISO 3166-1 |plentysystems ID
+
+|Germany
+|DE
+|1
+
+|Austria
+|AT
+|2
+
+|Belgium
+|BE
+|3
+
+|Switzerland
+|CH
+|4
+
+|Cyprus
+|CY
+|5
+
+|Czech Republic
+|CZ
+|6
+
+|Denmark
+|DK
+|7
+
+|Spain
+|ES
+|8
+
+|Estonia
+|EE
+|9
+
+|France
+|FR
+|10
+
+|Finland
+|FI
+|11
+
+|United Kingdom
+|GB
+|12
+
+|Greece
+|GR
+|13
+
+|Hungary
+|HU
+|14
+
+|Italy
+|IT
+|15
+
+|Ireland
+|IE
+|16
+
+|Luxembourg
+|LU
+|17
+
+|Latvia
+|LV
+|18
+
+|Malta
+|MT
+|19
+
+|Norway
+|NO
+|20
+
+|Netherlands
+|NL
+|21
+
+|Portugal
+|PT
+|22
+
+|Poland
+|PL
+|23
+
+|Sweden
+|SE
+|24
+
+|Singapore
+|SG
+|25
+
+|Slovakia
+|SK
+|26
+
+|Slovenia
+|SI
+|27
+
+|USA
+|US
+|28
+
+|Australia
+|AU
+|29
+
+|Canada
+|CA
+|30
+
+|China
+|CN
+|31
+
+|Japan
+|JP
+|32
+
+|Lithuania
+|LT
+|33
+
+|Liechtenstein
+|LI
+|34
+
+|Monaco
+|MC
+|35
+
+|Mexico
+|MX
+|36
+
+|Canary Islands
+|IC
+|37
+
+|India
+|IN
+|38
+
+|Brazil
+|BR
+|39
+
+|Russia
+|RU
+|40
+
+|Romania
+|RO
+|41
+
+|Ceuta
+|EA
+|42
+
+|Melilla
+|EA
+|43
+
+|Bulgaria
+|BG
+|44
+
+|Kosovo
+|XZ
+|45
+
+|Kyrgyzstan
+|KG
+|46
+
+|Kazakhstan
+|KZ
+|47
+
+|Belarus
+|BY
+|48
+
+|Uzbekistan
+|UZ
+|49
+
+|Morocco
+|MA
+|50
+
+|Armenia
+|AM
+|51
+
+|Albania
+|AL
+|52
+
+|Egypt
+|EG
+|53
+
+|Croatia
+|HR
+|54
+
+|Maldives
+|MV
+|55
+
+|Malaysia
+|MY
+|56
+
+|Hong Kong
+|HK
+|57
+
+|Yemen
+|YE
+|58
+
+|Israel
+|IL
+|59
+
+|Taiwan
+|TW
+|60
+
+|Guadeloupe
+|GP
+|61
+
+|Thailand
+|TH
+|62
+
+|Turkey
+|TR
+|63
+
+|Greek Islands
+|GR
+|64
+
+|Balearic Islands
+|ES
+|65
+
+|New Zealand
+|NZ
+|66
+
+|Afghanistan
+|AF
+|67
+
+|Aland Islands
+|AX
+|68
+
+|Algeria
+|DZ
+|69
+
+|American Samoa
+|AS
+|70
+
+|Andorra
+|AD
+|71
+
+|Angola
+|AO
+|72
+
+|Anguilla
+|AI
+|73
+
+|Antarctica
+|AQ
+|74
+
+|Antigua and Barbuda
+|AG
+|75
+
+|Argentina
+|AR
+|76
+
+|Aruba
+|AW
+|77
+
+|Azerbaijan
+|AZ
+|78
+
+|The Bahamas
+|BS
+|79
+
+|Bahrain
+|BH
+|80
+
+|Bangladesh
+|BD
+|81
+
+|Barbados
+|BB
+|82
+
+|Belize
+|BZ
+|83
+
+|Benin
+|BJ
+|84
+
+|Bermuda
+|BM
+|85
+
+|Bhutan
+|BT
+|86
+
+|Bolivia
+|BO
+|87
+
+|Bosnia and Herzegovina
+|BA
+|88
+
+|Botswana
+|BW
+|89
+
+|Bouvet Island
+|BV
+|90
+
+|British Indian Ocean Territory
+|IO
+|91
+
+|Brunei Darussalam
+|BN
+|92
+
+|Burkina Faso
+|BF
+|93
+
+|Burundi
+|BI
+|94
+
+|Cambodia
+|KH
+|95
+
+|Cameroon
+|CM
+|96
+
+|Cape Verde
+|CV
+|97
+
+|Cayman Islands
+|KY
+|98
+
+|Central African Republic
+|CF
+|99
+
+|Chad
+|TD
+|100
+
+|Chile
+|CL
+|101
+
+|Christmas Island
+|CX
+|102
+
+|Cocos Islands/Keeling Islands
+|CC
+|103
+
+|Columbia
+|CO
+|104
+
+|Comoros
+|KM
+|105
+
+|Congo
+|CG
+|106
+
+|Democratic Republic of the Congo
+|CD
+|107
+
+|Cook Islands
+|CK
+|108
+
+|Costa Rica
+|CR
+|109
+
+|Ivory coast
+|CI
+|110
+
+|Cuba
+|CU
+|112
+
+|Djibouti
+|DJ
+|113
+
+|Dominica
+|DM
+|114
+
+|Dominican Republic
+|DO
+|115
+
+|Ecuador
+|EC
+|116
+
+|El Salvador
+|SV
+|117
+
+|Equatorial Guinea
+|GQ
+|118
+
+|Eritrea
+|ER
+|119
+
+|Ethiopia
+|ET
+|120
+
+|Falkland Islands
+|FK
+|121
+
+|Faroe Islands
+|FO
+|122
+
+|Fiji
+|FJ
+|123
+
+|French Guiana
+|GF
+|124
+
+|French Polynesia
+|PF
+|125
+
+|French Southern and Antarctic Lands
+|TF
+|126
+
+|Gabon
+|GA
+|127
+
+|Gambia
+|GM
+|128
+
+|Georgia
+|GE
+|129
+
+|Ghana
+|GH
+|130
+
+|Gibraltar
+|GI
+|131
+
+|Greenland
+|GL
+|132
+
+|Grenada
+|GD
+|133
+
+|Guam
+|GU
+|134
+
+|Guatemala
+|GT
+|135
+
+|Guernsey
+|GG
+|136
+
+|Guinea
+|GN
+|137
+
+|Guinea-Bissau
+|GW
+|138
+
+|Guyana
+|GY
+|139
+
+|Haiti
+|HT
+|140
+
+|Heard Island and McDonald Islands
+|HM
+|141
+
+|Vatican City
+|VA
+|142
+
+|Honduras
+|HN
+|143
+
+|Iceland
+|IS
+|144
+
+|Indonesia
+|ID
+|145
+
+|Iran
+|IR
+|146
+
+|Iraq
+|IQ
+|147
+
+|Isle of Man
+|IM
+|148
+
+|Jamaica
+|JM
+|149
+
+|Jersey
+|JE
+|150
+
+|Jordan
+|JO
+|151
+
+|Kenya
+|KE
+|152
+
+|Kiribati
+|KI
+|153
+
+|Democratic People's Republic of Korea
+|KP
+|154
+
+|Republic of Korea
+|KR
+|155
+
+|Kuwait
+|KW
+|156
+
+|Laos
+|LA
+|158
+
+|Lebanon
+|LB
+|159
+
+|Lesotho
+|LS
+|160
+
+|Liberia
+|LR
+|161
+
+|Libya
+|LY
+|162
+
+|Macao
+|MO
+|163
+
+|Macedonia
+|MK
+|164
+
+|Madagascar
+|MG
+|165
+
+|Malawi
+|MW
+|166
+
+|Mali
+|ML
+|168
+
+|Marshall Islands
+|MH
+|169
+
+|Martinique
+|MQ
+|170
+
+|Mauritania
+|MR
+|171
+
+|Mauritius
+|MU
+|172
+
+|Mayotte
+|YT
+|173
+
+|Micronesia
+|FM
+|174
+
+|Moldova
+|MD
+|175
+
+|Mongolia
+|MN
+|176
+
+|Montenegro
+|ME
+|177
+
+|Montserrat
+|MS
+|178
+
+|Mozambique
+|MZ
+|179
+
+|Myanmar
+|MM
+|180
+
+|Namibia
+|NA
+|181
+
+|Nauru
+|NR
+|182
+
+|Nepal
+|NP
+|183
+
+|Netherlands Antilles
+|AN
+|184
+
+|New Caledonia
+|NC
+|185
+
+|Nicaragua
+|NI
+|186
+
+|Niger
+|NE
+|187
+
+|Nigeria
+|NG
+|188
+
+|Niue
+|NU
+|189
+
+|Norfolk Island
+|NF
+|190
+
+|Northern Mariana Islands
+|MP
+|191
+
+|Oman
+|OM
+|192
+
+|Pakistan
+|PK
+|193
+
+|Palau
+|PW
+|194
+
+|Palestinian territories
+|PS
+|195
+
+|Panama
+|PA
+|196
+
+|Papua New Guinea
+|PG
+|197
+
+|Paraguay
+|PY
+|198
+
+|Peru
+|PE
+|199
+
+|Philippines
+|PH
+|200
+
+|Pitcairn Islands
+|PN
+|201
+
+|Puerto Rico
+|PR
+|202
+
+|Qatar
+|QA
+|203
+
+|Reunion
+|RE
+|204
+
+|Rwanda
+|RW
+|205
+
+|Saint Helena
+|SH
+|206
+
+|Saint Kitts and Nevis
+|KN
+|207
+
+|Saint Lucia
+|LC
+|208
+
+|Saint Pierre and Miquelon
+|PM
+|209
+
+|Saint Vincent and the Grenadines
+|VC
+|210
+
+|Samoa
+|WS
+|211
+
+|San Marino
+|SM
+|212
+
+|Sao Tome and Principe
+|ST
+|213
+
+|Saudi Arabia
+|SA
+|214
+
+|Senegal
+|SN
+|215
+
+|Serbia
+|RS
+|216
+
+|Seychelles
+|SC
+|217
+
+|Sierra Leone
+|SL
+|218
+
+|Solomon Islands
+|SB
+|219
+
+|Somalia
+|SO
+|220
+
+|South Africa
+|ZA
+|221
+
+|South Georgia and the South Sandwich Islands
+|GS
+|222
+
+|Sri Lanka
+|LK
+|223
+
+|Sudan
+|SD
+|224
+
+|Suriname
+|SR
+|225
+
+|Spitsbergen and Jan Mayen
+|SJ
+|226
+
+|Swaziland
+|SZ
+|227
+
+|Syria
+|SY
+|228
+
+|Tajikistan
+|TJ
+|229
+
+|Tanzania
+|TZ
+|230
+
+|Timor-Leste
+|TL
+|231
+
+|Togo
+|TG
+|232
+
+|Tokelau
+|TK
+|233
+
+|Tonga
+|TO
+|234
+
+|Trinidad and Tobago
+|TT
+|235
+
+|Tunisia
+|TN
+|236
+
+|Turkmenistan
+|TM
+|237
+
+|Turks and Caicos Islands
+|TC
+|238
+
+|Tuvalu
+|TV
+|239
+
+|Uganda
+|UG
+|240
+
+|Ukraine
+|UA
+|241
+
+|United States Minor Outlying Islands
+|UM
+|242
+
+|Uruguay
+|UY
+|243
+
+|Vanuatu
+|VU
+|244
+
+|Venezuela
+|VE
+|245
+
+|Vietnam
+|VN
+|246
+
+|British Virgin Islands
+|VG
+|247
+
+|United States Virgin Islands
+|VI
+|248
+
+|Wallis and Futuna
+|WF
+|249
+
+|Western Sahara
+|EH
+|250
+
+|Zambia
+|ZM
+|252
+
+|Zimbabwe
+|ZW
+|253
+
+|United Arab Emirates
+|AE
+|254
+
+|Helgoland
+|DE
+|255
+
+|Buesingen
+|DE
+|256
+
+|Curaçao
+|CUW
+|258
+
+|Sint Maarten
+|SXM
+|259
+
+|BES Islands
+|BES
+|260
+
+|Saint Barthélemy
+|BL
+|261
+
+|Livigno
+|IT
+|262
+
+|Campione d'Italia
+|IT
+|263
+
+|Lake Lugano from Ponte Tresa to Porto Ceresio
+|IT
+|264
+
+|Northern Ireland
+|XI
+|265
+
+|Unknown
+|--
+|0
+|===
+
+== Default unit IDs
+
+The following IDs are used for default units in the plentysystems REST API.
+
+[cols="3,1,1"]
+|===
+|Unit |ISO code |plentysystems ID
+
+|Piece
+|C62
+|1
+
+|Kilogram
+|KGM
+|2
+
+|Gram
+|GRM
+|3
+
+|Milligram
+|MGM
+|4
+
+|Litre
+|LTR
+|5
+
+|12 pieces/dozen
+|DPC
+|6
+
+|Two pack
+|OP
+|7
+
+|Bale
+|BL
+|8
+
+|Dispenser
+|DI
+|9
+
+|Bag
+|BG
+|10
+
+|Sheet
+|ST
+|11
+
+|Block
+|D64
+|12
+
+|Block
+|PD
+|13
+
+|Quire
+|QR
+|14
+
+|Box
+|BX
+|15
+
+|Coil
+|CL
+|16
+
+|Container
+|CH
+|17
+
+|Tin
+|TN
+|18
+
+|Can
+|CA
+|19
+
+|Dozen
+|DZN
+|20
+
+|Bucket
+|BJ
+|21
+
+|Case
+|CS
+|22
+
+|Cask
+|Z3
+|23
+
+|Bottle
+|BO
+|24
+
+|Fluid ounce
+|OZA
+|25
+
+|Jar
+|JR
+|26
+
+|Cardboard box
+|CG
+|27
+
+|Carton
+|CT
+|28
+
+|Kit
+|KT 
+|29
+
+|Ball
+|AA
+|30
+
+|Metre
+|MTR
+|31
+
+|Millilitre
+|MLT
+|32
+
+|Millimetre
+|MMT
+|33
+
+|Pair
+|PR
+|34
+
+|Packet
+|PA
+|35
+
+|Bundle
+|PK
+|36
+
+|Pallet/unit load
+|D97
+|37
+
+|Square metre
+|MTK
+|38
+
+|Square centimetre
+|CMK
+|39
+
+|Square millimetre
+|MMK
+|40
+
+|Square centimetre (non-standard)
+|SCM
+|41
+
+|Square millimetre (non-standard)
+|SMM
+|42
+
+|Role
+|RO
+|43
+
+|Sack
+|SA
+|44
+
+|Set
+|SET
+|45
+
+|Reel
+|RL
+|46
+
+|Each
+|EA
+|47
+
+|Tube
+|TU
+|48
+
+|Ounce
+|OZ
+|49
+
+|Wet ton
+|WE
+|50
+
+|Centimetre
+|CMT
+|51
+
+|Inch
+|INH
+|52
+|===
+
+== Supported currencies
+
+The plentysystems REST API supports the following currencies. The currency ID is equivalent to the currency's ISO code.
+
+[cols="1,3"]
+|===
+|ISO code |Currency
+
+|AED
+|United Arab Emirates dirham
+
+|ARS
+|Argentine peso
+
+|AUD
+|Australian dollar
+
+|BGN
+|Bulgarian lev
+
+|BHD
+|Bahraini dinar
+
+|BRL
+|Brazilian real
+
+|CAD
+|Canadian dollar
+
+|CHF
+|Swiss franc
+
+|CNY
+|Chinese Renminbi
+
+|CZK
+|Czech koruna
+
+|DKK
+|Danish krone
+
+|EUR
+|Euro
+
+|GBP
+|Pound sterling
+
+|HKD
+|Hong Kong dollar
+
+|HRK
+|Croatian kuna
+
+|HUF
+|Hungarian forint
+
+|IDR
+|Indonesian rupiah
+
+|INR
+|Indian rupee
+
+|JPY
+|Japanese yen
+
+|MXN
+|Mexican peso
+
+|MYR
+|Malaysian ringgit
+
+|NOK
+|Norwegian krone
+
+|NZD
+|New Zealand dollar
+
+|PHP
+|Philippine peso
+
+|PLN
+|Polish zloty
+
+|QAR
+|Qatari riyal
+
+|RON
+|Romanian leu
+
+|RUB
+|Russian ruble
+
+|SEK
+|Swedish krona
+
+|SGD
+|Singapore dollar
+
+|THB
+|Thai baht
+
+|TRY
+|Turkish lira
+
+|TWD
+|New Taiwan dollar
+
+|UAH
+|Ukrainian hryvnia
+
+|USD
+|United States dollar
+
+|VND
+|Vietnamese dong
+
+|XCD
+|Eastern Caribbean dollar
+
+|ZAR
+|South African rand
+|===
+
+== Payment status IDs
+
+The following IDs are used for payment statuses in the plentysystems
+REST API.
+
+[cols="1,3"]
+|===
+|ID |Payment status
+
+|1
+|Awaiting approval
+
+|2
+|Approved
+
+|3
+|Captured
+
+|4
+|Partially captured
+
+|5
+|Cancelled
+
+|6
+|Refused
+
+|7
+|Awaiting renewal
+
+|8
+|Expired
+
+|9
+|Refunded
+
+|10
+|Partially refunded
+|===
+
+== Reason IDs
+The following Reason IDs are used for Stock management.
+
+[cols="1,3"]
+
+|===
+|ID |Reason
+
+|0
+|Undefined
+
+|1
+|Undefined log
+
+|2
+|Initial value (new log)
+
+|100
+|Incoming items
+
+|101
+|Incoming items (WE)
+
+|102
+|Recognition stocktaking
+
+|104
+|Derecognition cancelled manufacturer error
+
+|106
+|Maculation cancelled
+
+|107
+|Packing error cancelled
+
+|108
+|Dispensation claim cancelled
+
+|110
+|Incoming items (import)
+
+|112
+|Incoming items (reorder)
+
+|113
+|Outgoing items cancelled
+
+|114
+|Stock rotation inventory rise
+
+|115
+|Incoming items (second choice)
+
+|116
+|Recognition correction
+
+|150
+|Return booked in
+
+|171
+|Incoming items picking
+
+|180
+|Incoming items (purchase order)
+
+|181
+|Incoming items warehousing
+
+|182
+|Incoming items found source
+
+|200
+|Outgoing items
+
+|201
+|Outgoing items (WA)
+
+|202
+|Derecognition stocktaking
+
+|203
+|Return to producer
+
+|204
+|Derecognition manufacturer error
+
+|205
+|Derecognition maculation
+
+|206
+|Derecognition packing error
+
+|207
+|Derecognition damage
+
+|208
+|Derecognition dispensation claim
+
+|209
+|Outgoing items (logistics)
+
+|210
+|Outgoing items (import)
+
+|214
+|Stock rotation inventory reduction
+
+|215
+|Outgoing items (second choice)
+
+|216
+|Derecognition correction
+
+|226
+|Derecognition defect (without return)
+
+|280
+|Outgoing items (purchase order)
+
+|281
+|Outbound loss
+
+|300
+|Stock correction
+
+|301
+|Stock correction (WK)
+
+|302
+|Stock correction stocktaking
+
+|304
+|Stock correction manufacturer error
+
+|305
+|Stock correction maculation
+
+|306
+|Stock correction packing error
+
+|307
+|Stock correction damage
+
+|309
+|Stock correction (internal offset)
+
+|310
+|Stock correction (import)
+
+|315
+|Stock correction (attributes deleted)
+
+|316
+|Stock correction change FBA availability
+
+|317
+|Stock correction BBD
+
+|318
+|Stock correction shipping items to FBA
+
+|319
+|Stock correction shipping items to fulfilment service provider
+
+|320
+|Stock correction sample interested parties
+
+|321
+|Stock correction sample customers
+
+|322
+|Stock correction sample
+
+|323
+|Stock correction quality models booked in
+
+|324
+|Stock correction quality models booked out
+
+|325
+|Stock correction gift
+
+|326
+|Stock correction malfunction (without return)
+
+|327
+|Stock correction loss
+
+|328
+|Balancing entry
+
+|329
+|Year-end close
+
+|330
+|Stock correction own use
+
+|401
+|Rebooking stock
+
+|402
+|Stock correction stocktaking
+
+|403
+|Rebooking stock repair demand
+
+|404
+|Rebooking stock finding
+
+|405
+|Rebooking stock new return A
+
+|406
+|Rebooking stock new return C
+
+|407
+|Rebooking stock inventory lock
+
+|408
+|Rebooking stock remove lock
+
+|409
+|Rebooking warehousing return
+
+|410
+|Rebooking stock quality change
+
+|411
+|Rebooking stock via plentyWarehouse
+
+|412
+|Reversal via plentyWarehouse
+
+|500
+|Flow of stock deleted
+
+|600
+|Item registered
+
+|601
+|Purchase price changed
+
+|602
+|Quantity changed
+
+|603
+|Item booked in
+
+|604
+|Item removed from incoming items
+
+|605
+|Storage location changed
+
+|606
+|RRP changed
+
+|607
+|Quantity and purchase price changed
+
+|608
+|Quantity and RRP changed
+
+|609
+|Purchase price and RRP changed
+
+|610
+|Quantity, purchase price and RRP changed
+
+|611
+|Quantity corrected
+
+|612
+|Item registration cancelled
+
+|===

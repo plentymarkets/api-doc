@@ -1,0 +1,549 @@
+= Order data
+
+In this tutorial we will retrieve an order via REST. Based on this order you will learn how the order data that you retrieve is structured. We will first show you an example of a full response that you receive when retrieving an order. After this example response we will explain the fields and relations included in the response. The REST order documentation can be found xref:xref:plentymarkets-rest-api:ROOT:index.adoc[here^].
+
+== Getting an order
+
+This call will get the order that has the ID 630. The complete response for this call is shown below. You can expand the box to see all data.
+
+./rest/orders/630
+[source,json]
+----
+{
+    "id": 630,
+    "typeId": 1,
+    "plentyId": 1000,
+    "locationId": 1,
+    "statusId": 3,
+    "statusName": "[3] Warten auf Zahlung",
+    "ownerId": 3,
+    "lockStatus": "unlocked",
+    "createdAt": "2017-12-13T14:19:37+01:00",
+    "updatedAt": "2017-12-13T14:19:37+01:00",
+    "amounts": [{
+        "id": 534,
+        "orderId": 630,
+        "isSystemCurrency": true,
+        "isNet": false,
+        "currency": "EUR",
+        "exchangeRate": 1,
+        "netTotal": 129.4,
+        "grossTotal": 153.99,
+        "vatTotal": 24.59,
+        "invoiceTotal": 153.99,
+        "paidAmount": 0,
+        "giftCardAmount": 0,
+        "createdAt": "2017-12-13T14:19:37+01:00",
+        "updatedAt": "2017-12-13T14:19:37+01:00",
+        "prepaidAmount": 0,
+        "vats": [{
+            "id": 550,
+            "orderAmountId": 534,
+            "countryVatId": 1,
+            "vatField": 0,
+            "vatRate": 19,
+            "value": 24.59,
+            "createdAt": "2017-12-13T14:19:37+01:00",
+            "updatedAt": "2017-12-13T14:19:37+01:00",
+            "netTotal": 129.4,
+            "grossTotal": 153.99
+        }]
+    }],
+    "properties": [{
+        "orderId": 630,
+        "typeId": 3,
+        "value": "4"
+    }, {
+        "orderId": 630,
+        "typeId": 4,
+        "value": "unpaid"
+    }, {
+        "orderId": 630,
+        "typeId": 2,
+        "value": "6"
+    }, {
+        "orderId": 630,
+        "typeId": 1,
+        "value": "1"
+    }, {
+        "orderId": 630,
+        "typeId": 6,
+        "value": "de"
+    }],
+    "dates": [{
+        "orderId": 630,
+        "typeId": 2,
+        "date": "2017-12-13T14:19:37+01:00"
+    }, {
+        "orderId": 630,
+        "typeId": 4,
+        "date": "2017-12-13T14:19:37+01:00"
+    }],
+    "addressRelations": [{
+        "orderId": 630,
+        "typeId": 1,
+        "addressId": 33
+    }, {
+        "orderId": 630,
+        "typeId": 2,
+        "addressId": 33
+    }],
+    "relations": [{
+        "orderId": 630,
+        "referenceType": "warehouse",
+        "referenceId": 1,
+        "relation": "sender"
+    }, {
+        "orderId": 630,
+        "referenceType": "contact",
+        "referenceId": 104,
+        "relation": "receiver"
+    }],
+    "orderReferences": [],
+    "orderItems": [{
+        "id": 744,
+        "orderId": 630,
+        "typeId": 1,
+        "referrerId": 0,
+        "itemVariationId": 1012,
+        "quantity": 1,
+        "orderItemName": "Design Sessel Black&White",
+        "attributeValues": null,
+        "shippingProfileId": 0,
+        "countryVatId": 1,
+        "vatField": 0,
+        "vatRate": 19,
+        "position": "0",
+        "createdAt": "2017-12-13T14:19:37+01:00",
+        "updatedAt": "2017-12-13T14:19:37+01:00",
+        "warehouseId": 1,
+        "amounts": [{
+            "id": 592,
+            "orderItemId": 744,
+            "isSystemCurrency": true,
+            "currency": "EUR",
+            "exchangeRate": 1,
+            "purchasePrice": 143.16,
+            "priceOriginalGross": 149,
+            "priceOriginalNet": 125.2101,
+            "priceGross": 149,
+            "priceNet": 125.2101,
+            "surcharge": 0,
+            "discount": 0,
+            "isPercentage": true,
+            "createdAt": "2017-12-13T14:19:37+01:00",
+            "updatedAt": "2017-12-13T14:19:37+01:00"
+        }],
+        "properties": [{
+            "id": 1912,
+            "orderItemId": 744,
+            "typeId": 1,
+            "value": "1",
+            "createdAt": "2017-12-13T14:19:37+01:00",
+            "updatedAt": "2017-12-13T14:19:37+01:00"
+        }, {
+            "id": 1913,
+            "orderItemId": 744,
+            "typeId": 21,
+            "value": "1",
+            "createdAt": "2017-12-13T14:19:37+01:00",
+            "updatedAt": "2017-12-13T14:19:37+01:00"
+        }],
+        "dates": [],
+        "references": []
+    }, {
+        "orderId": 630,
+        "typeId": 6,
+        "referrerId": 0,
+        "itemVariationId": 0,
+        "quantity": 1,
+        "orderItemName": "Shipping Costs",
+        "attributeValues": "",
+        "shippingProfileId": 6,
+        "vatField": 0,
+        "vatRate": 19,
+        "id": 0,
+        "amounts": [{
+            "orderItemId": 0,
+            "currency": "EUR",
+            "exchangeRate": 1,
+            "isSystemCurrency": true,
+            "priceOriginalGross": 4.99,
+            "priceOriginalNet": 4.1933,
+            "priceGross": 4.99,
+            "priceNet": 4.1933
+        }]
+    }]
+}
+----
+
+== Order data structure
+
+An order is divided into data that concerns the order as a whole and data that concerns only the items included in the order. The data that concerns the order as a whole is referred to as order data. The data that concerns the items included is referred to as order item data. The most common order item is an actual product. However, order items do not have to be products. An order item can e.g. also be an additional charge. The order data is subdivided into the following sections:
+
+* order fields,
+* amounts,
+* properties,
+* dates,
+* address relations and
+* references
+
+The order item data is subdiveded into the following sections:
+
+* order item fields,
+* amounts,
+* properties,
+* dates and
+* references
+
+=== Order fields
+
+There are numerous order fields. You can find the complete list of all order fields in the https://developers.plentymarkets.com/api-doc/Order#element_16[order model documentation]. 3 of the order fields are here explained in detail:
+
+* typeId,
+* locationId and
+* lockStatus
+
+The `typeId` describes the type of the order. The different order types represent different business cases. The most common type is the sales order. A sales order has the `typeId` = 1. All types available are:
+
+* Sales order = 1
+* Delivery = 2
+* Returns = 3
+* Credit note = 4
+* Warranty = 5
+* Repair = 6
+* Offer = 7
+* Advance order = 8
+* Multi-order = 9
+* Multi credit note = 10
+* Multi delivery = 11
+* Reorder = 12
+* Partial delivery = 13
+
+The `locationId` gives you the ID of the accounting location that is used for the order. Use xref:plentymarkets-rest-api:ROOT:index.adoc#tag/Accounting/paths/~1rest~1accounting~1stores~1locations/get[this route] the list the accounting locations of a client.
+
+The `lockStatus` tells you whether an order is completely editable or not. If an order is locked, many fields can not be updated anymore. The following statuses are available:
+
+* `unlocked`: The order is not locked and is completely editable.
+* `permanentlyLocked`: The order is permanently locked (e.g. an order created by POS).
+* `reversibleLocked`: The order is locked but can be unlocked again by certain actions. An order will be e.g. locked reversibly if an invoice document is generated. By creating a reversal document the order can be unlocked again.
+
+=== Amounts
+
+The `amounts` relation provides information about the sums of an order as well as vat information for an order. The information is not provided by the user that creates an order. The amounts are rather calculated by using the amounts of the order items. The `amounts` relation always has an entry for the system currency. Additionally, an entry in a currency other than the system currency can be present. The amounts of an order are available in another currency, if the order items have entries in a currency other than the system currency. The order items have this other currency if the customer purchased in a currency that is not the system currency.
+
+The vat information is provided in the `vats` entry. Within the vats entry the most important entries are `countryVatId` and `vatField`. Each combination of a `countryVatId` and `vatField` that is applied to one or more items in the order is listed once here.
+
+The `countryVatId` shows you the id of a vat configuration. Each vat configuration applies to a certain country and that is why it is called countryVatId. Every vat configuration contains 4 vat fields and the `vatField` tells you which one of the four is valid. The `vatRate` shows you the actual percentage that is saved for the vat field. The
+`value` tells you the actual amount of money that was added from all order items that this combination of `countryVatId` and `vatField` was applied to.
+
+The sum of all vat values for an order is saved in `vatTotal`.
+
+=== Properties
+
+The `properties` relation holds various order information. It has a simple key/value structure. The `typeId` is the key. This key is an integer and the `value` a string. Use xref:plentymarkets-rest-api:ROOT:index.adoc#tag/Order/paths/~1rest~1orders~1properties~1types/get[this route] to get all types. The shipping profile e.g. is stored in a order property (`typeId` = 2).
+
+=== Dates
+
+The `dates` relation works similarly to the `properties` relation, but stores dates instead of strings. Use xref:plentymarkets-rest-api:ROOT:index.adoc#tag/Order/paths/~1rest~1orders~1dates~1types/get[this route] to get all types.
+
+=== Address relations
+
+The `addressRelations` relation stores the IDs of the addresses used for the order. There are always two addresses in an order, the billing address and the delivery address. The ID of the billing address is saved with `typeId` = 1 and the delivery address with `typeId` = 2.
+
+=== Relations
+
+There are two `relations`. These relations are sender and receiver. They show whether something is the source or the target. The combination of the `referenceType`, the `referenceId` and the `relations` will tell you exactly who send something and who received something. Let's take a normal sales order as example. In most cases the sender will be a warehouse and the receiver will be a contact. The `referenceId` will then tell you the exact warehouse and the exact contact. If we take a return as example then most likely both, the sender and the receiver, will have contact as `referenceType`. In the response example above we see a sales order. The sender is a warehouse and has the id 1. The receiver is a contact and has the id 104.
+
+=== References
+
+The `orderReferences` relation shows if an order is referencing another order. Currently the only `referenceType` is "parent". The parent order is the order that the actual order was derived from. E.g. a return is usually created from a sales order that contains the returned product. Therefore the return references the sales order. An example of such a reference relation is show directly below. The return in our example has the ID 101 and the sales order the ID 102:
+
+[source,json]
+----
+"orderReferences": [{
+    "id": 51,
+    "orderId": 101,
+    "originOrderId": 102,
+    "referenceOrderId": 102,
+    "referenceType": "parent",
+    "createdAt": "2017-12-13T16:32:53+01:00",
+    "updatedAt": "2017-12-13T16:32:53+01:00"
+}]
+----
+
+The `originOrderId` specifies the first order in a chain of orders that were created one from another. Let's take a credit note as example. The credit note (ID 203) is referencing a return (ID 202) and this return is referencing a sales order (ID 201). This means that the origin of our credit note is the sales order, but the sales order is not the parent. The parent is the return.
+
+[source,json]
+----
+"orderReferences": [{
+    "id": 52,
+    "orderId": 203,
+    "originOrderId": 201,
+    "referenceOrderId": 202,
+    "referenceType": "parent",
+    "createdAt": "2017-12-13T16:38:17+01:00",
+    "updatedAt": "2017-12-13T16:38:17+01:00"
+}]
+----
+
+== Order item data structure
+
+=== Order item fields
+
+The `typeId` specifies the type of the order item. The most common type is a variation. The ID an order item of the type variation is 1. Shipping costs are saved as an order item with `typeId` = 6. All types available are:
+
+* Variation = 1
+* Bundle = 2
+* Bundle component = 3
+* Promotional coupon = 4
+* Gift card = 5
+* Shipping costs = 6
+* Payment surcharge = 7
+* Gift wrap = 8
+* Unassigned variation = 9
+* Deposit = 10
+* Order = 11
+* Dunning charge = 12
+* Set = 13
+* Set component = 14
+* Order property = 15
+
+The `referrerId` describes where an order item comes from. Use xref:plentymarkets-rest-api:ROOT:index.adoc#tag/Order/paths/~1rest~1orders~1referrers/get[this route] the get a list of the referrers available in the system.
+
+In `attributeValues` a string of the attribute value names is saved. A T-Shirt has the attribute values "size: xl" and "color: green". In this case the string is "xl, green".
+
+The tax information is stored in the values `countryVatId`, `vatField` and `vatRate`. The `countryVatId` is the ID of a vat configuration in the system. Use the accounting vat to get vat configurations. Each vat configuration has 4 vat fields. The `vatField` specifies one of the 4 vat fields of that configuration. Thus values from 0 to 3 are possible. `vatRate` is the concrete vat rate in percent.
+
+=== Amounts
+
+The `amounts` relation provides information about the price of an order item. The `amounts` relation contains at least an entry for the system currency and can additionally have an entry in a currency other than the system currency. The price and the original price are both given in gross and net. The original price is the price without surcharges and discounts. The discounts can be given in percent or as an absolute values. Whether it is a percent value or an absolute value is indicated by `isPercentage`. The following formulas show the correlation between the price and the original price:
+
+If `isPercentage = false` the price is calculated like this:
+
+`priceGross = priceOriginalGross + surcharge - discount`. The net
+
+price is calculated accordingly.
+
+If `isPercentage = true` the price is calculated like this:
+
+`priceGross = (priceOriginalGross + surcharge) * ((100 - discount) / 100)`.
+
+The net price is calculated accordingly.
+
+=== Properties and Dates
+
+The order item `properties` and `dates` relations work the same way the the order properties and dates do. The same types as for order properties and dates are used here.
+
+=== References
+
+The order item `references` relation is similar to the `orderReferences` relation. Order items can reference other order items. 
+The available reference types are:
+
+* `parent`: references an order item in the parent order
+* `bundle`: references an order item with `typeId == 2` in the same order (only for order items with bundle components, `typeId == 3`)
+* `set`: references an order item with `typeId == 13` in the same order  (only for order items with set components, `typeId == 14`)
+* `order_property`: references an order item with `typeId == 1` in the same order (only for order item with `typeId == 15`)
+* `reorder`: references an order item in a reorder (order with `typeId == 12`) with stock for the current order
+
+Let's take a bundle as example. A bundle has components and these bundle component items reference the bundle item. The `references` relation of a component item is shown below. The bundle component item has the ID 501. The bundle that the component is part of has the ID 500.
+
+[source,json]
+----
+"references": [{
+    "id": 200,
+    "orderItemId": 501,
+    "referenceOrderItemId": 500,
+    "referenceType": "bundle",
+    "createdAt": "2017-12-13T16:32:53+01:00",
+    "updatedAt": "2017-12-13T16:32:53+01:00"
+}]
+----
+
+== Creating an order with the new order item orderProperties
+
+The new order item orderProperties are realised as order items with the `typeId` 15. They can have own prices and tax rates, depending on the property definition. They also should have one of the new order property types:
+
+* order property ID = 81 (mandatory)
+* order property value = 82
+* order property group ID = 83 (mandatory for property groups with `groupOptionIdentifier == `groupType` and `value IN ('select', 'multiselect')`)
+
+As an order item, orderProperty belongs to a variation order item (`typeId == 1`). Therefore, a reference between the orderProperty and the variation has to be created. For this, `metaData` have to be added in the variation and the orderProperty order item.
+
+The `metaData` of the variation order item has to contain a random but unique `externalHash`, so the order item can be referenced correctly. The `metaData` of the orderProperty order item has to have an `internalReferences` entry with `internalReferences` as key and the corresponding `externalHash` value.
+
+The `orderItemName` should contain:
+
+* the property name if the property does not belong to a group with `select` or `multiselect` as `groupType`.
+* the property group name if the property belongs to a group with `select` or `multiselect` as `groupType`. In the case of `select`, the order item property with `typeId == 82` contains the selected value(s) as a JSON string.
+
+Code example for creating a new order with new order item orderProperties:
+
+[source,json]
+----
+{
+    "typeId": 1,
+    "statusId": 3.0,
+    "referrerId": 1.0,
+    "plentyId": 1000,
+    "relations": [
+        {
+            "referenceType": "warehouse",
+            "referenceId": 103,
+            "relation": "sender"
+        },
+        {
+            "referenceType": "contact",
+            "referenceId": 801,
+            "relation": "receiver"
+        }
+    ],
+    "addressRelations": [
+        {
+            "typeId": 1,
+            "addressId": 1521
+        },
+        {
+            "typeId": 2,
+            "addressId": 1521
+        }
+    ],
+    "orderItems": [
+        {
+            "typeId": 1,
+            "quantity": 1.0,
+            "orderItemName": "Smart bracelet with glass beads",
+            "itemVariationId": 1266,
+            "countryVatId": 12,
+            "vatField": 0,
+            "vatRate": 19.0,
+            "referrerId": 1.0,
+            "properties": [
+                {
+                    "typeId": 1,
+                    "value": "105"
+                },
+                {
+                    "typeId": 2,
+                    "value": "6"
+                }
+            ],
+            "amounts": [
+                {
+                    "isSystemCurrency": true,
+                    "currency": "EUR",
+                    "exchangeRate": 1.0,
+                    "priceOriginalGross": 49.99
+                }
+            ],
+            "metaData": {
+            	"externalHash": "12ab34cd"
+            }
+        },
+        {
+            "typeId": 15,
+            "quantity": 1.0,
+            "orderItemName": "Glass beads",
+            "countryVatId": 12,
+            "vatField": 1,
+            "vatRate": 7.0,
+            "referrerId": 1.0,
+            "properties": [
+                {
+                    "typeId": 81,
+                    "value": "136"
+                },
+                {
+                    "typeId": 82,
+                    "value": "Red"
+                },
+                {
+                    "typeId": 83,
+                    "value": "26"
+                }
+            ],
+            "amounts": [
+                {
+                    "isSystemCurrency": true,
+                    "currency": "EUR",
+                    "exchangeRate": 1.0,
+                    "priceOriginalGross": 10.00
+                }
+            ],
+            "metaData": {
+            	"internalReferences": {
+            		"order_property": "12ab34cd"
+            	}
+            }
+        },
+        {
+            "typeId": 15,
+            "quantity": 1.0,
+            "orderItemName": "Glass beads",
+            "countryVatId": 12,
+            "vatField": 1,
+            "vatRate": 7.0,
+            "referrerId": 1.0,
+            "properties": [
+                {
+                    "typeId": 81,
+                    "value": "138"
+                },
+                {
+                    "typeId": 82,
+                    "value": "Blue"
+                },
+                {
+                    "typeId": 83,
+                    "value": "26"
+                }
+            ],
+            "amounts": [
+                {
+                    "isSystemCurrency": true,
+                    "currency": "EUR",
+                    "exchangeRate": 1.0,
+                    "priceOriginalGross": 5.00
+                }
+            ],
+            "metaData": {
+            	"internalReferences": {
+            		"order_property": "12ab34cd"
+            	}
+            }
+        },
+        {
+            "typeId": 15,
+            "quantity": 1.0,
+            "orderItemName": "Engraving",
+            "countryVatId": 12,
+            "vatField": 0,
+            "vatRate": 19.0,
+            "referrerId": 1.0,
+            "properties": [
+                {
+                    "typeId": 81,
+                    "value": "140"
+                },
+                {
+                    "typeId": 82,
+                    "value": "For my Love ♥"
+                }
+            ],
+            "amounts": [
+                {
+                    "isSystemCurrency": true,
+                    "currency": "EUR",
+                    "exchangeRate": 1.0,
+                    "priceOriginalGross": 25.00
+                }
+            ],
+            "metaData": {
+            	"internalReferences": {
+            		"order_property": "12ab34cd"
+            	}
+            }
+        }
+    ]
+}
+----

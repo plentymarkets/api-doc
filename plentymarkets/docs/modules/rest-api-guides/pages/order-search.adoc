@@ -1,0 +1,252 @@
+= Order search
+
+This tutorial explains to you how to search for orders using the route `GET /rest/orders/search`.
+
+[NOTE]
+====
+The route `/rest/orders/search` can be called with the filters given in the request body, as will be shown in this tutorial. Since for some clients it is not possible to send request data in the body when using `GET`, the route can also be called with `POST`.
+====
+
+The filters can be given either as query string parameters ("simple filters") or in the request body ("complex filters"). Sending the filters in the request body is more complex but offers you more possibilities to narrow down search results and to combine filters.
+
+To see which filters are available, refer to the https://developers.plentymarkets.com/en-gb/plentymarkets-rest-api/index.html#/Order/get_rest_orders_search[REST documentation].
+
+== Search results
+
+For example, the result of a search can look like this:
+
+[source,json]
+----
+{
+    "page": 1,
+    "totalsCount": 2,
+    "isLastPage": true,
+    "lastPageNumber": 1,
+    "firstOnPage": 1,
+    "lastOnPage": 2,
+    "itemsPerPage": 50,
+    "entries": [
+        {
+            "id": 16578,
+            "referrerId": 0,
+            "roundTotalsOnly": true,
+            "numberOfDecimals": 4,
+            "plentyId": 123,
+            "typeId": 3,
+            "lockStatus": "unlocked",
+            "locationId": "1",
+            "createdAt": "2021-12-22T14:43:55+01:00",
+            "updatedAt": "2021-12-22T14:45:03+01:00",
+            "statusId": 9,
+            "ownerId": "3"
+        },
+        {
+            "id": 16577,
+            "referrerId": 0,
+            "roundTotalsOnly": true,
+            "numberOfDecimals": 4,
+            "plentyId": 123,
+            "typeId": 1,
+            "lockStatus": "unlocked",
+            "locationId": "1",
+            "createdAt": "2021-12-22T14:40:19+01:00",
+            "updatedAt": "2021-12-22T14:42:02+01:00",
+            "statusId": 7,
+            "ownerId": "3"
+        }
+    ]
+}
+----
+
+The orders are lazy loaded per default. This means that no relations are loaded. To have the default relations loaded, the parameter `lazyLoaded` can be set to `true`. By using the paramter `with`, the required relations can also be defined manually.
+
+
+== Complex filters
+
+Complex filters are given in the request body in the JSON format. This is an example of how to filter all orders that are in status 3:
+
+.GET /rest/orders/search
+[source,json]
+----
+{
+    "conditionType": "and",
+    "fields": [
+        {
+            "field": "statusId",
+            "operator": "eq",
+            "value": 3
+        }
+    ],
+    "groups": []
+}
+----
+
+The complex filters are defined as a "group" whereby each group can contain other groups. A group consist of these fields:
+
+- `conditionType`: The logical operator that defines how the values in `fields` and `groups` should be combined. Possible values are `and` and `or`.
+- `fields`: An array of the filters.
+- `groups`: An array of nested groups.
+
+Each value of the `fields` array consists of these fields:
+
+- `field`: The name of the order filter as defined in the REST documentation.
+- `operator`: Defines how to filter.
+- `value`: The value to filter for. Can be a single value, an array or null (depending on the operator).
+
+These are the possible operators:
+
+- `eq`: The value must be equal to the given value.
+- `not`: The value must not be equal the given value.
+- `in`: The value must be present in the given array.
+- `nin`: The value must not be present in the given array.
+- `null`: The value must not exist.
+- `nn`: The value must exist.
+- `lt`: The value must be less than the given value.
+- `lte`: The value must be less than equal the given value.
+- `gt`: The value must be greater than the given value.
+- `gte`: The value must be greater than equal the given value.
+- `between`: The value must be between the two given values.
+
+=== Combining filters
+
+This example filters all orders that are sales orders and that are in a status between 3 and 5. Both filters must apply because `conditionType = and`.
+
+.GET /rest/orders/search
+[source,json]
+----
+{
+    "conditionType": "and",
+    "fields": [
+        {
+            "field": "orderTypeId",
+            "operator": "eq",
+            "value": 1
+        },
+        {
+            "field": "statusId",
+            "operator": "between",
+            "value": [3, 5]
+        }
+    ],
+    "groups": []
+}
+----
+
+The following example filters all orders where there is an order item present with either variation ID = 1001 or item ID = 107. Only one of the filters has to apply because `conditionType = or`.
+
+.GET /rest/orders/search
+[source,json]
+----
+{
+    "conditionType": "or",
+    "fields": [
+        {
+            "field": "itemVariationId",
+            "operator": "eq",
+            "value": 1001
+        },
+        {
+            "field": "itemId",
+            "operator": "eq",
+            "value": 107
+        }
+    ],
+    "groups": []
+}
+----
+
+=== Nested filters
+
+For more complex conditions, the field `groups` can be used. The given groups are combined as defined in the `conditionType` of the parent group. Inside the given groups another `conditionType` can be used.
+
+This example filters all orders that are sales orders, have the referrer ID 9 and are in either a status less than equal 5 or equal 8.
+
+.GET /rest/orders/search
+[source,json]
+----
+{
+    "conditionType": "and",
+    "fields": [
+        {
+            "field": "orderTypeId",
+            "operator": "eq",
+            "value": 1
+        },
+        {
+            "field": "referrerId",
+            "operator": "eq",
+            "value": 9
+        }
+    ],
+    "groups": [
+        {
+            "conditionType": "or",
+            "fields": [
+                {
+                    "field": "statusId",
+                    "operator": "lte",
+                    "value": 5
+                },
+                {
+                    "field": "statusId",
+                    "operator": "eq",
+                    "value": 8
+                }
+            ],
+            "groups": []
+        }
+    ]
+}
+----
+
+== Special filter names
+
+Some filters like the ones for properties and dates use a name that is exchangeable. This way, the property or date to be filter for can be specified.
+
+This example filters for orders where the order property with type ID 2 (shipping profile) equals the value 7:
+
+.GET /rest/orders/search
+[source,json]
+----
+{
+    "conditionType": "and",
+    "fields": [
+        {
+            "field": "orderProperty_2",
+            "operator": "eq",
+            "value": 7
+        }
+    ],
+    "groups": []
+}
+----
+
+The contact ID can be filtered like this:
+
+.GET /rest/orders/search
+[source,json]
+----
+{
+    "conditionType": "and",
+    "fields": [
+        {
+            "field": "relationReference_contact_receiver",
+            "operator": "eq",
+            "value": 105
+        }
+    ],
+    "groups": []
+}
+----
+
+Here the values "contact" and "receiver" are exchangeable. When for example using "warehouse" and "sender", the warehouse is filtered.
+
+== Sorting
+
+Sorting is done by setting the query string parameters `sortBy` and `sortOrder`. Per default, the results are sorted by order ID in descending order. This example shows how to sort by order ID in ascending order:
+
+```
+GET /rest/orders/search?sortBy=orderId&sortOrder=asc
+```
+
+The possible values for `sortBy` are defined in the REST documentation. For `sortOrder` the values `asc` (ascending) and `desc` (descending) are valid.

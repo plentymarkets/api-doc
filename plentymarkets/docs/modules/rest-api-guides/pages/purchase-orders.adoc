@@ -1,0 +1,487 @@
+= Purchase orders
+
+A purchase order is an order of one of the two order types "reorder" or "redistribution". This tutorial shows you how to work with these order types in REST.
+
+== Redistributions
+
+To get an overview of the REST data structure, we will first show an example for a redistribution. Then we will present the ideal workflow to work with redistributions.
+
+=== Example of a redistribution
+
+Redistributions are orders with `typeId = 15` and are retrieved the same way as sales orders are. The order with ID 640 is a redistribution in this example. The request and shortened response are shown below.
+
+./rest/orders/640?with[]=orderItems.transactions
+[source,json]
+----
+{
+    "id": 640,
+    "referrerId": 0,
+    "statusId": 19.1,
+    "statusName": "Bestellt",
+    "plentyId": 1000,
+    "typeId": 15,
+    "ownerId": 3,
+    "relations": [
+        {
+            "orderId": 640,
+            "referenceType": "warehouse",
+            "referenceId": 105,
+            "relation": "sender"
+        },
+        {
+            "orderId": 640,
+            "referenceType": "warehouse",
+            "referenceId": 107,
+            "relation": "receiver"
+        }
+    ],
+    "dates": [
+        {
+            "orderId": 640,
+            "typeId": 2,
+            "date": "2019-04-29T15:57:37+02:00"
+        },
+        {
+            "orderId": 640,
+            "typeId": 4,
+            "date": "2019-04-29T15:57:37+02:00"
+        },
+        {
+            "orderId": 640,
+            "typeId": 16,
+            "date": "2019-04-29T15:59:29+02:00"
+        }
+    ],
+    "orderItems": [
+        {
+            "id": 974,
+            "orderId": 640,
+            "typeId": 1,
+            "referrerId": null,
+            "itemVariationId": 1000,
+            "quantity": 1,
+            "orderItemName": "Moderner Ledersessel »Seattle« grün",
+            "amounts": [
+                {
+                    "id": 920,
+                    "orderItemId": 974,
+                    "isSystemCurrency": true,
+                    "currency": "EUR",
+                    "exchangeRate": 1,
+                    "purchasePrice": 0,
+                    "priceOriginalGross": 10,
+                    "priceOriginalNet": 10,
+                    "priceGross": 10,
+                    "priceNet": 10,
+                    "surcharge": 0,
+                    "discount": 0,
+                    "isPercentage": false
+                }
+            ],
+            "transactions": [
+                {
+                    "id": 76,
+                    "orderItemId": 974,
+                    "quantity": 1,
+                    "userId": 3,
+                    "identification": null,
+                    "direction": "out",
+                    "receiptId": 148,
+                    "warehouseLocationId": 3,
+                    "status": "regular",
+                    "batch": null,
+                    "bestBeforeDate": null
+                }
+            ]
+        }
+    ],
+    "amounts": [
+        {
+            "id": 549,
+            "orderId": 640,
+            "isSystemCurrency": true,
+            "isNet": true,
+            "currency": "EUR",
+            "exchangeRate": 1,
+            "netTotal": 10,
+            "grossTotal": 10,
+            "vatTotal": 0,
+            "invoiceTotal": 10,
+            "paidAmount": 0,
+            "giftCardAmount": 0,
+            "shippingCostsGross": 0,
+            "shippingCostsNet": 0,
+            "prepaidAmount": 0,
+            "vats": []
+        }
+    ]
+}
+----
+
+The general data structure of an order is described in https://developers.plentymarkets.com/tutorials/order-data[this tutorial]. An order of type "redistribution" has one entry in the `relations` field for the sending warehouse ID and one entry for the receiving warehouse ID. There can be a `transactions` relation on the order items which will be loaded with `?with[]=orderItems.transactions`. The concept of transactions will be discussed in the section about the workflow.
+
+=== Workflow for redistributions
+
+The first step consists of creating the redistribution. This is done with a separate route instead of the general route to create orders. The route and request data look like this:
+
+./rest/redistributions
+[source,json]
+----
+{
+    "plentyId": 1000,
+    "typeId": 15,
+    "referrerId": 0,
+    "statusId": 19.1,
+    "ownerId": 3,
+    "relations": [
+        {
+            "referenceType": "warehouse",
+            "referenceId": 105,
+            "relation": "sender"
+        },
+        {
+            "referenceType": "warehouse",
+            "referenceId": 107,
+            "relation": "receiver"
+        }
+    ],
+    "orderItems": [
+        {
+            "typeId": 1,
+            "itemVariationId": 1000,
+            "quantity": 1,
+            "orderItemName": "Moderner Ledersessel »Seattle« grün",
+            "amounts": [
+                {
+                    "currency": "EUR",
+                    "exchangeRate": 1,
+                    "priceOriginalGross": 10
+                }
+            ]
+        }
+    ]
+}
+----
+
+We have now created a redistribution that books a single variation (ID 1000) from warehouse ID 105 to warehouse ID 107. The purchase price is €10.
+
+After the redistribution is created and you have made sure that it is complete, you can set the order initiated date. This triggers the "Purchase order initiated" event procedure. These are the route and request data to do this:
+
+./rest/redistributions/640
+[source,json]
+----
+{
+    "dates": [
+        {
+            "typeId": 16,
+            "date": "2019-04-30T09:31:17+02:00"
+        }
+    ]
+}
+----
+
+After the redistribution is initiated, the transactions for the order items can be created and booked. A transaction represents an outgoing or incoming quantity of goods. Example: Let's say you are creating a redistribution (warehouse A to warehouse B) containing a single item with a quantity of 5. You want to book out 2 items from warehouse location A1 and 3 items from warehouse location A2. All 5 items shall be booked into warehouse location B1. Then you would create two outgoing transactions (one for A1 and one for A2) and one incoming transaction.
+
+The transactions are not booked right away when creating them. You have to explicitly book them using a separate route. A transaction that is already booked is always characterised by the field `receiptId` being set.
+
+So you create the outgoing transactions by the time you know which warehouse locations to use. We use the warehouse location ID 3 in this example to book out from. This is the route and request data to create the transaction:
+
+./rest/orders/items/974/transactions
+[source,json]
+----
+{
+    "quantity": 1,
+    "userId": 3,
+    "direction": "out",
+    "status": "regular",
+    "warehouseLocationId": 3
+}
+----
+
+Now we can book the outgoing transaction. This will book out the stock. There is a route to book all transactions for an order, a route to book all transactions for an order item and a route that allows you to define which transactions to book. We will use the route to book all transactions for an order here:
+
+`/rest/orders/640/booking`
+
+All transactions of the redistribution are now booked.
+
+If you want to set an estimated delivery date (ASN), you can do it with this route and request data:
+
+./rest/redistributions/640
+[source,json]
+----
+{
+    "dates": [
+        {
+            "typeId": 11,
+            "date": "2019-04-30T12:00:00+02:00"
+        }
+    ]
+}
+----
+
+The next step consists of creating the incoming transactions. The route and the request data are:
+
+./rest/orders/items/974/transactions
+[source,json]
+----
+{
+    "quantity": 1,
+    "userId": 3,
+    "direction": "in",
+    "status": "regular",
+    "warehouseLocationId": 23
+}
+----
+
+In the next step, the incoming transactions have to be booked. This can be done with the same route that is used for booking outgoing transactions. All transactions that don't have a `receiptId` set will be booked either in or out, depending on the `direction` field. Here, we will also provide a delivery note number.
+
+./rest/orders/640/booking
+[source,json]
+----
+{
+    "deliveryNoteNumber": "delivery-001423"
+}
+----
+
+As soon as no more changes need to be made to the transactions, we can finalise the redistribution. This is done by setting the finish date. When setting the finish date, the event procedure "Purchase order finished" is triggered.
+
+./rest/redistributions/640
+[source,json]
+----
+{
+    "dates": [
+        {
+            "typeId": 17,
+            "date": "2019-04-30T13:29:42+02:00"
+        }
+    ]
+}
+----
+
+=== Reorders
+
+Again, we will first show an example for a reorder and then present the ideal workflow to work with reorders.
+
+=== Example of a reorder
+
+Reorders are orders with `typeId = 12` and are retrieved the same way as sales orders are. The order with ID 650 is a reorder in this example. The request and shortened response are shown below.
+
+./rest/orders/650?with[]=orderItems.transactions
+[source,json]
+----
+{
+    "id": 650,
+    "referrerId": 0,
+    "statusId": 19.1,
+    "statusName": "Bestellt",
+    "plentyId": 1000,
+    "typeId": 12,
+    "ownerId": 3,
+    "relations": [
+        {
+            "orderId": 650,
+            "referenceType": "contact",
+            "referenceId": 115,
+            "relation": "sender"
+        },
+        {
+            "orderId": 650,
+            "referenceType": "warehouse",
+            "referenceId": 105,
+            "relation": "receiver"
+        }
+    ],
+    "dates": [
+        {
+            "orderId": 650,
+            "typeId": 2,
+            "date": "2019-04-30T16:05:33+02:00"
+        },
+        {
+            "orderId": 650,
+            "typeId": 4,
+            "date": "2019-04-30T16:05:33+02:00"
+        },
+        {
+            "orderId": 650,
+            "typeId": 16,
+            "date": "2019-04-30T16:08:47+02:00"
+        }
+    ],
+    "orderItems": [
+        {
+            "id": 984,
+            "orderId": 650,
+            "typeId": 1,
+            "referrerId": null,
+            "itemVariationId": 1000,
+            "quantity": 1,
+            "orderItemName": "Moderner Ledersessel »Seattle« grün",
+            "amounts": [
+                {
+                    "id": 930,
+                    "orderItemId": 984,
+                    "isSystemCurrency": true,
+                    "currency": "EUR",
+                    "exchangeRate": 1,
+                    "purchasePrice": 0,
+                    "priceOriginalGross": 10,
+                    "priceOriginalNet": 10,
+                    "priceGross": 10,
+                    "priceNet": 10,
+                    "surcharge": 0,
+                    "discount": 0,
+                    "isPercentage": false
+                }
+            ],
+            "transactions": []
+        }
+    ],
+    "amounts": [
+        {
+            "id": 559,
+            "orderId": 650,
+            "isSystemCurrency": true,
+            "isNet": true,
+            "currency": "EUR",
+            "exchangeRate": 1,
+            "netTotal": 10,
+            "grossTotal": 10,
+            "vatTotal": 0,
+            "invoiceTotal": 10,
+            "paidAmount": 0,
+            "giftCardAmount": 0,
+            "shippingCostsGross": 0,
+            "shippingCostsNet": 0,
+            "prepaidAmount": 0,
+            "vats": []
+        }
+    ]
+}
+----
+
+A reorder has one entry in the `relations` field for the supplier (`sender/contact`) and one entry for the receiving warehouse (`receiver/warehouse`). A reorder doesn't use outgoing transactions but only incoming transactions.
+
+=== Workflow for reorders
+
+You need to create the reorder again. There is also a separate route for reorders to do this. The route and request data look like this:
+
+./rest/reorders
+[source,json]
+----
+{
+    "plentyId": 1000,
+    "typeId": 12,
+    "referrerId": 0,
+    "statusId": 19.1,
+    "ownerId": 3,
+    "relations": [
+        {
+            "referenceType": "contact",
+            "referenceId": 115,
+            "relation": "sender"
+        },
+        {
+            "referenceType": "warehouse",
+            "referenceId": 105,
+            "relation": "receiver"
+        }
+    ],
+    "orderItems": [
+        {
+            "typeId": 1,
+            "itemVariationId": 1000,
+            "quantity": 1,
+            "orderItemName": "Moderner Ledersessel »Seattle« grün",
+            "amounts": [
+                {
+                    "currency": "EUR",
+                    "exchangeRate": 1,
+                    "priceOriginalGross": 10
+                }
+            ]
+        }
+    ]
+}
+----
+
+We have now created a reorder which purchases a single variation (ID 1000) from supplier with contact ID 115. The item will be booked in warehouse ID 105. The purchase price is €10.
+
+After the reorder is created, you have to set the order initiated date. These are route and request data to do this:
+
+./rest/reorders/650
+[source,json]
+----
+{
+    "dates": [
+        {
+            "typeId": 16,
+            "date": "2019-04-30T16:05:33+02:00"
+        }
+    ]
+}
+----
+
+You can optionally set the estimated delivery date (ASN), as above with redistributions. However, with reorders you have the possibility to get the estimated delivery date based on the delivery time saved in the item supplier data. This route gets you the estimated delivery date:
+
+./rest/reorders/650/delivery_date
+[source,json]
+----
+{
+    "deliveryDate": "2019-04-30T12:00:00+02:00"
+}
+----
+
+You can set this date now as the delivery date:
+
+./rest/reorders/650
+[source,json]
+----
+{
+    "dates": [
+        {
+            "typeId": 11,
+            "date": "2019-04-30T12:00:00+02:00"
+        }
+    ]
+}
+----
+
+Create incoming transactions with this route and request data:
+
+./rest/orders/items/984/transactions
+[source,json]
+----
+{
+    "quantity": 1,
+    "userId": 3,
+    "direction": "in",
+    "status": "regular",
+    "warehouseLocationId": 4
+}
+----
+
+Then book the incoming transactions:
+
+./rest/orders/650/booking
+[source,json]
+----
+{
+    "deliveryNoteNumber": "delivery-008324"
+}
+----
+
+And finally set the finish date:
+
+./rest/reorders/650
+[source,json]
+----
+{
+    "dates": [
+        {
+            "typeId": 17,
+            "date": "2019-04-30T16:10:14+02:00"
+        }
+    ]
+}
+----

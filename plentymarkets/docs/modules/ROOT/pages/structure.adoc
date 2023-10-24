@@ -1,0 +1,236 @@
+= Api structure
+
+== Endpoints
+
+The plentysystems REST API expands the functionality of and allows you to access resources, so data records,
+via unique URI paths.To use the REST API, you need to run an HTTP request and analyse the result. The REST API uses JSON
+as the communication format combined with the default HTTP methods GET, PUT, POST and DELETE:
+
+* *GET* returns data. This method does not modify data saved on the server.
+* *PUT* modifies an existing data record.
+* *POST* creates a new data record.
+* *DELETE* deletes an existing data record.
+
+//TODO this will be changed soon after the one namespace per customer (onpc) project.
+Each of our plentysystems systems has a dedicated API-endpoint which includes the frontend domain and a `/rest/` sufix:
+
+[source,httprequest]
+----
+https://myplentyshop.com/rest/
+----
+
+== JSON type
+
+JSON, which stands for "JavaScript Object Notation," is a lightweight data interchange format that is easy for humans to
+read and write and easy for machines to parse and generate. It's often used for exchanging data between a server and a
+web application or between different parts of an application. JSON has become a standard data format for various
+programming languages and technologies.
+
+It is mandatory to add the specific `Content-Type` header when consuming our REST Api.
+
+[source,httprequest]
+----
+Content-Type: application/json
+----
+
+In many cases, this allows for a very efficient work flow based on the following principle:
+
+1. JSON document of the requested resource is retrieved via GET
+2. Client or app is manipulating the JSON object
+3. Manipulated JSON object is transferred via PUT or POST method to be persisted
+
+=== DateType
+When receiving and sending date string, these need to be formatted with ISO 8601 standard.
+```
+2023-10-24T08:17:53+02:00
+```
+
+== Pagination
+
+For designated GET requests, the api endpoint will accept pagination params and respond with a `PaginatedResponse`.
+
+=== Query Params
+* `page` [optional, default = 1]
+** The page number
+* `itemsPerPage` [optional, default = depends on the endpoint, mostly 50]
+** The items per page
+
+=== Response
+
+[source,json]
+----
+{
+    "page": 1,
+    "totalsCount": 4,
+    "isLastPage": true,
+    "entries":
+    [
+        {},{},{},{}
+    ]
+}
+----
+
+=== Example
+
+[source,httprequest]
+----
+POST /rest/plugins/search?page=1&itemsPerPage=10 HTTP/1.1
+HOST: https://myplentyshop.com
+Content-Type: application/json
+Accept: application/json
+----
+
+[source,json]
+----
+{
+    "page": "1",
+    "totalsCount": 1,
+    "isLastPage": true,
+    "entries":
+    [
+        {
+            "name": "PlentyPluginShowcase",
+            "type": "template",
+            "activeStage": false,
+            "activeProductive": false,
+            "id": 1,
+            "position": "0",
+            "created_at": "2016-06-21 09:16:10",
+            "updated_at": "2016-06-21 09:16:10",
+            "inProductive": false,
+            "inStage": false,
+            "version": 0.1,
+            "description": "showcase of plentysystems plugins",
+            "namespace": "Showcase",
+            "author": "plentymarkets GmbH",
+            "keywords":
+            [
+                "plentymarkets",
+                "showcase",
+                "plugins"
+            ],
+            "require":
+            [],
+            "authorIcon": null,
+            "pluginIcon": null,
+            "webstores":
+            [],
+            "permissions":
+            []
+        }
+    ]
+}
+----
+
+== Filters
+
+When searching by using the simple filters, the filters are given as query string parameters. The shown operators are
+available only for filters for which they are applicable. For example, it is not possible to filter for a range of a
+string filter.
+
+=== Searching for single values
+
+To search for single values, the filters can simply be defined like this:
+
+[source,httprequest]
+----
+GET /rest/orders/search?orderTypeId=1&statusId=3
+----
+
+This filters all sales orders (`orderTypeId = 1`) that are in status 3.
+
+This notation is equivalent to the example above:
+
+[source,httprequest]
+----
+GET /rest/orders/search?orderTypeId=eq:1&statusId=eq:3
+----
+
+=== Searching for multiple values
+
+This is an example how to filter all orders that  are in status 3 or 4:
+
+[source,httprequest]
+----
+GET /rest/orders/search?statusId=in:3,4
+----
+
+=== Searching for ranges
+
+To filter for a range of values, these operators are availabe:
+
+- `lt`: less than
+- `lte`: less than equal
+- `gt`: greater than
+- `gte`: greater than equal
+- `between`: values between the given values, bounds are inclusive
+
+This is an example how to filter all orders in a status less than 7:
+
+[source,httprequest]
+----
+GET /rest/orders/search?statusId=lt:7
+----
+
+And this example filters all orders that were created between the dates `2021-12-22T00:00:00+01:00` and `2021-12-22T23:59:59+01:00`:
+
+[source,httprequest]
+----
+GET /rest/orders/search?createdAt=between:2021-12-22T00%3A00%3A00%2B01%3A00,2021-12-22T23%3A59%3A59%2B01%3A00
+----
+
+[NOTE]
+====
+Data given as query string parameters have to be URL encoded. So in this example the string `2021-12-22T00:00:00+01:00` must be encoded as `2021-12-22T00%3A00%3A00%2B01%3A00`. This is not necessary when sending the filters in the request body.
+====
+
+=== Search with logical operators
+
+To filter for example all orders that are not in the status 3, use the `not` operator:
+
+[source,httprequest]
+----
+GET /rest/orders/search?statusId=not:3
+----
+
+It is possible to combine filters for the same field with logical AND or OR operators.
+
+Filter all orders that are in a status greater 3 and less than 5:
+
+[source,httprequest]
+----
+GET /rest/orders/search?statusId=gt:3+AND+lt:5
+----
+
+Filter all orders that are in status 3 or a status greater than 6:
+
+[source,httprequest]
+----
+GET /rest/orders/search?statusId=eq:3+OR+gt:6
+----
+
+== Sorting
+
+For designated GET requests, the api endpoint will allow to specific the sorting of the result.
+
+=== Query Params
+* `sortBy` [optional, default = depends on the request]
+** The column/attribute name which should be used for sorting
+* `sortOrder` [optional, `asc`|`desc`, default = `asc`]
+** The sorting order, ascending or descending
+
+[source,httprequest]
+----
+GET /rest/orders/search?sortBy=orderId&sortOrder=asc
+----
+
+== With
+REST Api endpoints will respond with data of the requested resources. Sometimes the resource have relations which will
+not automatically be returned. You can append a `with[]` param containing the additional relations which should be
+part of the response. The relations and specific `with` params depend on the requested resource and are documented
+at the designated references.
+
+[source,httprequest]
+----
+GET /rest/orders??with[]=addresses&with[]=orderItems.variation
+----

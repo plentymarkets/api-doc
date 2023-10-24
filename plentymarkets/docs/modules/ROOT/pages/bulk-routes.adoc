@@ -1,0 +1,446 @@
+= Bulk REST routes
+
+To increase system stability and performance, the number of REST calls are limited per hour and day. In this tutorial, we will show you how to use bulk routes to create, update or delete several data sets at once, i.e. by sending a single call.
+
+== Item variation bulk routes
+
+Item variation bulk routes allow you to manage data that is linked at the variation level. You can manage the following sets of data in bulk:
+
+* Category links
+** POST - Create up to 50 links between variations and categories
+** PUT - Update up to 50 links between variations and categories
+* Sales price links
+** POST - Create up to 50 links between sales prices and variations and save prices
+** PUT - Update up to 50 links between sales prices and variations and save prices
+** DELETE - Delete all links between a specific variation and its sales prices
+* Market links
+** GET - List all links between markets and variations
+** POST - Create up to 50 links between variations and markets
+** DELETE - Delete all links between a specific variation and its markets
+* Property links
+** POST - Create up to 50 links between variations and properties
+** PUT - Update up to 50 links between variations and properties
+** DELETE - Delete all links between an item and its properties
+* Shipping profile links
+** GET - List all links between items and shipping profiles
+** POST - Create up to 50 links between items and shipping profiles
+** DELETE - Delete all links between an item and its shipping profiles
+
+Scroll down to find more detailed information and sample requests for these bulk calls.
+
+=== Bulk processing variation category data
+
+Find out how to create or update category data for several variations at once.
+
+==== Creating variation category data
+
+`rest/items/variations/variation_categories`
+
+This route allows you to create up to 50 links between variations and categories at once.
+
+For each link between a variation and a category, you need to specify the following data:
+
+* The ID of the variation
+* The ID of the category
+* A position (optional)
+* The **isNeckermannPrimary** flag to indicate if the category is the
+primary category for the market Neckermann (Boolean, optional)
+
+.rest/items/variations/variation_categories
+[source,json]
+----
+[
+    {
+        categoryId: 1,
+        variationId: 1136,
+        position: 10,
+        isNeckermannPrimary: false
+    },
+    {
+        categoryId: 2,
+        variationId: 1136,
+        position: 20,
+        isNeckermannPrimary: false
+    },
+    {
+        categoryId: 1,
+        variationId: 1137,
+        position: 10,
+        isNeckermannPrimary: false
+    }
+]
+----
+
+==== Updating variation category data
+
+`rest/items/variations/variation_categories`
+
+This route allows you to update the category data for up to 50 links between variations and categories at the same time.
+
+For each link between a variation and a category, you need to specify the following data:
+
+* The ID of the variation
+* The ID of the category
+* A new position (optional)
+* A new Boolean value for **isNeckermannPrimary** (optional)
+
+[TIP]
+====
+Because this route is a PUT route, you only can update existing category data. As such, the category/variation combination must be saved in the system when you send the PUT request. If you send category data for a category/variation combination that does not exist, no category data is saved.
+====
+
+Check the sample request below and compare it to our earlier POST call.
+
+.rest/items/variations/variation_categories
+[source,json]
+----
+[
+    {
+        categoryId: 1,
+        variationId: 1136,
+        position: 20,
+        isNeckermannPrimary: false
+    },
+    {
+        categoryId: 2,
+        variationId: 1136,
+        position: 10,                           // updates position
+        isNeckermannPrimary: false
+    },
+    {
+        categoryId: 1,
+        variationId: 1137,
+        position: 10,
+        isNeckermannPrimary: true              // updates Boolean
+    },
+    {
+        categoryId: 1,                        //  error message, category details not saved
+        variationId: 1138,
+        position: 10,
+        isNeckermannPrimary: false
+    }
+]
+----
+
+=== Bulk processing variation sales price data
+
+Find out how to create or update sales price data for several variations at once or delete price data for a specific variation.
+
+==== Creating variation sales price data
+
+`rest/items/variations/variation_sales_prices`
+
+Use this route to create up to 50 links between sales prices and variations and save a price for each sales price/variation combination. This route allows you to create links between any variations and sales prices saved in the system.
+
+For each link that you want to create, you need to specify the following data:
+
+* The ID of the variation
+* The ID of the sales price
+* A price for the sales price/variation combination
+
+Check out the sample request below. This example illustrates that you can create links for very different combinations of sales prices and variations.
+
+.rest/items/variations/variation_sales_prices
+[source,json]
+----
+[
+    {
+        "variationId": 1234,
+        "salesPriceId": 18,
+        "price": 398.99
+    },
+    {
+        "variationId": 1234,
+        "salesPriceId": 17,
+        "price": 498.99
+    },
+    {
+        "variationId": 1223,
+        "salesPriceId": 12,
+        "price": 348.98
+    },
+    {
+        "variationId": 1245,
+        "salesPriceId": 18,
+        "price": 998.99
+    }
+]
+----
+
+==== Updating variation sales price data
+
+`rest/items/variations/variation_sales_prices`
+
+This route allows you to update up to 50 links between variations and sales prices and save prices at the same time. This means you can update up to 50 prices at once.
+
+For each price that you want to update, you need to specify the following data:
+
+* The ID of the variation
+* The ID of the sales price
+* A new price for the sales price/variation combination
+
+Now look at the sample request below and compare it to the one we used to save the original price data.
+
+[TIP]
+====
+Because this route is a PUT route, you only can update existing prices. As such, a price must be saved for the sales price/variation combination in the system when you send the PUT request. If you send a price for a sales price/variation combination that does not exist, no price is saved.
+====
+
+.rest/items/variations/variation_sales_prices
+[source,json]
+----
+[
+    {
+        "variationId": 1234,
+        "salesPriceId": 18,
+        "price": 399.99                           // updates price
+    },
+    {
+        "variationId": 1234,
+        "salesPriceId": 17,
+        "price": 499.99                           // updates price
+    },
+    {
+        "variationId": 1223,
+        "salesPriceId": 12,
+        "price": 349.98                           // updates price
+    },
+    {
+        "variationId": 1245,
+        "salesPriceId": 18,
+        "price": 999.99                           // updates price
+    }
+]
+----
+
+==== Deleting all price data of a variation
+
+`rest/items/{id}/variations/{variationId}/variation_sales_prices`
+
+This call deletes the links between a variation and all its sales
+prices. The prices saved are also deleted.
+
+Look at this example route. You just need to insert the item ID and
+variation ID into the route and you're done - no additional parameters
+are needed to send this request.
+
+`rest/items/154332/variations/1136/variation_sales_prices`
+
+=== Bulk processing variation market data
+
+Find out how to create links between several variations and markets at once or delete the market links of a specific variation.
+
+==== Listing all market links
+
+`rest/items/variations/variation_markets`
+
+Use this route to list all links between markets and variations that exist in the system.
+
+Instead of retrieving all links, you can also limit the results by specifying the following data:
+
+* The ID of the variation and/or
+* The ID of the market
+
+==== Linking markets to variations
+
+`rest/items/variations/variation_markets`
+
+Use this route to create up to 50 links between markets and variations. This route allows you to create links between any variations and markets saved in the system.
+
+For each link that you want to create, you need to specify the following data:
+
+* The ID of the variation
+* The ID of the market
+
+Check out the sample request below. This example illustrates that you can create links for very different combinations of markets and variations.
+
+.rest/items/variations/variation_markets
+[source,json]
+----
+[
+    {
+        "variationId": 1234,
+        "marketId": "109.00"
+    },
+    {
+        "variationId": 1234,
+        "marketId": "4.00"
+    },
+    {
+        "variationId": 1223,
+        "marketId": "2.08"
+    },
+    {
+        "variationId": 1245,
+        "marketId": "2.00"
+    }
+]
+----
+
+==== Deleting all market links of a variation
+
+`rest/items/{id}/variations/{variationId}/variation_markets`
+
+This call deletes the links between a variation and all its markets.
+
+Look at this example route. All you need to do is specify the item ID and the variation ID and you're done - no additional parameters are needed to send this request.
+
+`rest/items/154332/variations/1136/variation_markets`
+
+=== Bulk processing variation property data
+
+Find out how to create or update variation data for several variations at once or delete property data for the variations of a specific item.
+
+==== Creating variation property data
+
+`rest/items/variations/variation_properties`
+
+This route allows you to create up to 50 links between variations and properties at once.
+
+For each link between a variation and a property, you need to specify the following data:
+
+* The ID of the variation
+* The ID of the property
+* Property data (optional)
+
+.rest/items/variations/variation_properties
+[source,json]
+----
+[
+    {
+        "variationId": 1136,
+        "propertyId": 12,
+        "valueInt": 100
+    },
+    {
+        "variationId": 1136,
+        "propertyId": 13,
+        "valueInt": 200
+    },
+    {
+        "variationId": 1137,
+        "propertyId": 12,
+        "valueInt": 34
+    }
+]
+----
+
+==== Updating variation property data
+
+`rest/items/variations/variation_properties`
+
+This route allows you to update up to 50 links between variations and properties at once.
+
+For each link between a variation and a property, you need to specify the following data:
+
+* The ID of the variation
+* The ID of the property
+* The new property data (optional)
+
+Check out the request below and compare it to our original POST request.
+
+.rest/items/variations/variation_properties
+[source,json]
+----
+[
+    {
+        "variationId": 1136,
+        "propertyId": 12,
+        "valueInt": 150                           // updates value
+    },
+    {
+        "variationId": 1136,
+        "propertyId": 13,
+        "valueInt": 250                           // updates value
+    },
+    {
+        "variationId": 1138,                     // error message, data not saved
+        "propertyId": 12,
+        "valueInt": 120
+    }
+]
+----
+
+==== Deleting all property links of a variation
+
+`rest/items/{id}/variations/{variationId}/variation_properties`
+
+This call deletes the links between the variations of an item and their property values.
+
+[WARNING]
+====
+Although you specify a variation ID in the call, this method will delete the property links for all variations of the item you specify in the route. This is because properties currently are still linked at the item level.
+====
+
+Look at the example route below. Insert the item ID and variation ID into the route and you're done - no additional parameters are needed to send this request.
+
+`rest/items/154332/variations/1136/variation_properties`
+
+=== Bulk processing item shipping profiles
+
+Find out how to bulk manage shipping profiles. Bulk activate shipping profiles for items by creating links between several items and shipping profiles or deactivate several shipping profiles at once by deleting all shipping profile links of a specific item. Note that shipping profiles are linked to items, not variations. As such, the shipping profiles are activate for all variations of an item.
+
+==== Listing all shipping profile links
+
+`rest/items/item_shipping_profiles`
+
+Use this route to list all links between items and shipping profiles that exist in the system.
+
+Instead of retrieving all links, you can also limit the results by using the following timestamp filters:
+
+* eq = Equal to
+* gte = Greater than or equal to
+* gt = Greater than
+* lte = Less than or equal to
+* lt = Less than
+* between = Date range
+
+These filters limit the results based on the timestamp when the link between an item and a shipping profile was created. For example, `updated=gt:2018-04-16 16:00:00` returns all items with shipping profiles that were activated after 4pm on the 16th of April 2018.
+
+==== Linking shipping profiles to items
+
+`rest/items/item_shipping_profiles`
+
+Use this route to create up to 50 links between items and shipping profiles. This route allows you to create links between any items and shipping profiles saved in the system.
+
+For each link that you want to create, you need to specify the following data:
+
+* itemId = The ID of the item
+* profileId = The ID of the shipping profile
+
+Check out the sample request below. This example illustrates that you can create links for very different combinations of items and shipping profiles.
+
+.rest/items/item_shipping_profiles
+[source,json]
+----
+[
+    {
+        "itemId": 123,
+        "profileId": 14
+    },
+    {
+        "itemId": 123,
+        "profileId": 4
+    },
+    {
+        "itemId": 234,
+        "profileId": 2
+    },
+    {
+        "itemId": 124,
+        "profileId": 2
+    }
+]
+----
+
+==== Deleting all shipping profile links of an item
+
+`/rest/items/{itemId}/item_shipping_profiles`
+
+This call deletes the links between an item and all its shipping profiles.
+
+Look at this example route. All you need to do is specify the item ID and you're done - no additional parameters are needed to send this request.
+
+`/rest/items/123/item_shipping_profiles`
+
+Awesome! You now know how to use bulk routes to manage your item and variation data more efficiently.

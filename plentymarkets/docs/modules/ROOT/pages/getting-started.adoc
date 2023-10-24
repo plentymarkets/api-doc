@@ -1,0 +1,17 @@
+= Getting started
+
+The following pages will navigate you through the basics of our REST Api.
+After the basics, you will find different guides which describe specific use cases consuming the API
+or resources.
+
+When developing apps consuming our APIs you might need to check the references for details and mappings.
+We provide you a simple reference page, containing the most important api endpoints, and a complex one
+containing all of our endpoints.
+
+== OpenAPI format
+
+We want to enhance your workflow with our API. For that reason, we built a whole new internal annotation progress.
+At the moment, we deliver a file you can use with your preferred API software. You can checkout our REST-Documentation,
+based upon the Swagger-UI, xref:plentymarkets-rest-api:ROOT:index.adoc[here].
+
+You either can download it or check out our link:https://github.com/plentymarkets/api-doc/[GitHub repository].
