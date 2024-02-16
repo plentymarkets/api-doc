@@ -1,7 +1,9 @@
 .Introduction
 * xref:getting-started.adoc[Getting started]
-* xref:structure.adoc[Structure]
 * xref:authentication.adoc[Authentication]
+
+.The basics
+* xref:structure.adoc[Structure]
 * xref:errors.adoc[Errors]
 * xref:limits.adoc[Limits and Throttling]
 
