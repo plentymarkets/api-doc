@@ -7207,7 +7207,7 @@
         ]
       }
     },
-    "/rest/accounts/contacts/{contactId}/addresses/{addressTypeId?}": {
+    "/rest/accounts/contacts/{contactId}/addresses/{addressTypeId}": {
       "get": {
         "summary": "List addresses that are linked with contacts",
         "description": "Lists addresses of the contact. The ID of the contact must be specified. If you specify page and itemsPerPage, you will get a paginated result. Otherwise you will get an array.",
@@ -9225,7 +9225,7 @@
         }
       }
     },
-    "/rest/address_layout/used_countries/{uuid?}": {
+    "/rest/address_layout/used_countries/{uuid}": {
       "get": {
         "summary": "List countries used in other layouts",
         "description": "Lists the countries that are already used in other layouts.",
@@ -44413,7 +44413,7 @@
         ]
       }
     },
-    "/rest/listings/markets/histories/end/{id?}": {
+    "/rest/listings/markets/histories/end/{id}": {
       "delete": {
         "summary": "End the listing",
         "description": "Ends the listing on the designated market.",
@@ -44459,7 +44459,7 @@
         ]
       }
     },
-    "/rest/listings/markets/histories/relist/{id?}": {
+    "/rest/listings/markets/histories/relist/{id}": {
       "post": {
         "summary": "Relist the listing",
         "description": "Relists the listing on the designated market.",
@@ -44497,7 +44497,7 @@
         ]
       }
     },
-    "/rest/listings/markets/histories/update/{id?}": {
+    "/rest/listings/markets/histories/update/{id}": {
       "put": {
         "summary": "Update listing market histories",
         "description": "Updates listing market histories by given update options. The listing market histories are not directly revised,\nthey are added to the batch processing lists, waiting to be revised by automated background processes.",
@@ -45004,7 +45004,7 @@
         ]
       }
     },
-    "/rest/listings/markets/start/{id?}": {
+    "/rest/listings/markets/start/{id}": {
       "post": {
         "summary": "Start the market listing on the designated market.",
         "description": "Starts the market listing on the designated markets.",
@@ -45396,7 +45396,7 @@
         ]
       }
     },
-    "/rest/listings/markets/verify/{id?}": {
+    "/rest/listings/markets/verify/{id}": {
       "post": {
         "summary": "Verify listing markets",
         "description": "Verifies the listing markets.",
@@ -56363,7 +56363,7 @@
         ]
       }
     },
-    "/rest/orders/referrers/{parentReferrerId?}": {
+    "/rest/orders/referrers/{parentReferrerId}": {
       "post": {
         "summary": "Create an order referrer",
         "description": "Create an order referrer. The ID can be specified, a parent ID can be specified to create a sub referrer or if no ID is specified, a referrer ID will be assigned automatically.\nIf an ID is specified, the ID may not be used already. If the ID is used already, the referrer will only be created.\nIf the ID is automatically assigned, the first ID that has not been used before will be set.\nIf the ID is not specified, but a parent referrer ID is given, then the new referrer ID will be a sub referrer of the given parent.",
@@ -58455,7 +58455,7 @@
         ]
       }
     },
-    "/rest/orders/shipping/parcels/preview/{language?}": {
+    "/rest/orders/shipping/parcels/preview/{language}": {
       "get": {
         "summary": "Get preview list",
         "description": "Get a preview list for parcel services.",
@@ -58590,7 +58590,7 @@
         ]
       }
     },
-    "/rest/orders/shipping/presets/preview/{language?}": {
+    "/rest/orders/shipping/presets/preview/{language}": {
       "get": {
         "summary": "Get preview list",
         "description": "Get a preview list for parcel service presets.",
@@ -59941,7 +59941,7 @@
         ]
       }
     },
-    "/rest/orders/{orderId}/addresses/{relationTypeId?}": {
+    "/rest/orders/{orderId}/addresses/{relationTypeId}": {
       "get": {
         "summary": "List order addresses",
         "description": "Lists order addresses. The ID of the order and the ID of the relation type must be specified.",
@@ -60833,7 +60833,7 @@
         ]
       }
     },
-    "/rest/orders/{orderId}/documents/downloads/{type?}": {
+    "/rest/orders/{orderId}/documents/downloads/{type}": {
       "get": {
         "summary": "Download documents of an order",
         "description": "Downloads documents of an order as a zip file. The ID of the order must be specified. In addition a type can be specified.",
@@ -61989,7 +61989,7 @@
         ]
       }
     },
-    "/rest/orders/{orderId}/documents/{type?}": {
+    "/rest/orders/{orderId}/documents/{type}": {
       "get": {
         "summary": "List documents of an order",
         "description": "Lists documents of an order. The ID of the order must be specified. In addition a type can be specified.",
@@ -63045,7 +63045,7 @@
         ]
       }
     },
-    "/rest/orders/{orderId}/properties/{typeId?}": {
+    "/rest/orders/{orderId}/properties/{typeId}": {
       "get": {
         "summary": "List properties of an order",
         "description": "<b>DEPRECATED: Use the following route: GET /rest/orders/{orderId}</b>\nLists properties of an order. The ID of the order must be specified. Optionally, the ID of the property type can be specified. The following property types are available by default:\n\n<br><ul>\n<li>1 = WAREHOUSE</li>\n<li>2 = SHIPPING_PROFILE</li>\n<li>3 = PAYMENT_METHOD</li>\n<li>4 = PAYMENT_STATUS</li>\n<li>5 = EXTERNAL_SHIPPING_PROFILE</li>\n<li>6 = DOCUMENT_LANGUAGE</li>\n<li>7 = EXTERNAL_ORDER_ID</li>\n<li>8 = CUSTOMER_SIGN</li>\n<li>9 = DUNNING_LEVEL</li>\n<li>10 = SELLER_ACCOUNT</li>\n<li>11 = WEIGHT</li>\n<li>12 = WIDTH</li>\n<li>13 = LENGTH</li>\n<li>14 = HEIGHT</li>\n<li>15 = FLAG</li>\n<li>16 = EXTERNAL_TOKEN_ID</li>\n<li>17 = EXTERNAL_ITEM_ID</li>\n<li>18 = COUPON_CODE</li>\n<li>19 = COUPON_TYPE</li>\n<li>33 = MAIN_DOCUMENT_NUMBER</li>\n<li>34 = SALES_TAX_ID_NUMBER</li>\n<li>45 = PAYMENT_TRANSACTION_ID</li>\n<li>47 = EXTERNAL_TAX_SERVICE</li>\n<li>60 = MERCHANT_ID</li>\n<li>61 = REPORT_ID</li>\n<li>63 = PREFERRED_STORAGE_LOCATION_ID</li>\n<li>64 = AMAZON_SHIPPING_LABEL</li>\n<li>994 = EBAY_PLUS</li>\n<li>995 = FULFILLMENT_SERVICE</li>\n</ul>",
@@ -65322,7 +65322,7 @@
         ]
       }
     },
-    "/rest/payment/properties/types/names/{lang?}": {
+    "/rest/payment/properties/types/names/{lang}": {
       "get": {
         "summary": "List names of property types",
         "description": "List names of property types in the specified language or German if none is specified.",
@@ -66638,7 +66638,7 @@
         ]
       }
     },
-    "/rest/payments/methods/preview/{language?}": {
+    "/rest/payments/methods/preview/{language}": {
       "get": {
         "summary": "Get preview list for payment method",
         "description": "Get an array with all payment methods with the ID as key and the name as value.",
@@ -82819,7 +82819,7 @@
         ]
       }
     },
-    "/rest/stockmanagement/warehouses/{warehouseId}/addresses/{relationTypeId?}": {
+    "/rest/stockmanagement/warehouses/{warehouseId}/addresses/{relationTypeId}": {
       "get": {
         "summary": "List warehouse addresses",
         "description": "List warehouse addresses. The ID of the warehouse, the address and the ID of the relation type must be specified.",
