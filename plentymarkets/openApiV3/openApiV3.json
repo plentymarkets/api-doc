@@ -8237,7 +8237,7 @@
         ]
       }
     },
-    "/rest/accounts/contacts/{contactId}/addresses/{addressTypeId}": {
+    "/rest/accounts/contacts/{contactId}/addresses/{addressTypeId?}": {
       "get": {
         "tags": [
           "Account"
@@ -10597,7 +10597,7 @@
         ]
       }
     },
-    "/rest/address_layout/used_countries/{uuid}": {
+    "/rest/address_layout/used_countries/{uuid?}": {
       "get": {
         "tags": [
           "AddressDesign"
@@ -50949,7 +50949,7 @@
         ]
       }
     },
-    "/rest/listings/markets/histories/end/{id}": {
+    "/rest/listings/markets/histories/end/{id?}": {
       "delete": {
         "tags": [
           "Listing"
@@ -51003,7 +51003,7 @@
         ]
       }
     },
-    "/rest/listings/markets/histories/relist/{id}": {
+    "/rest/listings/markets/histories/relist/{id?}": {
       "post": {
         "tags": [
           "Listing"
@@ -51048,7 +51048,7 @@
         ]
       }
     },
-    "/rest/listings/markets/histories/update/{id}": {
+    "/rest/listings/markets/histories/update/{id?}": {
       "put": {
         "tags": [
           "Listing"
@@ -51625,7 +51625,7 @@
         ]
       }
     },
-    "/rest/listings/markets/start/{id}": {
+    "/rest/listings/markets/start/{id?}": {
       "post": {
         "tags": [
           "Listing"
@@ -52078,7 +52078,7 @@
         "x-codegen-request-body-name": "/rest/listings/markets/texts/{listingMarketId}/{lang}"
       }
     },
-    "/rest/listings/markets/verify/{id}": {
+    "/rest/listings/markets/verify/{id?}": {
       "post": {
         "tags": [
           "Listing"
@@ -64844,7 +64844,7 @@
         ]
       }
     },
-    "/rest/orders/referrers/{parentReferrerId}": {
+    "/rest/orders/referrers/{parentReferrerId?}": {
       "post": {
         "tags": [
           "Order"
@@ -67255,7 +67255,7 @@
         ]
       }
     },
-    "/rest/orders/shipping/parcels/preview/{language}": {
+    "/rest/orders/shipping/parcels/preview/{language?}": {
       "get": {
         "tags": [
           "Order"
@@ -67411,7 +67411,7 @@
         ]
       }
     },
-    "/rest/orders/shipping/presets/preview/{language}": {
+    "/rest/orders/shipping/presets/preview/{language?}": {
       "get": {
         "tags": [
           "Order"
@@ -68978,7 +68978,7 @@
         ]
       }
     },
-    "/rest/orders/{orderId}/addresses/{relationTypeId}": {
+    "/rest/orders/{orderId}/addresses/{relationTypeId?}": {
       "get": {
         "tags": [
           "Account"
@@ -70035,7 +70035,7 @@
         ]
       }
     },
-    "/rest/orders/{orderId}/documents/downloads/{type}": {
+    "/rest/orders/{orderId}/documents/downloads/{type?}": {
       "get": {
         "tags": [
           "Document"
@@ -71391,7 +71391,7 @@
         ]
       }
     },
-    "/rest/orders/{orderId}/documents/{type}": {
+    "/rest/orders/{orderId}/documents/{type?}": {
       "get": {
         "tags": [
           "Document"
@@ -72614,7 +72614,7 @@
         "x-codegen-request-body-name": "/rest/orders/{orderId}/properties"
       }
     },
-    "/rest/orders/{orderId}/properties/{typeId}": {
+    "/rest/orders/{orderId}/properties/{typeId?}": {
       "get": {
         "tags": [
           "Order"
@@ -75295,7 +75295,7 @@
         "x-codegen-request-body-name": "/rest/payment/properties/types/names"
       }
     },
-    "/rest/payment/properties/types/names/{lang}": {
+    "/rest/payment/properties/types/names/{lang?}": {
       "get": {
         "tags": [
           "Payment"
@@ -76795,7 +76795,7 @@
         ]
       }
     },
-    "/rest/payments/methods/preview/{language}": {
+    "/rest/payments/methods/preview/{language?}": {
       "get": {
         "tags": [
           "Payment"
@@ -95438,7 +95438,7 @@
         ]
       }
     },
-    "/rest/stockmanagement/warehouses/{warehouseId}/addresses/{relationTypeId}": {
+    "/rest/stockmanagement/warehouses/{warehouseId}/addresses/{relationTypeId?}": {
       "get": {
         "tags": [
           "Account"
