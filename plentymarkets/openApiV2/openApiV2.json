@@ -1820,10 +1820,6 @@
                 "supplierCurrency": {
                   "type": "string",
                   "description": "The currency used by a supplier optional"
-                },
-                "externalId": {
-                  "type": "string",
-                  "description": "The externalId for this company (like the hubspot company id) optional"
                 }
               }
             }
@@ -3988,8 +3984,11 @@
             "type": "array",
             "required": false,
             "description": "Filter restricts the list of\n     * results to contacts with the specified tagIds. More than one ID should be separated by commas.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "integer"
+            }
           }
         ]
       },
@@ -4294,8 +4293,11 @@
             "type": "array",
             "required": false,
             "description": "When this parameter is used, the current relations between contacts and tags\n     *     will be deleted and replaced by the given ones. If the parameter is not used, the current relations remain.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -5328,8 +5330,11 @@
             "type": "array",
             "required": false,
             "description": "A list of contact IDs",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "emailTemplate",
@@ -6136,214 +6141,6 @@
         }
       }
     },
-    "/rest/accounts/contacts/search": {
-      "post": {
-        "summary": "* Search contacts",
-        "description": "Search contacts.",
-        "tags": [
-          "Account"
-        ],
-        "security": [
-          {
-            "oAuth2": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "page": {
-                  "type": "integer",
-                  "description": "Current page of the response"
-                },
-                "totalsCount": {
-                  "type": "integer",
-                  "description": "The total number of entries in the response"
-                },
-                "isLastPage": {
-                  "type": "boolean",
-                  "description": "Flag that indicates if the page shown is the last page of the response"
-                },
-                "lastPageNumber": {
-                  "type": "integer",
-                  "description": "The last page number"
-                },
-                "firstOnPage": {
-                  "type": "integer",
-                  "description": "The index of the first item of the current page result"
-                },
-                "lastOnPage": {
-                  "type": "integer",
-                  "description": "The index of the last item of the current page result"
-                },
-                "itemsPerPage": {
-                  "type": "integer",
-                  "description": "The requested amount of items per result page"
-                },
-                "entries": {
-                  "type": "array",
-                  "description": "List of Contact",
-                  "items": {
-                    "$ref": "#/definitions/Contact"
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-          }
-        },
-        "parameters": [
-          {
-            "name": "contactId",
-            "type": "integer",
-            "required": false,
-            "description": "Filter for a one or multiple contacts ids",
-            "format": "int",
-            "in": "query"
-          },
-          {
-            "name": "name",
-            "type": "string",
-            "required": false,
-            "description": "Filter that restricts the\n     * search result to contacts having a name like the provided term",
-            "format": "string",
-            "in": "query"
-          },
-          {
-            "name": "email",
-            "type": "string",
-            "required": false,
-            "description": "Filter that restricts the\n     * search result to contacts having an email address like the provided term",
-            "format": "string",
-            "in": "query"
-          },
-          {
-            "name": "phone",
-            "type": "integer",
-            "required": false,
-            "description": "Filter that restricts the\n     * search result to contacts having the phone number like the provided term",
-            "format": "int",
-            "in": "query"
-          },
-          {
-            "name": "address",
-            "type": "integer",
-            "required": false,
-            "description": "Filter that restricts the\n     * search result to contacts having the address like the provided term",
-            "format": "int",
-            "in": "query"
-          },
-          {
-            "name": "town",
-            "type": "integer",
-            "required": false,
-            "description": "Filter that restricts the\n     * search result to contacts having the town like the provided term",
-            "format": "int",
-            "in": "query"
-          },
-          {
-            "name": "contactData",
-            "type": "string",
-            "required": false,
-            "description": "Filter that restricts the\n     * search result to contacts having several fields like the provided term",
-            "format": "string",
-            "in": "query"
-          },
-          {
-            "name": "postcode",
-            "type": "string",
-            "required": false,
-            "description": "Filter that restricts the\n     * search result to contacts having the postcode like the provided term",
-            "format": "string",
-            "in": "query"
-          },
-          {
-            "name": "clientId",
-            "type": "integer",
-            "required": false,
-            "description": "Filter by one or multiple client ids",
-            "format": "int",
-            "in": "query"
-          },
-          {
-            "name": "countryId",
-            "type": "integer",
-            "required": false,
-            "description": "Filter by one or multiple country ids",
-            "format": "int",
-            "in": "query"
-          },
-          {
-            "name": "tagIds",
-            "type": "integer",
-            "required": false,
-            "description": "Filter by one or multiple tag ids",
-            "format": "int",
-            "in": "query"
-          },
-          {
-            "name": "ownerId",
-            "type": "integer",
-            "required": false,
-            "description": "Filter by one or multiple user ids",
-            "format": "int",
-            "in": "query"
-          },
-          {
-            "name": "typeId",
-            "type": "integer",
-            "required": false,
-            "description": "Filter by one or multiple type ids",
-            "format": "int",
-            "in": "query"
-          },
-          {
-            "name": "rating",
-            "type": "integer",
-            "required": false,
-            "description": "Filter by one or multiple rating ids",
-            "format": "int",
-            "in": "query"
-          },
-          {
-            "name": "classId",
-            "type": "integer",
-            "required": false,
-            "description": "Filter by one or multiple class ids",
-            "format": "int",
-            "in": "query"
-          },
-          {
-            "name": "jobId",
-            "type": "integer",
-            "required": false,
-            "description": "Filter by one or multiple job position ids",
-            "format": "int",
-            "in": "query"
-          },
-          {
-            "name": "followUp",
-            "type": "string",
-            "required": false,
-            "description": "Filter by a single date or a range of dates",
-            "format": "string",
-            "in": "query"
-          },
-          {
-            "name": "isGuest",
-            "type": "string",
-            "required": false,
-            "description": "Filter contacts by a boolean term",
-            "format": "string",
-            "in": "query"
-          }
-        ]
-      }
-    },
     "/rest/accounts/contacts/types": {
       "get": {
         "summary": "List contact types",
@@ -6636,8 +6433,11 @@
             "type": "array",
             "required": false,
             "description": "When this parameter is used, the current relations between contacts and tags\n     *     will be deleted and replaced by the given ones. If the parameter is not used, the current relations remain.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "contactId",
@@ -6910,10 +6710,6 @@
                 "supplierCurrency": {
                   "type": "string",
                   "description": "The currency used by a supplier optional"
-                },
-                "externalId": {
-                  "type": "string",
-                  "description": "The externalId for this company (like the hubspot company id) optional"
                 }
               }
             }
@@ -7411,7 +7207,7 @@
         ]
       }
     },
-    "/rest/accounts/contacts/{contactId}/addresses/{addressTypeId}": {
+    "/rest/accounts/contacts/{contactId}/addresses/{addressTypeId?}": {
       "get": {
         "summary": "List addresses that are linked with contacts",
         "description": "Lists addresses of the contact. The ID of the contact must be specified. If you specify page and itemsPerPage, you will get a paginated result. Otherwise you will get an array.",
@@ -7463,7 +7259,7 @@
             "in": "path"
           },
           {
-            "name": "addressTypeId",
+            "name": "addressTypeId?",
             "type": "integer",
             "required": true,
             "description": "",
@@ -7984,8 +7780,11 @@
             "type": "array",
             "required": true,
             "description": "List of storage keys to delete",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "contactId",
@@ -8484,8 +8283,11 @@
             "type": "array",
             "required": false,
             "description": "Job relations, array or string (comma separated)",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       },
@@ -9147,10 +8949,6 @@
                 "supplierCurrency": {
                   "type": "string",
                   "description": "The currency used by a supplier optional"
-                },
-                "externalId": {
-                  "type": "string",
-                  "description": "The externalId for this company (like the hubspot company id) optional"
                 }
               }
             }
@@ -9427,7 +9225,7 @@
         }
       }
     },
-    "/rest/address_layout/used_countries/{uuid}": {
+    "/rest/address_layout/used_countries/{uuid?}": {
       "get": {
         "summary": "List countries used in other layouts",
         "description": "Lists the countries that are already used in other layouts.",
@@ -10659,16 +10457,22 @@
             "type": "array",
             "required": false,
             "description": "Optional list of IDs that limit the search query",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "with",
             "type": "array",
             "required": false,
             "description": "Load additional relations for a key figure. The following relations are available:\n     * <ul>\n    <li>'filter' = Filter options of this key figure.</li>\n    <li>'targets' = Target values of this key figure.</li>\n    <li>'dimensions' = Available dimensions of this key figure.</li>\n    <li>'dimensionValues' = Available dimension values of this key figure.</li>\n    </ul>\n    Example: <code>?with[]=dimension&with[]=dimensionValues</code>",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       },
@@ -10829,8 +10633,11 @@
             "type": "array",
             "required": false,
             "description": "Load additional relations for a key figure. The following relations are available:\n     * <ul>\n    <li>'dimensions' = Available dimensions of this key figure.</li>\n    <li>'dimensionValues' = Available dimension values of this key figure.</li>\n    </ul>\n    Example: <code>?with[]=dimension&with[]=dimensionValues</code>",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "keyFigureConfigId",
@@ -10965,8 +10772,11 @@
             "type": "array",
             "required": false,
             "description": "Load additional relations for a key figure. The following relations are available:\n     * <ul>\n    <li>'dimensions' = Available dimensions of this key figure.</li>\n    <li>'dimensionValues' = Available dimension values of this key figure.</li>\n    </ul>\n    Example: <code>?with[]=dimension&with[]=dimensionValues</code>",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "dimension",
@@ -11246,8 +11056,11 @@
             "type": "array",
             "required": true,
             "description": "An array containing the columns from raw data which will be exported",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "startingCell",
@@ -11493,8 +11306,11 @@
             "type": "array",
             "required": true,
             "description": "Resets all saved raw data configurations with given configs",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -11634,8 +11450,11 @@
             "type": "array",
             "required": true,
             "description": "List of primary keys of the records to be deleted",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "dataName",
@@ -14676,8 +14495,11 @@
             "type": "array",
             "required": true,
             "description": "The array with the category documents",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "categoryId",
@@ -14756,10 +14578,6 @@
                 "source": {
                   "type": "string",
                   "description": "The source where the document was generated. Possible sources are 'klarna', 'soap', 'admin', 'hitmeister', 'paypal' and 'rest'. optional allowed values are klarna, soap, admin, hitmeister, paypal, rest"
-                },
-                "tags": {
-                  "type": "array",
-                  "items": {}
                 }
               }
             }
@@ -15897,8 +15715,11 @@
             "type": "array",
             "required": true,
             "description": "The list of conversations UUID's to be deleted. Expected values: ['24810ce7-4b75-45d0-8610-7fb07ede0d86']",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       },
@@ -16213,8 +16034,11 @@
             "type": "array",
             "required": false,
             "description": "Appends relations to conversations. Expected values: ['messages']",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "owners",
@@ -16279,8 +16103,11 @@
             "type": "array",
             "required": true,
             "description": "The list of conversations UUID's to archive. Expected values: ['24810ce7-4b75-45d0-8610-7fb07ede0d86']",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -16314,8 +16141,11 @@
             "type": "array",
             "required": true,
             "description": "The list of conversations UUID's to restore from archive. Expected values: ['24810ce7-4b75-45d0-8610-7fb07ede0d86']",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -16349,8 +16179,11 @@
             "type": "array",
             "required": true,
             "description": "The list of conversations UUID's to restore from archive. Expected values: ['24810ce7-4b75-45d0-8610-7fb07ede0d86']",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -16384,8 +16217,11 @@
             "type": "array",
             "required": true,
             "description": "The list of conversations UUID's to restore from trash. Expected values: ['24810ce7-4b75-45d0-8610-7fb07ede0d86']",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -16444,8 +16280,11 @@
             "type": "array",
             "required": true,
             "description": "Array of conversation categories ID's. Expected values: [1, 2]",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "integer"
+            }
           }
         ]
       },
@@ -16589,41 +16428,6 @@
             "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
           }
         }
-      }
-    },
-    "/rest/conversations/categories/createDefaultTypesAndStatuses/{id}": {
-      "post": {
-        "summary": "Creates a list of default types and statuses for given category ID",
-        "description": "Creates a list of default types and statuses for given category ID",
-        "tags": [
-          "Messenger"
-        ],
-        "security": [
-          {
-            "oAuth2": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/bool"
-            }
-          },
-          "401": {
-            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "type": "integer",
-            "required": true,
-            "description": "",
-            "format": "integer",
-            "in": "path"
-          }
-        ]
       }
     },
     "/rest/conversations/categories/{id}": {
@@ -16799,8 +16603,11 @@
             "type": "array",
             "required": true,
             "description": "Array of conversations UUID's. Expected values: ['24810ce7-4b75-45d0-8610-7fb07ede0d86']",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -16842,8 +16649,11 @@
             "type": "array",
             "required": true,
             "description": "The list of conversations UUID's to update deadline. Expected values: ['24810ce7-4b75-45d0-8610-7fb07ede0d86']",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -17407,8 +17217,11 @@
             "type": "array",
             "required": true,
             "description": "The list of conversations UUID's to assign to folders. Expected values: ['24810ce7-4b75-45d0-8610-7fb07ede0d86']",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -17450,8 +17263,11 @@
             "type": "array",
             "required": true,
             "description": "The list of conversations UUID's to assign to folders. Expected values: ['24810ce7-4b75-45d0-8610-7fb07ede0d86']",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -17493,8 +17309,11 @@
             "type": "array",
             "required": true,
             "description": "The list of conversations UUID's to assign to folders. Expected values: ['24810ce7-4b75-45d0-8610-7fb07ede0d86']",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -17637,8 +17456,11 @@
             "type": "array",
             "required": true,
             "description": "The list of conversations UUID's to update deadline. Expected values: ['24810ce7-4b75-45d0-8610-7fb07ede0d86']",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -17709,41 +17531,6 @@
         }
       }
     },
-    "/rest/conversations/markNotSpam": {
-      "put": {
-        "summary": "Mark a batch of conversations as read or unread",
-        "description": "Mark a batch of conversations as read or unread",
-        "tags": [
-          "Messenger"
-        ],
-        "security": [
-          {
-            "oAuth2": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/int"
-            }
-          },
-          "401": {
-            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-          }
-        },
-        "parameters": [
-          {
-            "name": "uuids",
-            "type": "array",
-            "required": true,
-            "description": "The list of conversations UUID's to update read status. Expected values: ['24810ce7-4b75-45d0-8610-7fb07ede0d86']",
-            "format": "array",
-            "in": "query"
-          }
-        ]
-      }
-    },
     "/rest/conversations/owner": {
       "put": {
         "summary": "Update owner roles for specific conversation id/ids",
@@ -17806,8 +17593,11 @@
             "type": "array",
             "required": true,
             "description": "The list of conversations UUID's to update priority. Expected values: ['24810ce7-4b75-45d0-8610-7fb07ede0d86']",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -17857,8 +17647,11 @@
             "type": "array",
             "required": true,
             "description": "The list of conversations UUID's to update read status. Expected values: ['24810ce7-4b75-45d0-8610-7fb07ede0d86']",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -17917,8 +17710,11 @@
             "type": "array",
             "required": true,
             "description": "Array of conversation roles ID's. Expected values: [1, 2]",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "integer"
+            }
           }
         ]
       },
@@ -18453,8 +18249,11 @@
             "type": "array",
             "required": false,
             "description": "Appends relations to conversations. Expected values: ['messages']",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "owners",
@@ -18534,8 +18333,11 @@
             "type": "array",
             "required": true,
             "description": "Array of conversation statuses ID's. Expected values: [1, 2]",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "integer"
+            }
           }
         ]
       },
@@ -18819,8 +18621,11 @@
             "type": "array",
             "required": true,
             "description": "The list of conversations UUID's to subscribe to. Expected values: ['24810ce7-4b75-45d0-8610-7fb07ede0d86']",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -18854,16 +18659,22 @@
             "type": "array",
             "required": true,
             "description": "The list of tags to be added. Expected values: [17, 18]",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "integer"
+            }
           },
           {
             "name": "uuids",
             "type": "array",
             "required": true,
             "description": "Array of conversations UUID's. Expected values: ['24810ce7-4b75-45d0-8610-7fb07ede0d86']",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -18941,8 +18752,11 @@
             "type": "array",
             "required": true,
             "description": "The list of conversations UUID's to update type and status. Expected values: ['24810ce7-4b75-45d0-8610-7fb07ede0d86']",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -18976,8 +18790,11 @@
             "type": "array",
             "required": true,
             "description": "Array of conversation types ID's. Expected values: [1, 2]",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "integer"
+            }
           }
         ]
       },
@@ -19102,8 +18919,11 @@
             "type": "array",
             "required": false,
             "description": "Appends relations to types. Expected values: ['allStatuses'] / ['activeStatuses']",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       },
@@ -19261,8 +19081,11 @@
             "type": "array",
             "required": true,
             "description": "The list of conversations UUID's to unsubscribe from. Expected values: ['24810ce7-4b75-45d0-8610-7fb07ede0d86']",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -19440,8 +19263,11 @@
             "type": "array",
             "required": true,
             "description": "The list of tags to be added. Expected values: [17, 18]",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "integer"
+            }
           },
           {
             "name": "uuid5",
@@ -19618,128 +19444,6 @@
             "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
           }
         }
-      }
-    },
-    "/rest/credit_notes/reasons": {
-      "get": {
-        "summary": "Get all order credit note reasons",
-        "description": "Gets all order credit note reasons.",
-        "tags": [
-          "Order"
-        ],
-        "security": [
-          {
-            "oAuth2": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CreditNoteReason"
-              }
-            }
-          },
-          "401": {
-            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-          }
-        }
-      },
-      "post": {
-        "summary": "Set an order credit note reason",
-        "description": "Sets an order credit note reason.",
-        "tags": [
-          "Order"
-        ],
-        "security": [
-          {
-            "oAuth2": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CreditNoteReason"
-              }
-            }
-          },
-          "401": {
-            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-          }
-        }
-      }
-    },
-    "/rest/credit_notes/reasons/{creditNotesReasonsId}": {
-      "delete": {
-        "summary": "Delete an order credit note reason",
-        "description": "Deletes an order credit note reason. The credit note reason ID must be specified.",
-        "tags": [
-          "Order"
-        ],
-        "security": [
-          {
-            "oAuth2": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SimpleRestResponse"
-            }
-          },
-          "401": {
-            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-          }
-        },
-        "parameters": [
-          {
-            "name": "creditNotesReasonsId",
-            "type": "integer",
-            "required": true,
-            "description": "",
-            "format": "integer",
-            "in": "path"
-          }
-        ]
-      },
-      "get": {
-        "summary": "Get an order credit note reason",
-        "description": "Gets an order credit note reason. The credit note reason has to be specified by providing a credit note reason\nID.",
-        "tags": [
-          "Order"
-        ],
-        "security": [
-          {
-            "oAuth2": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/CreditNoteReason"
-            }
-          },
-          "401": {
-            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-          }
-        },
-        "parameters": [
-          {
-            "name": "creditNotesReasonsId",
-            "type": "integer",
-            "required": true,
-            "description": "",
-            "format": "integer",
-            "in": "path"
-          }
-        ]
       }
     },
     "/rest/credit_notes/{orderId}": {
@@ -20478,41 +20182,6 @@
         ]
       }
     },
-    "/rest/documents/{documentId}/regenerate": {
-      "post": {
-        "summary": "Regenerate a faulty document",
-        "description": "Regenerate a faulty document. The ID of the document must be specified.",
-        "tags": [
-          "Document"
-        ],
-        "security": [
-          {
-            "oAuth2": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/DocumentGeneration"
-            }
-          },
-          "401": {
-            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-          }
-        },
-        "parameters": [
-          {
-            "name": "documentId",
-            "type": "integer",
-            "required": true,
-            "description": "",
-            "format": "integer",
-            "in": "path"
-          }
-        ]
-      }
-    },
     "/rest/documents/{documentId}/status": {
       "get": {
         "summary": "Get status of a document",
@@ -20680,8 +20349,11 @@
             "type": "array",
             "required": true,
             "description": "List of storage keys to delete",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       },
@@ -21077,8 +20749,11 @@
             "type": "array",
             "required": true,
             "description": "The file data",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -21109,8 +20784,11 @@
             "type": "array",
             "required": true,
             "description": "The file data",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -21141,8 +20819,11 @@
             "type": "array",
             "required": true,
             "description": "The file data",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -21173,8 +20854,11 @@
             "type": "array",
             "required": true,
             "description": "The file data",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -24867,8 +24551,11 @@
             "type": "array",
             "required": false,
             "description": "includes the item sets that have to be created",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       },
@@ -36459,8 +36146,11 @@
             "type": "array",
             "required": false,
             "description": "The properties to be loaded",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "id",
@@ -36927,8 +36617,11 @@
             "type": "array",
             "required": false,
             "description": "The properties to be loaded",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "id",
@@ -37175,8 +36868,11 @@
             "type": "array",
             "required": false,
             "description": "The properties to be loaded",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "sortBy",
@@ -39576,108 +39272,6 @@
                 }
               }
             }
-          }
-        ]
-      }
-    },
-    "/rest/items/{id}/variations/{variationId}/variation_properties/{propertyId}/deleteFile": {
-      "delete": {
-        "summary": "Delete file",
-        "description": "Deletes one file for specific characteristic",
-        "tags": [
-          "Item"
-        ],
-        "security": [
-          {
-            "oAuth2": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/VariationPropertyValue"
-            }
-          },
-          "401": {
-            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "type": "integer",
-            "required": true,
-            "description": "",
-            "format": "integer",
-            "in": "path"
-          },
-          {
-            "name": "variationId",
-            "type": "integer",
-            "required": true,
-            "description": "",
-            "format": "integer",
-            "in": "path"
-          },
-          {
-            "name": "propertyId",
-            "type": "integer",
-            "required": true,
-            "description": "",
-            "format": "integer",
-            "in": "path"
-          }
-        ]
-      }
-    },
-    "/rest/items/{id}/variations/{variationId}/variation_properties/{propertyId}/upload": {
-      "post": {
-        "summary": "Upload file",
-        "description": "Uploads one file for characteristics",
-        "tags": [
-          "Item"
-        ],
-        "security": [
-          {
-            "oAuth2": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/VariationPropertyValue"
-            }
-          },
-          "401": {
-            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "type": "integer",
-            "required": true,
-            "description": "",
-            "format": "integer",
-            "in": "path"
-          },
-          {
-            "name": "variationId",
-            "type": "integer",
-            "required": true,
-            "description": "",
-            "format": "integer",
-            "in": "path"
-          },
-          {
-            "name": "propertyId",
-            "type": "integer",
-            "required": true,
-            "description": "",
-            "format": "integer",
-            "in": "path"
           }
         ]
       }
@@ -43647,8 +43241,11 @@
             "type": "array",
             "required": false,
             "description": "An array with child instances to be loaded. One of 'stockDependenceType', 'type', 'markets', 'properties'.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       },
@@ -43953,7 +43550,7 @@
             "type": "number",
             "required": false,
             "description": "Filter that restricts the search result to listing markets with given referrer ID.",
-            "format": "",
+            "format": "double",
             "in": "query"
           },
           {
@@ -44065,8 +43662,11 @@
             "type": "array",
             "required": false,
             "description": "An array with child instances to be loaded. Valid instances are 'listing', 'texts', 'properties', 'prices', 'dates', 'infos'.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       },
@@ -44457,7 +44057,7 @@
             "type": "number",
             "required": false,
             "description": "Filter that restricts the search result to listing markets with given referrer ID.",
-            "format": "",
+            "format": "double",
             "in": "query"
           },
           {
@@ -44497,8 +44097,11 @@
             "type": "array",
             "required": false,
             "description": "An array with child instances to be loaded. Valid instances are 'listing', 'texts', 'properties', 'prices', 'dates', 'infos'.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -44609,7 +44212,7 @@
             "type": "number",
             "required": false,
             "description": "Filter that restricts the search result to listing market histories with given referrer ID.",
-            "format": "",
+            "format": "double",
             "in": "query"
           },
           {
@@ -44801,13 +44404,16 @@
             "type": "array",
             "required": false,
             "description": "An array with child instances to be loaded. Valid instances are 'listingMarket', 'texts', 'properties', 'prices', 'dates'.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
     },
-    "/rest/listings/markets/histories/end/{id}": {
+    "/rest/listings/markets/histories/end/{id?}": {
       "delete": {
         "summary": "End the listing",
         "description": "Ends the listing on the designated market.",
@@ -44853,7 +44459,7 @@
         ]
       }
     },
-    "/rest/listings/markets/histories/relist/{id}": {
+    "/rest/listings/markets/histories/relist/{id?}": {
       "post": {
         "summary": "Relist the listing",
         "description": "Relists the listing on the designated market.",
@@ -44891,7 +44497,7 @@
         ]
       }
     },
-    "/rest/listings/markets/histories/update/{id}": {
+    "/rest/listings/markets/histories/update/{id?}": {
       "put": {
         "summary": "Update listing market histories",
         "description": "Updates listing market histories by given update options. The listing market histories are not directly revised,\nthey are added to the batch processing lists, waiting to be revised by automated background processes.",
@@ -44923,16 +44529,22 @@
             "type": "array",
             "required": true,
             "description": "The ID of the listing market history that needs to be updated. This must be passed as an array. This parameter is only needed if more than one listing market history should be updated.",
-            "format": "array",
-            "in": "path"
+            "format": "",
+            "in": "path",
+            "items": {
+              "type": "integer"
+            }
           },
           {
             "name": "options",
             "type": "array",
             "required": false,
             "description": "Multiple update options. Available values are:\n    <ul>\n    <li>all - Updates everything\n    <li>title - Updates the title\n    <li>subtitle - Updates the subtitle</li></li>\n    <li>itemSpecifics - Updates the item specifics</li>\n    <li>category - Updates the platform and shop category</li>\n    <li>listingDetails - Updates listing details</li>\n    <li>enhancements - Updates the enhancements information</li>\n    <li>duration - Updates the duration</li>\n    <li>shipping - Updates the shipping information</li>\n    <li>description - Updates the description</li>\n    <li>pictures - Updates the entry pictures</li>\n    <li>quantityAndPrice - Updates the quantity and price (also for variations)</li>\n    <li>resetVariations - Reset the variations. The variations from the item are transmitted again</li>\n    <li>partsFitmentList - Updates the parts fitment information (only available for eBay)</li>\n    <li>loyaltyProgram - Updates the listing loyalty program information (only available for eBay Plus)</li>\n    <li>resetRrp - Reset the recommended retail price information (only available for eBay)</li>\n    <li>payment - Updates payment information (only available for Hood)</li>\n    </ul>",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -44974,8 +44586,11 @@
             "type": "array",
             "required": false,
             "description": "An array with child instances to be loaded. One of 'listingMarket', 'texts', 'properties', 'dates', 'variations'.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -45110,8 +44725,11 @@
             "type": "array",
             "required": false,
             "description": "An array with child instances to be loaded.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -45386,7 +45004,7 @@
         ]
       }
     },
-    "/rest/listings/markets/start/{id}": {
+    "/rest/listings/markets/start/{id?}": {
       "post": {
         "summary": "Start the market listing on the designated market.",
         "description": "Starts the market listing on the designated markets.",
@@ -45778,7 +45396,7 @@
         ]
       }
     },
-    "/rest/listings/markets/verify/{id}": {
+    "/rest/listings/markets/verify/{id?}": {
       "post": {
         "summary": "Verify listing markets",
         "description": "Verifies the listing markets.",
@@ -45886,8 +45504,11 @@
             "type": "array",
             "required": false,
             "description": "An array with child instances to be loaded. One of 'listing', 'texts', 'properties', 'itemSpecifics', 'prices', 'dates', 'infos'.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       },
@@ -45927,7 +45548,7 @@
             "type": "number",
             "required": true,
             "description": "The referrer ID.",
-            "format": "",
+            "format": "double",
             "in": "query"
           },
           {
@@ -46287,7 +45908,7 @@
             "type": "number",
             "required": false,
             "description": "Filter that restricts the search result to listing shipping profiles with given referrer ID(s).",
-            "format": "",
+            "format": "double",
             "in": "query"
           },
           {
@@ -46338,8 +45959,11 @@
             "type": "array",
             "required": false,
             "description": "An array with child instances to be loaded.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -46426,8 +46050,11 @@
             "type": "array",
             "required": false,
             "description": "An array with child instances to be loaded. Available values: 'names'.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -46469,8 +46096,11 @@
             "type": "array",
             "required": false,
             "description": "An array with child instances to be loaded. Available values: 'names'.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -46584,8 +46214,11 @@
             "type": "array",
             "required": false,
             "description": "An array with child instances to be loaded. Available values: 'names'.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "id",
@@ -46668,8 +46301,11 @@
             "type": "array",
             "required": false,
             "description": "An array with child instances to be loaded. One of 'stockDependenceType', 'type', 'markets', 'properties'.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       },
@@ -46903,16 +46539,22 @@
             "type": "array",
             "required": false,
             "description": "Filter that restricts the search result to log\n     *   entries with custom integration key(s).",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "identifier",
             "type": "array",
             "required": false,
             "description": "Filter that restricts the search result to log\n     *   entries with custom identifier(s).",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "referenceType",
@@ -46975,8 +46617,11 @@
             "type": "array",
             "required": false,
             "description": "An array with child instances to be loaded.\n     *   Valid instances are 'additionalInfo'.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       },
@@ -47538,24 +47183,33 @@
             "type": "array",
             "required": false,
             "description": "List of contacts ids",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "integer"
+            }
           },
           {
             "name": "orders",
             "type": "array",
             "required": false,
             "description": "List of orders ids",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "integer"
+            }
           },
           {
             "name": "emails",
             "type": "array",
             "required": false,
             "description": "List of emails",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "lang",
@@ -47608,32 +47262,44 @@
             "type": "array",
             "required": true,
             "description": "Contains all account details:\n     *          type = string (webstore/messenger_inbox)\n     *          id = int (the id of the webStore or de inbox id)\n     *          name = string (the name of the webStore or de inbox name)\n     *          from = array ('name': string - the from name, 'address': string - the from email)\n     *          ",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "to",
             "type": "array",
             "required": true,
             "description": "Array with emails and names for to receivers,\n     *      [{'name': string, 'address': string}]",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "cc",
             "type": "array",
             "required": false,
             "description": "Array with emails and names for cc receivers,\n     *      [{'name': string, 'address': string}]",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "bcc",
             "type": "array",
             "required": false,
             "description": "Array with emails and names for bcc receivers,\n     *      [{'name': string, 'address': string}]",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "subject",
@@ -47656,8 +47322,11 @@
             "type": "array",
             "required": false,
             "description": "Array that contains the multipel attachments details:\n     *      [\n     *           {\n     *           'name': string (File name),\n     *           'body': string (File content),\n     *           'size': int (File size in kb),\n     *           'contentType': string (File content type)\n     *           }\n     *       ]\n     *     ",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -48720,8 +48389,11 @@
             "type": "array",
             "required": false,
             "description": "An array with child instances to be loaded. Available values: 'items', 'items.properties'.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -49949,7 +49621,7 @@
                 },
                 "contentType": {
                   "type": "string",
-                  "description": "The content type fo the attachment  allowed values are image/png, image/jpeg, image/gif, image/bmp, image/tiff, application/pdf, application/zip, application/x-zip-compressed, application/json, application/octet-stream, text/plain, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.ms-powerpoint, application/vnd.openxmlformats-officedocument.presentationml.presentation"
+                  "description": "The content type fo the attachment  allowed values are image/png, image/jpeg, image/gif, image/bmp, image/tiff, application/pdf, application/zip, application/json, application/octet-stream, text/plain, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.ms-powerpoint, application/vnd.openxmlformats-officedocument.presentationml.presentation"
                 },
                 "categoryId": {
                   "type": "integer",
@@ -50030,79 +49702,7 @@
             "name": "conversationId",
             "type": "string",
             "required": true,
-            "description": "The UUID5 of the conversation.",
-            "format": "string",
-            "in": "query"
-          }
-        ]
-      }
-    },
-    "/rest/messages/forConversation": {
-      "get": {
-        "summary": "List of messages for a single conversation",
-        "description": "List of messages for a single conversation",
-        "tags": [
-          "Messenger"
-        ],
-        "security": [
-          {
-            "oAuth2": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "page": {
-                  "type": "integer",
-                  "description": "Current page of the response"
-                },
-                "totalsCount": {
-                  "type": "integer",
-                  "description": "The total number of entries in the response"
-                },
-                "isLastPage": {
-                  "type": "boolean",
-                  "description": "Flag that indicates if the page shown is the last page of the response"
-                },
-                "lastPageNumber": {
-                  "type": "integer",
-                  "description": "The last page number"
-                },
-                "firstOnPage": {
-                  "type": "integer",
-                  "description": "The index of the first item of the current page result"
-                },
-                "lastOnPage": {
-                  "type": "integer",
-                  "description": "The index of the last item of the current page result"
-                },
-                "itemsPerPage": {
-                  "type": "integer",
-                  "description": "The requested amount of items per result page"
-                },
-                "entries": {
-                  "type": "array",
-                  "description": "List of Message",
-                  "items": {
-                    "$ref": "#/definitions/Message"
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-          }
-        },
-        "parameters": [
-          {
-            "name": "conversationId",
-            "type": "string",
-            "required": true,
-            "description": "The UUID5 of the conversation.",
+            "description": "The reference UUID5 of the conversation to start from.",
             "format": "string",
             "in": "query"
           }
@@ -50503,8 +50103,11 @@
             "type": "array",
             "required": true,
             "description": "The tags of the message",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "integer"
+            }
           },
           {
             "name": "uuid5",
@@ -51364,8 +50967,11 @@
             "type": "array",
             "required": false,
             "description": "The IDs of the clients (stores). It is possible to determine which clients (stores) the newsletter folder is visible for. ",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "isDeletable",
@@ -51494,8 +51100,11 @@
             "type": "array",
             "required": false,
             "description": "Filter that restricts the search result to specific columns",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "page",
@@ -51534,8 +51143,11 @@
             "type": "array",
             "required": false,
             "description": "Load additional relations for a Recipient. CURRENTLY NOT AVAILABLE",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "recipientId",
@@ -51682,8 +51294,11 @@
             "type": "array",
             "required": false,
             "description": "The IDs of the newsletter folders. These folders were selected by the customer in the online store in order to receive newsletters included in these folders.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "isFrontend",
@@ -51847,8 +51462,11 @@
             "type": "array",
             "required": false,
             "description": "DEPRECATED: The IDs of the newsletter folders. These folders were selected by the customer in the online store in order to receive newsletters included in these folders.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "folderId",
@@ -52361,7 +51979,7 @@
             "type": "number",
             "required": false,
             "description": "Filter that restricts the search result to orders of a specific order referrer. The ID of the order referrer must be specified.",
-            "format": "",
+            "format": "double",
             "in": "query"
           },
           {
@@ -52425,8 +52043,11 @@
             "type": "array",
             "required": false,
             "description": "Filter that restricts the search result to orders with a specific ID. To list several orders, the order IDs must be enetered separated by commas.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "countryId",
@@ -52585,7 +52206,7 @@
             "type": "number",
             "required": false,
             "description": "Filter that restricts the search result to orders in a specific order status. The value of the order status must be specified.",
-            "format": "",
+            "format": "double",
             "in": "query"
           },
           {
@@ -52593,7 +52214,7 @@
             "type": "number",
             "required": false,
             "description": "Filter that restricts the search result to orders within a range of order statuses. This filter can be used alone or can be combined with the statusFrom filter. The value of the order status must be specified.",
-            "format": "",
+            "format": "double",
             "in": "query"
           },
           {
@@ -52657,8 +52278,11 @@
             "type": "array",
             "required": false,
             "description": "Load additional relations for an order. Currently possible are:\n    <ul>\n    <li>'addresses' = The address objects that are associated with the order.</li>\n    <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the the reference type, the ID of the reference and the relation itself.</li>\n    <li>'comments' = The order comments.</li>\n    <li>'location' = The accounting location of the order.</li>\n    <li>'payments' = The payments that are associated with the order.</li>\n    <li>'documents' = The documents that are associated with the order.</li>\n    <li>'contactSender' = The associated contact for the contact-sender relation.</li>\n    <li>'contactReceiver' = The associated contact for the contact-receiver relation.</li>\n    <li>'warehouseSender' = The associated warehouse for the warehouse-sender relation.</li>\n    <li>'warehouseReceiver' = The associated warehouse for the warehouse-receiver relation.</li>\n    <li>'orderItems.variation' = The variation that is associated with the order item.</li>\n    <li>'orderItems.variation.propertiesV2' = The properties belonging to the variation.</li>\n    <li>'orderItems.giftCardCodes' = The gift card codes that are associated with the order item.</li>\n    <li>'orderItems.transactions' = The transactions that are associated with the order item.</li>\n    <li>'orderItems.serialNumbers' = The serial numbers that are associated with the order item.</li>\n    <li>'orderItems.variationBarcodes' = The barcodes that are associated with variation of the order item.</li>\n    <li>'orderItems.comments' = The comments that are associated with the order item.</li>\n    <li>'originOrderReferences' = The references to other orders, e.g. returns or credit notes, associated with this order.</li>\n    <li>'shippingPackages' = The shipping packages that are associated with the order.</li>\n    <li>'shippingPackages.items' = The orderPackageItems associated with the package.</li>\n    <li>'shippingInformation' = The shipping information for the order.</li>\n    <li>'paymentTerms' = The payment terms that are associated with the order.</li>\n    <li><b>deprecated</b> 'orderItems.warehouseLocations' = The warehouse locations that are associated with the order item.</li>\n    </ul>\n    Example: <code>?with[]=addresses&with[]=orderItems.variation</code>",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "sortBy",
@@ -52706,8 +52330,11 @@
             "type": "array",
             "required": false,
             "description": "One or multiple coupon code to be redeemed with order creation",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "in": "body",
@@ -52815,16 +52442,22 @@
             "type": "array",
             "required": true,
             "description": "The IDs of the orders.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "integer"
+            }
           },
           {
             "name": "with",
             "type": "array",
             "required": false,
             "description": "Load additional relations for an order. The following relations are available:\n     * <ul>\n    <li>'addresses' = The address objects linked to the order.</li>\n    <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the reference type. The available reference types are parent and reorder. The ID of the reference and the relation itself are also available.</li>\n    <li>'comments' = The order comments.</li>\n    <li>'location' = The accounting location linked to the order.</li>\n    <li>'payments' = The payments linked to the order.</li>\n    <li>'documents' = The documents linked to the order.</li>\n    <li>'contactSender' = The contact belonging the contact-sender relation.</li>\n    <li>'contactReceiver' = The contact belonging to the contact-receiver relation.</li>\n    <li>'warehouseSender' = The warehouse belonging to the warehouse-sender relation.</li>\n    <li>'warehouseReceiver' = The warehouse belonging to the warehouse-receiver relation.</li>\n    <li>'orderItems.variation' = The variation data belonging to the order item.</li>\n    <li>'orderItems.variation.propertiesV2' = The properties belonging to the variation.</li>\n    <li>'orderItems.giftCardCodes' = The gift card codes belonging to the order item.</li>\n    <li>'orderItems.transactions' = The transactions belonging to the order item.</li>\n    <li>'orderItems.serialNumbers' = The serial numbers belonging to the order item.</li>\n    <li>'orderItems.variationBarcodes' = The barcodes belonging to the order item.</li>\n    <li>'orderItems.comments' = The comments belonging to the order item.</li>\n    <li>'shippingPackages' = The shipping packages that are associated with the order.</li>\n    <li>'paymentTerms' = The payment terms that are associated with the order.</li>\n    <li><b>deprecated</b> 'orderItems.warehouseLocations' = The warehouse locations linked to the order item.</li>\n    </ul>\n    Example: <code>?with[]=addresses&with[]=orderItems.variation</code>",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "addOrderItems",
@@ -52927,8 +52560,11 @@
             "type": "array",
             "required": false,
             "description": "Load additional relations for an order. The following relations are available:\n     * <ul>\n       <li>'addresses' = The address objects linked to the order.</li>\n       <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the reference type. The available reference types are parent and reorder. The ID of the reference and the relation itself are also available.</li>\n       <li>'comments' = The order comments.</li>\n       <li>'location' = The accounting location linked to the order.</li>\n       <li>'payments' = The payments linked to the order.</li>\n       <li>'documents' = The documents linked to the order.</li>\n       <li>'contactSender' = The contact belonging the contact-sender relation.</li>\n       <li>'contactReceiver' = The contact belonging to the contact-receiver relation.</li>\n       <li>'warehouseSender' = The warehouse belonging to the warehouse-sender relation.</li>\n       <li>'warehouseReceiver' = The warehouse belonging to the warehouse-receiver relation.</li>\n       <li>'orderItems.variation' = The variation data belonging to the order item.</li>\n       <li>'orderItems.variation.propertiesV2' = The properties belonging to the variation.</li>\n       <li>'orderItems.giftCardCodes' = The gift card codes belonging to the order item.</li>\n       <li>'orderItems.transactions' = The transactions belonging to the order item.</li>\n       <li>'orderItems.serialNumbers' = The serial numbers belonging to the order item.</li>\n       <li>'orderItems.variationBarcodes' = The barcodes belonging to the order item.</li>\n       <li>'orderItems.comments' = The comments belonging to the order item.</li>\n       <li>'shippingPackages' = The shipping packages that are associated with the order.</li>\n       <li>'paymentTerms' = The payment terms that are associated with the order.</li>\n       <li><b>deprecated</b> 'orderItems.warehouseLocations' = The warehouse locations linked to the order item.</li>\n     </ul>\n    Example: <code>?with[]=addresses&with[]=orderItems.variation</code>",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -53291,8 +52927,11 @@
             "type": "array",
             "required": true,
             "description": "The coupons to validate.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "callFromScheduler",
@@ -53614,16 +53253,22 @@
             "type": "array",
             "required": false,
             "description": "The attributes to be loaded",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "with",
             "type": "array",
             "required": false,
             "description": "The relations to be loaded. Valid relations are 'names' or 'countries'.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -53657,16 +53302,22 @@
             "type": "array",
             "required": false,
             "description": "The attributes to be loaded",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "with",
             "type": "array",
             "required": false,
             "description": "The relations to be loaded. Valid relations are 'names' or 'countries').",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "countryId",
@@ -53792,16 +53443,22 @@
             "type": "array",
             "required": false,
             "description": "The attributes to be loaded",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "with",
             "type": "array",
             "required": false,
             "description": "The relations to be loaded. Valid relations are 'names' or 'countries'",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -53846,8 +53503,11 @@
             "type": "array",
             "required": false,
             "description": "The attributes to be loaded",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -53913,101 +53573,12 @@
             "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
           }
         }
-      },
-      "post": {
-        "summary": "Create an order date type.",
-        "description": "Creates an order date type.",
-        "tags": [
-          "Order"
-        ],
-        "security": [
-          {
-            "oAuth2": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/OrderDateType"
-            }
-          },
-          "401": {
-            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-          }
-        }
       }
     },
     "/rest/orders/dates/types/{typeId}": {
-      "delete": {
-        "summary": "Delete an order date type.",
-        "description": "Deletes an order date type. The ID of the date type must be specified.",
-        "tags": [
-          "Order"
-        ],
-        "security": [
-          {
-            "oAuth2": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SimpleRestResponse"
-            }
-          },
-          "401": {
-            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-          }
-        },
-        "parameters": [
-          {
-            "name": "typeId",
-            "type": "integer",
-            "required": true,
-            "description": "",
-            "format": "integer",
-            "in": "path"
-          }
-        ]
-      },
       "get": {
         "summary": "Find an order date type",
         "description": "Finds an order date type. The ID of the type must be specified. The following IDs are available:\n<br><ul>\n<li>1 = Deleted on</li>\n<li>2 = Created on</li>\n<li>3 = Paid date</li>\n<li>4 = Last update</li>\n<li>5 = Completed on</li>\n<li>6 = Return date</li>\n<li>7 = Payment due date</li>\n<li>8 = Estimated shipping date</li>\n<li>9 = Start date</li>\n<li>10 = End date</li>\n<li>11 = Possible delivery date</li>\n<li>12 = Market transfer date</li>\n<li>13 = Subscription cancelled on</li>\n<li>14 = Subscription last run</li>\n<li>15 = Subscription next run</li>\n</ul>",
-        "tags": [
-          "Order"
-        ],
-        "security": [
-          {
-            "oAuth2": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/OrderDateType"
-            }
-          },
-          "401": {
-            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-          }
-        },
-        "parameters": [
-          {
-            "name": "typeId",
-            "type": "integer",
-            "required": true,
-            "description": "",
-            "format": "integer",
-            "in": "path"
-          }
-        ]
-      },
-      "put": {
-        "summary": "Update an order date type.",
-        "description": "Updates an order date type. The ID of the date type must be specified.",
         "tags": [
           "Order"
         ],
@@ -54250,8 +53821,11 @@
             "type": "array",
             "required": false,
             "description": "Load additional relations for a document. Currently possible are:\n    <ul>\n    <li>'references' = The document reference objects that are associated with the document.</li>\n    </ul>\n    Example: <code>?with[]=references</code>",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -54384,7 +53958,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/mixed"
+              "$ref": "#/definitions/JsonResponse"
             }
           },
           "401": {
@@ -54397,8 +53971,11 @@
             "type": "array",
             "required": true,
             "description": "The document ids to be downloaded",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "integer"
+            }
           },
           {
             "name": "filename",
@@ -54406,82 +53983,6 @@
             "required": false,
             "description": "The filename to be used for the zip file",
             "format": "string",
-            "in": "query"
-          }
-        ]
-      },
-      "post": {
-        "summary": "Download documents",
-        "description": "Downloads all documents as a zip file. The documents must be given as an array of indices. An optional filename for the zip file can also be given",
-        "tags": [
-          "Document"
-        ],
-        "security": [
-          {
-            "oAuth2": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/mixed"
-            }
-          },
-          "401": {
-            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-          }
-        },
-        "parameters": [
-          {
-            "name": "ids",
-            "type": "array",
-            "required": true,
-            "description": "The document ids to be downloaded",
-            "format": "array",
-            "in": "query"
-          },
-          {
-            "name": "filename",
-            "type": "string",
-            "required": false,
-            "description": "The filename to be used for the zip file",
-            "format": "string",
-            "in": "query"
-          }
-        ]
-      }
-    },
-    "/rest/orders/documents/downloads/as_zip/asynchronous": {
-      "get": {
-        "summary": "Download documents asynchronous",
-        "description": "Downloads all documents asynchronous as a zip file. The documents must be given as an array of indices.",
-        "tags": [
-          "Document"
-        ],
-        "security": [
-          {
-            "oAuth2": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/mixed"
-            }
-          },
-          "401": {
-            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-          }
-        },
-        "parameters": [
-          {
-            "name": "ids",
-            "type": "array",
-            "required": true,
-            "description": "The document ids to be downloaded",
-            "format": "array",
             "in": "query"
           }
         ]
@@ -54758,60 +54259,11 @@
             "description": "The number of documents to list per page. The default number of documents per page is 50. The maximum number is 6000.",
             "format": "integer",
             "in": "query"
-          },
-          {
-            "name": "sortBy",
-            "type": "string",
-            "required": false,
-            "description": "This field is used for sorting. Default is 'id'. Possible values are 'id', 'type', 'number', 'createdAt', 'displayDate'",
-            "format": "string",
-            "in": "query"
-          },
-          {
-            "name": "sortOrder",
-            "type": "string",
-            "required": false,
-            "description": "The order to sort by. Default is 'desc'. Possible values are 'asc' and 'desc'.",
-            "format": "string",
-            "in": "query"
           }
         ]
       }
     },
     "/rest/orders/documents/{documentId}": {
-      "delete": {
-        "summary": "Delete a document without an order relation",
-        "description": "Deletes a document that doesn't have an order relation",
-        "tags": [
-          "Document"
-        ],
-        "security": [
-          {
-            "oAuth2": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/DeleteResponse"
-            }
-          },
-          "401": {
-            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-          }
-        },
-        "parameters": [
-          {
-            "name": "documentId",
-            "type": "integer",
-            "required": true,
-            "description": "",
-            "format": "integer",
-            "in": "path"
-          }
-        ]
-      },
       "get": {
         "summary": "Get an order document.",
         "description": "Gets an order document. The document id must be specified.",
@@ -55000,8 +54452,11 @@
             "type": "array",
             "required": false,
             "description": "Load additional relations for a document. Currently possible are:\n    <ul>\n    <li>'references' = The document reference objects that are associated with the document.</li>\n    </ul>\n    Example: <code>?with[]=references</code>",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -55495,16 +54950,22 @@
             "type": "array",
             "required": false,
             "description": "Specifies the properties of the order item transactions to be loaded.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "with",
             "type": "array",
             "required": false,
             "description": "Loads additional relations of the order item transactions. The available relations are 'orderItem' and 'warehouseLocation'.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "sortBy",
@@ -55563,32 +55024,6 @@
             "in": "query"
           }
         ]
-      },
-      "post": {
-        "summary": "Create order item transactions",
-        "description": "Creates multiple order item transactions.",
-        "tags": [
-          "Order"
-        ],
-        "security": [
-          {
-            "oAuth2": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/OrderItemTransaction"
-              }
-            }
-          },
-          "401": {
-            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-          }
-        }
       }
     },
     "/rest/orders/items/transactions/booking": {
@@ -55620,8 +55055,11 @@
             "type": "array",
             "required": true,
             "description": "The IDs of the order item transactions.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "integer"
+            }
           },
           {
             "name": "deliveryNoteNumber",
@@ -55716,10 +55154,6 @@
                 "bestBeforeDate": {
                   "type": "string",
                   "description": "The best before date"
-                },
-                "deliveryNoteNumber": {
-                  "type": "string",
-                  "description": "The delivery note number"
                 }
               }
             }
@@ -56307,16 +55741,22 @@
             "type": "array",
             "required": false,
             "description": "The properties to be loaded",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "with",
             "type": "array",
             "required": false,
             "description": "Load additional relations for a transaction. Currently possible are 'orderItem' and 'warehouseLocation'.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       },
@@ -56402,10 +55842,6 @@
                 "bestBeforeDate": {
                   "type": "string",
                   "description": "The best before date"
-                },
-                "deliveryNoteNumber": {
-                  "type": "string",
-                  "description": "The delivery note number"
                 }
               }
             }
@@ -56445,8 +55881,11 @@
             "type": "array",
             "required": false,
             "description": "If no parameter is set here, all languages are loaded by default. Optionally, enter an arry containing the ISO codes of the desired languages.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       },
@@ -56579,8 +56018,11 @@
             "type": "array",
             "required": false,
             "description": "If no parameter is set here, all languages for the property are loaded by default. Optionally, enter an arry containing the ISO codes of the desired languages.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       },
@@ -56775,8 +56217,11 @@
             "type": "array",
             "required": false,
             "description": "The desired columns/attributes of the order referrer to be loaded.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -56918,7 +56363,7 @@
         ]
       }
     },
-    "/rest/orders/referrers/{parentReferrerId}": {
+    "/rest/orders/referrers/{parentReferrerId?}": {
       "post": {
         "summary": "Create an order referrer",
         "description": "Create an order referrer. The ID can be specified, a parent ID can be specified to create a sub referrer or if no ID is specified, a referrer ID will be assigned automatically.\nIf an ID is specified, the ID may not be used already. If the ID is used already, the referrer will only be created.\nIf the ID is automatically assigned, the first ID that has not been used before will be set.\nIf the ID is not specified, but a parent referrer ID is given, then the new referrer ID will be a sub referrer of the given parent.",
@@ -56947,11 +56392,14 @@
             "type": "array",
             "required": true,
             "description": "The attributes of the order referrer to be created.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
-            "name": "parentReferrerId",
+            "name": "parentReferrerId?",
             "type": "integer",
             "required": true,
             "description": "",
@@ -57536,8 +56984,11 @@
             "type": "array",
             "required": false,
             "description": "Load additional relations for an order.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "lazyLoaded",
@@ -58022,8 +57473,11 @@
             "type": "array",
             "required": false,
             "description": "Load additional relations for an order.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "lazyLoaded",
@@ -58111,8 +57565,11 @@
             "type": "array",
             "required": false,
             "description": "The relations to be loaded. Possible values are 'states' and 'names'.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "onlyEUCountries",
@@ -58494,14 +57951,6 @@
                 "weight": {
                   "type": "integer",
                   "description": "The weight of the package in grams optional"
-                },
-                "extraWeight": {
-                  "type": "integer",
-                  "description": "The extra weight of the package in grams optional"
-                },
-                "itemsWeight": {
-                  "type": "integer",
-                  "description": "The items weight of the package in grams optional"
                 },
                 "packageNumber": {
                   "type": "string",
@@ -58919,8 +58368,11 @@
             "type": "array",
             "required": false,
             "description": "Possible value is 'items'.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "page",
@@ -58994,13 +58446,16 @@
             "type": "array",
             "required": false,
             "description": "The properties to be loaded",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
     },
-    "/rest/orders/shipping/parcels/preview/{language}": {
+    "/rest/orders/shipping/parcels/preview/{language?}": {
       "get": {
         "summary": "Get preview list",
         "description": "Get a preview list for parcel services.",
@@ -59070,8 +58525,11 @@
             "type": "array",
             "required": false,
             "description": "The attributes to be loaded in the shipping profile",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "parcelServiceName",
@@ -59132,7 +58590,7 @@
         ]
       }
     },
-    "/rest/orders/shipping/presets/preview/{language}": {
+    "/rest/orders/shipping/presets/preview/{language?}": {
       "get": {
         "summary": "Get preview list",
         "description": "Get a preview list for parcel service presets.",
@@ -59207,8 +58665,11 @@
             "type": "array",
             "required": false,
             "description": "The attributes to be loaded in the shipping profile",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -59245,8 +58706,11 @@
             "type": "array",
             "required": false,
             "description": "The properties to be loaded",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "presetId",
@@ -59533,8 +58997,11 @@
             "type": "array",
             "required": false,
             "description": "Load additional relations for an order. Currently possible are:\n    <ul>\n    <li>'documents' = The document objects that are associated with the order returns.</li>\n    <li>'labels' = The base64 encoded labels that are associated with the order returns.</li>\n    </ul>\n    Example: <code>?with[]=documents&with[]=labels</code>",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       },
@@ -60136,16 +59603,22 @@
             "type": "array",
             "required": true,
             "description": "Set an array of new order status properties consisting of one key and one value for each property. The status colour must be set as a hexadecimal code. All other properties must be specified either by value 0 (inactive) or 1 (active).",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "selectedStatusList",
             "type": "array",
             "required": true,
             "description": "Set a list with the IDs of the order statuses that should be changed.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -60330,8 +59803,11 @@
             "type": "array",
             "required": false,
             "description": "Load additional relations for an order. The following relations are available:\n     * <ul>\n       <li>'addresses' = The address objects linked to the order.</li>\n       <li>'relations' = The order relation reference instances that are associated with the order. These instances contain information such as the reference type. The available reference types are parent and reorder. The ID of the reference and the relation itself are also available.</li>\n       <li>'comments' = The order comments.</li>\n       <li>'location' = The accounting location linked to the order.</li>\n       <li>'payments' = The payments linked to the order.</li>\n       <li>'documents' = The documents linked to the order.</li>\n       <li>'contactSender' = The contact belonging the contact-sender relation.</li>\n       <li>'contactReceiver' = The contact belonging to the contact-receiver relation.</li>\n       <li>'warehouseSender' = The warehouse belonging to the warehouse-sender relation.</li>\n       <li>'warehouseReceiver' = The warehouse belonging to the warehouse-receiver relation.</li>\n       <li>'orderItems.variation' = The variation data belonging to the order item.</li>\n       <li>'orderItems.variation.propertiesV2' = The properties belonging to the variation.</li>\n       <li>'orderItems.giftCardCodes' = The gift card codes belonging to the order item.</li>\n       <li>'orderItems.transactions' = The transactions belonging to the order item.</li>\n       <li>'orderItems.serialNumbers' = The serial numbers belonging to the order item.</li>\n       <li>'orderItems.variationBarcodes' = The barcodes belonging to the order item.</li>\n       <li>'orderItems.comments' = The comments belonging to the order item.</li>\n       <li>'shippingPallets' = The shipping pallets that are associated with the order.</li>\n       <li>'shippingPackages' = The shipping packages that are associated with the order.</li>\n       <li>'paymentTerms' = The payment terms that are associated with the order.</li>\n       <li><b>deprecated</b> 'orderItems.warehouseLocations' = The warehouse locations linked to the order item.</li>\n     </ul>\n     Example: <code>?with[]=addresses&with[]=orderItems.variation</code>",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "addOrderItems",
@@ -60465,7 +59941,7 @@
         ]
       }
     },
-    "/rest/orders/{orderId}/addresses/{relationTypeId}": {
+    "/rest/orders/{orderId}/addresses/{relationTypeId?}": {
       "get": {
         "summary": "List order addresses",
         "description": "Lists order addresses. The ID of the order and the ID of the relation type must be specified.",
@@ -60498,7 +59974,7 @@
             "in": "path"
           },
           {
-            "name": "relationTypeId",
+            "name": "relationTypeId?",
             "type": "integer",
             "required": true,
             "description": "",
@@ -60506,7 +59982,9 @@
             "in": "path"
           }
         ]
-      },
+      }
+    },
+    "/rest/orders/{orderId}/addresses/{relationTypeId}": {
       "post": {
         "summary": "Create an address for an existing order.",
         "description": "Creates an address for an existing order and update the relation.",
@@ -61355,7 +60833,7 @@
         ]
       }
     },
-    "/rest/orders/{orderId}/documents/downloads/{type}": {
+    "/rest/orders/{orderId}/documents/downloads/{type?}": {
       "get": {
         "summary": "Download documents of an order",
         "description": "Downloads documents of an order as a zip file. The ID of the order must be specified. In addition a type can be specified.",
@@ -62511,7 +61989,7 @@
         ]
       }
     },
-    "/rest/orders/{orderId}/documents/{type}": {
+    "/rest/orders/{orderId}/documents/{type?}": {
       "get": {
         "summary": "List documents of an order",
         "description": "Lists documents of an order. The ID of the order must be specified. In addition a type can be specified.",
@@ -62641,8 +62119,11 @@
             "type": "array",
             "required": false,
             "description": "Load additional relations for a document. Currently possible are:\n    <ul>\n    <li>'references' = The document reference objects that are associated with the document.</li>\n    </ul>\n    Example: <code>?with[]=references</code>",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "withContent",
@@ -62653,7 +62134,9 @@
             "in": "query"
           }
         ]
-      },
+      }
+    },
+    "/rest/orders/{orderId}/documents/{type}": {
       "post": {
         "summary": "Upload order documents",
         "description": "Uploads order documents. The ID of the order and the document type must be specified.",
@@ -63017,8 +62500,11 @@
             "type": "array",
             "required": false,
             "description": "Load additional relations for an order item. Currently possible are:\n    <ul>\n    <li>'variation' = The variation that is associated with the order item.</li>\n    <li>'giftCardCodes' = The gift card codes that are associated with the order item.</li>\n    <li>'transactions' = The transactions that are associated with the order item.</li>\n    <li>'serialNumbers' = The serial numbers that are associated with the order item.</li>\n    <li>'variationBarcodes' = The barcodes that are associated with variation of the order item.</li>\n    </ul>",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "orderId",
@@ -63559,6 +63045,52 @@
         ]
       }
     },
+    "/rest/orders/{orderId}/properties/{typeId?}": {
+      "get": {
+        "summary": "List properties of an order",
+        "description": "<b>DEPRECATED: Use the following route: GET /rest/orders/{orderId}</b>\nLists properties of an order. The ID of the order must be specified. Optionally, the ID of the property type can be specified. The following property types are available by default:\n\n<br><ul>\n<li>1 = WAREHOUSE</li>\n<li>2 = SHIPPING_PROFILE</li>\n<li>3 = PAYMENT_METHOD</li>\n<li>4 = PAYMENT_STATUS</li>\n<li>5 = EXTERNAL_SHIPPING_PROFILE</li>\n<li>6 = DOCUMENT_LANGUAGE</li>\n<li>7 = EXTERNAL_ORDER_ID</li>\n<li>8 = CUSTOMER_SIGN</li>\n<li>9 = DUNNING_LEVEL</li>\n<li>10 = SELLER_ACCOUNT</li>\n<li>11 = WEIGHT</li>\n<li>12 = WIDTH</li>\n<li>13 = LENGTH</li>\n<li>14 = HEIGHT</li>\n<li>15 = FLAG</li>\n<li>16 = EXTERNAL_TOKEN_ID</li>\n<li>17 = EXTERNAL_ITEM_ID</li>\n<li>18 = COUPON_CODE</li>\n<li>19 = COUPON_TYPE</li>\n<li>33 = MAIN_DOCUMENT_NUMBER</li>\n<li>34 = SALES_TAX_ID_NUMBER</li>\n<li>45 = PAYMENT_TRANSACTION_ID</li>\n<li>47 = EXTERNAL_TAX_SERVICE</li>\n<li>60 = MERCHANT_ID</li>\n<li>61 = REPORT_ID</li>\n<li>63 = PREFERRED_STORAGE_LOCATION_ID</li>\n<li>64 = AMAZON_SHIPPING_LABEL</li>\n<li>994 = EBAY_PLUS</li>\n<li>995 = FULFILLMENT_SERVICE</li>\n</ul>",
+        "tags": [
+          "Order"
+        ],
+        "security": [
+          {
+            "oAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/OrderProperty"
+              }
+            }
+          },
+          "401": {
+            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+          }
+        },
+        "parameters": [
+          {
+            "name": "orderId",
+            "type": "integer",
+            "required": true,
+            "description": "The ID of the order",
+            "format": "integer",
+            "in": "path"
+          },
+          {
+            "name": "typeId",
+            "type": "integer",
+            "required": true,
+            "description": "The property type ID",
+            "format": "integer",
+            "in": "path"
+          }
+        ]
+      }
+    },
     "/rest/orders/{orderId}/properties/{typeId}": {
       "delete": {
         "summary": "Delete property of an order by order ID and property type ID",
@@ -63619,50 +63151,6 @@
                 }
               }
             }
-          }
-        ]
-      },
-      "get": {
-        "summary": "List properties of an order",
-        "description": "<b>DEPRECATED: Use the following route: GET /rest/orders/{orderId}</b>\nLists properties of an order. The ID of the order must be specified. Optionally, the ID of the property type can be specified. The following property types are available by default:\n\n<br><ul>\n<li>1 = WAREHOUSE</li>\n<li>2 = SHIPPING_PROFILE</li>\n<li>3 = PAYMENT_METHOD</li>\n<li>4 = PAYMENT_STATUS</li>\n<li>5 = EXTERNAL_SHIPPING_PROFILE</li>\n<li>6 = DOCUMENT_LANGUAGE</li>\n<li>7 = EXTERNAL_ORDER_ID</li>\n<li>8 = CUSTOMER_SIGN</li>\n<li>9 = DUNNING_LEVEL</li>\n<li>10 = SELLER_ACCOUNT</li>\n<li>11 = WEIGHT</li>\n<li>12 = WIDTH</li>\n<li>13 = LENGTH</li>\n<li>14 = HEIGHT</li>\n<li>15 = FLAG</li>\n<li>16 = EXTERNAL_TOKEN_ID</li>\n<li>17 = EXTERNAL_ITEM_ID</li>\n<li>18 = COUPON_CODE</li>\n<li>19 = COUPON_TYPE</li>\n<li>33 = MAIN_DOCUMENT_NUMBER</li>\n<li>34 = SALES_TAX_ID_NUMBER</li>\n<li>45 = PAYMENT_TRANSACTION_ID</li>\n<li>47 = EXTERNAL_TAX_SERVICE</li>\n<li>60 = MERCHANT_ID</li>\n<li>61 = REPORT_ID</li>\n<li>63 = PREFERRED_STORAGE_LOCATION_ID</li>\n<li>64 = AMAZON_SHIPPING_LABEL</li>\n<li>994 = EBAY_PLUS</li>\n<li>995 = FULFILLMENT_SERVICE</li>\n</ul>",
-        "tags": [
-          "Order"
-        ],
-        "security": [
-          {
-            "oAuth2": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/OrderProperty"
-              }
-            }
-          },
-          "401": {
-            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-          }
-        },
-        "parameters": [
-          {
-            "name": "orderId",
-            "type": "integer",
-            "required": true,
-            "description": "The ID of the order",
-            "format": "integer",
-            "in": "path"
-          },
-          {
-            "name": "typeId",
-            "type": "integer",
-            "required": true,
-            "description": "The property type ID",
-            "format": "integer",
-            "in": "path"
           }
         ]
       },
@@ -64320,8 +63808,11 @@
             "type": "array",
             "required": false,
             "description": "The properties to be loaded",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "with",
@@ -64637,8 +64128,11 @@
             "type": "array",
             "required": false,
             "description": "The properties to be loaded",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       },
@@ -64694,14 +64188,6 @@
                 "weight": {
                   "type": "integer",
                   "description": "The weight of the package in grams optional"
-                },
-                "extraWeight": {
-                  "type": "integer",
-                  "description": "The extra weight of the package in grams optional"
-                },
-                "itemsWeight": {
-                  "type": "integer",
-                  "description": "The items weight of the package in grams optional"
                 },
                 "packageNumber": {
                   "type": "string",
@@ -64761,8 +64247,11 @@
             "type": "array",
             "required": false,
             "description": "Possible value is 'items'.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "page",
@@ -65138,8 +64627,11 @@
             "type": "array",
             "required": false,
             "description": "Load additional relations for an order. Currently possible are:\n    <ul>\n    <li>'documents' = The document objects that are associated with the order returns.</li>\n    <li>'labels' = The base64 encoded labels that are associated with the order returns.</li>\n    </ul>\n    Example: <code>?with[]=documents&with[]=labels</code>",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       },
@@ -65625,10 +65117,6 @@
                 "status": {
                   "type": "string",
                   "description": "The status. Possible values are 'regular' and 'cancelled'.  allowed values are regular, cancelled"
-                },
-                "deliveryNoteNumber": {
-                  "type": "string",
-                  "description": "The delivery note number"
                 }
               }
             }
@@ -65834,7 +65322,7 @@
         ]
       }
     },
-    "/rest/payment/properties/types/names/{lang}": {
+    "/rest/payment/properties/types/names/{lang?}": {
       "get": {
         "summary": "List names of property types",
         "description": "List names of property types in the specified language or German if none is specified.",
@@ -65878,7 +65366,7 @@
             "in": "query"
           },
           {
-            "name": "lang",
+            "name": "lang?",
             "type": "integer",
             "required": true,
             "description": "",
@@ -66462,8 +65950,11 @@
             "type": "array",
             "required": false,
             "description": "An array with payment ids to be deleted. Eg: ['ids' => [1,2,3]]",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "integer"
+            }
           }
         ]
       }
@@ -67147,7 +66638,7 @@
         ]
       }
     },
-    "/rest/payments/methods/preview/{language}": {
+    "/rest/payments/methods/preview/{language?}": {
       "get": {
         "summary": "Get preview list for payment method",
         "description": "Get an array with all payment methods with the ID as key and the name as value.",
@@ -67303,8 +66794,11 @@
             "type": "array",
             "required": false,
             "description": "An array with payment ids to be autoassigned. Eg: ['ids' => [1,2,3]]",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "integer"
+            }
           }
         ]
       }
@@ -68060,8 +67554,11 @@
             "type": "array",
             "required": false,
             "description": "The relations to load with the payment object. The relations available are parent, method, histories, properties, order or contact.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       },
@@ -68282,8 +67779,11 @@
             "type": "array",
             "required": false,
             "description": "The relations to load with the payment object. The relations available are parent, method, histories, properties, order or contact.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -72007,14 +71507,6 @@
             "in": "query"
           },
           {
-            "name": "hasListing",
-            "type": "boolean",
-            "required": false,
-            "description": "Filter restricts the list of results to variations which have at least one or no listing.",
-            "format": "boolean",
-            "in": "query"
-          },
-          {
             "name": "marketId",
             "type": "number",
             "required": false,
@@ -73446,14 +72938,6 @@
             "required": false,
             "description": "Filter restricts the list of results to variations which have the specified item type.",
             "format": "string",
-            "in": "query"
-          },
-          {
-            "name": "hasListing",
-            "type": "boolean",
-            "required": false,
-            "description": "Filter restricts the list of results to variations which have at least one or no listing.",
-            "format": "boolean",
             "in": "query"
           },
           {
@@ -79191,76 +78675,6 @@
         ]
       }
     },
-    "/rest/redistributions/{orderId}/split": {
-      "post": {
-        "summary": "Split a redistribution into at least two redistributions",
-        "description": "Splits a redistribution into at least two redistributions. The parent order ID and the quantities to use must be specified.",
-        "tags": [
-          "Order"
-        ],
-        "security": [
-          {
-            "oAuth2": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Collection"
-            }
-          },
-          "401": {
-            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-          }
-        },
-        "parameters": [
-          {
-            "name": "orderId",
-            "type": "integer",
-            "required": true,
-            "description": "",
-            "format": "integer",
-            "in": "path"
-          }
-        ]
-      }
-    },
-    "/rest/redistributions/{orderId}/split_by_transactions": {
-      "post": {
-        "summary": "Split a redistribution into at least two redistributions by the order item transactions",
-        "description": "Splits a redistribution into at least two redistributions by the order item transactions. The parent order ID and the quantities to use must be specified.",
-        "tags": [
-          "Order"
-        ],
-        "security": [
-          {
-            "oAuth2": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Collection"
-            }
-          },
-          "401": {
-            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-          }
-        },
-        "parameters": [
-          {
-            "name": "orderId",
-            "type": "integer",
-            "required": true,
-            "description": "",
-            "format": "integer",
-            "in": "path"
-          }
-        ]
-      }
-    },
     "/rest/reorders": {
       "post": {
         "summary": "Create a reorder",
@@ -79308,101 +78722,6 @@
                 }
               }
             }
-          }
-        ]
-      }
-    },
-    "/rest/reorders/group": {
-      "post": {
-        "summary": "Group multiple reorders in one reorder.",
-        "description": "Groups multiple reorders in one reorder. The IDs of the reorders to group must be specified.",
-        "tags": [
-          "Order"
-        ],
-        "security": [
-          {
-            "oAuth2": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Order"
-            }
-          },
-          "401": {
-            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-          }
-        }
-      }
-    },
-    "/rest/reorders/items/{orderItemId}/assign_variation": {
-      "post": {
-        "summary": "Change an order item of type \"unassigned variation\" to \"variation\".",
-        "description": "Change an order item of type \"unassigned variation\" to \"variation\". The ID of the order item and variation ID must be specified.",
-        "tags": [
-          "Order"
-        ],
-        "security": [
-          {
-            "oAuth2": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Order"
-            }
-          },
-          "401": {
-            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-          }
-        },
-        "parameters": [
-          {
-            "name": "orderItemId",
-            "type": "integer",
-            "required": true,
-            "description": "",
-            "format": "integer",
-            "in": "path"
-          }
-        ]
-      }
-    },
-    "/rest/reorders/items/{orderItemId}/unassign_variation": {
-      "post": {
-        "summary": "Change an order item of type \"variation\" to \"unassigned variation\".",
-        "description": "Change an order item of type \"variation\" to \"unassigned variation\". The ID of the order item must be specified.",
-        "tags": [
-          "Order"
-        ],
-        "security": [
-          {
-            "oAuth2": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Order"
-            }
-          },
-          "401": {
-            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-          }
-        },
-        "parameters": [
-          {
-            "name": "orderItemId",
-            "type": "integer",
-            "required": true,
-            "description": "",
-            "format": "integer",
-            "in": "path"
           }
         ]
       }
@@ -79671,22 +78990,6 @@
             "description": "The ID of the order.",
             "format": "integer",
             "in": "path"
-          },
-          {
-            "name": "date",
-            "type": "string",
-            "required": false,
-            "description": "If given, this date is used and there is no date calculation.",
-            "format": "string",
-            "in": "query"
-          },
-          {
-            "name": "transferToOrderItems",
-            "type": "string",
-            "required": false,
-            "description": "Defines if the date should be transferred to the order items. Is only used when a date is given. Possible values: 'always', 'never', 'ifNotExists'.",
-            "format": "string",
-            "in": "query"
           }
         ]
       }
@@ -79711,41 +79014,6 @@
               "items": {
                 "$ref": "#/definitions/mixed"
               }
-            }
-          },
-          "401": {
-            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-          }
-        },
-        "parameters": [
-          {
-            "name": "orderId",
-            "type": "integer",
-            "required": true,
-            "description": "",
-            "format": "integer",
-            "in": "path"
-          }
-        ]
-      }
-    },
-    "/rest/reorders/{orderId}/split": {
-      "post": {
-        "summary": "Split a reorder into at least two reorders",
-        "description": "Splits a reorder into at least two reorders. The parent order ID and the quantities to use must be specified.",
-        "tags": [
-          "Order"
-        ],
-        "security": [
-          {
-            "oAuth2": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Collection"
             }
           },
           "401": {
@@ -80483,8 +79751,11 @@
             "type": "array",
             "required": true,
             "description": "Resets all saved raw data configurations with given configs",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -81670,8 +80941,11 @@
             "type": "array",
             "required": true,
             "description": "The IDs of the orders that you want to reset the shipments for",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "integer"
+            }
           }
         ]
       }
@@ -82793,8 +82067,11 @@
             "type": "array",
             "required": false,
             "description": "Sources to consider during search.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -83109,8 +82386,11 @@
             "type": "array",
             "required": false,
             "description": "The properties to be loaded.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -83314,8 +82594,11 @@
             "type": "array",
             "required": false,
             "description": "The properties to be loaded.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "updatedAtFrom",
@@ -83373,8 +82656,11 @@
             "type": "array",
             "required": false,
             "description": "Related objects to be loaded. repairWarehouse is the only relation currently available.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       },
@@ -83524,13 +82810,16 @@
             "type": "array",
             "required": false,
             "description": "Related objects to be loaded. 'repairWarehouse' is the only relation currently available.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
     },
-    "/rest/stockmanagement/warehouses/{warehouseId}/addresses/{relationTypeId}": {
+    "/rest/stockmanagement/warehouses/{warehouseId}/addresses/{relationTypeId?}": {
       "get": {
         "summary": "List warehouse addresses",
         "description": "List warehouse addresses. The ID of the warehouse, the address and the ID of the relation type must be specified.",
@@ -83563,7 +82852,7 @@
             "in": "path"
           },
           {
-            "name": "relationTypeId",
+            "name": "relationTypeId?",
             "type": "integer",
             "required": true,
             "description": "",
@@ -83618,16 +82907,22 @@
             "type": "array",
             "required": false,
             "description": "The attributes to be loaded.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "with",
             "type": "array",
             "required": false,
             "description": "The relations to be loaded. Possible values are 'warehouse', 'rack' and 'shelf'.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -83746,8 +83041,11 @@
             "type": "array",
             "required": false,
             "description": "The properties to be loaded.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "reasonId",
@@ -84168,8 +83466,11 @@
             "type": "array",
             "required": false,
             "description": "The properties to be loaded",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "processRowType",
@@ -84304,16 +83605,22 @@
             "type": "array",
             "required": false,
             "description": "The properties to be loaded.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "with",
             "type": "array",
             "required": false,
             "description": "Load additional relations for a StockStorageLocation. Possible values:\n    <ul>\n    <li>'storageLocation' = The storageLocation this stock information belongs to.</li>\n    </ul>\n    Example: <code>?with[]=storageLocation</code>",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "warehouseId",
@@ -84440,16 +83747,22 @@
             "type": "array",
             "required": false,
             "description": "The properties to be loaded.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "with",
             "type": "array",
             "required": false,
             "description": "Load additional relations for a StockStorageLocation. Possible values:\n    <ul>\n    <li>'storageLocation' = The storageLocation this stock information belongs to.</li>\n    </ul>\n    Example: <code>?with[]=warehouseLocation</code>",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "warehouseId",
@@ -84491,16 +83804,22 @@
             "type": "array",
             "required": true,
             "description": "The new item that will be booked in as result of the unpacking",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "VariationStockCorrection",
             "type": "array",
             "required": true,
             "description": "The item that is unpacked",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "warehouseId",
@@ -84838,8 +84157,11 @@
             "type": "array",
             "required": true,
             "description": "The metadata to assign to storage object",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -84873,8 +84195,11 @@
             "type": "array",
             "required": true,
             "description": "List of storage keys for the files to be deleted.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       },
@@ -84979,8 +84304,11 @@
             "type": "array",
             "required": true,
             "description": "List of storage keys for the files to be deleted.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       },
@@ -85152,8 +84480,11 @@
             "type": "array",
             "required": true,
             "description": "List of storage keys for the files to be deleted.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       },
@@ -86098,7 +85429,7 @@
                 },
                 "tagType": {
                   "type": "string",
-                  "description": "The type of the tag. The following types are available.\n\nblog\ncategory\ncontent_page\nvariation\nticket\nboard\norder\n  allowed values are category, ticket, variation, board, contact, order, reorder, redistribution, subscription, messenger, messageBillable, messageClearingSubAccount, document, documentTemplate, plentyFunction"
+                  "description": "The type of the tag. The following types are available.\n\nblog\ncategory\ncontent_page\nvariation\nticket\nboard\norder\n  allowed values are category, ticket, variation, board, contact, order, messenger, messageBillable, messageClearingSubAccount, document, documentTemplate, plentyFunction"
                 },
                 "clients": {
                   "type": "array",
@@ -86182,7 +85513,7 @@
                 },
                 "tagType": {
                   "type": "string",
-                  "description": "The type of the tag. The following types are available.\n\nblog\ncategory\ncontent_page\nvariation\nticket\nboard\norder\n  allowed values are category, ticket, variation, board, contact, order, reorder, redistribution, subscription, messenger, messageBillable, messageClearingSubAccount, document, documentTemplate, plentyFunction"
+                  "description": "The type of the tag. The following types are available.\n\nblog\ncategory\ncontent_page\nvariation\nticket\nboard\norder\n  allowed values are category, ticket, variation, board, contact, order, messenger, messageBillable, messageClearingSubAccount, document, documentTemplate, plentyFunction"
                 },
                 "clients": {
                   "type": "array",
@@ -86264,7 +85595,7 @@
                 },
                 "tagType": {
                   "type": "string",
-                  "description": "The type of the tag. The following types are available.\n\nblog\ncategory\ncontent_page\nvariation\nticket\nboard\norder\n  allowed values are category, ticket, variation, board, contact, order, reorder, redistribution, subscription, messenger, messageBillable, messageClearingSubAccount, document, documentTemplate, plentyFunction"
+                  "description": "The type of the tag. The following types are available.\n\nblog\ncategory\ncontent_page\nvariation\nticket\nboard\norder\n  allowed values are category, ticket, variation, board, contact, order, messenger, messageBillable, messageClearingSubAccount, document, documentTemplate, plentyFunction"
                 },
                 "clients": {
                   "type": "array",
@@ -86641,7 +85972,7 @@
                 },
                 "tagType": {
                   "type": "string",
-                  "description": "The type of the tag. The following types are available.\n\nblog\ncategory\ncontent_page\nvariation\nticket\nboard\norder\n  allowed values are category, ticket, variation, board, contact, order, reorder, redistribution, subscription, messenger, messageBillable, messageClearingSubAccount, document, documentTemplate, plentyFunction"
+                  "description": "The type of the tag. The following types are available.\n\nblog\ncategory\ncontent_page\nvariation\nticket\nboard\norder\n  allowed values are category, ticket, variation, board, contact, order, messenger, messageBillable, messageClearingSubAccount, document, documentTemplate, plentyFunction"
                 },
                 "clients": {
                   "type": "array",
@@ -87258,8 +86589,11 @@
             "type": "array",
             "required": false,
             "description": "An array with relations to be loaded with the ticket. Possible values are 'order' and 'contact'",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       },
@@ -92919,16 +92253,22 @@
             "type": "array",
             "required": false,
             "description": "The relations to load with the VAT object. The relations available are location or country.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "columns",
             "type": "array",
             "required": false,
             "description": "The properties to be loaded.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       },
@@ -92980,10 +92320,6 @@
                 "taxIdNumber": {
                   "type": "string",
                   "description": "The tax id number of VAT configuration."
-                },
-                "economicIdNumber": {
-                  "type": "string",
-                  "description": "The economic id number of VAT configuration."
                 },
                 "startedAt": {
                   "type": "string",
@@ -93066,16 +92402,22 @@
             "type": "array",
             "required": false,
             "description": "The relations to load with the VAT object. The relations available are location and country.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "columns[]",
             "type": "array",
             "required": false,
             "description": "The attributes of the VAT configuration",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -93128,16 +92470,22 @@
             "type": "array",
             "required": false,
             "description": "The relations to load with the VAT object. The relations available are location or country.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "columns[]",
             "type": "array",
             "required": false,
             "description": "The attributes of the VAT configuration",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -93195,16 +92543,22 @@
             "type": "array",
             "required": false,
             "description": "The relations to load with the VAT object. The relations available are location or country.",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "columns[]",
             "type": "array",
             "required": false,
             "description": "The attributes of the VAT configuration",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "date",
@@ -93378,10 +92732,6 @@
                 "taxIdNumber": {
                   "type": "string",
                   "description": "The tax id number of VAT configuration."
-                },
-                "economicIdNumber": {
-                  "type": "string",
-                  "description": "The economic id number of VAT configuration."
                 },
                 "startedAt": {
                   "type": "string",
@@ -93703,8 +93053,11 @@
             "type": "array",
             "required": true,
             "description": "An array containing all the ID's for the storage locations that need to be deleted",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       },
@@ -94541,8 +93894,11 @@
             "type": "array",
             "required": true,
             "description": "The dimensions array that contains data for creating multiple dimensions",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -94624,24 +93980,33 @@
             "type": "array",
             "required": true,
             "description": "The storage location dimensions used by the generator",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "storageLocationData",
             "type": "array",
             "required": true,
             "description": "The storage location data used by the generator",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "levelData",
             "type": "array",
             "required": true,
             "description": "The storage location level data used by the generator",
-            "format": "array",
-            "in": "query"
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "save",
@@ -96547,10 +95912,6 @@
           "type": "string",
           "description": "The currency used by a supplier"
         },
-        "externalId": {
-          "type": "string",
-          "description": "The externalId for this company (like the hubspot company id)"
-        },
         "createdAt": {
           "type": "string",
           "description": "The time the account was created as unix timestamp"
@@ -96878,10 +96239,6 @@
         "contactId": {
           "type": "integer",
           "description": "The ID of the foreign key contact"
-        },
-        "isPrimary": {
-          "type": "integer",
-          "description": ""
         }
       }
     },
@@ -99241,12 +98598,10 @@
         },
         "messagesPaths": {
           "type": "array",
-          "items": {},
           "description": "Array with s3 messages paths"
         },
         "messagesIds": {
           "type": "array",
-          "items": {},
           "description": "Array with all messages UUID's"
         },
         "isMigratedToEs": {
@@ -99256,10 +98611,6 @@
         "isArchived": {
           "type": "boolean",
           "description": "Flag that indicates if the conversation is archived"
-        },
-        "isSpam": {
-          "type": "boolean",
-          "description": "Flag that indicates if the conversation is spam"
         },
         "conversationPreview": {
           "type": "string",
@@ -99271,12 +98622,10 @@
         },
         "linkedFolders": {
           "type": "array",
-          "items": {},
           "description": "List of linked folders"
         },
         "marketplacesMetadata": {
           "type": "array",
-          "items": {},
           "description": "marketplaces Meta data"
         }
       }
@@ -99436,19 +98785,6 @@
         "categoryId": {
           "type": "boolean",
           "description": "The ID of the parent category"
-        }
-      }
-    },
-    "CreditNoteReason": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "description": "The ID of the credit note reason."
-        },
-        "reason": {
-          "type": "string",
-          "description": "The specified reason in system language."
         }
       }
     },
@@ -100597,10 +99933,6 @@
           "type": "string",
           "description": "The name of the manufacturer"
         },
-        "legalName": {
-          "type": "string",
-          "description": "The legal name of the manufacturer"
-        },
         "externalName": {
           "type": "string",
           "description": "The external name of the manufacturer. The external name is used for the item export to external markets. If no external name is saved, the Name will be used. The external name will also be transferred to FINDOLOGIC and will be indexed for item searches."
@@ -100612,10 +99944,6 @@
         "url": {
           "type": "string",
           "description": "The URL of the manufacturer's website"
-        },
-        "contactUrl": {
-          "type": "string",
-          "description": "The Contact URL of the manufacturer's website"
         },
         "street": {
           "type": "string",
@@ -100700,10 +100028,6 @@
         "responsibleEmail": {
           "type": "string",
           "description": "The email address of the EU-Responsible person"
-        },
-        "responsibleContactUrl": {
-          "type": "string",
-          "description": "The contact form the EU-Responsible person"
         },
         "responsiblePhoneNo": {
           "type": "string",
@@ -102899,10 +102223,6 @@
           "type": "boolean",
           "description": "Whether the message is whispered (not visible for the contact/order linked to the message) or not"
         },
-        "forwarded": {
-          "type": "boolean",
-          "description": "Whether the message is forwarded to another recipient or not"
-        },
         "tags": {
           "type": "array",
           "items": {},
@@ -102967,10 +102287,6 @@
         "statusPosition": {
           "type": "integer",
           "description": "The statusPosition of statusID"
-        },
-        "messageType": {
-          "type": "string",
-          "description": "The type of message (example: {@link MessageTypesService::MESSAGE_TYPE_NEW_MESSAGE_FROM_CONTACT})"
         }
       }
     },
@@ -103726,10 +103042,6 @@
           "type": "string",
           "description": "The best before date"
         },
-        "deliveryNoteNumber": {
-          "type": "string",
-          "description": "The delivery note number"
-        },
         "batchBestBeforeDateId": {
           "type": "integer",
           "description": "Deprecated. Replaced by $batch and $bestBeforeDate."
@@ -103884,10 +103196,6 @@
           "type": "integer",
           "description": "The width of the shipping package type"
         },
-        "individualWeight": {
-          "type": "integer",
-          "description": "The individual weight of the shipping package type"
-        },
         "height": {
           "type": "integer",
           "description": "The height of the shipping package type"
@@ -103932,14 +103240,6 @@
         "weight": {
           "type": "integer",
           "description": "The weight of the package in grams"
-        },
-        "extraWeight": {
-          "type": "integer",
-          "description": "The extra weight of the package in grams"
-        },
-        "itemsWeight": {
-          "type": "integer",
-          "description": "The items weight of the package in grams"
         },
         "packageNumber": {
           "type": "string",
@@ -106421,10 +105721,6 @@
         "taxIdNumber": {
           "type": "string",
           "description": "The tax id number of VAT configuration."
-        },
-        "economicIdNumber": {
-          "type": "string",
-          "description": "The economic id number of VAT configuration."
         },
         "startedAt": {
           "type": "string",
