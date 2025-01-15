@@ -1820,6 +1820,10 @@
                 "supplierCurrency": {
                   "type": "string",
                   "description": "The currency used by a supplier optional"
+                },
+                "externalId": {
+                  "type": "string",
+                  "description": "The externalId for this company (like the hubspot company id) optional"
                 }
               }
             }
@@ -6141,6 +6145,214 @@
         }
       }
     },
+    "/rest/accounts/contacts/search": {
+      "post": {
+        "summary": "* Search contacts",
+        "description": "Search contacts.",
+        "tags": [
+          "Account"
+        ],
+        "security": [
+          {
+            "oAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "page": {
+                  "type": "integer",
+                  "description": "Current page of the response"
+                },
+                "totalsCount": {
+                  "type": "integer",
+                  "description": "The total number of entries in the response"
+                },
+                "isLastPage": {
+                  "type": "boolean",
+                  "description": "Flag that indicates if the page shown is the last page of the response"
+                },
+                "lastPageNumber": {
+                  "type": "integer",
+                  "description": "The last page number"
+                },
+                "firstOnPage": {
+                  "type": "integer",
+                  "description": "The index of the first item of the current page result"
+                },
+                "lastOnPage": {
+                  "type": "integer",
+                  "description": "The index of the last item of the current page result"
+                },
+                "itemsPerPage": {
+                  "type": "integer",
+                  "description": "The requested amount of items per result page"
+                },
+                "entries": {
+                  "type": "array",
+                  "description": "List of Contact",
+                  "items": {
+                    "$ref": "#/definitions/Contact"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+          }
+        },
+        "parameters": [
+          {
+            "name": "contactId",
+            "type": "integer",
+            "required": false,
+            "description": "Filter for a one or multiple contacts ids",
+            "format": "integer",
+            "in": "query"
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "required": false,
+            "description": "Filter that restricts the\n     * search result to contacts having a name like the provided term",
+            "format": "string",
+            "in": "query"
+          },
+          {
+            "name": "email",
+            "type": "string",
+            "required": false,
+            "description": "Filter that restricts the\n     * search result to contacts having an email address like the provided term",
+            "format": "string",
+            "in": "query"
+          },
+          {
+            "name": "phone",
+            "type": "integer",
+            "required": false,
+            "description": "Filter that restricts the\n     * search result to contacts having the phone number like the provided term",
+            "format": "integer",
+            "in": "query"
+          },
+          {
+            "name": "address",
+            "type": "integer",
+            "required": false,
+            "description": "Filter that restricts the\n     * search result to contacts having the address like the provided term",
+            "format": "integer",
+            "in": "query"
+          },
+          {
+            "name": "town",
+            "type": "integer",
+            "required": false,
+            "description": "Filter that restricts the\n     * search result to contacts having the town like the provided term",
+            "format": "integer",
+            "in": "query"
+          },
+          {
+            "name": "contactData",
+            "type": "string",
+            "required": false,
+            "description": "Filter that restricts the\n     * search result to contacts having several fields like the provided term",
+            "format": "string",
+            "in": "query"
+          },
+          {
+            "name": "postcode",
+            "type": "string",
+            "required": false,
+            "description": "Filter that restricts the\n     * search result to contacts having the postcode like the provided term",
+            "format": "string",
+            "in": "query"
+          },
+          {
+            "name": "clientId",
+            "type": "integer",
+            "required": false,
+            "description": "Filter by one or multiple client ids",
+            "format": "integer",
+            "in": "query"
+          },
+          {
+            "name": "countryId",
+            "type": "integer",
+            "required": false,
+            "description": "Filter by one or multiple country ids",
+            "format": "integer",
+            "in": "query"
+          },
+          {
+            "name": "tagIds",
+            "type": "integer",
+            "required": false,
+            "description": "Filter by one or multiple tag ids",
+            "format": "integer",
+            "in": "query"
+          },
+          {
+            "name": "ownerId",
+            "type": "integer",
+            "required": false,
+            "description": "Filter by one or multiple user ids",
+            "format": "integer",
+            "in": "query"
+          },
+          {
+            "name": "typeId",
+            "type": "integer",
+            "required": false,
+            "description": "Filter by one or multiple type ids",
+            "format": "integer",
+            "in": "query"
+          },
+          {
+            "name": "rating",
+            "type": "integer",
+            "required": false,
+            "description": "Filter by one or multiple rating ids",
+            "format": "integer",
+            "in": "query"
+          },
+          {
+            "name": "classId",
+            "type": "integer",
+            "required": false,
+            "description": "Filter by one or multiple class ids",
+            "format": "integer",
+            "in": "query"
+          },
+          {
+            "name": "jobId",
+            "type": "integer",
+            "required": false,
+            "description": "Filter by one or multiple job position ids",
+            "format": "integer",
+            "in": "query"
+          },
+          {
+            "name": "followUp",
+            "type": "string",
+            "required": false,
+            "description": "Filter by a single date or a range of dates",
+            "format": "string",
+            "in": "query"
+          },
+          {
+            "name": "isGuest",
+            "type": "string",
+            "required": false,
+            "description": "Filter contacts by a boolean term",
+            "format": "string",
+            "in": "query"
+          }
+        ]
+      }
+    },
     "/rest/accounts/contacts/types": {
       "get": {
         "summary": "List contact types",
@@ -6710,6 +6922,10 @@
                 "supplierCurrency": {
                   "type": "string",
                   "description": "The currency used by a supplier optional"
+                },
+                "externalId": {
+                  "type": "string",
+                  "description": "The externalId for this company (like the hubspot company id) optional"
                 }
               }
             }
@@ -7207,7 +7423,7 @@
         ]
       }
     },
-    "/rest/accounts/contacts/{contactId}/addresses/{addressTypeId?}": {
+    "/rest/accounts/contacts/{contactId}/addresses/{addressTypeId}": {
       "get": {
         "summary": "List addresses that are linked with contacts",
         "description": "Lists addresses of the contact. The ID of the contact must be specified. If you specify page and itemsPerPage, you will get a paginated result. Otherwise you will get an array.",
@@ -7259,7 +7475,7 @@
             "in": "path"
           },
           {
-            "name": "addressTypeId?",
+            "name": "addressTypeId",
             "type": "integer",
             "required": true,
             "description": "",
@@ -8949,6 +9165,10 @@
                 "supplierCurrency": {
                   "type": "string",
                   "description": "The currency used by a supplier optional"
+                },
+                "externalId": {
+                  "type": "string",
+                  "description": "The externalId for this company (like the hubspot company id) optional"
                 }
               }
             }
@@ -9225,7 +9445,7 @@
         }
       }
     },
-    "/rest/address_layout/used_countries/{uuid?}": {
+    "/rest/address_layout/used_countries/{uuid}": {
       "get": {
         "summary": "List countries used in other layouts",
         "description": "Lists the countries that are already used in other layouts.",
@@ -14578,6 +14798,10 @@
                 "source": {
                   "type": "string",
                   "description": "The source where the document was generated. Possible sources are 'klarna', 'soap', 'admin', 'hitmeister', 'paypal' and 'rest'. optional allowed values are klarna, soap, admin, hitmeister, paypal, rest"
+                },
+                "tags": {
+                  "type": "array",
+                  "items": {}
                 }
               }
             }
@@ -16430,6 +16654,41 @@
         }
       }
     },
+    "/rest/conversations/categories/createDefaultTypesAndStatuses/{id}": {
+      "post": {
+        "summary": "Creates a list of default types and statuses for given category ID",
+        "description": "Creates a list of default types and statuses for given category ID",
+        "tags": [
+          "Messenger"
+        ],
+        "security": [
+          {
+            "oAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/bool"
+            }
+          },
+          "401": {
+            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "type": "integer",
+            "required": true,
+            "description": "",
+            "format": "integer",
+            "in": "path"
+          }
+        ]
+      }
+    },
     "/rest/conversations/categories/{id}": {
       "delete": {
         "summary": "Deletes a single category (soft delete, type will be flagged as deleted)",
@@ -17529,6 +17788,44 @@
             "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
           }
         }
+      }
+    },
+    "/rest/conversations/markNotSpam": {
+      "put": {
+        "summary": "Mark a batch of conversations as read or unread",
+        "description": "Mark a batch of conversations as read or unread",
+        "tags": [
+          "Messenger"
+        ],
+        "security": [
+          {
+            "oAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/int"
+            }
+          },
+          "401": {
+            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuids",
+            "type": "array",
+            "required": true,
+            "description": "The list of conversations UUID's to update read status. Expected values: ['24810ce7-4b75-45d0-8610-7fb07ede0d86']",
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "string"
+            }
+          }
+        ]
       }
     },
     "/rest/conversations/owner": {
@@ -19446,6 +19743,128 @@
         }
       }
     },
+    "/rest/credit_notes/reasons": {
+      "get": {
+        "summary": "Get all order credit note reasons",
+        "description": "Gets all order credit note reasons.",
+        "tags": [
+          "Order"
+        ],
+        "security": [
+          {
+            "oAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CreditNoteReason"
+              }
+            }
+          },
+          "401": {
+            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+          }
+        }
+      },
+      "post": {
+        "summary": "Set an order credit note reason",
+        "description": "Sets an order credit note reason.",
+        "tags": [
+          "Order"
+        ],
+        "security": [
+          {
+            "oAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CreditNoteReason"
+              }
+            }
+          },
+          "401": {
+            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+          }
+        }
+      }
+    },
+    "/rest/credit_notes/reasons/{creditNotesReasonsId}": {
+      "delete": {
+        "summary": "Delete an order credit note reason",
+        "description": "Deletes an order credit note reason. The credit note reason ID must be specified.",
+        "tags": [
+          "Order"
+        ],
+        "security": [
+          {
+            "oAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SimpleRestResponse"
+            }
+          },
+          "401": {
+            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+          }
+        },
+        "parameters": [
+          {
+            "name": "creditNotesReasonsId",
+            "type": "integer",
+            "required": true,
+            "description": "",
+            "format": "integer",
+            "in": "path"
+          }
+        ]
+      },
+      "get": {
+        "summary": "Get an order credit note reason",
+        "description": "Gets an order credit note reason. The credit note reason has to be specified by providing a credit note reason\nID.",
+        "tags": [
+          "Order"
+        ],
+        "security": [
+          {
+            "oAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CreditNoteReason"
+            }
+          },
+          "401": {
+            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+          }
+        },
+        "parameters": [
+          {
+            "name": "creditNotesReasonsId",
+            "type": "integer",
+            "required": true,
+            "description": "",
+            "format": "integer",
+            "in": "path"
+          }
+        ]
+      }
+    },
     "/rest/credit_notes/{orderId}": {
       "delete": {
         "summary": "Delete a credit note",
@@ -20176,6 +20595,41 @@
             "type": "integer",
             "required": true,
             "description": "The ID of the document",
+            "format": "integer",
+            "in": "path"
+          }
+        ]
+      }
+    },
+    "/rest/documents/{documentId}/regenerate": {
+      "post": {
+        "summary": "Regenerate a faulty document",
+        "description": "Regenerate a faulty document. The ID of the document must be specified.",
+        "tags": [
+          "Document"
+        ],
+        "security": [
+          {
+            "oAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DocumentGeneration"
+            }
+          },
+          "401": {
+            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+          }
+        },
+        "parameters": [
+          {
+            "name": "documentId",
+            "type": "integer",
+            "required": true,
+            "description": "",
             "format": "integer",
             "in": "path"
           }
@@ -39276,6 +39730,108 @@
         ]
       }
     },
+    "/rest/items/{id}/variations/{variationId}/variation_properties/{propertyId}/deleteFile": {
+      "delete": {
+        "summary": "Delete file",
+        "description": "Deletes one file for specific characteristic",
+        "tags": [
+          "Item"
+        ],
+        "security": [
+          {
+            "oAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VariationPropertyValue"
+            }
+          },
+          "401": {
+            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "type": "integer",
+            "required": true,
+            "description": "",
+            "format": "integer",
+            "in": "path"
+          },
+          {
+            "name": "variationId",
+            "type": "integer",
+            "required": true,
+            "description": "",
+            "format": "integer",
+            "in": "path"
+          },
+          {
+            "name": "propertyId",
+            "type": "integer",
+            "required": true,
+            "description": "",
+            "format": "integer",
+            "in": "path"
+          }
+        ]
+      }
+    },
+    "/rest/items/{id}/variations/{variationId}/variation_properties/{propertyId}/upload": {
+      "post": {
+        "summary": "Upload file",
+        "description": "Uploads one file for characteristics",
+        "tags": [
+          "Item"
+        ],
+        "security": [
+          {
+            "oAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VariationPropertyValue"
+            }
+          },
+          "401": {
+            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "type": "integer",
+            "required": true,
+            "description": "",
+            "format": "integer",
+            "in": "path"
+          },
+          {
+            "name": "variationId",
+            "type": "integer",
+            "required": true,
+            "description": "",
+            "format": "integer",
+            "in": "path"
+          },
+          {
+            "name": "propertyId",
+            "type": "integer",
+            "required": true,
+            "description": "",
+            "format": "integer",
+            "in": "path"
+          }
+        ]
+      }
+    },
     "/rest/items/{id}/variations/{variationId}/variation_sales_prices": {
       "delete": {
         "summary": "Delete all links between a variation and its sales prices",
@@ -43550,7 +44106,7 @@
             "type": "number",
             "required": false,
             "description": "Filter that restricts the search result to listing markets with given referrer ID.",
-            "format": "double",
+            "format": "number",
             "in": "query"
           },
           {
@@ -44057,7 +44613,7 @@
             "type": "number",
             "required": false,
             "description": "Filter that restricts the search result to listing markets with given referrer ID.",
-            "format": "double",
+            "format": "number",
             "in": "query"
           },
           {
@@ -44212,7 +44768,7 @@
             "type": "number",
             "required": false,
             "description": "Filter that restricts the search result to listing market histories with given referrer ID.",
-            "format": "double",
+            "format": "number",
             "in": "query"
           },
           {
@@ -44413,7 +44969,7 @@
         ]
       }
     },
-    "/rest/listings/markets/histories/end/{id?}": {
+    "/rest/listings/markets/histories/end/{id}": {
       "delete": {
         "summary": "End the listing",
         "description": "Ends the listing on the designated market.",
@@ -44459,7 +45015,7 @@
         ]
       }
     },
-    "/rest/listings/markets/histories/relist/{id?}": {
+    "/rest/listings/markets/histories/relist/{id}": {
       "post": {
         "summary": "Relist the listing",
         "description": "Relists the listing on the designated market.",
@@ -44497,7 +45053,7 @@
         ]
       }
     },
-    "/rest/listings/markets/histories/update/{id?}": {
+    "/rest/listings/markets/histories/update/{id}": {
       "put": {
         "summary": "Update listing market histories",
         "description": "Updates listing market histories by given update options. The listing market histories are not directly revised,\nthey are added to the batch processing lists, waiting to be revised by automated background processes.",
@@ -45004,7 +45560,7 @@
         ]
       }
     },
-    "/rest/listings/markets/start/{id?}": {
+    "/rest/listings/markets/start/{id}": {
       "post": {
         "summary": "Start the market listing on the designated market.",
         "description": "Starts the market listing on the designated markets.",
@@ -45396,7 +45952,7 @@
         ]
       }
     },
-    "/rest/listings/markets/verify/{id?}": {
+    "/rest/listings/markets/verify/{id}": {
       "post": {
         "summary": "Verify listing markets",
         "description": "Verifies the listing markets.",
@@ -45548,7 +46104,7 @@
             "type": "number",
             "required": true,
             "description": "The referrer ID.",
-            "format": "double",
+            "format": "number",
             "in": "query"
           },
           {
@@ -45908,7 +46464,7 @@
             "type": "number",
             "required": false,
             "description": "Filter that restricts the search result to listing shipping profiles with given referrer ID(s).",
-            "format": "double",
+            "format": "number",
             "in": "query"
           },
           {
@@ -48139,7 +48695,7 @@
             "type": "number",
             "required": false,
             "description": "Get only marketplaces that match the given referrer ID",
-            "format": "",
+            "format": "number",
             "in": "query"
           },
           {
@@ -49166,7 +49722,7 @@
             "type": "number",
             "required": false,
             "description": "Get only marketplaces that match the given referrer ID",
-            "format": "",
+            "format": "number",
             "in": "query"
           },
           {
@@ -49621,7 +50177,7 @@
                 },
                 "contentType": {
                   "type": "string",
-                  "description": "The content type fo the attachment  allowed values are image/png, image/jpeg, image/gif, image/bmp, image/tiff, application/pdf, application/zip, application/json, application/octet-stream, text/plain, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.ms-powerpoint, application/vnd.openxmlformats-officedocument.presentationml.presentation"
+                  "description": "The content type fo the attachment  allowed values are image/png, image/jpeg, image/gif, image/bmp, image/tiff, application/pdf, application/zip, application/x-zip-compressed, application/json, application/octet-stream, text/plain, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.ms-powerpoint, application/vnd.openxmlformats-officedocument.presentationml.presentation"
                 },
                 "categoryId": {
                   "type": "integer",
@@ -49702,7 +50258,79 @@
             "name": "conversationId",
             "type": "string",
             "required": true,
-            "description": "The reference UUID5 of the conversation to start from.",
+            "description": "The UUID5 of the conversation.",
+            "format": "string",
+            "in": "query"
+          }
+        ]
+      }
+    },
+    "/rest/messages/forConversation": {
+      "get": {
+        "summary": "List of messages for a single conversation",
+        "description": "List of messages for a single conversation",
+        "tags": [
+          "Messenger"
+        ],
+        "security": [
+          {
+            "oAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "page": {
+                  "type": "integer",
+                  "description": "Current page of the response"
+                },
+                "totalsCount": {
+                  "type": "integer",
+                  "description": "The total number of entries in the response"
+                },
+                "isLastPage": {
+                  "type": "boolean",
+                  "description": "Flag that indicates if the page shown is the last page of the response"
+                },
+                "lastPageNumber": {
+                  "type": "integer",
+                  "description": "The last page number"
+                },
+                "firstOnPage": {
+                  "type": "integer",
+                  "description": "The index of the first item of the current page result"
+                },
+                "lastOnPage": {
+                  "type": "integer",
+                  "description": "The index of the last item of the current page result"
+                },
+                "itemsPerPage": {
+                  "type": "integer",
+                  "description": "The requested amount of items per result page"
+                },
+                "entries": {
+                  "type": "array",
+                  "description": "List of Message",
+                  "items": {
+                    "$ref": "#/definitions/Message"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+          }
+        },
+        "parameters": [
+          {
+            "name": "conversationId",
+            "type": "string",
+            "required": true,
+            "description": "The UUID5 of the conversation.",
             "format": "string",
             "in": "query"
           }
@@ -51979,7 +52607,7 @@
             "type": "number",
             "required": false,
             "description": "Filter that restricts the search result to orders of a specific order referrer. The ID of the order referrer must be specified.",
-            "format": "double",
+            "format": "number",
             "in": "query"
           },
           {
@@ -52206,7 +52834,7 @@
             "type": "number",
             "required": false,
             "description": "Filter that restricts the search result to orders in a specific order status. The value of the order status must be specified.",
-            "format": "double",
+            "format": "number",
             "in": "query"
           },
           {
@@ -52214,7 +52842,7 @@
             "type": "number",
             "required": false,
             "description": "Filter that restricts the search result to orders within a range of order statuses. This filter can be used alone or can be combined with the statusFrom filter. The value of the order status must be specified.",
-            "format": "double",
+            "format": "number",
             "in": "query"
           },
           {
@@ -53573,12 +54201,101 @@
             "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
           }
         }
+      },
+      "post": {
+        "summary": "Create an order date type.",
+        "description": "Creates an order date type.",
+        "tags": [
+          "Order"
+        ],
+        "security": [
+          {
+            "oAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OrderDateType"
+            }
+          },
+          "401": {
+            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+          }
+        }
       }
     },
     "/rest/orders/dates/types/{typeId}": {
+      "delete": {
+        "summary": "Delete an order date type.",
+        "description": "Deletes an order date type. The ID of the date type must be specified.",
+        "tags": [
+          "Order"
+        ],
+        "security": [
+          {
+            "oAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SimpleRestResponse"
+            }
+          },
+          "401": {
+            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+          }
+        },
+        "parameters": [
+          {
+            "name": "typeId",
+            "type": "integer",
+            "required": true,
+            "description": "",
+            "format": "integer",
+            "in": "path"
+          }
+        ]
+      },
       "get": {
         "summary": "Find an order date type",
         "description": "Finds an order date type. The ID of the type must be specified. The following IDs are available:\n<br><ul>\n<li>1 = Deleted on</li>\n<li>2 = Created on</li>\n<li>3 = Paid date</li>\n<li>4 = Last update</li>\n<li>5 = Completed on</li>\n<li>6 = Return date</li>\n<li>7 = Payment due date</li>\n<li>8 = Estimated shipping date</li>\n<li>9 = Start date</li>\n<li>10 = End date</li>\n<li>11 = Possible delivery date</li>\n<li>12 = Market transfer date</li>\n<li>13 = Subscription cancelled on</li>\n<li>14 = Subscription last run</li>\n<li>15 = Subscription next run</li>\n</ul>",
+        "tags": [
+          "Order"
+        ],
+        "security": [
+          {
+            "oAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OrderDateType"
+            }
+          },
+          "401": {
+            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+          }
+        },
+        "parameters": [
+          {
+            "name": "typeId",
+            "type": "integer",
+            "required": true,
+            "description": "",
+            "format": "integer",
+            "in": "path"
+          }
+        ]
+      },
+      "put": {
+        "summary": "Update an order date type.",
+        "description": "Updates an order date type. The ID of the date type must be specified.",
         "tags": [
           "Order"
         ],
@@ -53958,7 +54675,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/JsonResponse"
+              "$ref": "#/definitions/mixed"
             }
           },
           "401": {
@@ -53984,6 +54701,88 @@
             "description": "The filename to be used for the zip file",
             "format": "string",
             "in": "query"
+          }
+        ]
+      },
+      "post": {
+        "summary": "Download documents",
+        "description": "Downloads all documents as a zip file. The documents must be given as an array of indices. An optional filename for the zip file can also be given",
+        "tags": [
+          "Document"
+        ],
+        "security": [
+          {
+            "oAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/mixed"
+            }
+          },
+          "401": {
+            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+          }
+        },
+        "parameters": [
+          {
+            "name": "ids",
+            "type": "array",
+            "required": true,
+            "description": "The document ids to be downloaded",
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "filename",
+            "type": "string",
+            "required": false,
+            "description": "The filename to be used for the zip file",
+            "format": "string",
+            "in": "query"
+          }
+        ]
+      }
+    },
+    "/rest/orders/documents/downloads/as_zip/asynchronous": {
+      "get": {
+        "summary": "Download documents asynchronous",
+        "description": "Downloads all documents asynchronous as a zip file. The documents must be given as an array of indices.",
+        "tags": [
+          "Document"
+        ],
+        "security": [
+          {
+            "oAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/mixed"
+            }
+          },
+          "401": {
+            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+          }
+        },
+        "parameters": [
+          {
+            "name": "ids",
+            "type": "array",
+            "required": true,
+            "description": "The document ids to be downloaded",
+            "format": "",
+            "in": "query",
+            "items": {
+              "type": "integer"
+            }
           }
         ]
       }
@@ -54259,11 +55058,60 @@
             "description": "The number of documents to list per page. The default number of documents per page is 50. The maximum number is 6000.",
             "format": "integer",
             "in": "query"
+          },
+          {
+            "name": "sortBy",
+            "type": "string",
+            "required": false,
+            "description": "This field is used for sorting. Default is 'id'. Possible values are 'id', 'type', 'number', 'createdAt', 'displayDate'",
+            "format": "string",
+            "in": "query"
+          },
+          {
+            "name": "sortOrder",
+            "type": "string",
+            "required": false,
+            "description": "The order to sort by. Default is 'desc'. Possible values are 'asc' and 'desc'.",
+            "format": "string",
+            "in": "query"
           }
         ]
       }
     },
     "/rest/orders/documents/{documentId}": {
+      "delete": {
+        "summary": "Delete a document without an order relation",
+        "description": "Deletes a document that doesn't have an order relation",
+        "tags": [
+          "Document"
+        ],
+        "security": [
+          {
+            "oAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeleteResponse"
+            }
+          },
+          "401": {
+            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+          }
+        },
+        "parameters": [
+          {
+            "name": "documentId",
+            "type": "integer",
+            "required": true,
+            "description": "",
+            "format": "integer",
+            "in": "path"
+          }
+        ]
+      },
       "get": {
         "summary": "Get an order document.",
         "description": "Gets an order document. The document id must be specified.",
@@ -55024,6 +55872,32 @@
             "in": "query"
           }
         ]
+      },
+      "post": {
+        "summary": "Create order item transactions",
+        "description": "Creates multiple order item transactions.",
+        "tags": [
+          "Order"
+        ],
+        "security": [
+          {
+            "oAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/OrderItemTransaction"
+              }
+            }
+          },
+          "401": {
+            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+          }
+        }
       }
     },
     "/rest/orders/items/transactions/booking": {
@@ -55154,6 +56028,10 @@
                 "bestBeforeDate": {
                   "type": "string",
                   "description": "The best before date"
+                },
+                "deliveryNoteNumber": {
+                  "type": "string",
+                  "description": "The delivery note number"
                 }
               }
             }
@@ -55842,6 +56720,10 @@
                 "bestBeforeDate": {
                   "type": "string",
                   "description": "The best before date"
+                },
+                "deliveryNoteNumber": {
+                  "type": "string",
+                  "description": "The delivery note number"
                 }
               }
             }
@@ -56363,7 +57245,7 @@
         ]
       }
     },
-    "/rest/orders/referrers/{parentReferrerId?}": {
+    "/rest/orders/referrers/{parentReferrerId}": {
       "post": {
         "summary": "Create an order referrer",
         "description": "Create an order referrer. The ID can be specified, a parent ID can be specified to create a sub referrer or if no ID is specified, a referrer ID will be assigned automatically.\nIf an ID is specified, the ID may not be used already. If the ID is used already, the referrer will only be created.\nIf the ID is automatically assigned, the first ID that has not been used before will be set.\nIf the ID is not specified, but a parent referrer ID is given, then the new referrer ID will be a sub referrer of the given parent.",
@@ -56399,7 +57281,7 @@
             }
           },
           {
-            "name": "parentReferrerId?",
+            "name": "parentReferrerId",
             "type": "integer",
             "required": true,
             "description": "",
@@ -56600,7 +57482,7 @@
             "type": "number",
             "required": false,
             "description": "This filter restricts the search results to orders with a specific status ID.",
-            "format": "",
+            "format": "number",
             "in": "query"
           },
           {
@@ -56608,7 +57490,7 @@
             "type": "number",
             "required": false,
             "description": "This filter restricts the search results to orders with a specific referrer ID.",
-            "format": "",
+            "format": "number",
             "in": "query"
           },
           {
@@ -56760,7 +57642,7 @@
             "type": "number",
             "required": false,
             "description": "This filter restricts the search results to orders with a specific invoice total (in system currency).",
-            "format": "",
+            "format": "number",
             "in": "query"
           },
           {
@@ -57089,7 +57971,7 @@
             "type": "number",
             "required": false,
             "description": "This filter restricts the search results to orders with a specific status ID.",
-            "format": "",
+            "format": "number",
             "in": "query"
           },
           {
@@ -57097,7 +57979,7 @@
             "type": "number",
             "required": false,
             "description": "This filter restricts the search results to orders with a specific referrer ID.",
-            "format": "",
+            "format": "number",
             "in": "query"
           },
           {
@@ -57249,7 +58131,7 @@
             "type": "number",
             "required": false,
             "description": "This filter restricts the search results to orders with a specific invoice total (in system currency).",
-            "format": "",
+            "format": "number",
             "in": "query"
           },
           {
@@ -57952,6 +58834,14 @@
                   "type": "integer",
                   "description": "The weight of the package in grams optional"
                 },
+                "extraWeight": {
+                  "type": "integer",
+                  "description": "The extra weight of the package in grams optional"
+                },
+                "itemsWeight": {
+                  "type": "integer",
+                  "description": "The items weight of the package in grams optional"
+                },
                 "packageNumber": {
                   "type": "string",
                   "description": "The package number optional"
@@ -58455,7 +59345,7 @@
         ]
       }
     },
-    "/rest/orders/shipping/parcels/preview/{language?}": {
+    "/rest/orders/shipping/parcels/preview/{language}": {
       "get": {
         "summary": "Get preview list",
         "description": "Get a preview list for parcel services.",
@@ -58590,7 +59480,7 @@
         ]
       }
     },
-    "/rest/orders/shipping/presets/preview/{language?}": {
+    "/rest/orders/shipping/presets/preview/{language}": {
       "get": {
         "summary": "Get preview list",
         "description": "Get a preview list for parcel service presets.",
@@ -59386,7 +60276,7 @@
             "type": "number",
             "required": false,
             "description": "The ID of the status",
-            "format": "",
+            "format": "number",
             "in": "query"
           },
           {
@@ -59482,7 +60372,7 @@
             "type": "number",
             "required": false,
             "description": "Define an ID as a start value for the filter. Filter that restricts the search for order statuses to IDs from a defined value.",
-            "format": "",
+            "format": "number",
             "in": "query"
           },
           {
@@ -59490,7 +60380,7 @@
             "type": "number",
             "required": false,
             "description": "Define an ID as an end value for the filter.",
-            "format": "",
+            "format": "number",
             "in": "query"
           },
           {
@@ -59649,7 +60539,7 @@
             "type": "number",
             "required": true,
             "description": "The ID of the status, which shall be deleted.",
-            "format": "",
+            "format": "number",
             "in": "path"
           }
         ]
@@ -59682,7 +60572,7 @@
             "type": "number",
             "required": true,
             "description": "The ID of the order status.",
-            "format": "",
+            "format": "number",
             "in": "path"
           }
         ]
@@ -59715,7 +60605,7 @@
             "type": "number",
             "required": true,
             "description": "The ID of the order status that should be updated.",
-            "format": "",
+            "format": "number",
             "in": "path"
           },
           {
@@ -59941,7 +60831,7 @@
         ]
       }
     },
-    "/rest/orders/{orderId}/addresses/{relationTypeId?}": {
+    "/rest/orders/{orderId}/addresses/{relationTypeId}": {
       "get": {
         "summary": "List order addresses",
         "description": "Lists order addresses. The ID of the order and the ID of the relation type must be specified.",
@@ -59974,7 +60864,7 @@
             "in": "path"
           },
           {
-            "name": "relationTypeId?",
+            "name": "relationTypeId",
             "type": "integer",
             "required": true,
             "description": "",
@@ -59982,9 +60872,7 @@
             "in": "path"
           }
         ]
-      }
-    },
-    "/rest/orders/{orderId}/addresses/{relationTypeId}": {
+      },
       "post": {
         "summary": "Create an address for an existing order.",
         "description": "Creates an address for an existing order and update the relation.",
@@ -60833,7 +61721,7 @@
         ]
       }
     },
-    "/rest/orders/{orderId}/documents/downloads/{type?}": {
+    "/rest/orders/{orderId}/documents/downloads/{type}": {
       "get": {
         "summary": "Download documents of an order",
         "description": "Downloads documents of an order as a zip file. The ID of the order must be specified. In addition a type can be specified.",
@@ -61989,7 +62877,7 @@
         ]
       }
     },
-    "/rest/orders/{orderId}/documents/{type?}": {
+    "/rest/orders/{orderId}/documents/{type}": {
       "get": {
         "summary": "List documents of an order",
         "description": "Lists documents of an order. The ID of the order must be specified. In addition a type can be specified.",
@@ -62134,9 +63022,7 @@
             "in": "query"
           }
         ]
-      }
-    },
-    "/rest/orders/{orderId}/documents/{type}": {
+      },
       "post": {
         "summary": "Upload order documents",
         "description": "Uploads order documents. The ID of the order and the document type must be specified.",
@@ -63045,52 +63931,6 @@
         ]
       }
     },
-    "/rest/orders/{orderId}/properties/{typeId?}": {
-      "get": {
-        "summary": "List properties of an order",
-        "description": "<b>DEPRECATED: Use the following route: GET /rest/orders/{orderId}</b>\nLists properties of an order. The ID of the order must be specified. Optionally, the ID of the property type can be specified. The following property types are available by default:\n\n<br><ul>\n<li>1 = WAREHOUSE</li>\n<li>2 = SHIPPING_PROFILE</li>\n<li>3 = PAYMENT_METHOD</li>\n<li>4 = PAYMENT_STATUS</li>\n<li>5 = EXTERNAL_SHIPPING_PROFILE</li>\n<li>6 = DOCUMENT_LANGUAGE</li>\n<li>7 = EXTERNAL_ORDER_ID</li>\n<li>8 = CUSTOMER_SIGN</li>\n<li>9 = DUNNING_LEVEL</li>\n<li>10 = SELLER_ACCOUNT</li>\n<li>11 = WEIGHT</li>\n<li>12 = WIDTH</li>\n<li>13 = LENGTH</li>\n<li>14 = HEIGHT</li>\n<li>15 = FLAG</li>\n<li>16 = EXTERNAL_TOKEN_ID</li>\n<li>17 = EXTERNAL_ITEM_ID</li>\n<li>18 = COUPON_CODE</li>\n<li>19 = COUPON_TYPE</li>\n<li>33 = MAIN_DOCUMENT_NUMBER</li>\n<li>34 = SALES_TAX_ID_NUMBER</li>\n<li>45 = PAYMENT_TRANSACTION_ID</li>\n<li>47 = EXTERNAL_TAX_SERVICE</li>\n<li>60 = MERCHANT_ID</li>\n<li>61 = REPORT_ID</li>\n<li>63 = PREFERRED_STORAGE_LOCATION_ID</li>\n<li>64 = AMAZON_SHIPPING_LABEL</li>\n<li>994 = EBAY_PLUS</li>\n<li>995 = FULFILLMENT_SERVICE</li>\n</ul>",
-        "tags": [
-          "Order"
-        ],
-        "security": [
-          {
-            "oAuth2": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/OrderProperty"
-              }
-            }
-          },
-          "401": {
-            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
-          }
-        },
-        "parameters": [
-          {
-            "name": "orderId",
-            "type": "integer",
-            "required": true,
-            "description": "The ID of the order",
-            "format": "integer",
-            "in": "path"
-          },
-          {
-            "name": "typeId",
-            "type": "integer",
-            "required": true,
-            "description": "The property type ID",
-            "format": "integer",
-            "in": "path"
-          }
-        ]
-      }
-    },
     "/rest/orders/{orderId}/properties/{typeId}": {
       "delete": {
         "summary": "Delete property of an order by order ID and property type ID",
@@ -63151,6 +63991,50 @@
                 }
               }
             }
+          }
+        ]
+      },
+      "get": {
+        "summary": "List properties of an order",
+        "description": "<b>DEPRECATED: Use the following route: GET /rest/orders/{orderId}</b>\nLists properties of an order. The ID of the order must be specified. Optionally, the ID of the property type can be specified. The following property types are available by default:\n\n<br><ul>\n<li>1 = WAREHOUSE</li>\n<li>2 = SHIPPING_PROFILE</li>\n<li>3 = PAYMENT_METHOD</li>\n<li>4 = PAYMENT_STATUS</li>\n<li>5 = EXTERNAL_SHIPPING_PROFILE</li>\n<li>6 = DOCUMENT_LANGUAGE</li>\n<li>7 = EXTERNAL_ORDER_ID</li>\n<li>8 = CUSTOMER_SIGN</li>\n<li>9 = DUNNING_LEVEL</li>\n<li>10 = SELLER_ACCOUNT</li>\n<li>11 = WEIGHT</li>\n<li>12 = WIDTH</li>\n<li>13 = LENGTH</li>\n<li>14 = HEIGHT</li>\n<li>15 = FLAG</li>\n<li>16 = EXTERNAL_TOKEN_ID</li>\n<li>17 = EXTERNAL_ITEM_ID</li>\n<li>18 = COUPON_CODE</li>\n<li>19 = COUPON_TYPE</li>\n<li>33 = MAIN_DOCUMENT_NUMBER</li>\n<li>34 = SALES_TAX_ID_NUMBER</li>\n<li>45 = PAYMENT_TRANSACTION_ID</li>\n<li>47 = EXTERNAL_TAX_SERVICE</li>\n<li>60 = MERCHANT_ID</li>\n<li>61 = REPORT_ID</li>\n<li>63 = PREFERRED_STORAGE_LOCATION_ID</li>\n<li>64 = AMAZON_SHIPPING_LABEL</li>\n<li>994 = EBAY_PLUS</li>\n<li>995 = FULFILLMENT_SERVICE</li>\n</ul>",
+        "tags": [
+          "Order"
+        ],
+        "security": [
+          {
+            "oAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/OrderProperty"
+              }
+            }
+          },
+          "401": {
+            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+          }
+        },
+        "parameters": [
+          {
+            "name": "orderId",
+            "type": "integer",
+            "required": true,
+            "description": "The ID of the order",
+            "format": "integer",
+            "in": "path"
+          },
+          {
+            "name": "typeId",
+            "type": "integer",
+            "required": true,
+            "description": "The property type ID",
+            "format": "integer",
+            "in": "path"
           }
         ]
       },
@@ -64189,6 +65073,14 @@
                   "type": "integer",
                   "description": "The weight of the package in grams optional"
                 },
+                "extraWeight": {
+                  "type": "integer",
+                  "description": "The extra weight of the package in grams optional"
+                },
+                "itemsWeight": {
+                  "type": "integer",
+                  "description": "The items weight of the package in grams optional"
+                },
                 "packageNumber": {
                   "type": "string",
                   "description": "The package number optional"
@@ -65117,6 +66009,10 @@
                 "status": {
                   "type": "string",
                   "description": "The status. Possible values are 'regular' and 'cancelled'.  allowed values are regular, cancelled"
+                },
+                "deliveryNoteNumber": {
+                  "type": "string",
+                  "description": "The delivery note number"
                 }
               }
             }
@@ -65322,7 +66218,7 @@
         ]
       }
     },
-    "/rest/payment/properties/types/names/{lang?}": {
+    "/rest/payment/properties/types/names/{lang}": {
       "get": {
         "summary": "List names of property types",
         "description": "List names of property types in the specified language or German if none is specified.",
@@ -65366,7 +66262,7 @@
             "in": "query"
           },
           {
-            "name": "lang?",
+            "name": "lang",
             "type": "integer",
             "required": true,
             "description": "",
@@ -66638,7 +67534,7 @@
         ]
       }
     },
-    "/rest/payments/methods/preview/{language?}": {
+    "/rest/payments/methods/preview/{language}": {
       "get": {
         "summary": "Get preview list for payment method",
         "description": "Get an array with all payment methods with the ID as key and the name as value.",
@@ -71463,7 +72359,7 @@
             "type": "number",
             "required": false,
             "description": "Filter restricts the list of results to variations which have an image available for the specified market ID.",
-            "format": "",
+            "format": "number",
             "in": "query"
           },
           {
@@ -71507,11 +72403,19 @@
             "in": "query"
           },
           {
+            "name": "hasListing",
+            "type": "boolean",
+            "required": false,
+            "description": "Filter restricts the list of results to variations which have at least one or no listing.",
+            "format": "boolean",
+            "in": "query"
+          },
+          {
             "name": "marketId",
             "type": "number",
             "required": false,
             "description": "Filter restricts the list of results to variations which have the specified market ID.",
-            "format": "",
+            "format": "number",
             "in": "query"
           },
           {
@@ -72897,7 +73801,7 @@
             "type": "number",
             "required": false,
             "description": "Filter restricts the list of results to variations which have an image available for the specified market ID.",
-            "format": "",
+            "format": "number",
             "in": "query"
           },
           {
@@ -72941,11 +73845,19 @@
             "in": "query"
           },
           {
+            "name": "hasListing",
+            "type": "boolean",
+            "required": false,
+            "description": "Filter restricts the list of results to variations which have at least one or no listing.",
+            "format": "boolean",
+            "in": "query"
+          },
+          {
             "name": "marketId",
             "type": "number",
             "required": false,
             "description": "Filter restricts the list of results to variations which have the specified market ID.",
-            "format": "",
+            "format": "number",
             "in": "query"
           },
           {
@@ -76768,7 +77680,7 @@
             "type": "number",
             "required": true,
             "description": "The referrer id of the property market",
-            "format": "",
+            "format": "number",
             "in": "query"
           },
           {
@@ -78675,6 +79587,76 @@
         ]
       }
     },
+    "/rest/redistributions/{orderId}/split": {
+      "post": {
+        "summary": "Split a redistribution into at least two redistributions",
+        "description": "Splits a redistribution into at least two redistributions. The parent order ID and the quantities to use must be specified.",
+        "tags": [
+          "Order"
+        ],
+        "security": [
+          {
+            "oAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Collection"
+            }
+          },
+          "401": {
+            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+          }
+        },
+        "parameters": [
+          {
+            "name": "orderId",
+            "type": "integer",
+            "required": true,
+            "description": "",
+            "format": "integer",
+            "in": "path"
+          }
+        ]
+      }
+    },
+    "/rest/redistributions/{orderId}/split_by_transactions": {
+      "post": {
+        "summary": "Split a redistribution into at least two redistributions by the order item transactions",
+        "description": "Splits a redistribution into at least two redistributions by the order item transactions. The parent order ID and the quantities to use must be specified.",
+        "tags": [
+          "Order"
+        ],
+        "security": [
+          {
+            "oAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Collection"
+            }
+          },
+          "401": {
+            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+          }
+        },
+        "parameters": [
+          {
+            "name": "orderId",
+            "type": "integer",
+            "required": true,
+            "description": "",
+            "format": "integer",
+            "in": "path"
+          }
+        ]
+      }
+    },
     "/rest/reorders": {
       "post": {
         "summary": "Create a reorder",
@@ -78722,6 +79704,101 @@
                 }
               }
             }
+          }
+        ]
+      }
+    },
+    "/rest/reorders/group": {
+      "post": {
+        "summary": "Group multiple reorders in one reorder.",
+        "description": "Groups multiple reorders in one reorder. The IDs of the reorders to group must be specified.",
+        "tags": [
+          "Order"
+        ],
+        "security": [
+          {
+            "oAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          },
+          "401": {
+            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+          }
+        }
+      }
+    },
+    "/rest/reorders/items/{orderItemId}/assign_variation": {
+      "post": {
+        "summary": "Change an order item of type \"unassigned variation\" to \"variation\".",
+        "description": "Change an order item of type \"unassigned variation\" to \"variation\". The ID of the order item and variation ID must be specified.",
+        "tags": [
+          "Order"
+        ],
+        "security": [
+          {
+            "oAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          },
+          "401": {
+            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+          }
+        },
+        "parameters": [
+          {
+            "name": "orderItemId",
+            "type": "integer",
+            "required": true,
+            "description": "",
+            "format": "integer",
+            "in": "path"
+          }
+        ]
+      }
+    },
+    "/rest/reorders/items/{orderItemId}/unassign_variation": {
+      "post": {
+        "summary": "Change an order item of type \"variation\" to \"unassigned variation\".",
+        "description": "Change an order item of type \"variation\" to \"unassigned variation\". The ID of the order item must be specified.",
+        "tags": [
+          "Order"
+        ],
+        "security": [
+          {
+            "oAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          },
+          "401": {
+            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+          }
+        },
+        "parameters": [
+          {
+            "name": "orderItemId",
+            "type": "integer",
+            "required": true,
+            "description": "",
+            "format": "integer",
+            "in": "path"
           }
         ]
       }
@@ -78990,6 +80067,22 @@
             "description": "The ID of the order.",
             "format": "integer",
             "in": "path"
+          },
+          {
+            "name": "date",
+            "type": "string",
+            "required": false,
+            "description": "If given, this date is used and there is no date calculation.",
+            "format": "string",
+            "in": "query"
+          },
+          {
+            "name": "transferToOrderItems",
+            "type": "string",
+            "required": false,
+            "description": "Defines if the date should be transferred to the order items. Is only used when a date is given. Possible values: 'always', 'never', 'ifNotExists'.",
+            "format": "string",
+            "in": "query"
           }
         ]
       }
@@ -79014,6 +80107,41 @@
               "items": {
                 "$ref": "#/definitions/mixed"
               }
+            }
+          },
+          "401": {
+            "description": "The resource owner or authorization server denied the request. - The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the \"access token\" parameter."
+          }
+        },
+        "parameters": [
+          {
+            "name": "orderId",
+            "type": "integer",
+            "required": true,
+            "description": "",
+            "format": "integer",
+            "in": "path"
+          }
+        ]
+      }
+    },
+    "/rest/reorders/{orderId}/split": {
+      "post": {
+        "summary": "Split a reorder into at least two reorders",
+        "description": "Splits a reorder into at least two reorders. The parent order ID and the quantities to use must be specified.",
+        "tags": [
+          "Order"
+        ],
+        "security": [
+          {
+            "oAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Collection"
             }
           },
           "401": {
@@ -82819,7 +83947,7 @@
         ]
       }
     },
-    "/rest/stockmanagement/warehouses/{warehouseId}/addresses/{relationTypeId?}": {
+    "/rest/stockmanagement/warehouses/{warehouseId}/addresses/{relationTypeId}": {
       "get": {
         "summary": "List warehouse addresses",
         "description": "List warehouse addresses. The ID of the warehouse, the address and the ID of the relation type must be specified.",
@@ -82852,7 +83980,7 @@
             "in": "path"
           },
           {
-            "name": "relationTypeId?",
+            "name": "relationTypeId",
             "type": "integer",
             "required": true,
             "description": "",
@@ -85429,7 +86557,7 @@
                 },
                 "tagType": {
                   "type": "string",
-                  "description": "The type of the tag. The following types are available.\n\nblog\ncategory\ncontent_page\nvariation\nticket\nboard\norder\n  allowed values are category, ticket, variation, board, contact, order, messenger, messageBillable, messageClearingSubAccount, document, documentTemplate, plentyFunction"
+                  "description": "The type of the tag. The following types are available.\n\nblog\ncategory\ncontent_page\nvariation\nticket\nboard\norder\n  allowed values are category, ticket, variation, board, contact, order, reorder, redistribution, subscription, messenger, messageBillable, messageClearingSubAccount, document, documentTemplate, plentyFunction"
                 },
                 "clients": {
                   "type": "array",
@@ -85513,7 +86641,7 @@
                 },
                 "tagType": {
                   "type": "string",
-                  "description": "The type of the tag. The following types are available.\n\nblog\ncategory\ncontent_page\nvariation\nticket\nboard\norder\n  allowed values are category, ticket, variation, board, contact, order, messenger, messageBillable, messageClearingSubAccount, document, documentTemplate, plentyFunction"
+                  "description": "The type of the tag. The following types are available.\n\nblog\ncategory\ncontent_page\nvariation\nticket\nboard\norder\n  allowed values are category, ticket, variation, board, contact, order, reorder, redistribution, subscription, messenger, messageBillable, messageClearingSubAccount, document, documentTemplate, plentyFunction"
                 },
                 "clients": {
                   "type": "array",
@@ -85595,7 +86723,7 @@
                 },
                 "tagType": {
                   "type": "string",
-                  "description": "The type of the tag. The following types are available.\n\nblog\ncategory\ncontent_page\nvariation\nticket\nboard\norder\n  allowed values are category, ticket, variation, board, contact, order, messenger, messageBillable, messageClearingSubAccount, document, documentTemplate, plentyFunction"
+                  "description": "The type of the tag. The following types are available.\n\nblog\ncategory\ncontent_page\nvariation\nticket\nboard\norder\n  allowed values are category, ticket, variation, board, contact, order, reorder, redistribution, subscription, messenger, messageBillable, messageClearingSubAccount, document, documentTemplate, plentyFunction"
                 },
                 "clients": {
                   "type": "array",
@@ -85972,7 +87100,7 @@
                 },
                 "tagType": {
                   "type": "string",
-                  "description": "The type of the tag. The following types are available.\n\nblog\ncategory\ncontent_page\nvariation\nticket\nboard\norder\n  allowed values are category, ticket, variation, board, contact, order, messenger, messageBillable, messageClearingSubAccount, document, documentTemplate, plentyFunction"
+                  "description": "The type of the tag. The following types are available.\n\nblog\ncategory\ncontent_page\nvariation\nticket\nboard\norder\n  allowed values are category, ticket, variation, board, contact, order, reorder, redistribution, subscription, messenger, messageBillable, messageClearingSubAccount, document, documentTemplate, plentyFunction"
                 },
                 "clients": {
                   "type": "array",
@@ -92321,6 +93449,10 @@
                   "type": "string",
                   "description": "The tax id number of VAT configuration."
                 },
+                "economicIdNumber": {
+                  "type": "string",
+                  "description": "The economic id number of VAT configuration."
+                },
                 "startedAt": {
                   "type": "string",
                   "description": "The date when the VAT configuration went into effect"
@@ -92732,6 +93864,10 @@
                 "taxIdNumber": {
                   "type": "string",
                   "description": "The tax id number of VAT configuration."
+                },
+                "economicIdNumber": {
+                  "type": "string",
+                  "description": "The economic id number of VAT configuration."
                 },
                 "startedAt": {
                   "type": "string",
@@ -95912,6 +97048,10 @@
           "type": "string",
           "description": "The currency used by a supplier"
         },
+        "externalId": {
+          "type": "string",
+          "description": "The externalId for this company (like the hubspot company id)"
+        },
         "createdAt": {
           "type": "string",
           "description": "The time the account was created as unix timestamp"
@@ -96239,6 +97379,10 @@
         "contactId": {
           "type": "integer",
           "description": "The ID of the foreign key contact"
+        },
+        "isPrimary": {
+          "type": "integer",
+          "description": ""
         }
       }
     },
@@ -98598,10 +99742,12 @@
         },
         "messagesPaths": {
           "type": "array",
+          "items": {},
           "description": "Array with s3 messages paths"
         },
         "messagesIds": {
           "type": "array",
+          "items": {},
           "description": "Array with all messages UUID's"
         },
         "isMigratedToEs": {
@@ -98611,6 +99757,10 @@
         "isArchived": {
           "type": "boolean",
           "description": "Flag that indicates if the conversation is archived"
+        },
+        "isSpam": {
+          "type": "boolean",
+          "description": "Flag that indicates if the conversation is spam"
         },
         "conversationPreview": {
           "type": "string",
@@ -98622,10 +99772,12 @@
         },
         "linkedFolders": {
           "type": "array",
+          "items": {},
           "description": "List of linked folders"
         },
         "marketplacesMetadata": {
           "type": "array",
+          "items": {},
           "description": "marketplaces Meta data"
         }
       }
@@ -98785,6 +99937,19 @@
         "categoryId": {
           "type": "boolean",
           "description": "The ID of the parent category"
+        }
+      }
+    },
+    "CreditNoteReason": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "The ID of the credit note reason."
+        },
+        "reason": {
+          "type": "string",
+          "description": "The specified reason in system language."
         }
       }
     },
@@ -99933,6 +101098,10 @@
           "type": "string",
           "description": "The name of the manufacturer"
         },
+        "legalName": {
+          "type": "string",
+          "description": "The legal name of the manufacturer"
+        },
         "externalName": {
           "type": "string",
           "description": "The external name of the manufacturer. The external name is used for the item export to external markets. If no external name is saved, the Name will be used. The external name will also be transferred to FINDOLOGIC and will be indexed for item searches."
@@ -99944,6 +101113,10 @@
         "url": {
           "type": "string",
           "description": "The URL of the manufacturer's website"
+        },
+        "contactUrl": {
+          "type": "string",
+          "description": "The Contact URL of the manufacturer's website"
         },
         "street": {
           "type": "string",
@@ -100028,6 +101201,10 @@
         "responsibleEmail": {
           "type": "string",
           "description": "The email address of the EU-Responsible person"
+        },
+        "responsibleContactUrl": {
+          "type": "string",
+          "description": "The contact form the EU-Responsible person"
         },
         "responsiblePhoneNo": {
           "type": "string",
@@ -102223,6 +103400,10 @@
           "type": "boolean",
           "description": "Whether the message is whispered (not visible for the contact/order linked to the message) or not"
         },
+        "forwarded": {
+          "type": "boolean",
+          "description": "Whether the message is forwarded to another recipient or not"
+        },
         "tags": {
           "type": "array",
           "items": {},
@@ -102287,6 +103468,10 @@
         "statusPosition": {
           "type": "integer",
           "description": "The statusPosition of statusID"
+        },
+        "messageType": {
+          "type": "string",
+          "description": "The type of message (example: {@link MessageTypesService::MESSAGE_TYPE_NEW_MESSAGE_FROM_CONTACT})"
         }
       }
     },
@@ -103042,6 +104227,10 @@
           "type": "string",
           "description": "The best before date"
         },
+        "deliveryNoteNumber": {
+          "type": "string",
+          "description": "The delivery note number"
+        },
         "batchBestBeforeDateId": {
           "type": "integer",
           "description": "Deprecated. Replaced by $batch and $bestBeforeDate."
@@ -103196,6 +104385,10 @@
           "type": "integer",
           "description": "The width of the shipping package type"
         },
+        "individualWeight": {
+          "type": "integer",
+          "description": "The individual weight of the shipping package type"
+        },
         "height": {
           "type": "integer",
           "description": "The height of the shipping package type"
@@ -103240,6 +104433,14 @@
         "weight": {
           "type": "integer",
           "description": "The weight of the package in grams"
+        },
+        "extraWeight": {
+          "type": "integer",
+          "description": "The extra weight of the package in grams"
+        },
+        "itemsWeight": {
+          "type": "integer",
+          "description": "The items weight of the package in grams"
         },
         "packageNumber": {
           "type": "string",
@@ -105721,6 +106922,10 @@
         "taxIdNumber": {
           "type": "string",
           "description": "The tax id number of VAT configuration."
+        },
+        "economicIdNumber": {
+          "type": "string",
+          "description": "The economic id number of VAT configuration."
         },
         "startedAt": {
           "type": "string",
