@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 #v6.0.3
             
       - name: Rebuild site
-        uses: peter-evans/repository-dispatch@ce5485de42c9b2622d2ed064be479e8ed65e76f4
+        uses: peter-evans/repository-dispatch@28959ce8df70de7be546dd1250a005dd32156697 #v4.0.1
         with:
           token: ${{ secrets.PUBLIC_PAT_CICD4_PUBLIC }}
           repository: plentymarkets/plenty-developers-docs
