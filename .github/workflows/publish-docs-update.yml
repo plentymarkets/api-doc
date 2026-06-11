@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v2
             
       - name: Rebuild site
-        uses: peter-evans/repository-dispatch@ce5485de42c9b2622d2ed064be479e8ed65e76f4
+        uses: peter-evans/repository-dispatch@0e0cf047c08f936c436da4399814cdb4880c8cbf
         with:
           token: ${{ secrets.PUBLIC_PAT_CICD4_PUBLIC }}
           repository: plentymarkets/plenty-developers-docs
